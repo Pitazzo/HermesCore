@@ -38,14 +38,17 @@ public class Stats implements CommandExecutor {
 								+ " de su habilidad "
 								+ habilidad1.toLowerCase() + " y tiene "
 								+ points1 + " puntos.");
+						return true;
 					} else {
 						player.sendMessage(ChatColor.RED
 								+ "Jugador no encontrado");
+						return true;
 					}
 
 				} else {
 					player.sendMessage(ChatColor.RED
 							+ "No tienes permisos suficientes para hacer eso");
+					return true;
 				}
 			}
 		}
