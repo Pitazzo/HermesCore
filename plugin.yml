@@ -1,0 +1,13 @@
+name: HermesCore
+version: 0.2
+main: es.programahermes.Main
+commands:
+   subirnivel:
+     description: Subes el nivel de la habilidad principal
+     usage: Error de sintaxis! Simplemente escribe /subirnivel
+   puntos:
+     description: Indica tu cantidad de puntos de habilidad.
+     usage: Error de sintaxis! Simplemente escribe /puntos
+   stats:
+     description: Muestra las estadísticas de tu personaje
+     usage: Error de sintaxis! Simplemente escribe /stats
