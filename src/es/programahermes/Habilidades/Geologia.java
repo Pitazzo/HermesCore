@@ -21,7 +21,7 @@ public class Geologia implements Listener {
 	public void onBlockBreak(BlockBreakEvent event) {
 		Player player = event.getPlayer();
 		Material material = event.getBlock().getType();
-		double level = MySQL.getLevel(player);
+		int level = MySQL.getLevel(player);
 		if (MySQL.getHability(player).equals("Geologia")) {
 
 			if (material.equals(Material.STONE)) {
@@ -64,22 +64,27 @@ public class Geologia implements Listener {
 		Block block = event.getClickedBlock();
 		ItemStack tool = new ItemStack(Material.GOLD_SPADE, 1);
 		ItemStack cell = new ItemStack(Material.COAL, 1);
+		ItemStack escoria = new ItemStack(Material.STONE, 1);
 		Location location = block.getLocation();
 		double random = Math.random() * 10;
+		int level = MySQL.getLevel(player);
 		if (MySQL.getHability(player).equals("Geologia")) {
 			if (action.equals(Action.RIGHT_CLICK_BLOCK)) {
 				if (block.getType().equals(Material.COAL_ORE)) {
 					if (player.getItemInHand().equals(tool)) {
-						if (random >= 2.0) {
+						if (random >= 1.5) {
 							block.setType(Material.AIR);
 							player.getWorld().dropItemNaturally(location, cell);
+							player.getWorld().dropItemNaturally(location, escoria);
 							player.getWorld().playSound(location, Sound.FIZZ,
 									0.5F, 0.0F);
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has obtenido una celda de energía");
+							int coal = 7;
+							MySQL.addPoints(player, coal/level);
 							tool.setDurability((short) -1);
 						} else {
-							player.getWorld().createExplosion(location, 1.0F);
+							player.getWorld().createExplosion(location, 3.0F);
 							player.sendMessage(ChatColor.RED
 									+ "Parece que algo ha fallado");
 						}
