@@ -90,6 +90,7 @@ public class MySQL {
 			ResultSet result = ps.executeQuery();
 			result.next();
 			int nivel = result.getInt("nivel1");
+			ps.close();
 			closeConnection();
 			return nivel;
 		} catch (Exception e) {
@@ -171,6 +172,8 @@ public class MySQL {
 			sql.setString(1, player.getName());
 			ResultSet result = sql.executeQuery();
 			result.next();
+			sql.close();
+			closeConnection();
 			return result.getString("habilidad1");
 		} catch (Exception e) {
 			e.printStackTrace();

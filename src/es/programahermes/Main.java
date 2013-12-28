@@ -9,6 +9,7 @@ import es.programahermes.Commands.PointsCommand;
 import es.programahermes.Commands.Stats;
 import es.programahermes.Habilidades.Biologia;
 import es.programahermes.Habilidades.Geologia;
+import es.programahermes.Utilidades.Prospeccion;
 
 public class Main extends JavaPlugin implements CommandExecutor {
 	
@@ -17,6 +18,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(new Geologia(), this);
 		getServer().getPluginManager().registerEvents(new Biologia(null), this);
+		getServer().getPluginManager().registerEvents(new Prospeccion(), this);
 		loadConfiguration();
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
