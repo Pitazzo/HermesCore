@@ -50,17 +50,19 @@ public class Biologia implements Listener {
 
 				}
 				if (block.getType().equals(Material.SOIL)) {
-
+					System.out.println("Hey1");
 					if (item.getType().equals(Material.SEEDS)) {
-						int seeds = 2;
-						MySQL.addPoints(player, seeds / level);
+						double seeds = 2;
+						System.out.println("Hey2");
+						MySQL.addPoints(player, seeds/level);
 					}
 					if (item.getType().equals(Material.CARROT_ITEM)) {
-						int carrot = 3;
+						double carrot = 3;
+						System.out.println("Hey3");
 						MySQL.addPoints(player, carrot / level);
 					}
 					if (item.getType().equals(Material.POTATO_ITEM)) {
-						int potato = 3;
+						double potato = 3;
 						MySQL.addPoints(player, potato / level);
 					}
 				}
@@ -93,8 +95,8 @@ public class Biologia implements Listener {
 			if (entity == EntityType.COW || entity == EntityType.CHICKEN
 					|| entity == EntityType.PIG || entity == EntityType.SHEEP) {
 				if (player.getItemInHand().equals(wheat)) {
-					int feed = 4;
-					int level = MySQL.getLevel(player);
+					double feed = 4;
+					double level = MySQL.getLevel(player);
 					MySQL.addPoints(player, feed / level);
 				}
 			}
