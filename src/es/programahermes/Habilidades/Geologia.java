@@ -56,7 +56,7 @@ public class Geologia implements Listener {
 		}
 	}
 
-	// celdas de energia
+	// celdas de energia y prospeccion
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		Action action = event.getAction();
@@ -84,7 +84,7 @@ public class Geologia implements Listener {
 							MySQL.addPoints(player, coal/level);
 							tool.setDurability((short) -1);
 						} else {
-							player.getWorld().createExplosion(location, 3.0F);
+							player.getWorld().createExplosion(location, 2.0F);
 							player.sendMessage(ChatColor.RED
 									+ "Parece que algo ha fallado");
 						}
@@ -95,5 +95,4 @@ public class Geologia implements Listener {
 		}
 
 	}
-
 }
