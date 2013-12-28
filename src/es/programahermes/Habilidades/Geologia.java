@@ -65,7 +65,7 @@ public class Geologia implements Listener {
 		ItemStack tool = new ItemStack(Material.GOLD_SPADE, 1);
 		ItemStack cell = new ItemStack(Material.COAL, 1);
 		ItemStack escoria = new ItemStack(Material.STONE, 1);
-		Location location = block.getLocation();
+		
 		double random = Math.random() * 10;
 		int level = MySQL.getLevel(player);
 		if (MySQL.getHability(player).equals("Geologia")) {
@@ -73,6 +73,7 @@ public class Geologia implements Listener {
 				if (block.getType().equals(Material.COAL_ORE)) {
 					if (player.getItemInHand().equals(tool)) {
 						if (random >= 1.5) {
+							Location location = block.getLocation();
 							block.setType(Material.AIR);
 							player.getWorld().dropItemNaturally(location, cell);
 							player.getWorld().dropItemNaturally(location, escoria);
@@ -84,7 +85,8 @@ public class Geologia implements Listener {
 							MySQL.addPoints(player, coal/level);
 							tool.setDurability((short) -1);
 						} else {
-							player.getWorld().createExplosion(location, 2.0F);
+							
+							player.getWorld().createExplosion(block.getLocation(), 2.0F);
 							player.sendMessage(ChatColor.RED
 									+ "Parece que algo ha fallado");
 						}
