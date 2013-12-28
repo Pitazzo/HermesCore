@@ -19,10 +19,15 @@ public class Stats implements CommandExecutor {
 			double points = MySQL.getPoints(player);
 			int level = MySQL.getLevel(player);
 			String habilidad = MySQL.getHability(player);
-			player.sendMessage(ChatColor.GOLD + "[Hermes Core] "
-					+ ChatColor.GREEN + "Ahora mismo estás a nivel " + level
-					+ " de tu habilidad principal " + habilidad.toLowerCase()
-					+ " y tienes " + points + " puntos.");
+			if (args.length == 0) {
+
+				player.sendMessage(ChatColor.GOLD + "[Hermes Core] "
+						+ ChatColor.GREEN + "Ahora mismo estás a nivel "
+						+ level + " de tu habilidad principal "
+						+ habilidad.toLowerCase() + " y tienes " + points
+						+ " puntos.");
+				return true;
+			}
 
 			if (args.length == 1) {
 
@@ -30,7 +35,7 @@ public class Stats implements CommandExecutor {
 				double points1 = MySQL.getPoints(target);
 				int level1 = MySQL.getLevel(target);
 				String habilidad1 = MySQL.getHability(target);
-				if (player.hasPermission("hermescore.stats")||player.isOp()) {
+				if (player.hasPermission("hermescore.stats") || player.isOp()) {
 					if (MySQL.dbContanisPlayer(target)) {
 						player.sendMessage(ChatColor.GOLD + "[Hermes Core] "
 								+ ChatColor.GREEN + " El jugador "
