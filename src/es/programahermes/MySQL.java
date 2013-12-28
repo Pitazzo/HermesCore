@@ -172,9 +172,10 @@ public class MySQL {
 			sql.setString(1, player.getName());
 			ResultSet result = sql.executeQuery();
 			result.next();
+			String habilidad = result.getString("habilidad1");
 			sql.close();
 			closeConnection();
-			return result.getString("habilidad1");
+			return habilidad;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
