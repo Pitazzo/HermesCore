@@ -32,16 +32,19 @@ public class Biologia implements Listener {
 		ItemStack item = player.getItemInHand();
 		String habilidad = MySQL.getHability(player);
 		int level = MySQL.getLevel(player);
+
 		if (habilidad.equals("Biologia")) {
+
 			if (action.equals(Action.RIGHT_CLICK_BLOCK)) {
+
 				if (block.getType().equals(Material.DIRT)
 						|| block.getType().equals(Material.GRASS)) {
-					if (item.equals(Material.WOOD_HOE)
-							|| item.equals(Material.STONE_HOE)
-							|| item.equals(Material.IRON_HOE)
-							|| item.equals(Material.DIAMOND_HOE)) {
-						int labrar = 2;
-						MySQL.addPoints(player, labrar / level);
+					if (item.getType().equals(Material.WOOD_HOE)
+							|| item.getType().equals(Material.STONE_HOE)
+							|| item.getType().equals(Material.IRON_HOE)
+							|| item.getType().equals(Material.DIAMOND_HOE)) {
+						double labrar = 2;
+						MySQL.addPoints(player, labrar/level);
 
 					}
 
