@@ -47,9 +47,13 @@ public class Prospeccion implements Listener {
 
 									if (random2 > 9.5) {
 										block.setType(Material.DIAMOND_ORE);
+									}else{
+										block.setType(Material.COBBLESTONE);
 									}
 									if (random2 > 8.5 && random2 < 9.5) {
 										block.setType(Material.REDSTONE_ORE);
+									}else{
+										block.setType(Material.COBBLESTONE);
 									}
 
 								}

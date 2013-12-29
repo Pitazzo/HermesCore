@@ -51,7 +51,7 @@ public class MySQL {
 		openConnection();
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("INSERT doubleO `user_data`(`name`, `points`) VALUES (?,0)");
+					.prepareStatement("INSERT INTO `user_data`(`name`, `points`) VALUES (?,0)");
 			ps.setString(1, player.getName());
 			ps.executeUpdate();
 			ps.close();
