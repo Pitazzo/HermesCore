@@ -13,6 +13,9 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.sk89q.worldguard.protection.managers.RegionManager;
+
+import es.programahermes.Main;
 import es.programahermes.MySQL;
 
 public class Geologia implements Listener {
@@ -56,6 +59,7 @@ public class Geologia implements Listener {
 		}
 	}
 
+	
 	// celdas de energia y prospeccion
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {

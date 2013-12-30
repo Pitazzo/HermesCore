@@ -4,11 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
-
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.managers.RegionManager;
@@ -40,28 +40,35 @@ public class Prospectar implements Listener {
 		return false;
 	}
 
+	@EventHandler
 	public void onBreak(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 
 			if (event.getClickedBlock().getType().equals(Material.STONE)) {
+
 				if (MySQL.getHability(player).equals("Geologia")) {
+
 					if (player.getItemInHand().getType()
 							.equals(Material.WOOD_PICKAXE)) {
+
 						Location location = event.getClickedBlock()
 								.getLocation();
 						if (isWithinRegion(location, "Aluminio")) {
-							int y = location.getBlockY();
-							if (y < 64) {
-								double random = Math.random();
-								if (random <= 1.2) {
-									event.getClickedBlock().setType(
-											Material.IRON_ORE);
-								} else {
-									event.getClickedBlock().setType(
-											Material.COBBLESTONE);
-								}
+
+							double random = Math.random() * 10;
+							if (random <= 0.8) {
+
+								event.getClickedBlock().setType(
+										Material.IRON_ORE);
+							} else {
+
+								event.getClickedBlock().setType(
+										Material.COBBLESTONE);
 							}
+						} else {
+							event.getClickedBlock().setType(
+									Material.COBBLESTONE);
 						}
 					}
 				}
