@@ -4,11 +4,14 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -44,7 +47,7 @@ public class Biologia implements Listener {
 							|| item.getType().equals(Material.IRON_HOE)
 							|| item.getType().equals(Material.DIAMOND_HOE)) {
 						double labrar = 2;
-						MySQL.addPoints(player, labrar/level);
+						MySQL.addPoints(player, labrar / level);
 
 					}
 
@@ -54,7 +57,7 @@ public class Biologia implements Listener {
 					if (item.getType().equals(Material.SEEDS)) {
 						double seeds = 2;
 						System.out.println("Hey2");
-						MySQL.addPoints(player, seeds/level);
+						MySQL.addPoints(player, seeds / level);
 					}
 					if (item.getType().equals(Material.CARROT_ITEM)) {
 						double carrot = 3;
@@ -103,4 +106,22 @@ public class Biologia implements Listener {
 		}
 
 	}
+
+	@EventHandler
+	public void onCraftEvent(CraftItemEvent event) {
+		Player player = (Player) event.getWhoClicked();
+		Material result = event.getRecipe().getResult().getType();
+		int amount = event.getRecipe().getResult().getAmount();
+		int level = MySQL.getLevel(player);
+		if (MySQL.getHability(player).equals("Biologia")) {
+			if (result.equals(Material.BREAD)) {
+
+				double bread = 3*amount;
+				MySQL.addPoints(player, bread / level);
+
+			}
+		}
+
+	}
+
 }

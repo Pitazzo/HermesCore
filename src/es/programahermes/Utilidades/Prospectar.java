@@ -69,6 +69,17 @@ public class Prospectar implements Listener {
 						} else {
 							event.getClickedBlock().setType(
 									Material.COBBLESTONE);
+						}if(isWithinRegion(location, "Cobre")){
+							double random = Math.random() * 10;
+							if (random <= 0.8) {
+
+								event.getClickedBlock().setType(
+										Material.IRON_ORE);
+							} else {
+
+								event.getClickedBlock().setType(
+										Material.COBBLESTONE);
+							}
 						}
 					}
 				}
