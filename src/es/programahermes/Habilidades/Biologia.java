@@ -4,20 +4,19 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import es.programahermes.Main;
 import es.programahermes.MySQL;
+import es.programahermes.Utilidades.Scoreboard;
 
 public class Biologia implements Listener {
 
@@ -115,7 +114,7 @@ public class Biologia implements Listener {
 		int level = MySQL.getLevel(player);
 		if (MySQL.getHability(player).equals("Biologia")) {
 			if (result.equals(Material.BREAD)) {
-
+				Scoreboard.showPoints(player);
 				double bread = 3*amount;
 				MySQL.addPoints(player, bread / level);
 
