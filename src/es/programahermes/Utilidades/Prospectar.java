@@ -1,6 +1,7 @@
 package es.programahermes.Utilidades;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -8,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -43,6 +45,8 @@ public class Prospectar implements Listener {
 	@EventHandler
 	public void onBreak(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
+		ItemStack escoria1 = new ItemStack(Material.GHAST_TEAR, 1);
+		ItemStack escoria6 = new ItemStack(Material.GHAST_TEAR, 6);
 		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 
 			if (event.getClickedBlock().getType().equals(Material.STONE)) {
@@ -52,37 +56,214 @@ public class Prospectar implements Listener {
 					if (player.getItemInHand().getType()
 							.equals(Material.WOOD_PICKAXE)) {
 
+						double prospectar = 2;
+						int level = MySQL.getLevel(player);
+						double random = Math.random() * 10;
+						MySQL.addPoints(player, prospectar / level);
 						Location location = event.getClickedBlock()
 								.getLocation();
-						if (isWithinRegion(location, "Aluminio")) {
 
-							double random = Math.random() * 10;
-							if (random <= 0.8) {
+						// coal
 
+						if (isWithinRegion(location, "Coal")) {
+
+							if (random <= 0.3) {
 								event.getClickedBlock().setType(
-										Material.IRON_ORE);
+										Material.COAL_ORE);
+								player.getWorld().dropItemNaturally(location,
+										escoria1);
 							} else {
-
-								event.getClickedBlock().setType(
-										Material.COBBLESTONE);
+								event.getClickedBlock().setType(Material.AIR);
+								player.getWorld().dropItemNaturally(location,
+										escoria6);
 							}
 						} else {
-							event.getClickedBlock().setType(
-									Material.COBBLESTONE);
-						}if(isWithinRegion(location, "Cobre")){
-							double random = Math.random() * 10;
-							if (random <= 0.8) {
+							event.getClickedBlock().getLocation();
+							event.getClickedBlock().setType(Material.AIR);
+							player.getWorld().dropItemNaturally(location,
+									escoria6);
 
-								event.getClickedBlock().setType(
-										Material.IRON_ORE);
+							// gold
+
+							if (isWithinRegion(location, "Gold")) {
+
+								if (random <= 1.2) {
+									event.getClickedBlock().setType(
+											Material.GOLD_ORE);
+									player.getWorld().dropItemNaturally(
+											location, escoria1);
+								} else {
+									event.getClickedBlock().setType(
+											Material.AIR);
+									player.getWorld().dropItemNaturally(
+											location, escoria6);
+								}
 							} else {
+								event.getClickedBlock().getLocation();
+								event.getClickedBlock().setType(Material.AIR);
+								player.getWorld().dropItemNaturally(location,
+										escoria6);
 
-								event.getClickedBlock().setType(
-										Material.COBBLESTONE);
+								// iron
+								if (isWithinRegion(location, "Iron")) {
+
+									if (random <= 0.095) {
+										event.getClickedBlock().setType(
+												Material.IRON_ORE);
+										player.getWorld().dropItemNaturally(
+												location, escoria1);
+									} else {
+										event.getClickedBlock().setType(
+												Material.AIR);
+										player.getWorld().dropItemNaturally(
+												location, escoria6);
+									}
+								} else {
+									event.getClickedBlock().getLocation();
+									event.getClickedBlock().setType(
+											Material.AIR);
+									player.getWorld().dropItemNaturally(
+											location, escoria6);
+
+									// redstone
+									if (isWithinRegion(location, "Redstone")) {
+
+										if (random <= 0.07) {
+											event.getClickedBlock().setType(
+													Material.REDSTONE_ORE);
+											player.getWorld()
+													.dropItemNaturally(
+															location, escoria1);
+										} else {
+											event.getClickedBlock().setType(
+													Material.AIR);
+											player.getWorld()
+													.dropItemNaturally(
+															location, escoria6);
+										}
+									} else {
+										event.getClickedBlock().getLocation();
+										event.getClickedBlock().setType(
+												Material.AIR);
+										player.getWorld().dropItemNaturally(
+												location, escoria6);
+
+										// diamond
+
+										if (isWithinRegion(location, "Diamond")) {
+
+											if (random <= 0.07) {
+												event.getClickedBlock()
+														.setType(
+																Material.DIAMOND_ORE);
+												player.getWorld()
+														.dropItemNaturally(
+																location,
+																escoria1);
+											} else {
+												event.getClickedBlock()
+														.setType(Material.AIR);
+												player.getWorld()
+														.dropItemNaturally(
+																location,
+																escoria6);
+											}
+										} else {
+											event.getClickedBlock()
+													.getLocation();
+											event.getClickedBlock().setType(
+													Material.AIR);
+											player.getWorld()
+													.dropItemNaturally(
+															location, escoria6);
+
+											
+										}
+									}
+
+								}
 							}
 						}
 					}
 				}
+			}
+		}
+
+	}
+
+	@EventHandler
+	public void onInteract(PlayerInteractEvent event) {
+		Player player = event.getPlayer();
+		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+			if (event.getClickedBlock().getType().equals(Material.LEVER)) {
+				if (MySQL.getHability(player).equals("Geologia")) {
+
+					if (event.getClickedBlock().getType()
+							.equals(Material.LEVER)) {
+						Location clicked = event.getClickedBlock()
+								.getLocation();
+						Location drill = new Location(player.getWorld(),
+								clicked.getX(), clicked.getY() - 1,
+								clicked.getZ());
+						Location air = new Location(player.getWorld(),
+								clicked.getX(), drill.getY() - 1,
+								clicked.getZ());
+						if (drill.getBlock().getType().equals(Material.SPONGE)) {
+							if (air.getBlock().getType().equals(Material.AIR)) {
+
+								int maxDeep = drill.getBlockY() - 20;
+								for (int y = drill.getBlockY(); y > maxDeep; y--) {
+
+									Location loc3 = new Location(
+											player.getWorld(), drill.getX(),
+											y - 1, drill.getZ());
+
+									loc3.getBlock().setType(Material.AIR);
+									
+									//empieza lo bueno
+									
+									
+									
+								}
+								if(isWithinRegion(drill, "Coal")){
+									player.sendMessage(ChatColor.BLACK+"La perforadora ha dado positivo en carbón");
+								}else{
+									player.sendMessage(ChatColor.RED+"Aparentemente no hay carbón en esta zona");
+								}
+								
+								if(isWithinRegion(drill, "Gold")){
+									player.sendMessage(ChatColor.GOLD+"La perforadora ha dado positivo en cobre");
+								}else{
+									player.sendMessage(ChatColor.RED+"Aparentemente no hay cobre en esta zona");
+								}
+								
+								if(isWithinRegion(drill, "Iron")){
+									player.sendMessage(ChatColor.GRAY+"La perforadora ha dado positivo en aluminio");
+								}else{
+									player.sendMessage(ChatColor.RED+"Aparentemente no hay aluminio en esta zona");
+								}
+								
+								if(isWithinRegion(drill, "Redstone")){
+									player.sendMessage(ChatColor.GREEN+"La perforadora ha dado positivo en silicio");
+								}else{
+									player.sendMessage(ChatColor.RED+"Aparentemente no hay silicio en esta zona");
+								}
+								
+								if(isWithinRegion(drill, "Diamond")){
+									player.sendMessage(ChatColor.DARK_GRAY+"La perforadora ha dado positivo en titanio");
+								}else{
+									player.sendMessage(ChatColor.RED+"Aparentemente no hay titanio en esta zona");
+								}
+							} else {
+								player.sendMessage(ChatColor.BLUE
+										+ "¡Perforadora mal colocada!");
+							}
+
+						}
+					}
+				}
+			}else{
+				player.sendMessage(ChatColor.RED+"Debes ser geólogo para manejar una perforadora");
 			}
 		}
 	}
