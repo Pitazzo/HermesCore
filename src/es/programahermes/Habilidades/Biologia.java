@@ -9,6 +9,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -52,21 +53,32 @@ public class Biologia implements Listener {
 
 				}
 				if (block.getType().equals(Material.SOIL)) {
-					System.out.println("Hey1");
+
 					if (item.getType().equals(Material.SEEDS)) {
 						double seeds = 2;
-						System.out.println("Hey2");
+
 						MySQL.addPoints(player, seeds / level);
+					}
+					if (item.getType().equals(Material.MELON_SEEDS)) {
+						double melonSeeds = 3;
+
+						MySQL.addPoints(player, melonSeeds / level);
+					}
+					if (item.getType().equals(Material.PUMPKIN_SEEDS)) {
+						double pumpkinSeeds = 3;
+
+						MySQL.addPoints(player, pumpkinSeeds / level);
 					}
 					if (item.getType().equals(Material.CARROT_ITEM)) {
 						double carrot = 3;
-						System.out.println("Hey3");
+
 						MySQL.addPoints(player, carrot / level);
 					}
 					if (item.getType().equals(Material.POTATO_ITEM)) {
 						double potato = 3;
 						MySQL.addPoints(player, potato / level);
 					}
+
 				}
 
 			}
@@ -80,8 +92,24 @@ public class Biologia implements Listener {
 		int level = MySQL.getLevel(player);
 		if (MySQL.getHability(player).equals("Biologia")) {
 			if (block.getType().equals(Material.CROPS)) {
-				double crops = 5;
+				double crops = 2;
 				MySQL.addPoints(player, crops / level);
+			}
+			if (block.getType().equals(Material.CARROT)) {
+				double carrot = 3;
+				MySQL.addPoints(player, carrot / level);
+			}
+			if (block.getType().equals(Material.POTATO)) {
+				double potato = 3;
+				MySQL.addPoints(player, potato / level);
+			}
+			if (block.getType().equals(Material.MELON_BLOCK)) {
+				double melon = 4;
+				MySQL.addPoints(player, melon / level);
+			}
+			if (block.getType().equals(Material.PUMPKIN)) {
+				double pumpkin = 4;
+				MySQL.addPoints(player, pumpkin / level);
 			}
 
 		}
@@ -91,12 +119,12 @@ public class Biologia implements Listener {
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onEntityInteract(PlayerInteractEntityEvent event) {
 		Player player = event.getPlayer();
-		ItemStack wheat = new ItemStack(Material.WHEAT);
+
 		if (MySQL.getHability(player).equals("Biologia")) {
 			EntityType entity = event.getRightClicked().getType();
 			if (entity == EntityType.COW || entity == EntityType.CHICKEN
 					|| entity == EntityType.PIG || entity == EntityType.SHEEP) {
-				if (player.getItemInHand().equals(wheat)) {
+				if (player.getItemInHand().getType().equals(Material.WHEAT)) {
 					double feed = 4;
 					double level = MySQL.getLevel(player);
 					MySQL.addPoints(player, feed / level);
@@ -104,6 +132,21 @@ public class Biologia implements Listener {
 			}
 		}
 
+	}
+
+	@EventHandler
+	public void onDeath(EntityDeathEvent event) {
+		Player player = event.getEntity().getKiller();
+		if (MySQL.getHability(player).equals("Biologia")) {
+			EntityType type = event.getEntity().getType();
+			if (type.equals(EntityType.CHICKEN) || type.equals(EntityType.COW)
+					|| type.equals(EntityType.SHEEP)
+					|| type.equals(EntityType.PIG)) {
+				double kill = 6;
+				MySQL.addPoints(player, kill / MySQL.getLevel(player));
+
+			}
+		}
 	}
 
 	@EventHandler
@@ -115,7 +158,7 @@ public class Biologia implements Listener {
 		if (MySQL.getHability(player).equals("Biologia")) {
 			if (result.equals(Material.BREAD)) {
 				Scoreboard.showPoints(player);
-				double bread = 3*amount;
+				double bread = 3 * amount;
 				MySQL.addPoints(player, bread / level);
 
 			}
