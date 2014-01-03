@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -218,13 +219,11 @@ public class Prospectar implements Listener {
 											player.getWorld(), drill.getX(),
 											y - 1, drill.getZ());
 
-									loc3.getBlock().setType(Material.AIR);
-									
-									//empieza lo bueno
-									
-									
-									
+									loc3.getBlock().setType(Material.AIR);	
 								}
+								
+								MySQL.addPoints(player, 8/MySQL.getLevel(player));
+								player.getWorld().playSound(drill, Sound.ANVIL_BREAK, 15F, 15F);
 								if(isWithinRegion(drill, "Coal")){
 									player.sendMessage(ChatColor.BLACK+"La perforadora ha dado positivo en carbón");
 								}else{
@@ -262,8 +261,6 @@ public class Prospectar implements Listener {
 						}
 					}
 				}
-			}else{
-				player.sendMessage(ChatColor.RED+"Debes ser geólogo para manejar una perforadora");
 			}
 		}
 	}
