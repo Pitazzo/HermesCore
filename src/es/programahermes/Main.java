@@ -6,11 +6,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 
 
+
 import es.programahermes.Commands.LevelUpCommand;
 import es.programahermes.Commands.PointsCommand;
 import es.programahermes.Commands.Stats;
 import es.programahermes.Habilidades.Biologia;
 import es.programahermes.Habilidades.Geologia;
+import es.programahermes.Utilidades.EnergyCells;
 import es.programahermes.Utilidades.Prospectar;
 
 public class Main extends JavaPlugin implements CommandExecutor {
@@ -20,6 +22,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(new Geologia(), this);
 		getServer().getPluginManager().registerEvents(new Prospectar(), this);
+		getServer().getPluginManager().registerEvents(new EnergyCells(), this);
 		getServer().getPluginManager().registerEvents(new Biologia(null), this);
 
 		loadConfiguration();
