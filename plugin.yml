@@ -11,3 +11,6 @@ commands:
    stats:
      description: Muestra las estadísticas de tu personaje
      usage: Error de sintaxis! Simplemente escribe /stats
+   sethabilidad:
+     description: Se asigna una habildiad concreta al jugador
+     usage: Error de sintaxis! Simplemente escribe /sethabilidad <jugador> <habilidad>

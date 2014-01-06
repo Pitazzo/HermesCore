@@ -7,8 +7,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 
 
+
 import es.programahermes.Commands.LevelUpCommand;
 import es.programahermes.Commands.PointsCommand;
+import es.programahermes.Commands.SetHability;
 import es.programahermes.Commands.Stats;
 import es.programahermes.Habilidades.Biologia;
 import es.programahermes.Habilidades.Geologia;
@@ -23,15 +25,15 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().getPluginManager().registerEvents(new Geologia(), this);
 		getServer().getPluginManager().registerEvents(new Prospectar(), this);
 		getServer().getPluginManager().registerEvents(new EnergyCells(), this);
-		getServer().getPluginManager().registerEvents(new Biologia(null), this);
+		getServer().getPluginManager().registerEvents(new Biologia(), this);
 
 		loadConfiguration();
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());
+		getCommand("sethabilidad").setExecutor(new SetHability());
 	}
 
-	Biologia Biologia = new Biologia(this);
 
 	public void onDisable() {
 

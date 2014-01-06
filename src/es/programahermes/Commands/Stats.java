@@ -11,6 +11,14 @@ import es.programahermes.MySQL;
 
 public class Stats implements CommandExecutor {
 
+	public double getDecimal(int numeroDecimales, double decimal) {
+		decimal = decimal * (java.lang.Math.pow(10, numeroDecimales));
+		decimal = java.lang.Math.round(decimal);
+		decimal = decimal / java.lang.Math.pow(10, numeroDecimales);
+
+		return decimal;
+	}
+
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 		if (cmd.getName().equalsIgnoreCase("stats")) {
@@ -42,7 +50,7 @@ public class Stats implements CommandExecutor {
 								+ target.getName() + " está a nivel " + level1
 								+ " de su habilidad "
 								+ habilidad1.toLowerCase() + " y tiene "
-								+ points1 + " puntos.");
+								+ getDecimal(2, points1) + " puntos.");
 						return true;
 					} else {
 						player.sendMessage(ChatColor.RED

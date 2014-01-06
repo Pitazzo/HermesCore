@@ -163,6 +163,21 @@ public class MySQL {
 			e.printStackTrace();
 		}
 	}
+	
+	public static synchronized void setHability(Player player, String hability){
+		openConnection();
+		try{
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE `user_data` SET `habilidad1`=? WHERE name=?");
+			ps.setString(2, player.getName());
+			ps.setString(1, hability);
+			ps.executeUpdate();
+			ps.close();
+			closeConnection();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 
 	public static synchronized String getHability(Player player) {
 		openConnection();

@@ -14,18 +14,9 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import es.programahermes.Main;
 import es.programahermes.MySQL;
-import es.programahermes.Utilidades.Scoreboard;
 
 public class Biologia implements Listener {
-
-	public Main plugin;
-
-	public Biologia(Main plugin) {
-		this.plugin = plugin;
-	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onInteract(PlayerInteractEvent event) {
@@ -157,7 +148,7 @@ public class Biologia implements Listener {
 		int level = MySQL.getLevel(player);
 		if (MySQL.getHability(player).equals("Biologia")) {
 			if (result.equals(Material.BREAD)) {
-				Scoreboard.showPoints(player);
+
 				double bread = 3 * amount;
 				MySQL.addPoints(player, bread / level);
 
