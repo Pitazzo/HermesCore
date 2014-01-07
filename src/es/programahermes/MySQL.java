@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import org.bukkit.entity.Player;
 
 public class MySQL {
@@ -148,10 +147,10 @@ public class MySQL {
 			e.printStackTrace();
 		}
 	}
-	
-	public static synchronized void setPoints(Player player, double newPoints){
+
+	public static synchronized void setPoints(Player player, double newPoints) {
 		openConnection();
-		try{
+		try {
 			PreparedStatement ps = connection
 					.prepareStatement("UPDATE `user_data` SET `points`=? WHERE name=?");
 			ps.setString(2, player.getName());
@@ -159,14 +158,14 @@ public class MySQL {
 			ps.executeUpdate();
 			ps.close();
 			closeConnection();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static synchronized void setHability(Player player, String hability){
+
+	public static synchronized void setHability(Player player, String hability) {
 		openConnection();
-		try{
+		try {
 			PreparedStatement ps = connection
 					.prepareStatement("UPDATE `user_data` SET `habilidad1`=? WHERE name=?");
 			ps.setString(2, player.getName());
@@ -174,7 +173,7 @@ public class MySQL {
 			ps.executeUpdate();
 			ps.close();
 			closeConnection();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -216,7 +215,7 @@ public class MySQL {
 		}
 
 	}
-	
+
 	public static synchronized void levelUp(Player player) {
 		openConnection();
 		try {
@@ -242,6 +241,53 @@ public class MySQL {
 		}
 	}
 
+	public static synchronized void addEarnedPoints(Player player, String type,
+			String material, double amount) {
+		openConnection();
+		try {
+
+			int level = getLevel(player);
+
+			switch (type) {
+			case "break":
+				PreparedStatement ps1 = connection
+						.prepareStatement("SELECT points FROM `break_data` WHERE material=?");
+				ps1.setString(1, material);
+			
+				ResultSet result1 = ps1.executeQuery();
+				result1.next();
+				double points = result1.getDouble("points");
+				addPoints(player, points / level);
+				ps1.close();
+				result1.close();
+				closeConnection();
+
+			case "craft":
+				PreparedStatement ps2 = connection
+						.prepareStatement("SELECT points FROM `bukkit`.`craft` WHERE material=?");
+				ps2.setString(1, material);
+				ResultSet result2 = ps2.executeQuery();
+				result2.next();
+				double points2 = result2.getDouble("points");
+				addPoints(player, (points2 / level) * amount);
+				ps2.close();
+				result2.close();
+				closeConnection();
+			case "placement":
+				PreparedStatement ps3 = connection
+						.prepareStatement("SELECT points FROM `bukkit`.`break_data` WHERE material=?");
+				ps3.setString(1, material);
+				ResultSet result3 = ps3.executeQuery();
+				result3.next();
+				double points3 = result3.getDouble("points");
+				addPoints(player, points3 / level);
+
+			case "special":
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
-
-

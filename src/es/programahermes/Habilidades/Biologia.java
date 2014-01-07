@@ -143,18 +143,13 @@ public class Biologia implements Listener {
 	@EventHandler
 	public void onCraftEvent(CraftItemEvent event) {
 		Player player = (Player) event.getWhoClicked();
-		Material result = event.getRecipe().getResult().getType();
+		String result = event.getRecipe().getResult().getType().toString();
 		int amount = event.getRecipe().getResult().getAmount();
-		int level = MySQL.getLevel(player);
 		if (MySQL.getHability(player).equals("Biologia")) {
-			if (result.equals(Material.BREAD)) {
-
-				double bread = 3 * amount;
-				MySQL.addPoints(player, bread / level);
+			MySQL.addEarnedPoints(player, "craft", result, amount);
 
 			}
 		}
 
 	}
 
-}

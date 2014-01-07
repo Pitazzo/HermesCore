@@ -16,46 +16,13 @@ public class Geologia implements Listener {
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
 		Player player = event.getPlayer();
-		Material material = event.getBlock().getType();
-		int level = MySQL.getLevel(player);
+		String material = event.getBlock().getType().toString();
 		if (MySQL.getHability(player).equals("Geologia")) {
 
-			if (material.equals(Material.SANDSTONE)) {
-				double sandstone = 2.5;
-				MySQL.addPoints(player, sandstone / level);
-			}
-			if (material.equals(Material.SAND)) {
-				double sand = 0.5;
-				MySQL.addPoints(player, sand / level);
-			}
-			if (material.equals(Material.GRAVEL)) {
-				double gravel = 0.5;
-				MySQL.addPoints(player, gravel / level);
-			}
-			if (material.equals(Material.STONE)) {
+			
+			MySQL.addEarnedPoints(player, "break", material, 1);
 
-				double stone = 2;
-				MySQL.addPoints(player, stone / level);
-			}
-			if (material.equals(Material.IRON_ORE)) {
-				double iron = 7;
-				MySQL.addPoints(player, iron / level);
-			}
-			if (material.equals(Material.GRAVEL)) {
-				double gravel = 1;
-				MySQL.addPoints(player, gravel / level);
-			}
-			if (material.equals(Material.GOLD_ORE)) {
-				double gold = 10;
-				MySQL.addPoints(player, gold / level);
-			}
-
-			if (material.equals(Material.REDSTONE_ORE)) {
-				double redstone = 15;
-				MySQL.addPoints(player, redstone / level);
-			}
-
-			if (material.equals(Material.COAL_ORE)) {
+			if (event.getBlock().getType().equals(Material.COAL_ORE)) {
 				ItemStack drop = new ItemStack(Material.STONE, 1);
 				event.getBlock().getDrops(drop);
 				player.sendMessage(ChatColor.RED
