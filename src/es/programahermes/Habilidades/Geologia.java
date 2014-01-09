@@ -18,8 +18,7 @@ public class Geologia implements Listener {
 		Player player = event.getPlayer();
 		String material = event.getBlock().getType().toString();
 		if (MySQL.getHability(player).equals("Geologia")) {
-
-			
+						
 			MySQL.addEarnedPoints(player, "break", material, 1);
 
 			if (event.getBlock().getType().equals(Material.COAL_ORE)) {

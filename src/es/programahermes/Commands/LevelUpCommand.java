@@ -253,12 +253,12 @@ public class LevelUpCommand implements CommandExecutor {
 
 					}
 					return true;
-				} else {
+				} 
+				}else {
 					player.sendMessage(ChatColor.GREEN
 							+ "No tienes suficientes puntos para subir de nivel, tienes "
 							+ points + " puntos, luego te faltan " + pointsLeft
 							+ " más.");
-				}
 			}
 
 			return false;

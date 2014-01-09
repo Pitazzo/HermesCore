@@ -22,6 +22,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 	public  Plugin plugin = this;
 
 	public void onEnable() {
+		
 		getServer().getPluginManager().registerEvents(new Geologia(), this);
 		getServer().getPluginManager().registerEvents(new Prospectar(), this);
 		getServer().getPluginManager().registerEvents(new EnergyCells(), this);
@@ -32,11 +33,12 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());
 		getCommand("sethabilidad").setExecutor(new SetHability());
+		MySQL.openConnection();
 	}
 
 
 	public void onDisable() {
-
+		MySQL.closeConnection();
 	}
 
 ;
