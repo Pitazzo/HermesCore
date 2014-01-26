@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class MySQL {
@@ -46,20 +45,6 @@ public class MySQL {
 			e.printStackTrace();
 		}
 		return false;
-	}
-
-	static synchronized void firstJoin(Player player) {
-
-		try {
-			PreparedStatement ps = connection
-					.prepareStatement("INSERT INTO `user_data`(`name`, `points`) VALUES (?,0)");
-			ps.setString(1, player.getName());
-			ps.executeUpdate();
-			ps.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public static synchronized double getPoints(Player player) {
@@ -261,17 +246,105 @@ public class MySQL {
 					ps1.close();
 					result1.close();
 
-				} else {
-					player.sendMessage(":(");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			break;
+		case "entity":
+			try {
 
-		
+				if (dbContanisEntity(material)) {
+					PreparedStatement ps1 = connection
+							.prepareStatement("SELECT points FROM `entity_data` WHERE entity=?");
+					ps1.setString(1, material);
 
+					ResultSet result1 = ps1.executeQuery();
+					result1.next();
+					double points = result1.getDouble("points");
+					addPoints(player, points / level);
+					ps1.close();
+					result1.close();
+
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "craft":
+			try {
+				if (dbContanisCraft(material)) {
+					PreparedStatement ps1 = connection
+							.prepareStatement("SELECT points FROM `craft_data` WHERE material=?");
+					ps1.setString(1, material);
+					ResultSet result1 = ps1.executeQuery();
+					result1.next();
+					double points = result1.getDouble("points");
+					addPoints(player, (points / level) * amount);
+					ps1.close();
+					result1.close();
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "interact":
+			try {
+				if (dbContanisInteract(material)) {
+					PreparedStatement ps1 = connection
+							.prepareStatement("SELECT points FROM `interact_data` WHERE material=?");
+					ps1.setString(1, material);
+					ResultSet result1 = ps1.executeQuery();
+					result1.next();
+					double points = result1.getDouble("points");
+					addPoints(player, points / level);
+					ps1.close();
+					result1.close();
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+
+		case "special":
+			try {
+				if (dbContanisSpecial(material)) {
+					PreparedStatement ps1 = connection
+							.prepareStatement("SELECT points FROM `special_data` WHERE special=?");
+					ps1.setString(1, material);
+					ResultSet result1 = ps1.executeQuery();
+					result1.next();
+					double points = result1.getDouble("points");
+					addPoints(player, points / level);
+					ps1.close();
+					result1.close();
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "place":
+			try {
+				if (dbContanisPlace(material)) {
+					PreparedStatement ps1 = connection
+							.prepareStatement("SELECT points FROM `place_data` WHERE material=?");
+					ps1.setString(1, material);
+					ResultSet result1 = ps1.executeQuery();
+					result1.next();
+					double points = result1.getDouble("points");
+					addPoints(player, points / level);
+					ps1.close();
+					result1.close();
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 		}
-
 	}
 
 	public static synchronized boolean dbContanisBreak(String material) {
@@ -302,10 +375,8 @@ public class MySQL {
 					.prepareStatement("SELECT * FROM `bukkit`.`craft_data` WHERE material=?;");
 			ps.setString(1, material);
 			ResultSet resultSet = ps.executeQuery();
-			boolean containsPlayer = false;
-			if(resultSet.next()){
-			containsPlayer = resultSet.next();
-			}
+			boolean containsPlayer = resultSet.next();
+
 			ps.close();
 			resultSet.close();
 
@@ -318,4 +389,89 @@ public class MySQL {
 
 	}
 
+	public static synchronized boolean dbContanisEntity(String entity) {
+		try {
+
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT * FROM `bukkit`.`entity_data` WHERE entity=?;");
+			ps.setString(1, entity);
+			ResultSet resultSet = ps.executeQuery();
+			boolean containsPlayer = resultSet.next();
+
+			ps.close();
+			resultSet.close();
+
+			return containsPlayer;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+
+	public static synchronized boolean dbContanisInteract(String material) {
+		try {
+
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT * FROM `bukkit`.`interact_data` WHERE material=?;");
+			ps.setString(1, material);
+			ResultSet resultSet = ps.executeQuery();
+			boolean containsPlayer = resultSet.next();
+
+			ps.close();
+			resultSet.close();
+
+			return containsPlayer;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+
+	public static synchronized boolean dbContanisSpecial(String special) {
+		try {
+
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT * FROM `bukkit`.`special_data` WHERE special=?;");
+			ps.setString(1, special);
+			ResultSet resultSet = ps.executeQuery();
+			boolean containsPlayer = resultSet.next();
+
+			ps.close();
+			resultSet.close();
+
+			return containsPlayer;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+	
+	public static synchronized boolean dbContanisPlace(String material) {
+		try {
+
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT * FROM `bukkit`.`place_data` WHERE material=?;");
+			ps.setString(1, material);
+			ResultSet resultSet = ps.executeQuery();
+			boolean containsPlayer = resultSet.next();
+
+			ps.close();
+			resultSet.close();
+
+			return containsPlayer;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+	
+	
 }
