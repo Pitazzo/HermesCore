@@ -16,6 +16,7 @@ public class Tecnica implements Listener {
 		int amount = event.getRecipe().getResult().getAmount();
 		if (MySQL.getHability(player).equals("Tecnica")) {
 			MySQL.addEarnedPoints(player, "craft", result, amount);
+			player.sendMessage(result);
 		}
 	}
 

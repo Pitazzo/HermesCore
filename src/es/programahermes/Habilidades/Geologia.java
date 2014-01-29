@@ -18,7 +18,7 @@ public class Geologia implements Listener {
 		Player player = event.getPlayer();
 		String material = event.getBlock().getType().toString();
 		if (MySQL.getHability(player).equals("Geologia")) {
-						
+
 			MySQL.addEarnedPoints(player, "break", material, 1);
 
 			if (event.getBlock().getType().equals(Material.COAL_ORE)) {
@@ -34,13 +34,9 @@ public class Geologia implements Listener {
 	@EventHandler
 	public void onBuild(BlockPlaceEvent event) {
 		Player player = event.getPlayer();
+		String material = event.getBlock().getType().toString();
 		if (MySQL.getHability(player).equals("Geologia")) {
-			if (event.getBlock().getType().equals(Material.FENCE)) {
-				double fence = 4;
-				int level = MySQL.getLevel(player);
-				MySQL.addPoints(player, fence / level);
-			}
+			MySQL.addEarnedPoints(player, "place", material, 1);
 		}
 	}
-
 }

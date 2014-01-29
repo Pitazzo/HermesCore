@@ -289,6 +289,24 @@ public class MySQL {
 				e.printStackTrace();
 			}
 			break;
+		case "smelt":
+			try {
+				if (dbContanisSmelt(material)) {
+					PreparedStatement ps1 = connection
+							.prepareStatement("SELECT points FROM `smelt` WHERE material=?");
+					ps1.setString(1, material);
+					ResultSet result1 = ps1.executeQuery();
+					result1.next();
+					double points = result1.getDouble("points");
+					addPoints(player, (points / level) * amount);
+					ps1.close();
+					result1.close();
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 		case "interact":
 			try {
 				if (dbContanisInteract(material)) {
@@ -457,6 +475,27 @@ public class MySQL {
 
 			PreparedStatement ps = connection
 					.prepareStatement("SELECT * FROM `bukkit`.`place_data` WHERE material=?;");
+			ps.setString(1, material);
+			ResultSet resultSet = ps.executeQuery();
+			boolean containsPlayer = resultSet.next();
+
+			ps.close();
+			resultSet.close();
+
+			return containsPlayer;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+	
+	public static synchronized boolean dbContanisSmelt(String material) {
+		try {
+
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT * FROM `bukkit`.`smelt_data` WHERE material=?;");
 			ps.setString(1, material);
 			ResultSet resultSet = ps.executeQuery();
 			boolean containsPlayer = resultSet.next();

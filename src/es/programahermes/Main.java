@@ -38,8 +38,8 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().getPluginManager().registerEvents(new Estructural(), this);
 		getServer().getPluginManager().registerEvents(new Quimica(), this);
 		getServer().getPluginManager().registerEvents(new Tecnica(), this);
-		getServer().getPluginManager().registerEvents(new Furnaces(), this);
 		getServer().getPluginManager().registerEvents(new Miscelaneo(), this);
+		getServer().getPluginManager().registerEvents(new Furnaces(), this);
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());
