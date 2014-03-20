@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import org.bukkit.entity.Player;
 
 public class MySQL {
+
 	public static Connection connection;
 
 	public static synchronized void openConnection() {
@@ -469,7 +470,7 @@ public class MySQL {
 		return false;
 
 	}
-	
+
 	public static synchronized boolean dbContanisPlace(String material) {
 		try {
 
@@ -490,7 +491,7 @@ public class MySQL {
 		return false;
 
 	}
-	
+
 	public static synchronized boolean dbContanisSmelt(String material) {
 		try {
 
@@ -511,6 +512,234 @@ public class MySQL {
 		return false;
 
 	}
-	
-	
+
+	public static synchronized double getSed(Player player) {
+
+		try {
+			PreparedStatement sql = connection
+					.prepareStatement("SELECT sed FROM `bukkit`.`user_data` WHERE name=?;");
+
+			sql.setString(1, player.getName());
+			ResultSet result = sql.executeQuery();
+			result.next();
+			double sed = result.getDouble("sed");
+			sql.close();
+			result.close();
+
+			return sed;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public static synchronized void addSed(Player player, double sed) {
+
+		try {
+
+			PreparedStatement ps1 = connection
+					.prepareStatement("SELECT sed FROM `bukkit`.`user_data` WHERE name=?");
+			ps1.setString(1, player.getName());
+			ResultSet result1 = ps1.executeQuery();
+			result1.next();
+			double sed2 = result1.getDouble("sed");
+
+			PreparedStatement ps2 = connection
+					.prepareStatement("UPDATE `user_data` SET `sed`=? WHERE name=?");
+			ps2.setString(2, player.getName());
+			ps2.setDouble(1, sed + sed2);
+			ps2.executeUpdate();
+			ps1.close();
+			result1.close();
+			ps2.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static synchronized void removeSed(Player player, double sed) {
+
+		try {
+			PreparedStatement ps1 = connection
+					.prepareStatement("SELECT sed FROM `bukkit`.`user_data` WHERE name=?");
+			ps1.setString(1, player.getName());
+			ResultSet result1 = ps1.executeQuery();
+			result1.next();
+			double sed2 = result1.getDouble("sed");
+
+			PreparedStatement ps2 = connection
+					.prepareStatement("UPDATE `bukkit`.`user_data` SET `sed`=? WHERE name=?");
+			ps2.setString(2, player.getName());
+			ps2.setDouble(1, sed2 - sed);
+			ps2.executeUpdate();
+			ps1.close();
+			result1.close();
+			ps2.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static synchronized void setSed(Player player, double newSed) {
+
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE `user_data` SET `sed`=? WHERE name=?");
+			ps.setString(2, player.getName());
+			ps.setDouble(1, newSed);
+			ps.executeUpdate();
+			ps.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static synchronized double getResidual(Player player) {
+
+		try {
+			PreparedStatement sql = connection
+					.prepareStatement("SELECT residual FROM `bukkit`.`user_data` WHERE name=?;");
+
+			sql.setString(1, player.getName());
+			ResultSet result = sql.executeQuery();
+			result.next();
+			double sed = result.getDouble("residual");
+			sql.close();
+			result.close();
+
+			return sed;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public static synchronized void setResidual(Player player,
+			double newResidual) {
+
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE `user_data` SET `residual`=? WHERE name=?");
+			ps.setString(2, player.getName());
+			ps.setDouble(1, newResidual);
+			ps.executeUpdate();
+			ps.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static synchronized void addResidual(Player player, double residual) {
+
+		try {
+
+			PreparedStatement ps1 = connection
+					.prepareStatement("SELECT residual FROM `bukkit`.`user_data` WHERE name=?");
+			ps1.setString(1, player.getName());
+			ResultSet result1 = ps1.executeQuery();
+			result1.next();
+			double residual2 = result1.getDouble("residual");
+
+			PreparedStatement ps2 = connection
+					.prepareStatement("UPDATE `user_data` SET `residual`=? WHERE name=?");
+			ps2.setString(2, player.getName());
+			ps2.setDouble(1, residual + residual2);
+			ps2.executeUpdate();
+			ps1.close();
+			result1.close();
+			ps2.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static synchronized double getOxygen(Player player) {
+
+		try {
+			PreparedStatement sql = connection
+					.prepareStatement("SELECT oxygen FROM `bukkit`.`user_data` WHERE name=?;");
+
+			sql.setString(1, player.getName());
+			ResultSet result = sql.executeQuery();
+			result.next();
+			double oxygen = result.getDouble("oxygen");
+			sql.close();
+			result.close();
+
+			return oxygen;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public static synchronized void addOxygen(Player player, double oxygen) {
+
+		try {
+
+			PreparedStatement ps1 = connection
+					.prepareStatement("SELECT oxygen FROM `bukkit`.`user_data` WHERE name=?");
+			ps1.setString(1, player.getName());
+			ResultSet result1 = ps1.executeQuery();
+			result1.next();
+			double oxygen2 = result1.getDouble("oxygen");
+
+			PreparedStatement ps2 = connection
+					.prepareStatement("UPDATE `user_data` SET `oxygen`=? WHERE name=?");
+			ps2.setString(2, player.getName());
+			ps2.setDouble(1, oxygen + oxygen2);
+			ps2.executeUpdate();
+			ps1.close();
+			result1.close();
+			ps2.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static synchronized void removeOxygen(Player player, double oxygen) {
+
+		try {
+			PreparedStatement ps1 = connection
+					.prepareStatement("SELECT oxygen FROM `bukkit`.`user_data` WHERE name=?");
+			ps1.setString(1, player.getName());
+			ResultSet result1 = ps1.executeQuery();
+			result1.next();
+			double oxygen2 = result1.getDouble("oxygen");
+
+			PreparedStatement ps2 = connection
+					.prepareStatement("UPDATE `bukkit`.`user_data` SET `oxygen`=? WHERE name=?");
+			ps2.setString(2, player.getName());
+			ps2.setDouble(1, oxygen2 - oxygen);
+			ps2.executeUpdate();
+			ps1.close();
+			result1.close();
+			ps2.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static synchronized void setOxygen(Player player, double newOxygen) {
+
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE `user_data` SET `oxygen`=? WHERE name=?");
+			ps.setString(2, player.getName());
+			ps.setDouble(1, newOxygen);
+			ps.executeUpdate();
+			ps.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

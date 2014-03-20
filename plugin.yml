@@ -14,3 +14,12 @@ commands:
    sethabilidad:
      description: Se asigna una habildiad concreta al jugador
      usage: Error de sintaxis! Simplemente escribe /sethabilidad <jugador> <habilidad>
+   evacuar:
+     description: El jugador evacua sus residuos
+     usage: Error de sintaxis! Simplemente escribe /evacuar
+   csp:
+     description: El jugador consulta su CSP
+     usage: Error de sintaxis! Simplemente escribe /csp
+   presurizar:
+     description: El jugador presuriza su traje o tanque de oxígeno
+     usage: Error de sintaxis! Simplemente escribe /presurizar <tanque|traje>

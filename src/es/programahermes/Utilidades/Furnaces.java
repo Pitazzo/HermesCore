@@ -45,9 +45,7 @@ public class Furnaces implements Listener {
 						|| action.equals(InventoryAction.PICKUP_ONE)
 						|| action.equals(InventoryAction.PICKUP_SOME)) {
 					int material2 = event.getCursor().getType().getId();
-				}if(player.hasPermission("hermescore.cook." + material2){
-					MySQL.addEarnedPoints(player, "smelt", material, amount);
-				}else{
+				
 					player.sendMessage(ChatColor.GOLD
 							+ "¡No sabes como manejar este horno! Alejate, es peligroso sin los conocimeintos adecuados");
 				event.setCancelled(true);
