@@ -17,9 +17,12 @@ commands:
    evacuar:
      description: El jugador evacua sus residuos
      usage: Error de sintaxis! Simplemente escribe /evacuar
-   csp:
+   csv:
      description: El jugador consulta su CSP
      usage: Error de sintaxis! Simplemente escribe /csp
    presurizar:
      description: El jugador presuriza su traje o tanque de oxígeno
      usage: Error de sintaxis! Simplemente escribe /presurizar <tanque|traje>
+   visor:
+     description: Se activa/desactiva el protector solar del casco
+     usage: Error de sintaxis! Simplemente escribe /visor

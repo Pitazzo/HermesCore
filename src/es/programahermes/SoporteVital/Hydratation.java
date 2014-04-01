@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
@@ -24,15 +25,17 @@ public class Hydratation implements Listener {
 			@Override
 			public void run() {
 				for (Player player : Bukkit.getOnlinePlayers()) {
-					MySQL.removeSed(player, 1);
+					if (MySQL.getSed(player) > 0) {
+						MySQL.removeSed(player, 1);
+					}
+
 					Scoreboard.showScore(player);
-					if(MySQL.getSed(player)<=20){
+					if (MySQL.getSed(player) <= 20) {
 						player.setWalkSpeed((float) 0.1);
-					}else{
+					} else {
 						player.setWalkSpeed((float) 0.2);
 					}
-					
-					
+
 					if (MySQL.getSed(player) <= 20) {
 						player.sendMessage(ChatColor.GREEN
 								+ "[Soporte Vital]"
@@ -52,62 +55,32 @@ public class Hydratation implements Listener {
 		}, 100L, 20 * 60);
 	}
 
-
-
 	@EventHandler
-	public void onInteract(PlayerInteractEvent event) {
+	public void onConsum(PlayerItemConsumeEvent event) {
 		Player player = event.getPlayer();
-		if (event.getAction().equals(Action.RIGHT_CLICK_AIR)
-				|| event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-			if (player.getItemInHand().getType().equals(Material.POTION)) {
+		if (event.getItem().getType().equals(Material.POTION)) {
+			if (MySQL.getSed(player) < 100) {
+				MySQL.addSed(player, 5);
 
-				if (!(MySQL.getSed(player) >= 100)) {
-					MySQL.addSed(player, 10);
-					player.getInventory().removeItem(
-							new ItemStack(Material.POTION, 1));
-					player.getInventory().addItem(
-							new ItemStack(Material.GLASS_BOTTLE, 1));
-					player.updateInventory();
-					player.sendMessage(ChatColor.GREEN + "[Soporte Vital]"
-							+ ChatColor.RED + "¡Te has rehidratado!");
-				} else {
-					player.sendMessage(ChatColor.GREEN + "[Soporte Vital]"
-							+ ChatColor.RED + "¡Ya has bebido suficiente!");
-				}
-				Scoreboard.showScore(player);
 			}
-			if (player.getItemInHand().getType().equals(Material.MELON)) {
 
-				if (!(MySQL.getSed(player) >= 100)) {
-					MySQL.addSed(player, 10);
-					player.getInventory().removeItem(
-							new ItemStack(Material.MELON, 1));
-					player.updateInventory();
-					player.sendMessage(ChatColor.GREEN + "[Soporte Vital]"
-							+ ChatColor.RED + "¡Te has rehidratado!");
-				} else {
-					player.sendMessage(ChatColor.GREEN + "[Soporte Vital]"
-							+ ChatColor.RED + "¡Ya has bebido suficiente!");
-				}
-				Scoreboard.showScore(player);
+		}
+		if (event.getItem().getType().equals(Material.MUSHROOM_SOUP)) {
+			if (MySQL.getSed(player) < 100) {
+				MySQL.addSed(player, 10);
+
+			} else {
+				player.sendMessage(ChatColor.RED + "Ya has bebido suficiente");
 			}
-			if (player.getItemInHand().getType().equals(Material.MUSHROOM_SOUP)) {
+		}
+		if (event.getItem().getType().equals(Material.MELON)) {
+			if (MySQL.getSed(player) < 100) {
+				MySQL.addSed(player, 5);
 
-				if (!(MySQL.getSed(player) >= 100)) {
-					MySQL.addSed(player, 10);
-					player.getInventory().removeItem(
-							new ItemStack(Material.MUSHROOM_SOUP, 1));
-					player.getInventory().addItem(
-							new ItemStack(Material.BOWL, 1));
-					player.updateInventory();
-					player.sendMessage(ChatColor.GREEN + "[Soporte Vital]"
-							+ ChatColor.RED + "¡Te has rehidratado!");
-				} else {
-					player.sendMessage(ChatColor.GREEN + "[Soporte Vital]"
-							+ ChatColor.RED + "¡Ya has bebido suficiente!");
-				}
-				Scoreboard.showScore(player);
+			} else {
+				player.sendMessage(ChatColor.RED + "Ya has bebido suficiente");
 			}
 		}
 	}
+
 }

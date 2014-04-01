@@ -21,6 +21,7 @@ public class Scoreboard {
 		int sed = (int) MySQL.getSed(player);
 		int res = (int) MySQL.getResidual(player);
 		int oxy = (int) MySQL.getOxygen(player);
+		int fat = (int) MySQL.getFatiga(player);
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		org.bukkit.scoreboard.Scoreboard board = manager.getNewScoreboard();
 		org.bukkit.scoreboard.Scoreboard blank = manager.getNewScoreboard();
@@ -31,6 +32,7 @@ public class Scoreboard {
 		Score hidratacion = null;
 		Score hambre = null;
 		Score oxygen = null;
+		Score fatiga = null;
 		int food = (100 * player.getFoodLevel() / 20);
 
 		// sed
@@ -50,6 +52,22 @@ public class Scoreboard {
 			}
 		}
 
+		// fatiga
+		if (MySQL.getFatiga(player) < 50) {
+			fatiga = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN
+					+ "Fatiga: " + fat + "%"));
+		} else {
+			if (MySQL.getFatiga(player) > 70) {
+				fatiga = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.RED
+						+ "Fatiga: " + fat + "%"));
+			} else {
+				fatiga = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD
+						+ "Fatiga: " + fat + "%"));
+
+			}
+		}
+		
+		
 		// hambre
 		if (food > 70) {
 			hambre = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN
@@ -83,15 +101,15 @@ public class Scoreboard {
 		if (Oxygen.hasSuit(player)) {
 			if (MySQL.getOxygen(player) > 70) {
 				oxygen = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN
-						+ "Oxígeno: " + oxy + "%"));
+						+ "Oxígeno: " + oxy + " L"));
 			} else {
 				if (MySQL.getOxygen(player) < 30) {
 					oxygen = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.RED
-							+ "Oxígeno: " + oxy + "%"));
+							+ "Oxígeno: " + oxy + " L"));
 				} else {
 					oxygen = obj.getScore(Bukkit
 							.getOfflinePlayer(ChatColor.GOLD + "Oxígeno: "
-									+ oxy + "%"));
+									+ oxy + " L"));
 
 				}
 
@@ -105,7 +123,8 @@ public class Scoreboard {
 		residual.setScore(0);
 		hidratacion.setScore(0);
 		oxygen.setScore(0);
-		if (player.getInventory().contains(Material.ARROW)) {
+		fatiga.setScore(0);
+		if (player.getInventory().contains(Material.NETHER_BRICK_ITEM)) {
 			player.setScoreboard(board);
 		}else{
 			player.setScoreboard(blank);

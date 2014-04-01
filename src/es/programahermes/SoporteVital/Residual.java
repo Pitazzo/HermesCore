@@ -23,7 +23,10 @@ public class Residual implements CommandExecutor{
 			@Override
 			public void run() {
 				for (Player player : Bukkit.getOnlinePlayers()) {
-					MySQL.addResidual(player, 1.85);
+					if(!(MySQL.getResidual(player)>= 100)){
+						MySQL.addResidual(player, 1.85);
+					}
+					
 					Scoreboard.showScore(player);
 					if (MySQL.getResidual(player) >= 80) {
 						player.sendMessage(ChatColor.GREEN

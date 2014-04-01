@@ -9,6 +9,7 @@ import es.programahermes.Commands.PointsCommand;
 import es.programahermes.Commands.SetHability;
 import es.programahermes.Commands.Stats;
 import es.programahermes.Commands.VSC;
+import es.programahermes.Commands.Visor;
 import es.programahermes.Habilidades.Biologia;
 import es.programahermes.Habilidades.Estructural;
 import es.programahermes.Habilidades.Geologia;
@@ -20,16 +21,18 @@ import es.programahermes.SoporteVital.Oxygen;
 import es.programahermes.SoporteVital.OxygenCommand;
 import es.programahermes.SoporteVital.Residual;
 import es.programahermes.Utilidades.EnergyCells;
-import es.programahermes.Utilidades.Furnaces;
 import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.Prospectar;
+import es.programahermes.Utilidades.Recipes;
 
 public class Main extends JavaPlugin implements CommandExecutor {
 
 
 	Plugin plugin = this;
-
+	
+	
 	public void onEnable() {
+
 		Residual.residualUpdate(plugin);
 		Hydratation.thirstUpdate(plugin);
 		Oxygen.oxyenUpdate(plugin);
@@ -42,7 +45,6 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().getPluginManager().registerEvents(new Quimica(), this);
 		getServer().getPluginManager().registerEvents(new Tecnica(), this);
 		getServer().getPluginManager().registerEvents(new Miscelaneo(), this);
-		getServer().getPluginManager().registerEvents(new Furnaces(), this);
 		getServer().getPluginManager().registerEvents(new Hydratation(), this);
 		getServer().getPluginManager().registerEvents(new Fatiga(), this);
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
@@ -50,15 +52,27 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getCommand("stats").setExecutor(new Stats());
 		getCommand("sethabilidad").setExecutor(new SetHability());
 		getCommand("evacuar").setExecutor(new Residual());
-		getCommand("csp").setExecutor(new VSC());
+		getCommand("csv").setExecutor(new VSC());
 		getCommand("presurizar").setExecutor(new OxygenCommand());
+		getCommand("visor").setExecutor(new Visor());
+		loadConfiguration();
+		getConfig().options().copyDefaults(true);
+		saveDefaultConfig();
+		
 		MySQL.openConnection();
+		getServer().addRecipe(Recipes.Web);
 	}
 
 	public void onDisable() {
 		MySQL.closeConnection();
+		getServer().clearRecipes();
 	}
 
+	public void loadConfiguration() {
+		this.plugin.getConfig().options().copyDefaults(true);
+		this.plugin.saveConfig();
+
+	}
 
 	
 }

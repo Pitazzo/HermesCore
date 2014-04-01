@@ -658,6 +658,90 @@ public class MySQL {
 		}
 	}
 
+	public static synchronized double getFatiga(Player player) {
+
+		try {
+			PreparedStatement sql = connection
+					.prepareStatement("SELECT fatiga FROM `bukkit`.`user_data` WHERE name=?;");
+
+			sql.setString(1, player.getName());
+			ResultSet result = sql.executeQuery();
+			result.next();
+			double fatiga = result.getDouble("fatiga");
+			sql.close();
+			result.close();
+
+			return fatiga;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public static synchronized void addFatiga(Player player, double fatiga) {
+
+		try {
+
+			PreparedStatement ps1 = connection
+					.prepareStatement("SELECT fatiga FROM `bukkit`.`user_data` WHERE name=?");
+			ps1.setString(1, player.getName());
+			ResultSet result1 = ps1.executeQuery();
+			result1.next();
+			double fatiga2 = result1.getDouble("fatiga");
+
+			PreparedStatement ps2 = connection
+					.prepareStatement("UPDATE `user_data` SET `fatiga`=? WHERE name=?");
+			ps2.setString(2, player.getName());
+			ps2.setDouble(1, fatiga + fatiga2);
+			ps2.executeUpdate();
+			ps1.close();
+			result1.close();
+			ps2.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static synchronized void removeFatiga(Player player, double fatiga) {
+
+		try {
+			PreparedStatement ps1 = connection
+					.prepareStatement("SELECT fatiga FROM `bukkit`.`user_data` WHERE name=?");
+			ps1.setString(1, player.getName());
+			ResultSet result1 = ps1.executeQuery();
+			result1.next();
+			double fatiga2 = result1.getDouble("fatiga");
+
+			PreparedStatement ps2 = connection
+					.prepareStatement("UPDATE `bukkit`.`user_data` SET `fatiga`=? WHERE name=?");
+			ps2.setString(2, player.getName());
+			ps2.setDouble(1, fatiga2 - fatiga);
+			ps2.executeUpdate();
+			ps1.close();
+			result1.close();
+			ps2.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static synchronized void setFatiga(Player player, double newfatiga) {
+
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE `user_data` SET `fatiga`=? WHERE name=?");
+			ps.setString(2, player.getName());
+			ps.setDouble(1, newfatiga);
+			ps.executeUpdate();
+			ps.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static synchronized double getOxygen(Player player) {
 
 		try {

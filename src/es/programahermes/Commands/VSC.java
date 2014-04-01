@@ -15,13 +15,17 @@ public class VSC implements CommandExecutor{
 			String[] args) {
 		Player player = (Player) sender;
 		if(player instanceof Player){
-			if(cmd.getName().equalsIgnoreCase("csp")){
-				if(player.getInventory().contains(Material.ARROW)){
+			if(cmd.getName().equalsIgnoreCase("csv")){
+				if(player.getInventory().contains(Material.NETHER_BRICK_ITEM)){
 					int sed = (int) MySQL.getSed(player);
+					int fatiga = (int) MySQL.getFatiga(player);
 					int residual = (int) MySQL.getResidual(player);
+					int food = (100 * player.getFoodLevel() / 20);
 					player.sendMessage(ChatColor.RED+"+-------+Consola de soporte vital+-------+");
-					player.sendMessage(ChatColor.GOLD+"Oxígeno: "+ChatColor.GREEN+"58%");
+					player.sendMessage(ChatColor.GOLD+"Oxígeno: "+ChatColor.GREEN+MySQL.getOxygen(player)+"L");
 					player.sendMessage(ChatColor.GOLD+"Nivel de hidratación: "+ChatColor.GREEN+sed+"%");
+					player.sendMessage(ChatColor.GOLD+"Fatiga: "+ChatColor.GREEN+fatiga+"%");
+					player.sendMessage(ChatColor.GOLD+"Hambre: "+ChatColor.GREEN+food+"%");
 					player.sendMessage(ChatColor.GOLD+"Almacenaje de residuos: "+ChatColor.GREEN+residual+"%");
 					player.sendMessage(ChatColor.RED+"+-------+Consola de soporte vital+-------+");
 					return true;
