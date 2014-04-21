@@ -21,6 +21,7 @@ import es.programahermes.SoporteVital.Oxygen;
 import es.programahermes.SoporteVital.OxygenCommand;
 import es.programahermes.SoporteVital.Residual;
 import es.programahermes.Utilidades.EnergyCells;
+import es.programahermes.Utilidades.GPS;
 import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.Prospectar;
 import es.programahermes.Utilidades.Recipes;
@@ -55,6 +56,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getCommand("csv").setExecutor(new VSC());
 		getCommand("presurizar").setExecutor(new OxygenCommand());
 		getCommand("visor").setExecutor(new Visor());
+		getCommand("gps").setExecutor(new GPS());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();

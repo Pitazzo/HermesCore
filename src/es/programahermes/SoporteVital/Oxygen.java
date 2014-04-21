@@ -2,8 +2,8 @@ package es.programahermes.SoporteVital;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -16,8 +16,6 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import es.programahermes.MySQL;
-
-import com.mewin.WGCustomFlags.WGCustomFlagsPlugin;
 
 public class Oxygen {
 
@@ -35,18 +33,6 @@ public class Oxygen {
 
 	// WGCF
 
-	private WGCustomFlagsPlugin getWGCustomFlags() {
-		Plugin plugin = Bukkit.getPluginManager().getPlugin("WGCustomFlags");
-
-		if (plugin == null || !(plugin instanceof WGCustomFlagsPlugin)) {
-			return null;
-		}
-
-		return (WGCustomFlagsPlugin) plugin;
-		
-	
-	}
-
 	// World Guard
 	private static WorldGuardPlugin getWorldGuard() {
 		Plugin plugin = Bukkit.getPluginManager().getPlugin("WorldGuard");
@@ -57,9 +43,6 @@ public class Oxygen {
 		return (WorldGuardPlugin) plugin;
 	}
 
-	
-
-	
 	public static boolean isWithinRegion(Location loc, String region) {
 		WorldGuardPlugin guard = getWorldGuard();
 		RegionManager manager = guard.getRegionManager(loc.getWorld());
@@ -79,42 +62,47 @@ public class Oxygen {
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					// consumo normal exterior
-					if (hasSuit(player)) {
-						if (MySQL.getOxygen(player) > 1) {
-							if(MySQL.getOxygen(player)>0){
-								MySQL.removeOxygen(player, 1);
-							}
-							
-						} else {
-							player.sendMessage(ChatColor.GREEN
-									+ "[Soporte Vital]"
-									+ ChatColor.RED
-									+ "¡Tu traje no está presurizado!¡Presurizalo!");
-							player.damage(5);
-							player.playSound(player.getLocation(),
-									Sound.BAT_DEATH, 1F, 1F);
-							player.addPotionEffect(new PotionEffect(
-									PotionEffectType.CONFUSION, 10, 2), true);
-						}
-					} else {
-						MySQL.setOxygen(player, 0);
-						// no tiene traje
-						if (isWithinRegion(player.getLocation(), "presurizada")) {
-							// está en casa
-							return;
-						} else {
-							// no está en casa
-							player.sendMessage(ChatColor.GREEN
-									+ "[Soporte Vital]"
-									+ ChatColor.RED
-									+ "¡No salgas al exterior sin un traje!¡Regresa inmediatamente!");
-							player.damage(4);
-							player.playSound(player.getLocation(),
-									Sound.BAT_DEATH, 1F, 1F);
-							player.addPotionEffect(new PotionEffect(
-									PotionEffectType.CONFUSION, 10, 2), true);
-						}
+					if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+						if (hasSuit(player)) {
+							if (MySQL.getOxygen(player) > 1) {
+								if (MySQL.getOxygen(player) > 0) {
+									MySQL.removeOxygen(player, 1);
+								}
 
+							} else {
+								player.sendMessage(ChatColor.GREEN
+										+ "[Soporte Vital]"
+										+ ChatColor.RED
+										+ "¡Tu traje no está presurizado!¡Presurizalo!");
+								player.damage(5);
+								player.playSound(player.getLocation(),
+										Sound.BAT_DEATH, 1F, 1F);
+								player.addPotionEffect(new PotionEffect(
+										PotionEffectType.CONFUSION, 10, 2),
+										true);
+							}
+						} else {
+							MySQL.setOxygen(player, 0);
+							// no tiene traje
+							if (isWithinRegion(player.getLocation(),
+									"presurizada")) {
+								// está en casa
+								return;
+							} else {
+								// no está en casa
+								player.sendMessage(ChatColor.GREEN
+										+ "[Soporte Vital]"
+										+ ChatColor.RED
+										+ "¡No salgas al exterior sin un traje!¡Regresa inmediatamente!");
+								player.damage(4);
+								player.playSound(player.getLocation(),
+										Sound.BAT_DEATH, 1F, 1F);
+								player.addPotionEffect(new PotionEffect(
+										PotionEffectType.CONFUSION, 10, 2),
+										true);
+							}
+
+						}
 					}
 
 				}

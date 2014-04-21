@@ -5,10 +5,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -19,7 +17,7 @@ import es.programahermes.MySQL;
 
 public class Biologia implements Listener {
 
-	@EventHandler(priority = EventPriority.LOWEST)
+	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		Action action = event.getAction();
@@ -51,18 +49,8 @@ public class Biologia implements Listener {
 		}
 	}
 
-	@EventHandler(priority = EventPriority.LOWEST)
-	public void onBlockBreak(BlockBreakEvent event) {
-		Player player = event.getPlayer();
-		String material = event.getBlock().getType().toString();
-		if (MySQL.getHability(player).equals("Geologia")) {
 
-			MySQL.addEarnedPoints(player, "break", material, 1);
-		}
-
-	}
-
-	@EventHandler(priority = EventPriority.LOWEST)
+	@EventHandler
 	public void onEntityInteract(PlayerInteractEntityEvent event) {
 		Player player = event.getPlayer();
 

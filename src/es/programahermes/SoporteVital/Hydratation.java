@@ -2,17 +2,13 @@ package es.programahermes.SoporteVital;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import es.programahermes.MySQL;
@@ -25,31 +21,33 @@ public class Hydratation implements Listener {
 			@Override
 			public void run() {
 				for (Player player : Bukkit.getOnlinePlayers()) {
-					if (MySQL.getSed(player) > 0) {
-						MySQL.removeSed(player, 1);
-					}
-
-					Scoreboard.showScore(player);
-					if (MySQL.getSed(player) <= 20) {
-						player.setWalkSpeed((float) 0.1);
-					} else {
-						player.setWalkSpeed((float) 0.2);
-					}
-
-					if (MySQL.getSed(player) <= 20) {
-						player.sendMessage(ChatColor.GREEN
-								+ "[Soporte Vital]"
-								+ ChatColor.RED
-								+ "¡Bebe algo pronto, tu nivel de hidratación es muy bajo!");
-						player.playSound(player.getLocation(), Sound.BAT_DEATH,
-								0.5F, 0.0F);
-						if (MySQL.getSed(player) <= 0) {
-							player.damage(100);
-
+					if(player.getGameMode().equals(GameMode.SURVIVAL)){
+						if (MySQL.getSed(player) > 0) {
+							MySQL.removeSed(player, 1);
 						}
-					}
 
-				}
+						Scoreboard.showScore(player);
+						if (MySQL.getSed(player) <= 20) {
+							player.setWalkSpeed((float) 0.1);
+						} else {
+							player.setWalkSpeed((float) 0.2);
+						}
+
+						if (MySQL.getSed(player) <= 20) {
+							player.sendMessage(ChatColor.GREEN
+									+ "[Soporte Vital]"
+									+ ChatColor.RED
+									+ "¡Bebe algo pronto, tu nivel de hidratación es muy bajo!");
+							player.playSound(player.getLocation(), Sound.BAT_DEATH,
+									0.5F, 0.0F);
+							if (MySQL.getSed(player) <= 0) {
+								player.damage(100);
+
+							}
+						}
+
+					}
+					}
 
 			}
 		}, 100L, 20 * 60);

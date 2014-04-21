@@ -239,11 +239,10 @@ public class MySQL {
 					PreparedStatement ps1 = connection
 							.prepareStatement("SELECT points FROM `break_data` WHERE material=?");
 					ps1.setString(1, material);
-
 					ResultSet result1 = ps1.executeQuery();
 					result1.next();
 					double points = result1.getDouble("points");
-					addPoints(player, points / level);
+					addPoints(player, (points*amount) / level);
 					ps1.close();
 					result1.close();
 

@@ -18,6 +18,7 @@ public class Miscelaneo implements Listener {
 		MySQL.removePoints(player, 40);
 	}
 
+	/*
 	@EventHandler
 	public void onLogin(PlayerLoginEvent event) {
 		Player player = event.getPlayer();
@@ -28,4 +29,5 @@ public class Miscelaneo implements Listener {
 							+ "¡Acceso denegado, no cuentas con un perfil de jugador! Si crees que es un error contacta con el staff");
 		}
 	}
+	*/
 }

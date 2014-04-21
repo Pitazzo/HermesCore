@@ -26,3 +26,6 @@ commands:
    visor:
      description: Se activa/desactiva el protector solar del casco
      usage: Error de sintaxis! Simplemente escribe /visor
+   GPS:
+     description: Se muestra información sobre la ubicación
+     usage: Error de sintaxis! Simplemente escribe /GPS

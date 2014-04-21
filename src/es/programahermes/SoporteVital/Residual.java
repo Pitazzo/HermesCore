@@ -2,6 +2,7 @@ package es.programahermes.SoporteVital;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -23,22 +24,24 @@ public class Residual implements CommandExecutor{
 			@Override
 			public void run() {
 				for (Player player : Bukkit.getOnlinePlayers()) {
-					if(!(MySQL.getResidual(player)>= 100)){
-						MySQL.addResidual(player, 1.85);
-					}
-					
-					Scoreboard.showScore(player);
-					if (MySQL.getResidual(player) >= 80) {
-						player.sendMessage(ChatColor.GREEN
-								+ "[Soporte Vital]"
-								+ ChatColor.RED
-								+ "¡Vacía pronto tu depósito de residuos, está al límite de su capacidad!");
-						player.playSound(player.getLocation(), Sound.BAT_DEATH,
-								0.5F, 0.0F);
-						if (MySQL.getResidual(player) >= 100) {
-							player.addPotionEffect(new PotionEffect(
-									PotionEffectType.CONFUSION, 2, 0), true);
-							player.damage(2);
+					if(player.getGameMode().equals(GameMode.SURVIVAL)){
+						if(!(MySQL.getResidual(player)>= 100)){
+							MySQL.addResidual(player, 1.85);
+						}
+						
+						Scoreboard.showScore(player);
+						if (MySQL.getResidual(player) >= 80) {
+							player.sendMessage(ChatColor.GREEN
+									+ "[Soporte Vital]"
+									+ ChatColor.RED
+									+ "¡Vacía pronto tu depósito de residuos, está al límite de su capacidad!");
+							player.playSound(player.getLocation(), Sound.BAT_DEATH,
+									0.5F, 0.0F);
+							if (MySQL.getResidual(player) >= 100) {
+								player.addPotionEffect(new PotionEffect(
+										PotionEffectType.CONFUSION, 2, 0), true);
+								player.damage(2);
+							}
 						}
 					}
 

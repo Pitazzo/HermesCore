@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -43,11 +44,13 @@ public class Prospectar implements Listener {
 		return false;
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onBreak(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
-		ItemStack escoria1 = new ItemStack(Material.GHAST_TEAR, 1);
-		ItemStack escoria6 = new ItemStack(Material.GHAST_TEAR, 6);
+		ItemStack escoria1 = new ItemStack(Material.INK_SACK, 1);
+		escoria1.setDurability((short) 6);
+		ItemStack escoria6 = new ItemStack(Material.INK_SACK, 2);
+		escoria6.setDurability((short) 6);
 		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 
 			if (event.getClickedBlock().getType().equals(Material.STONE)) {
@@ -57,87 +60,69 @@ public class Prospectar implements Listener {
 					if (player.getItemInHand().getType()
 							.equals(Material.WOOD_PICKAXE)) {
 
-						double prospectar = 2;
-						int level = MySQL.getLevel(player);
-						double random = Math.random() * 10;
-						MySQL.addPoints(player, prospectar / level);
-						Location location = event.getClickedBlock()
-								.getLocation();
+						if (player.hasPermission("hermescore.perforar")) {
+							double prospectar = 2;
+							int level = MySQL.getLevel(player);
+							double random = Math.random() * 10;
+							MySQL.addPoints(player, prospectar / level);
+							Location location = event.getClickedBlock()
+									.getLocation();
 
-						// coal
+							// coal
 
-						if (isWithinRegion(location, "Coal")) {
+							if (isWithinRegion(location, "Coal")) {
 
-							if (random <= 0.3) {
-								event.getClickedBlock().setType(
-										Material.COAL_ORE);
-								player.getWorld().dropItemNaturally(location,
-										escoria1);
-							} else {
-								event.getClickedBlock().setType(Material.AIR);
-								player.getWorld().dropItemNaturally(location,
-										escoria6);
-							}
-						} else {
-							event.getClickedBlock().getLocation();
-							event.getClickedBlock().setType(Material.AIR);
-							player.getWorld().dropItemNaturally(location,
-									escoria6);
-
-							// gold
-
-							if (isWithinRegion(location, "Gold")) {
-
-								if (random <= 1.2) {
+								if (random <= 0.3) {
 									event.getClickedBlock().setType(
-											Material.GOLD_ORE);
+											Material.COAL_ORE);
 									player.getWorld().dropItemNaturally(
 											location, escoria1);
 								} else {
 									event.getClickedBlock().setType(
-											Material.AIR);
+											Material.ENDER_STONE);
 									player.getWorld().dropItemNaturally(
 											location, escoria6);
 								}
 							} else {
 								event.getClickedBlock().getLocation();
-								event.getClickedBlock().setType(Material.AIR);
+								event.getClickedBlock().setType(Material.ENDER_STONE);
 								player.getWorld().dropItemNaturally(location,
 										escoria6);
 
-								// iron
-								if (isWithinRegion(location, "Iron")) {
+								// gold
 
-									if (random <= 0.095) {
+								if (isWithinRegion(location, "Gold")) {
+
+									if (random <= 1.2) {
 										event.getClickedBlock().setType(
-												Material.IRON_ORE);
+												Material.GOLD_ORE);
 										player.getWorld().dropItemNaturally(
 												location, escoria1);
 									} else {
 										event.getClickedBlock().setType(
-												Material.AIR);
+												Material.ENDER_STONE);
 										player.getWorld().dropItemNaturally(
 												location, escoria6);
 									}
 								} else {
 									event.getClickedBlock().getLocation();
 									event.getClickedBlock().setType(
-											Material.AIR);
+											Material.ENDER_STONE);
 									player.getWorld().dropItemNaturally(
 											location, escoria6);
 
-									// redstone
-									if (isWithinRegion(location, "Redstone")) {
+									// iron
+									if (isWithinRegion(location, "Iron")) {
 
-										if (random <= 0.07) {
+										if (random <= 0.095) {
 											event.getClickedBlock().setType(
-													Material.REDSTONE_ORE);
+													Material.IRON_ORE);
 											player.getWorld()
 													.dropItemNaturally(
 															location, escoria1);
 										} else {
 											event.getClickedBlock().setType(
-													Material.AIR);
+													Material.ENDER_STONE);
 											player.getWorld()
 													.dropItemNaturally(
 															location, escoria6);
@@ -145,25 +130,24 @@ public class Prospectar implements Listener {
 									} else {
 										event.getClickedBlock().getLocation();
 										event.getClickedBlock().setType(
-												Material.AIR);
+												Material.ENDER_STONE);
 										player.getWorld().dropItemNaturally(
 												location, escoria6);
 
-										// diamond
-
-										if (isWithinRegion(location, "Diamond")) {
+										// redstone
+										if (isWithinRegion(location, "Redstone")) {
 
 											if (random <= 0.07) {
 												event.getClickedBlock()
 														.setType(
-																Material.DIAMOND_ORE);
+																Material.REDSTONE_ORE);
 												player.getWorld()
 														.dropItemNaturally(
 																location,
 																escoria1);
 											} else {
 												event.getClickedBlock()
-														.setType(Material.AIR);
+														.setType(Material.ENDER_STONE);
 												player.getWorld()
 														.dropItemNaturally(
 																location,
@@ -173,17 +157,52 @@ public class Prospectar implements Listener {
 											event.getClickedBlock()
 													.getLocation();
 											event.getClickedBlock().setType(
-													Material.AIR);
+													Material.ENDER_STONE);
 											player.getWorld()
 													.dropItemNaturally(
 															location, escoria6);
 
-											
-										}
-									}
+											// diamond
 
+											if (isWithinRegion(location,
+													"Diamond")) {
+
+												if (random <= 0.07) {
+													event.getClickedBlock()
+															.setType(
+																	Material.DIAMOND_ORE);
+													player.getWorld()
+															.dropItemNaturally(
+																	location,
+																	escoria1);
+												} else {
+													event.getClickedBlock()
+															.setType(
+																	Material.ENDER_STONE);
+													player.getWorld()
+															.dropItemNaturally(
+																	location,
+																	escoria6);
+												}
+											} else {
+												event.getClickedBlock()
+														.getLocation();
+												event.getClickedBlock()
+														.setType(Material.ENDER_STONE);
+												player.getWorld()
+														.dropItemNaturally(
+																location,
+																escoria6);
+
+											}
+										}
+
+									}
 								}
 							}
+						} else {
+							player.sendMessage(ChatColor.RED
+									+ "No sabes ni como empezar a manejar una perforadora... Mejor harás en no volverla a tocar");
 						}
 					}
 				}
@@ -192,76 +211,94 @@ public class Prospectar implements Listener {
 
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
-		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-			if (event.getClickedBlock().getType().equals(Material.LEVER)) {
-				if (MySQL.getHability(player).equals("Geologia")) {
+		if (!event.isCancelled()) {
+			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+				if (event.getClickedBlock().getType().equals(Material.LEVER)) {
+					if (MySQL.getHability(player).equals("Geologia")) {
 
-					if (event.getClickedBlock().getType()
-							.equals(Material.LEVER)) {
-						Location clicked = event.getClickedBlock()
-								.getLocation();
-						Location drill = new Location(player.getWorld(),
-								clicked.getX(), clicked.getY() - 1,
-								clicked.getZ());
-						Location air = new Location(player.getWorld(),
-								clicked.getX(), drill.getY() - 1,
-								clicked.getZ());
-						if (drill.getBlock().getType().equals(Material.SPONGE)) {
-							if (air.getBlock().getType().equals(Material.AIR)) {
+						if (event.getClickedBlock().getType()
+								.equals(Material.LEVER)) {
+							Location clicked = event.getClickedBlock()
+									.getLocation();
+							Location drill = new Location(player.getWorld(),
+									clicked.getX(), clicked.getY() - 1,
+									clicked.getZ());
+							Location air = new Location(player.getWorld(),
+									clicked.getX(), drill.getY() - 1,
+									clicked.getZ());
+							if (drill.getBlock().getType()
+									.equals(Material.SPONGE)) {
+								if (air.getBlock().getType()
+										.equals(Material.AIR)) {
 
-								int maxDeep = drill.getBlockY() - 20;
-								for (int y = drill.getBlockY(); y > maxDeep; y--) {
+									int maxDeep = drill.getBlockY() - 20;
+									for (int y = drill.getBlockY(); y > maxDeep; y--) {
 
-									Location loc3 = new Location(
-											player.getWorld(), drill.getX(),
-											y - 1, drill.getZ());
+										Location loc3 = new Location(
+												player.getWorld(),
+												drill.getX(), y - 1,
+												drill.getZ());
 
-									loc3.getBlock().setType(Material.AIR);	
+										loc3.getBlock().setType(Material.AIR);
+									}
+
+									MySQL.addPoints(player,
+											8 / MySQL.getLevel(player));
+									player.getWorld().playSound(drill,
+											Sound.ANVIL_BREAK, 15F, 15F);
+									if (isWithinRegion(drill, "Coal")) {
+										player.sendMessage(ChatColor.BLACK
+												+ "La perforadora ha dado positivo en carbón");
+									} else {
+										player.sendMessage(ChatColor.RED
+												+ "Aparentemente no hay carbón en esta zona");
+									}
+
+									if (isWithinRegion(drill, "Gold")) {
+										player.sendMessage(ChatColor.GOLD
+												+ "La perforadora ha dado positivo en cobre");
+									} else {
+										player.sendMessage(ChatColor.RED
+												+ "Aparentemente no hay cobre en esta zona");
+									}
+
+									if (isWithinRegion(drill, "Iron")) {
+										player.sendMessage(ChatColor.GRAY
+												+ "La perforadora ha dado positivo en aluminio");
+									} else {
+										player.sendMessage(ChatColor.RED
+												+ "Aparentemente no hay aluminio en esta zona");
+									}
+
+									if (isWithinRegion(drill, "Redstone")) {
+										player.sendMessage(ChatColor.GREEN
+												+ "La perforadora ha dado positivo en silicio");
+									} else {
+										player.sendMessage(ChatColor.RED
+												+ "Aparentemente no hay silicio en esta zona");
+									}
+
+									if (isWithinRegion(drill, "Diamond")) {
+										player.sendMessage(ChatColor.DARK_GRAY
+												+ "La perforadora ha dado positivo en titanio");
+									} else {
+										player.sendMessage(ChatColor.RED
+												+ "Aparentemente no hay titanio en esta zona");
+									}
+								} else {
+									player.sendMessage(ChatColor.BLUE
+											+ "¡Perforadora mal colocada!");
 								}
-								
-								MySQL.addPoints(player, 8/MySQL.getLevel(player));
-								player.getWorld().playSound(drill, Sound.ANVIL_BREAK, 15F, 15F);
-								if(isWithinRegion(drill, "Coal")){
-									player.sendMessage(ChatColor.BLACK+"La perforadora ha dado positivo en carbón");
-								}else{
-									player.sendMessage(ChatColor.RED+"Aparentemente no hay carbón en esta zona");
-								}
-								
-								if(isWithinRegion(drill, "Gold")){
-									player.sendMessage(ChatColor.GOLD+"La perforadora ha dado positivo en cobre");
-								}else{
-									player.sendMessage(ChatColor.RED+"Aparentemente no hay cobre en esta zona");
-								}
-								
-								if(isWithinRegion(drill, "Iron")){
-									player.sendMessage(ChatColor.GRAY+"La perforadora ha dado positivo en aluminio");
-								}else{
-									player.sendMessage(ChatColor.RED+"Aparentemente no hay aluminio en esta zona");
-								}
-								
-								if(isWithinRegion(drill, "Redstone")){
-									player.sendMessage(ChatColor.GREEN+"La perforadora ha dado positivo en silicio");
-								}else{
-									player.sendMessage(ChatColor.RED+"Aparentemente no hay silicio en esta zona");
-								}
-								
-								if(isWithinRegion(drill, "Diamond")){
-									player.sendMessage(ChatColor.DARK_GRAY+"La perforadora ha dado positivo en titanio");
-								}else{
-									player.sendMessage(ChatColor.RED+"Aparentemente no hay titanio en esta zona");
-								}
-							} else {
-								player.sendMessage(ChatColor.BLUE
-										+ "¡Perforadora mal colocada!");
+
 							}
-
 						}
 					}
 				}
 			}
 		}
+
 	}
 }

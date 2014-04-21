@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -49,22 +50,25 @@ public class Fatiga implements Listener {
 	@EventHandler
 	public void onSprint(PlayerToggleSprintEvent event) {
 		Player player = event.getPlayer();
-		if (!(MySQL.getFatiga(player) >= 100)) {
-			MySQL.addFatiga(player, 0.1);
-		}
-		if (!(MySQL.getSed(player) <= 0)) {
-			MySQL.removeSed(player, 1.5);
-		}
-		if (!(MySQL.getOxygen(player) <= 0)) {
-			MySQL.removeOxygen(player, 4);
-		}
+		if(player.getGameMode().equals(GameMode.SURVIVAL)){
+			if (!(MySQL.getFatiga(player) >= 100)) {
+				MySQL.addFatiga(player, 0.1);
+			}
+			if (!(MySQL.getSed(player) <= 0)) {
+				MySQL.removeSed(player, 1.5);
+			}
+			if (!(MySQL.getOxygen(player) <= 0)) {
+				MySQL.removeOxygen(player, 4);
+			}
 
-		Scoreboard.showScore(player);
-		if (MySQL.getFatiga(player) > 70) {
-			event.setCancelled(true);
-			player.sendMessage(ChatColor.RED
-					+ "Estás demasiado cansado para hacer un sprint");
+			Scoreboard.showScore(player);
+			if (MySQL.getFatiga(player) > 70) {
+				event.setCancelled(true);
+				player.sendMessage(ChatColor.RED
+						+ "Estás demasiado cansado para hacer un sprint");
+			}
 		}
+		
 	}
 
 	@EventHandler
@@ -95,21 +99,26 @@ public class Fatiga implements Listener {
 		int toY = (int) event.getTo().getY();
 		int toZ = (int) event.getTo().getZ();
 
-		if (fromX != toX || fromY != toY || fromZ != toZ) {
-			MySQL.addFatiga(player, 0.01);
-			Scoreboard.showScore(player);
-			if (MySQL.getFatiga(player) > 85) {
-				player.setWalkSpeed((float) 0.1);
-			} else {
-				player.setWalkSpeed((float) 0.2);
+		if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+			if (fromX != toX || fromY != toY || fromZ != toZ) {
+				MySQL.addFatiga(player, 0.01);
+				Scoreboard.showScore(player);
+				if (MySQL.getFatiga(player) > 85) {
+					player.setWalkSpeed((float) 0.1);
+				} else {
+					player.setWalkSpeed((float) 0.2);
+				}
+				if (walked.containsValue(player)) {
+					walked.remove(player);
+					walked.put(player, System.currentTimeMillis());
+				} else {
+					walked.put(player, System.currentTimeMillis());
+				}
 			}
-			if (walked.containsValue(player)) {
-				walked.remove(player);
-				walked.put(player, System.currentTimeMillis());
-			} else {
-				walked.put(player, System.currentTimeMillis());
-			}
+		} else {
+			return;
 		}
+
 	}
 
 	public static void waitFatigaCheck(Plugin plugin) {
@@ -118,14 +127,15 @@ public class Fatiga implements Listener {
 			public void run() {
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
+					if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+						if (walked.containsKey(player)) {
+							if (System.currentTimeMillis() - walked.get(player) >= 20 * 1000) {
+								if (!(MySQL.getFatiga(player) <= 0)) {
+									MySQL.removeFatiga(player, 1);
+								}
 
-					if (walked.containsKey(player)) {
-						if (System.currentTimeMillis() - walked.get(player) >= 20 * 1000) {
-							if(!(MySQL.getFatiga(player)<=0)){
-								MySQL.removeFatiga(player, 1);
+								Scoreboard.showScore(player);
 							}
-							
-							Scoreboard.showScore(player);
 						}
 					}
 				}

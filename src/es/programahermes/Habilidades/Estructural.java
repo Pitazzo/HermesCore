@@ -15,6 +15,7 @@ public class Estructural implements Listener {
 		Player player = event.getPlayer();
 		String material = event.getBlock().getType().toString();
 		if (MySQL.getHability(player).equals("Estructural")) {
+			player.sendMessage("est");
 			MySQL.addEarnedPoints(player, "break", material, 1);
 		}
 	}
