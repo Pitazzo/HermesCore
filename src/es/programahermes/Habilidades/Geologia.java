@@ -48,10 +48,12 @@ public class Geologia implements Listener {
 
 	@EventHandler
 	public void onBuild(BlockPlaceEvent event) {
-		Player player = event.getPlayer();
-		String material = event.getBlock().getType().toString();
-		if (MySQL.getHability(player).equals("Geologia")) {
-			MySQL.addEarnedPoints(player, "place", material, 1);
+		if(!event.isCancelled()){
+			Player player = event.getPlayer();
+			String material = event.getBlock().getType().toString();
+			if (MySQL.getHability(player).equals("Geologia")) {
+				MySQL.addEarnedPoints(player, "place", material, 1);
+			}
 		}
 	}
 }
