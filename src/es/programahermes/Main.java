@@ -20,9 +20,12 @@ import es.programahermes.SoporteVital.Hydratation;
 import es.programahermes.SoporteVital.Oxygen;
 import es.programahermes.SoporteVital.OxygenCommand;
 import es.programahermes.SoporteVital.Residual;
+import es.programahermes.Training.ETS;
+import es.programahermes.Training.Resistencia;
 import es.programahermes.Utilidades.EnergyCells;
 import es.programahermes.Utilidades.GPS;
 import es.programahermes.Utilidades.Miscelaneo;
+import es.programahermes.Utilidades.Pernos;
 import es.programahermes.Utilidades.Prospectar;
 import es.programahermes.Utilidades.Recipes;
 
@@ -48,6 +51,9 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().getPluginManager().registerEvents(new Miscelaneo(), this);
 		getServer().getPluginManager().registerEvents(new Hydratation(), this);
 		getServer().getPluginManager().registerEvents(new Fatiga(), this);
+		getServer().getPluginManager().registerEvents(new Pernos(), this);
+		getServer().getPluginManager().registerEvents(new Resistencia(), this);
+		getServer().getPluginManager().registerEvents(new ETS(), this);
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());
@@ -57,6 +63,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getCommand("presurizar").setExecutor(new OxygenCommand());
 		getCommand("visor").setExecutor(new Visor());
 		getCommand("gps").setExecutor(new GPS());
+		getCommand("pesa").setExecutor(new ETS());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();

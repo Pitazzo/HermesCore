@@ -58,7 +58,7 @@ public class Fatiga implements Listener {
 				MySQL.removeSed(player, 1.5);
 			}
 			if (!(MySQL.getOxygen(player) <= 0)) {
-				MySQL.removeOxygen(player, 4);
+				MySQL.removeOxygen(player, 0.5);
 			}
 
 			Scoreboard.showScore(player);

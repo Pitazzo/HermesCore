@@ -8,6 +8,8 @@ import java.sql.SQLException;
 
 import org.bukkit.entity.Player;
 
+import es.programahermes.Training.TrainingSQL;
+
 public class MySQL {
 
 	public static Connection connection;
@@ -681,6 +683,7 @@ public class MySQL {
 
 		try {
 
+			double FTI = TrainingSQL.getFTS(player);
 			PreparedStatement ps1 = connection
 					.prepareStatement("SELECT fatiga FROM `bukkit`.`user_data` WHERE name=?");
 			ps1.setString(1, player.getName());
