@@ -52,10 +52,10 @@ public class Fatiga implements Listener {
 		Player player = event.getPlayer();
 		if(player.getGameMode().equals(GameMode.SURVIVAL)){
 			if (!(MySQL.getFatiga(player) >= 100)) {
-				MySQL.addFatiga(player, 0.1);
+				MySQL.addFatiga(player, 0.3);
 			}
 			if (!(MySQL.getSed(player) <= 0)) {
-				MySQL.removeSed(player, 1.5);
+				MySQL.removeSed(player, 0.5);
 			}
 			if (!(MySQL.getOxygen(player) <= 0)) {
 				MySQL.removeOxygen(player, 0.5);

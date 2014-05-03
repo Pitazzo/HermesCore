@@ -54,6 +54,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().getPluginManager().registerEvents(new Pernos(), this);
 		getServer().getPluginManager().registerEvents(new Resistencia(), this);
 		getServer().getPluginManager().registerEvents(new ETS(), this);
+		getCommand("pesa").setExecutor(new ETS());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());
@@ -63,11 +64,9 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getCommand("presurizar").setExecutor(new OxygenCommand());
 		getCommand("visor").setExecutor(new Visor());
 		getCommand("gps").setExecutor(new GPS());
-		getCommand("pesa").setExecutor(new ETS());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
-		
 		MySQL.openConnection();
 		getServer().addRecipe(Recipes.Web);
 	}
