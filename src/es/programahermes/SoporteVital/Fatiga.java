@@ -131,7 +131,7 @@ public class Fatiga implements Listener {
 						if (walked.containsKey(player)) {
 							if (System.currentTimeMillis() - walked.get(player) >= 20 * 1000) {
 								if (!(MySQL.getFatiga(player) <= 0)) {
-									MySQL.removeFatiga(player, 1);
+									MySQL.removeFatiga(player, 1.5);
 								}
 
 								Scoreboard.showScore(player);

@@ -2,6 +2,7 @@ package es.programahermes.Utilidades;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.DyeColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -10,8 +11,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Wool;
 import org.bukkit.plugin.Plugin;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -45,7 +48,7 @@ public class Prospectar implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onBreak(PlayerInteractEvent event) {
+	public void onProspectar(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		ItemStack escoria1 = new ItemStack(Material.INK_SACK, 1);
 		escoria1.setDurability((short) 6);
@@ -85,7 +88,8 @@ public class Prospectar implements Listener {
 								}
 							} else {
 								event.getClickedBlock().getLocation();
-								event.getClickedBlock().setType(Material.ENDER_STONE);
+								event.getClickedBlock().setType(
+										Material.ENDER_STONE);
 								player.getWorld().dropItemNaturally(location,
 										escoria6);
 
@@ -147,7 +151,8 @@ public class Prospectar implements Listener {
 																escoria1);
 											} else {
 												event.getClickedBlock()
-														.setType(Material.ENDER_STONE);
+														.setType(
+																Material.ENDER_STONE);
 												player.getWorld()
 														.dropItemNaturally(
 																location,
@@ -188,7 +193,8 @@ public class Prospectar implements Listener {
 												event.getClickedBlock()
 														.getLocation();
 												event.getClickedBlock()
-														.setType(Material.ENDER_STONE);
+														.setType(
+																Material.ENDER_STONE);
 												player.getWorld()
 														.dropItemNaturally(
 																location,
@@ -208,11 +214,11 @@ public class Prospectar implements Listener {
 				}
 			}
 		}
-		
+
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onInteract(PlayerInteractEvent event) {
+	public void onPerf(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		if (!event.isCancelled()) {
 			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
@@ -300,5 +306,41 @@ public class Prospectar implements Listener {
 			}
 		}
 
+	}
+
+	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void onRefor(PlayerInteractEvent event) {
+		Player player = event.getPlayer();
+		if (MySQL.getHability(player).equals("Geologia")) {
+			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+				if (player.getItemInHand().getType().equals(Material.INK_SACK)) {
+					if (player.getItemInHand().getDurability() == 0) {
+						if (event.getClickedBlock().getType()
+								.equals(Material.STONE)||event.getClickedBlock().getType().equals(Material.ENDER_STONE)) {
+							event.getClickedBlock().setType(Material.STAINED_CLAY);
+							event.getClickedBlock().setData((byte) 14);
+							event.getClickedBlock().setType(Material.STAINED_CLAY);
+							player.getInventory().setItem(player.getInventory().first(Material.INK_SACK), new ItemStack(Material.INK_SACK, player.getInventory().getItem(player.getInventory().first(Material.INK_SACK)).getAmount() - 1));
+							player.updateInventory();
+						}else{
+							player.sendMessage(ChatColor.GOLD+"Ese bloque no es reforzable");
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onBreak(BlockBreakEvent event){
+		if(event.getBlock().getType().equals(Material.STAINED_CLAY)){
+			if(event.getBlock().getData()== 14){
+				event.getBlock().getDrops();
+				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.STONE, 1));
+				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.INK_SACK, 1));
+				event.getPlayer().sendMessage(ChatColor.GOLD+"Cuidado, has roto un bloque reforzado");
+			}
+		}
 	}
 }

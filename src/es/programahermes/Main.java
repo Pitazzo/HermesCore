@@ -4,6 +4,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import es.programahermes.Combat.Accuracy;
 import es.programahermes.Commands.LevelUpCommand;
 import es.programahermes.Commands.PointsCommand;
 import es.programahermes.Commands.SetHability;
@@ -53,8 +54,8 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().getPluginManager().registerEvents(new Fatiga(), this);
 		getServer().getPluginManager().registerEvents(new Pernos(), this);
 		getServer().getPluginManager().registerEvents(new Resistencia(), this);
+		getServer().getPluginManager().registerEvents(new Accuracy(), this);
 		getServer().getPluginManager().registerEvents(new ETS(), this);
-		getCommand("pesa").setExecutor(new ETS());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());

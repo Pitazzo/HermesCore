@@ -9,12 +9,13 @@ import org.bukkit.event.player.PlayerToggleSprintEvent;
 public class Resistencia implements Listener {
 
 	@EventHandler
-	public void onMove(PlayerToggleSprintEvent event) {
+	public void onSprint(PlayerToggleSprintEvent event) {
 		Player player = event.getPlayer();
 		
 		if(player.getGameMode().equals(GameMode.SURVIVAL)){
 			if(!event.isCancelled()){
 				TrainingSQL.addFTI(player, 0.001);
+				
 			}
 		}
 			
