@@ -24,6 +24,7 @@ import es.programahermes.SoporteVital.Residual;
 import es.programahermes.Training.ETS;
 import es.programahermes.Training.Resistencia;
 import es.programahermes.Utilidades.EnergyCells;
+import es.programahermes.Utilidades.FireExtinguisher;
 import es.programahermes.Utilidades.GPS;
 import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.Pernos;
@@ -56,6 +57,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().getPluginManager().registerEvents(new Resistencia(), this);
 		getServer().getPluginManager().registerEvents(new Accuracy(), this);
 		getServer().getPluginManager().registerEvents(new ETS(), this);
+		getServer().getPluginManager().registerEvents(new FireExtinguisher(), this);
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());
@@ -65,6 +67,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getCommand("presurizar").setExecutor(new OxygenCommand());
 		getCommand("visor").setExecutor(new Visor());
 		getCommand("gps").setExecutor(new GPS());
+		getCommand("entrenartiro").setExecutor(new Accuracy());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
