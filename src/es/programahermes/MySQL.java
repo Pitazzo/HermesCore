@@ -17,7 +17,8 @@ public class MySQL {
 	public static synchronized void openConnection() {
 		try {
 			connection = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/bukkit", "root", "");
+					"jdbc:mysql://localhost:3306/bukkit", "root",
+					"");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -214,14 +215,18 @@ public class MySQL {
 			result1.next();
 			int previousLevel = result1.getInt("nivel1");
 
-			PreparedStatement ps2 = connection
-					.prepareStatement("UPDATE `user_data` SET `nivel1`=? WHERE name=?");
-			ps2.setString(2, player.getName());
-			ps2.setInt(1, 1 + previousLevel);
-			ps2.executeUpdate();
-			ps1.close();
-			result1.close();
-			ps2.close();
+			if(!(previousLevel + 1 <= 5)){
+				PreparedStatement ps2 = connection
+						.prepareStatement("UPDATE `user_data` SET `nivel1`=? WHERE name=?");
+				ps2.setString(2, player.getName());
+				ps2.setInt(1, 1 + previousLevel);
+				ps2.executeUpdate();
+				ps1.close();
+				result1.close();
+				ps2.close();
+			}else{
+				return;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -244,7 +249,7 @@ public class MySQL {
 					ResultSet result1 = ps1.executeQuery();
 					result1.next();
 					double points = result1.getDouble("points");
-					addPoints(player, (points*amount) / level);
+					addPoints(player, (points * amount) / level);
 					ps1.close();
 					result1.close();
 
@@ -544,15 +549,19 @@ public class MySQL {
 			ResultSet result1 = ps1.executeQuery();
 			result1.next();
 			double sed2 = result1.getDouble("sed");
+			if(!(sed2+sed>100)){
 
-			PreparedStatement ps2 = connection
-					.prepareStatement("UPDATE `user_data` SET `sed`=? WHERE name=?");
-			ps2.setString(2, player.getName());
-			ps2.setDouble(1, sed + sed2);
-			ps2.executeUpdate();
-			ps1.close();
-			result1.close();
-			ps2.close();
+				PreparedStatement ps2 = connection
+						.prepareStatement("UPDATE `user_data` SET `sed`=? WHERE name=?");
+				ps2.setString(2, player.getName());
+				ps2.setDouble(1, sed + sed2);
+				ps2.executeUpdate();
+				ps1.close();
+				result1.close();
+				ps2.close();
+			}else{
+				return;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -569,14 +578,18 @@ public class MySQL {
 			result1.next();
 			double sed2 = result1.getDouble("sed");
 
-			PreparedStatement ps2 = connection
-					.prepareStatement("UPDATE `bukkit`.`user_data` SET `sed`=? WHERE name=?");
-			ps2.setString(2, player.getName());
-			ps2.setDouble(1, sed2 - sed);
-			ps2.executeUpdate();
-			ps1.close();
-			result1.close();
-			ps2.close();
+			if (!(sed2 - sed < 0)) {
+				PreparedStatement ps2 = connection
+						.prepareStatement("UPDATE `bukkit`.`user_data` SET `sed`=? WHERE name=?");
+				ps2.setString(2, player.getName());
+				ps2.setDouble(1, sed2 - sed);
+				ps2.executeUpdate();
+				ps1.close();
+				result1.close();
+				ps2.close();
+			} else {
+				return;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -644,15 +657,19 @@ public class MySQL {
 			ResultSet result1 = ps1.executeQuery();
 			result1.next();
 			double residual2 = result1.getDouble("residual");
+			if (!(residual2 + residual > 100)) {
 
-			PreparedStatement ps2 = connection
-					.prepareStatement("UPDATE `user_data` SET `residual`=? WHERE name=?");
-			ps2.setString(2, player.getName());
-			ps2.setDouble(1, residual + residual2);
-			ps2.executeUpdate();
-			ps1.close();
-			result1.close();
-			ps2.close();
+				PreparedStatement ps2 = connection
+						.prepareStatement("UPDATE `user_data` SET `residual`=? WHERE name=?");
+				ps2.setString(2, player.getName());
+				ps2.setDouble(1, residual + residual2);
+				ps2.executeUpdate();
+				ps1.close();
+				result1.close();
+				ps2.close();
+			} else {
+				return;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -691,14 +708,18 @@ public class MySQL {
 			result1.next();
 			double fatiga2 = result1.getDouble("fatiga");
 
-			PreparedStatement ps2 = connection
-					.prepareStatement("UPDATE `user_data` SET `fatiga`=? WHERE name=?");
-			ps2.setString(2, player.getName());
-			ps2.setDouble(1, fatiga + fatiga2);
-			ps2.executeUpdate();
-			ps1.close();
-			result1.close();
-			ps2.close();
+			if ((fatiga + fatiga2 > 100)) {
+				PreparedStatement ps2 = connection
+						.prepareStatement("UPDATE `user_data` SET `fatiga`=? WHERE name=?");
+				ps2.setString(2, player.getName());
+				ps2.setDouble(1, fatiga + fatiga2);
+				ps2.executeUpdate();
+				ps1.close();
+				result1.close();
+				ps2.close();
+			} else {
+				return;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -714,15 +735,18 @@ public class MySQL {
 			ResultSet result1 = ps1.executeQuery();
 			result1.next();
 			double fatiga2 = result1.getDouble("fatiga");
-
-			PreparedStatement ps2 = connection
-					.prepareStatement("UPDATE `bukkit`.`user_data` SET `fatiga`=? WHERE name=?");
-			ps2.setString(2, player.getName());
-			ps2.setDouble(1, fatiga2 - fatiga);
-			ps2.executeUpdate();
-			ps1.close();
-			result1.close();
-			ps2.close();
+			if (!(fatiga - fatiga2 < 0)) {
+				PreparedStatement ps2 = connection
+						.prepareStatement("UPDATE `bukkit`.`user_data` SET `fatiga`=? WHERE name=?");
+				ps2.setString(2, player.getName());
+				ps2.setDouble(1, fatiga2 - fatiga);
+				ps2.executeUpdate();
+				ps1.close();
+				result1.close();
+				ps2.close();
+			} else {
+				return;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -743,7 +767,7 @@ public class MySQL {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static synchronized double getOxygen(Player player) {
 
 		try {
@@ -798,15 +822,18 @@ public class MySQL {
 			ResultSet result1 = ps1.executeQuery();
 			result1.next();
 			double oxygen2 = result1.getDouble("oxygen");
-
-			PreparedStatement ps2 = connection
-					.prepareStatement("UPDATE `bukkit`.`user_data` SET `oxygen`=? WHERE name=?");
-			ps2.setString(2, player.getName());
-			ps2.setDouble(1, oxygen2 - oxygen);
-			ps2.executeUpdate();
-			ps1.close();
-			result1.close();
-			ps2.close();
+			if (!(oxygen2 - oxygen < 0)) {
+				PreparedStatement ps2 = connection
+						.prepareStatement("UPDATE `bukkit`.`user_data` SET `oxygen`=? WHERE name=?");
+				ps2.setString(2, player.getName());
+				ps2.setDouble(1, oxygen2 - oxygen);
+				ps2.executeUpdate();
+				ps1.close();
+				result1.close();
+				ps2.close();
+			} else {
+				return;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

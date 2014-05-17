@@ -15,7 +15,7 @@ import com.shampaggon.crackshot.events.WeaponHitBlockEvent;
 
 public class Accuracy implements Listener, CommandExecutor {
 
-	ArrayList<String> isTraining = new ArrayList<String>();
+	public static ArrayList<String> isTraining = new ArrayList<String>();
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
@@ -33,10 +33,7 @@ public class Accuracy implements Listener, CommandExecutor {
 						sender.sendMessage(ChatColor.GREEN+"Recuerda que ahora fallar la diana te restará puntos");
 						return true;
 					}
-				} else {
-					sender.sendMessage(isTraining.toString());
 				}
-
 			}else{
 				return false;
 			}

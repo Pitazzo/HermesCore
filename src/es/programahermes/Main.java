@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import es.programahermes.Combat.Accuracy;
+import es.programahermes.Combat.Melee;
 import es.programahermes.Commands.LevelUpCommand;
 import es.programahermes.Commands.PointsCommand;
 import es.programahermes.Commands.SetHability;
@@ -58,6 +59,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().getPluginManager().registerEvents(new Accuracy(), this);
 		getServer().getPluginManager().registerEvents(new ETS(), this);
 		getServer().getPluginManager().registerEvents(new FireExtinguisher(), this);
+		getServer().getPluginManager().registerEvents(new Melee(), this);
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());
@@ -68,6 +70,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getCommand("visor").setExecutor(new Visor());
 		getCommand("gps").setExecutor(new GPS());
 		getCommand("entrenartiro").setExecutor(new Accuracy());
+		getCommand("cuerpoacuerpo").setExecutor(new Melee());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
