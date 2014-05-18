@@ -708,7 +708,7 @@ public class MySQL {
 			result1.next();
 			double fatiga2 = result1.getDouble("fatiga");
 
-			if ((fatiga + fatiga2 > 100)) {
+			if (!(fatiga + fatiga2 > 100)) {
 				PreparedStatement ps2 = connection
 						.prepareStatement("UPDATE `user_data` SET `fatiga`=? WHERE name=?");
 				ps2.setString(2, player.getName());

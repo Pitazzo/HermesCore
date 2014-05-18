@@ -33,5 +33,11 @@ commands:
      description: Activado, suma y resta puntos en función de si se hace diana o no
      usage: Error de sintaxis! Simplemente escribe /entrenartiro
    cuerpoacuerpo:
-     description: Activado, suma y resta puntos en función de si se hace diana o no
+     description: Activado, se pueden entrenar hablidades de combate cuerpo a cuerpo
      usage: Error de sintaxis! Simplemente escribe /cuerpoacuerpo
+   location:
+     description: TEST
+     usage: Error de sintaxis! Simplemente escribe /location <nombre>
+   emergency:
+     description: Proporciona equipación de emergencia a los OPs
+     usage: Error de sintaxis! Simplemente escribe /emergency

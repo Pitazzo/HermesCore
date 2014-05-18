@@ -18,13 +18,11 @@ public class Visor implements CommandExecutor {
 				if(player.getInventory().getHelmet().getType().equals(Material.GOLD_HELMET)){
 					player.sendMessage(ChatColor.BLUE+"Has descativado el protector solar");
 					player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET, 1));
-					player.updateInventory();
 					return true;
 				}else{
 					if(player.getInventory().getHelmet().getType().equals(Material.IRON_HELMET)){
 						player.sendMessage(ChatColor.BLUE+"Has activado el protector solar");
 						player.getInventory().setHelmet(new ItemStack(Material.GOLD_HELMET, 1));
-						player.updateInventory();
 						return true;
 					}else{
 						player.sendMessage(ChatColor.BLUE+"Para activar o desactivar tu protector solar necesitas tener un visor");

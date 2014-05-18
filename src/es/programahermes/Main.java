@@ -31,6 +31,7 @@ import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.Pernos;
 import es.programahermes.Utilidades.Prospectar;
 import es.programahermes.Utilidades.Recipes;
+import es.programahermes.Utilidades.Speakers;
 
 public class Main extends JavaPlugin implements CommandExecutor {
 
@@ -60,6 +61,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().getPluginManager().registerEvents(new ETS(), this);
 		getServer().getPluginManager().registerEvents(new FireExtinguisher(), this);
 		getServer().getPluginManager().registerEvents(new Melee(), this);
+		getServer().getPluginManager().registerEvents(new Speakers(null), this);
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());
@@ -71,6 +73,8 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getCommand("gps").setExecutor(new GPS());
 		getCommand("entrenartiro").setExecutor(new Accuracy());
 		getCommand("cuerpoacuerpo").setExecutor(new Melee());
+		getCommand("emergency").setExecutor(new Miscelaneo());
+		getCommand("location").setExecutor(new Speakers(null));
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();

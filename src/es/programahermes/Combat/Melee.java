@@ -13,7 +13,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import es.programahermes.MySQL;
 import es.programahermes.Training.TrainingSQL;
+import es.programahermes.Utilidades.ModiferConverter;
 
 public class Melee implements Listener, CommandExecutor {
 
@@ -39,12 +41,10 @@ public class Melee implements Listener, CommandExecutor {
 				}
 
 			} else {
-				sender.sendMessage("1");
 				return false;
-				
+
 			}
 		}
-		sender.sendMessage("2");
 		return false;
 
 	}
@@ -53,50 +53,67 @@ public class Melee implements Listener, CommandExecutor {
 	public void onHit(EntityDamageByEntityEvent event) {
 		Player attacker = (Player) event.getDamager();
 		Player victim = (Player) event.getEntity();
-		if((attacker.getGameMode().equals(GameMode.SURVIVAL)&&(victim.getGameMode().equals(GameMode.SURVIVAL)))){
+		if ((attacker.getGameMode().equals(GameMode.SURVIVAL) && (victim
+				.getGameMode().equals(GameMode.SURVIVAL)))) {
 			if (attacker instanceof Player) {
-				//entrenamiento
-				if(isTraining.contains(attacker)){
-					if(attacker.getItemInHand().getType().equals(Material.AIR)){
-						event.setDamage(event.getDamage()/50);
-						if(Math.random()<0.02){
-							event.setDamage(0.75);
-							//MySQL
-							attacker.sendMessage(ChatColor.RED+"¡Contrólate un poco!¡No pegues tan fuerte!");
+				// entrenamiento
+				if (isTraining.contains(attacker.getName())) {
+
+					if (attacker.getItemInHand().getType().equals(Material.AIR)) {
+						event.setDamage(0);
+						victim.setVelocity(victim.getLocation().getDirection()
+								.multiply(-0.5));
+						TrainingSQL.addFTS(attacker, 0.03);
+						MySQL.addFatiga(attacker, 0.2);
+						MySQL.addFatiga(victim, 0.2);
+						if (Math.random() < 0.01) {
+							event.setDamage(0.5);
+							attacker.sendMessage(ChatColor.RED
+									+ "¡Contrólate un poco!¡No pegues tan fuerte!");
 						}
-						victim.setVelocity(victim.getLocation().getDirection().multiply(-0.25));
-					}else{
-						attacker.sendMessage(ChatColor.RED+"Solo puedes practicar la lucha cuerpo a cuerpo con las manos vacías");
-						attacker.sendMessage(ChatColor.RED+"Desactiva el entrenamiento con /cuerpoacuerpo");
+
+					} else {
+						attacker.sendMessage(ChatColor.RED
+								+ "Solo puedes practicar la lucha cuerpo a cuerpo con las manos vacías");
+						attacker.sendMessage(ChatColor.RED
+								+ "Desactiva el entrenamiento con /cuerpoacuerpo");
 						event.setCancelled(true);
 					}
-					
+
 				}
-				
-				//modifiers normales
+
+				// modifiers normales
 				double fts = TrainingSQL.getFTS(attacker);
-				double modifier = 0;
-				if(fts > 50){
-					modifier = fts/50;
-				}else{
-					modifier = (fts -50)/50;
-				}
-				
-				event.setDamage(event.getDamage() + modifier);
-				victim.sendMessage("Modifier: "+modifier);
-				//por la espalda
+				double modifier = ModiferConverter.Scala(fts);
+				event.setDamage(event.getDamage() * modifier);
+				TrainingSQL.addFTS(attacker, 0.03);
+
+				// por la espalda
 				int x1 = attacker.getLocation().getDirection().getBlockX();
 				int z1 = attacker.getLocation().getDirection().getBlockZ();
 				int x2 = victim.getLocation().getDirection().getBlockX();
 				int z2 = victim.getLocation().getDirection().getBlockZ();
 
 				if ((x1 == x2) && (z1 == z2)) {
-					victim.damage(18);
-					attacker.sendMessage(ChatColor.GOLD
-							+ "Digno de las fuerzas especiales...");
+					if (attacker.isSneaking()) {
+						if (isTraining.contains(victim.getName())) {
+							victim.sendMessage(ChatColor.GOLD
+									+ "Después de ese golpe de tu contrincante, ya estarías muerto");
+							attacker.sendMessage(ChatColor.GOLD
+									+ "¡Buen golpe! Digno de las fuerzas especiales...");
+						} else {
+							victim.damage(18);
+							attacker.sendMessage(ChatColor.GOLD
+									+ "Digno de las fuerzas especiales...");
+						}
+
+					} else {
+						return;
+					}
+
 				}
-		}
-	
+			}
+
 		}
 	}
 }
