@@ -17,6 +17,8 @@ import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.plugin.Plugin;
 
 import es.programahermes.MySQL;
+import es.programahermes.Training.TrainingSQL;
+import es.programahermes.Utilidades.ModiferConverter;
 import es.programahermes.Utilidades.Scoreboard;
 
 public class Fatiga implements Listener {
@@ -26,13 +28,13 @@ public class Fatiga implements Listener {
 
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event) {
-		MySQL.addFatiga(event.getPlayer(), 0.02);
+		MySQL.addFatiga(event.getPlayer(), 0.02*ModiferConverter.SacalaReverse(TrainingSQL.getFTS(event.getPlayer())));
 		Scoreboard.showScore(event.getPlayer());
 	}
 
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
-		MySQL.addFatiga(event.getPlayer(), 0.02);
+		MySQL.addFatiga(event.getPlayer(), 0.02*ModiferConverter.SacalaReverse(TrainingSQL.getFTS(event.getPlayer())));
 		Scoreboard.showScore(event.getPlayer());
 	}
 
@@ -53,7 +55,7 @@ public class Fatiga implements Listener {
 		if (player.getGameMode().equals(GameMode.SURVIVAL)) {
 			if (!player.isSprinting()) {
 				if (!(MySQL.getFatiga(player) >= 100)) {
-					MySQL.addFatiga(player, 0.3);
+					MySQL.addFatiga(player, 0.3*ModiferConverter.SacalaReverse(TrainingSQL.getFTI(event.getPlayer())));
 				}
 				if (!(MySQL.getSed(player) <= 0)) {
 					MySQL.removeSed(player, 0.5);
@@ -103,7 +105,7 @@ public class Fatiga implements Listener {
 
 		if (player.getGameMode().equals(GameMode.SURVIVAL)) {
 			if (fromX != toX || fromY != toY || fromZ != toZ) {
-				MySQL.addFatiga(player, 0.01);
+				MySQL.addFatiga(player, 0.01*ModiferConverter.SacalaReverse(TrainingSQL.getFTI(event.getPlayer())));
 				Scoreboard.showScore(player);
 				if (MySQL.getFatiga(player) > 85) {
 					player.setWalkSpeed((float) 0.1);

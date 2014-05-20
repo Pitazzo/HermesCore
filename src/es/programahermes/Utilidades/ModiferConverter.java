@@ -11,19 +11,28 @@ public class ModiferConverter {
 				double modifier = 0.0136 * level + 0.3197;
 				return modifier;
 			} else {
-				if (level == 50) {
 
-					return 1;
-				} else {
-					System.out
-							.println("[ERROR EN HERMESCORE] REVISAR DB Y MODIFIERS");
-					return 1;
-				}
+				return 1;
+
 			}
 
 		}
 
 	}
 
+	public static double SacalaReverse(double level) {
+		if (level > 50) {
+			double modifier = -((1 / 75) * level) + (5 / 3);
+			return modifier;
+		} else {
+			if (level < 50) {
+				double modifier = ((-2 * level) + 149) / 49;
+				return modifier;
+			} else {
+				return 1;
+			}
+		}
+
+	}
 
 }

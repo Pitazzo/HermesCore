@@ -13,7 +13,6 @@ import es.programahermes.Training.TrainingSQL;
 public class MySQL {
 
 	public static Connection connection;
-
 	public static synchronized void openConnection() {
 		try {
 			connection = DriverManager.getConnection(
@@ -707,7 +706,6 @@ public class MySQL {
 			ResultSet result1 = ps1.executeQuery();
 			result1.next();
 			double fatiga2 = result1.getDouble("fatiga");
-
 			if (!(fatiga + fatiga2 > 100)) {
 				PreparedStatement ps2 = connection
 						.prepareStatement("UPDATE `user_data` SET `fatiga`=? WHERE name=?");

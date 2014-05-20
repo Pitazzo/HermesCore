@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 
+import es.programahermes.Utilidades.ModiferConverter;
+
 public class Resistencia implements Listener {
 
 	@EventHandler
@@ -17,14 +19,9 @@ public class Resistencia implements Listener {
 				if (!player.isSprinting()) {
 					TrainingSQL.addFTI(player, 0.001);
 					double fti = TrainingSQL.getFTI(player);
-					double modifier = 0;
-						if(fti > 50){
-							modifier = fti/250;
-						}else{
-							modifier = (fti-50)/250;
-						}
-					player.sendMessage("Modifier: "+modifier);
-					player.setWalkSpeed((float) ((float) 0.26 + modifier));
+					double modifier = ModiferConverter.Scala(fti);
+					player.sendMessage("Modifier: "+modifier+"Total : "+0.06*modifier);
+					player.setWalkSpeed((float) ((float) 0.2 +0.1*modifier));
 				} else {
 					player.setWalkSpeed((float) 0.2);
 				}
