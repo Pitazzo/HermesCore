@@ -9,9 +9,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import es.programahermes.MySQL;
+import es.programahermes.Utilidades.ModiferConverter;
 import es.programahermes.Utilidades.Scoreboard;
 
 public class ETS implements Listener {
@@ -24,7 +26,8 @@ public class ETS implements Listener {
 		if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 			if (player.getItemInHand().getType().equals(Material.AIR)) {
 				if (event.getClickedBlock().getType().equals(Material.WOOL)) {
-					MySQL.addFatiga(player, 0.2);
+					MySQL.addFatiga(player, 0.2 * ModiferConverter
+							.SacalaReverse(TrainingSQL.getFTS(player)));
 					player.playSound(player.getLocation(), Sound.VILLAGER_HIT,
 							3.0F, 3.0F);
 					TrainingSQL.addFTS(player, 0.05);
@@ -65,7 +68,10 @@ public class ETS implements Listener {
 										Scoreboard.showScore(player);
 
 									}
-									MySQL.addFatiga(player, 0.8);
+									MySQL.addFatiga(player,
+											0.5 * ModiferConverter
+													.SacalaReverse(TrainingSQL
+															.getFTS(player)));
 									int show = (int) (20 - diff);
 									player.sendMessage(ChatColor.GOLD
 											+ "Mejor espera unos "
@@ -74,7 +80,10 @@ public class ETS implements Listener {
 									Scoreboard.showScore(player);
 
 								} else {
-									MySQL.addFatiga(player, 0.6);
+									MySQL.addFatiga(player,
+											0.6 * ModiferConverter
+													.SacalaReverse(TrainingSQL
+															.getFTS(player)));
 									TrainingSQL.addFTS(player, 0.2);
 									player.sendMessage(ChatColor.GREEN
 											+ "¡Así se hace! Sigue así :)");
@@ -104,6 +113,25 @@ public class ETS implements Listener {
 								+ "Estás demasiado débil para entrenar ahora");
 
 					}
+				}
+			}
+		}
+	}
+
+	@EventHandler
+	public void onBreak(BlockBreakEvent event) {
+		Player player = event.getPlayer();
+		if (!event.isCancelled()) {
+			if (event.getBlock().getType().equals(Material.LOG)
+					|| event.getBlock().getType().equals(Material.LOG_2)
+					|| event.getBlock().getType().equals(Material.GRASS)
+					|| event.getBlock().getType().equals(Material.DIRT)
+					|| event.getBlock().getType().equals(Material.SAND)
+					|| event.getBlock().getType().equals(Material.GRAVEL)) {
+				if (TrainingSQL.getFTS(player) < 65) {
+					event.setCancelled(true);
+					player.sendMessage(ChatColor.RED
+							+ "No tienes fuerza suficiente para romper ese bloque");
 				}
 			}
 		}

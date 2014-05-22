@@ -48,12 +48,14 @@ public class Accuracy implements Listener, CommandExecutor {
 		if(isTraining.contains(player.getName())){
 			if(event.getBlock().getType().equals(Material.STAINED_CLAY)&&event.getBlock().getData()==13){
 				int distance = (int) player.getLocation().distance(event.getBlock().getLocation());
-				player.sendMessage(ChatColor.GREEN+"¡Buen tiro! Has ganado "+distance*0.25+" puntos. El objetivo estaba a "+distance+" metros.");
+				double points = distance*0.25;
+				player.sendMessage(ChatColor.GREEN+"¡Buen tiro! Has ganado "+points+" puntos. El objetivo estaba a "+distance+" metros.");
+				CombatSQL.addWP(player, points);
 			}else{
-				player.sendMessage(ChatColor.RED+"-2");
+				player.sendMessage(ChatColor.RED+"Has fallado, pierdes cuatro puntos");
+				CombatSQL.removeWP(player, -4);
 			}
 		}else{
-			player.sendMessage(isTraining.toString());
 			if(event.getBlock().getType().equals(Material.STAINED_CLAY)&&event.getBlock().getData()==13){
 				int distance = (int) player.getLocation().distance(event.getBlock().getLocation());
 				player.sendMessage(ChatColor.GOLD+"Has hecho blanco, el objetivo estaba a "+distance+" metros");

@@ -89,10 +89,10 @@ public class Scoreboard {
 					+ "Residuos: " + res + "%"));
 		} else {
 			if (MySQL.getResidual(player) > 70) {
-				residual = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD
+				residual = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.RED
 						+ "Residuos: " + res + "%"));
 			} else {
-				residual = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.RED
+				residual = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD
 						+ "Residuos: " + res + "%"));
 
 			}

@@ -24,7 +24,7 @@ public class Stats implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("stats")) {
 
 			Player player = (Player) sender;
-			double points = MySQL.getPoints(player);
+			int points = (int) MySQL.getPoints(player);
 			int level = MySQL.getLevel(player);
 			String habilidad = MySQL.getHability(player);
 			if (args.length == 0) {

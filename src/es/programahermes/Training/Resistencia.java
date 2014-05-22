@@ -20,7 +20,6 @@ public class Resistencia implements Listener {
 					TrainingSQL.addFTI(player, 0.001);
 					double fti = TrainingSQL.getFTI(player);
 					double modifier = ModiferConverter.Scala(fti);
-					player.sendMessage("Modifier: "+modifier+"Total : "+0.06*modifier);
 					player.setWalkSpeed((float) ((float) 0.2 +0.1*modifier));
 				} else {
 					player.setWalkSpeed((float) 0.2);

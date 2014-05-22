@@ -64,8 +64,11 @@ public class Melee implements Listener, CommandExecutor {
 						victim.setVelocity(victim.getLocation().getDirection()
 								.multiply(-0.5));
 						TrainingSQL.addFTS(attacker, 0.03);
-						MySQL.addFatiga(attacker, 0.2);
-						MySQL.addFatiga(victim, 0.2);
+						MySQL.addFatiga(attacker, 0.2 * ModiferConverter
+								.SacalaReverse(TrainingSQL.getFTS(attacker)));
+						MySQL.addFatiga(victim, 0.3 * ModiferConverter
+								.SacalaReverse(TrainingSQL.getFTS(victim)));
+						CombatSQL.addWP(attacker, 0.01);
 						if (Math.random() < 0.01) {
 							event.setDamage(0.5);
 							attacker.sendMessage(ChatColor.RED
@@ -87,6 +90,11 @@ public class Melee implements Listener, CommandExecutor {
 				double modifier = ModiferConverter.Scala(fts);
 				event.setDamage(event.getDamage() * modifier);
 				TrainingSQL.addFTS(attacker, 0.03);
+				CombatSQL.addWP(attacker, 0.01);
+				MySQL.addFatiga(attacker, 0.2 * ModiferConverter
+						.SacalaReverse(TrainingSQL.getFTS(attacker)));
+				MySQL.addFatiga(victim, 0.3 * ModiferConverter
+						.SacalaReverse(TrainingSQL.getFTS(victim)));
 
 				// por la espalda
 				int x1 = attacker.getLocation().getDirection().getBlockX();
@@ -101,10 +109,12 @@ public class Melee implements Listener, CommandExecutor {
 									+ "Después de ese golpe de tu contrincante, ya estarías muerto");
 							attacker.sendMessage(ChatColor.GOLD
 									+ "¡Buen golpe! Digno de las fuerzas especiales...");
+							CombatSQL.addWP(attacker, 4);
 						} else {
 							victim.damage(18);
 							attacker.sendMessage(ChatColor.GOLD
 									+ "Digno de las fuerzas especiales...");
+							CombatSQL.addWP(attacker, 6);
 						}
 
 					} else {
