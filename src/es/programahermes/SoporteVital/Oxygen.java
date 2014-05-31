@@ -15,7 +15,9 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+import es.programahermes.Main;
 import es.programahermes.MySQL;
+import es.programahermes.Utilidades.WGFlags;
 
 public class Oxygen {
 
@@ -43,12 +45,12 @@ public class Oxygen {
 		return (WorldGuardPlugin) plugin;
 	}
 
-	public static boolean isWithinRegion(Location loc, String region) {
+	public static boolean isWithinRegion(Location loc) {
 		WorldGuardPlugin guard = getWorldGuard();
 		RegionManager manager = guard.getRegionManager(loc.getWorld());
 		ApplicableRegionSet set = manager.getApplicableRegions(loc);
 		for (ProtectedRegion each : set) {
-			if (each.getId().equalsIgnoreCase(region)) {
+			if (each.getFlag(WGFlags.presurizada).booleanValue()) {
 				return true;
 			}
 		}
@@ -84,9 +86,9 @@ public class Oxygen {
 						} else {
 							MySQL.setOxygen(player, 0);
 							// no tiene traje
-							if (isWithinRegion(player.getLocation(),
-									"presurizada")) {
+							if (isWithinRegion(player.getLocation())) {
 								// está en casa
+								player.sendMessage("OK");
 								return;
 							} else {
 								// no está en casa

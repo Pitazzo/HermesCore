@@ -1,6 +1,7 @@
 name: HermesCore
 version: 0.2
 main: es.programahermes.Main
+depend: [WorldGuard, WorldEdit, WGCustomFlags]
 commands:
    subirnivel:
      description: Subes el nivel de la habilidad principal

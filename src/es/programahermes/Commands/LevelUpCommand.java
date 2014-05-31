@@ -16,6 +16,7 @@ public class LevelUpCommand implements CommandExecutor {
 			String[] args) {
 		if (cmd.getName().equalsIgnoreCase("subirnivel")) {
 			Player player = (Player) sender;
+
 			int points = (int) MySQL.getPoints(player);
 			int pointsLeft = 1000 - points;
 			String habilidad1 = MySQL.getHability(player);
@@ -253,18 +254,21 @@ public class LevelUpCommand implements CommandExecutor {
 
 					}
 					return true;
-				} 
-				}else {
-					player.sendMessage(ChatColor.GOLD+"[Hermes Core]"+ChatColor.GREEN
-							+ "No tienes suficientes puntos para subir de nivel, tienes "
-							+ points + " puntos, luego te faltan " + pointsLeft
-							+ " más.");
-					return true;
+				}
+
+			} else {
+				player.sendMessage(ChatColor.GOLD
+						+ "[Hermes Core]"
+						+ ChatColor.GREEN
+						+ "No tienes suficientes puntos para subir de nivel, tienes "
+						+ points + " puntos, luego te faltan " + pointsLeft
+						+ " más.");
+				return true;
 			}
 
-			return false;
 		}
 		return false;
 
 	}
+
 }
