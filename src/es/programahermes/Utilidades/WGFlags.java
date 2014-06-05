@@ -5,6 +5,8 @@ import org.bukkit.plugin.Plugin;
 
 import com.mewin.WGCustomFlags.WGCustomFlagsPlugin;
 import com.sk89q.worldguard.protection.flags.BooleanFlag;
+import com.sk89q.worldguard.protection.flags.DoubleFlag;
+
 
 public class WGFlags {
 
@@ -21,5 +23,7 @@ public class WGFlags {
 	}
 
 	public static BooleanFlag presurizada = new BooleanFlag("presurizada");
+	public static DoubleFlag gold = new DoubleFlag("gold");
+	
 	
 }

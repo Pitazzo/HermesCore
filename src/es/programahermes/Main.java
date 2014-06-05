@@ -87,6 +87,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		MySQL.openConnection();
 		getServer().addRecipe(Recipes.Web);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.presurizada);
+		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.gold);
 	}
 
 	public void onDisable() {

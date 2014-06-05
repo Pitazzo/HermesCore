@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.flags.Flag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
@@ -24,7 +25,7 @@ import es.programahermes.MySQL;
 
 public class Prospectar implements Listener {
 
-	private WorldGuardPlugin getWorldGuard() {
+	private static WorldGuardPlugin getWorldGuard() {
 		Plugin plugin = Bukkit.getPluginManager().getPlugin("WorldGuard");
 		if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
 			return null;
@@ -32,7 +33,20 @@ public class Prospectar implements Listener {
 
 		return (WorldGuardPlugin) plugin;
 	}
-
+/*
+	public static double getConcentration(Location loc, Flag flag) {
+		WorldGuardPlugin guard = getWorldGuard();
+		RegionManager manager = guard.getRegionManager(loc.getWorld());
+		ApplicableRegionSet set = manager.getApplicableRegions(loc);
+		for (ProtectedRegion each : set) {
+			if (each.getFlag(flag)) {
+				
+			}else{
+				return 0;
+			}
+		}
+	}
+	*/
 	public boolean isWithinRegion(Location loc, String region) {
 		WorldGuardPlugin guard = getWorldGuard();
 		RegionManager manager = guard.getRegionManager(loc.getWorld());

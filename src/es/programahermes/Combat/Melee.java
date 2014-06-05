@@ -51,7 +51,8 @@ public class Melee implements Listener, CommandExecutor {
 
 	@EventHandler
 	public void onHit(EntityDamageByEntityEvent event) {
-		Player attacker = (Player) event.getDamager();
+		if(event.getDamager() instanceof Player && event.getEntity() instanceof Player){
+		 Player attacker = (Player) event.getDamager();
 		Player victim = (Player) event.getEntity();
 		if ((attacker.getGameMode().equals(GameMode.SURVIVAL) && (victim
 				.getGameMode().equals(GameMode.SURVIVAL)))) {
@@ -120,7 +121,7 @@ public class Melee implements Listener, CommandExecutor {
 					} else {
 						return;
 					}
-
+				}
 				}
 			}
 
