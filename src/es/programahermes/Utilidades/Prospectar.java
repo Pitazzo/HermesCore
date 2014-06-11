@@ -1,4 +1,4 @@
-package es.programahermes.Utilidades;
+/*package es.programahermes.Utilidades;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,21 +33,22 @@ public class Prospectar implements Listener {
 
 		return (WorldGuardPlugin) plugin;
 	}
-/*
+
 	public static double getConcentration(Location loc, Flag flag) {
 		WorldGuardPlugin guard = getWorldGuard();
 		RegionManager manager = guard.getRegionManager(loc.getWorld());
 		ApplicableRegionSet set = manager.getApplicableRegions(loc);
 		for (ProtectedRegion each : set) {
 			if (each.getFlag(flag)) {
-				
-			}else{
+				return Integer.parseInt(flag.toString());
+			} else {
 				return 0;
 			}
 		}
+		return 0;
 	}
-	*/
-	public boolean isWithinRegion(Location loc, String region) {
+
+	public boolean getModifier(Location loc, String region) {
 		WorldGuardPlugin guard = getWorldGuard();
 		RegionManager manager = guard.getRegionManager(loc.getWorld());
 		ApplicableRegionSet set = manager.getApplicableRegions(loc);
@@ -83,150 +84,15 @@ public class Prospectar implements Listener {
 							Location location = event.getClickedBlock()
 									.getLocation();
 
-							// coal
-
-							if (isWithinRegion(location, "Coal")) {
-
-								if (random <= 0.3) {
-									event.getClickedBlock().setType(
-											Material.COAL_ORE);
-									player.getWorld().dropItemNaturally(
-											location, escoria1);
-								} else {
-									event.getClickedBlock().setType(
-											Material.ENDER_STONE);
-									player.getWorld().dropItemNaturally(
-											location, escoria6);
-								}
-							} else {
-								event.getClickedBlock().getLocation();
-								event.getClickedBlock().setType(
-										Material.ENDER_STONE);
-								player.getWorld().dropItemNaturally(location,
-										escoria6);
-
-								// gold
-
-								if (isWithinRegion(location, "Gold")) {
-
-									if (random <= 1.2) {
-										event.getClickedBlock().setType(
-												Material.GOLD_ORE);
-										player.getWorld().dropItemNaturally(
-												location, escoria1);
-									} else {
-										event.getClickedBlock().setType(
-												Material.ENDER_STONE);
-										player.getWorld().dropItemNaturally(
-												location, escoria6);
-									}
-								} else {
-									event.getClickedBlock().getLocation();
-									event.getClickedBlock().setType(
-											Material.ENDER_STONE);
-									player.getWorld().dropItemNaturally(
-											location, escoria6);
-
-									// iron
-									if (isWithinRegion(location, "Iron")) {
-
-										if (random <= 0.095) {
-											event.getClickedBlock().setType(
-													Material.IRON_ORE);
-											player.getWorld()
-													.dropItemNaturally(
-															location, escoria1);
-										} else {
-											event.getClickedBlock().setType(
-													Material.ENDER_STONE);
-											player.getWorld()
-													.dropItemNaturally(
-															location, escoria6);
-										}
-									} else {
-										event.getClickedBlock().getLocation();
-										event.getClickedBlock().setType(
-												Material.ENDER_STONE);
-										player.getWorld().dropItemNaturally(
-												location, escoria6);
-
-										// redstone
-										if (isWithinRegion(location, "Redstone")) {
-
-											if (random <= 0.07) {
-												event.getClickedBlock()
-														.setType(
-																Material.REDSTONE_ORE);
-												player.getWorld()
-														.dropItemNaturally(
-																location,
-																escoria1);
-											} else {
-												event.getClickedBlock()
-														.setType(
-																Material.ENDER_STONE);
-												player.getWorld()
-														.dropItemNaturally(
-																location,
-																escoria6);
-											}
-										} else {
-											event.getClickedBlock()
-													.getLocation();
-											event.getClickedBlock().setType(
-													Material.ENDER_STONE);
-											player.getWorld()
-													.dropItemNaturally(
-															location, escoria6);
-
-											// diamond
-
-											if (isWithinRegion(location,
-													"Diamond")) {
-
-												if (random <= 0.07) {
-													event.getClickedBlock()
-															.setType(
-																	Material.DIAMOND_ORE);
-													player.getWorld()
-															.dropItemNaturally(
-																	location,
-																	escoria1);
-												} else {
-													event.getClickedBlock()
-															.setType(
-																	Material.ENDER_STONE);
-													player.getWorld()
-															.dropItemNaturally(
-																	location,
-																	escoria6);
-												}
-											} else {
-												event.getClickedBlock()
-														.getLocation();
-												event.getClickedBlock()
-														.setType(
-																Material.ENDER_STONE);
-												player.getWorld()
-														.dropItemNaturally(
-																location,
-																escoria6);
-
-											}
-										}
-
-									}
-								}
-							}
-						} else {
-							player.sendMessage(ChatColor.RED
-									+ "No sabes ni como empezar a manejar una perforadora... Mejor harás en no volverla a tocar");
 						}
+
 					}
 				}
 			}
+		} else {
+			player.sendMessage(ChatColor.RED
+					+ "No sabes ni como empezar a manejar una perforadora... Mejor harás en no volverla a tocar");
 		}
-
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST)
@@ -320,39 +186,5 @@ public class Prospectar implements Listener {
 
 	}
 
-	@SuppressWarnings("deprecation")
-	@EventHandler
-	public void onRefor(PlayerInteractEvent event) {
-		Player player = event.getPlayer();
-		if (MySQL.getHability(player).equals("Geologia")) {
-			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-				if (player.getItemInHand().getType().equals(Material.INK_SACK)) {
-					if (player.getItemInHand().getDurability() == 0) {
-						if (event.getClickedBlock().getType()
-								.equals(Material.STONE)||event.getClickedBlock().getType().equals(Material.ENDER_STONE)) {
-							event.getClickedBlock().setType(Material.STAINED_CLAY);
-							event.getClickedBlock().setData((byte) 14);
-							event.getClickedBlock().setType(Material.STAINED_CLAY);
-							player.getInventory().setItem(player.getInventory().first(Material.INK_SACK), new ItemStack(Material.INK_SACK, player.getInventory().getItem(player.getInventory().first(Material.INK_SACK)).getAmount() - 1));
-							player.updateInventory();
-						}else{
-							player.sendMessage(ChatColor.GOLD+"Ese bloque no es reforzable");
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	@EventHandler
-	public void onBreak(BlockBreakEvent event){
-		if(event.getBlock().getType().equals(Material.STAINED_CLAY)){
-			if(event.getBlock().getData()== 14){
-				event.getBlock().getDrops();
-				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.STONE, 1));
-				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.INK_SACK, 1));
-				event.getPlayer().sendMessage(ChatColor.GOLD+"Cuidado, has roto un bloque reforzado");
-			}
-		}
-	}
 }
+*/

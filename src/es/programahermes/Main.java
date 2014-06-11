@@ -1,13 +1,19 @@
 package es.programahermes;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.mewin.WGCustomFlags.WGCustomFlagsPlugin;
-import com.sk89q.worldguard.protection.flags.BooleanFlag;
 
+
+
+
+
+
+
+
+
+import WGRegions.WGFlags;
 import es.programahermes.Combat.Accuracy;
 import es.programahermes.Combat.Melee;
 import es.programahermes.Commands.LevelUpCommand;
@@ -16,9 +22,11 @@ import es.programahermes.Commands.SetHability;
 import es.programahermes.Commands.Stats;
 import es.programahermes.Commands.VSC;
 import es.programahermes.Commands.Visor;
+import es.programahermes.Geologia.Geologia;
+import es.programahermes.Geologia.Perforadora;
+import es.programahermes.Geologia.Refuerzos;
 import es.programahermes.Habilidades.Biologia;
 import es.programahermes.Habilidades.Estructural;
-import es.programahermes.Habilidades.Geologia;
 import es.programahermes.Habilidades.Quimica;
 import es.programahermes.Habilidades.Tecnica;
 import es.programahermes.SoporteVital.Fatiga;
@@ -34,10 +42,7 @@ import es.programahermes.Utilidades.FireExtinguisher;
 import es.programahermes.Utilidades.GPS;
 import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.Pernos;
-import es.programahermes.Utilidades.Prospectar;
 import es.programahermes.Utilidades.Recipes;
-import es.programahermes.Utilidades.Speakers;
-import es.programahermes.Utilidades.WGFlags;
 
 public class Main extends JavaPlugin implements CommandExecutor {
 
@@ -50,7 +55,8 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		Oxygen.oxyenUpdate(plugin);
 		Fatiga.waitFatigaCheck(plugin);
 		getServer().getPluginManager().registerEvents(new Geologia(), this);
-		getServer().getPluginManager().registerEvents(new Prospectar(), this);
+		getServer().getPluginManager().registerEvents(new Refuerzos(), this);
+		getServer().getPluginManager().registerEvents(new Perforadora(), this);
 		getServer().getPluginManager().registerEvents(new EnergyCells(), this);
 		getServer().getPluginManager().registerEvents(new Biologia(), this);
 		getServer().getPluginManager().registerEvents(new Estructural(), this);
@@ -67,7 +73,6 @@ public class Main extends JavaPlugin implements CommandExecutor {
 				this);
 		getServer().getPluginManager().registerEvents(new Melee(), this);
 		getServer().getPluginManager().registerEvents(new Bulletproof(), this);
-		getServer().getPluginManager().registerEvents(new Speakers(null), this);
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());
@@ -80,7 +85,6 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getCommand("entrenartiro").setExecutor(new Accuracy());
 		getCommand("cuerpoacuerpo").setExecutor(new Melee());
 		getCommand("emergency").setExecutor(new Miscelaneo());
-		getCommand("location").setExecutor(new Speakers(null));
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
@@ -88,6 +92,11 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().addRecipe(Recipes.Web);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.presurizada);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.gold);
+		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.iron);
+		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.coal);
+		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.lapis);
+		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.diamond);
+		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.lapis);
 	}
 
 	public void onDisable() {

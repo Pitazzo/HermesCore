@@ -1,4 +1,4 @@
-package es.programahermes.Utilidades;
+package WGRegions;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -24,6 +24,11 @@ public class WGFlags {
 
 	public static BooleanFlag presurizada = new BooleanFlag("presurizada");
 	public static DoubleFlag gold = new DoubleFlag("gold");
+	public static DoubleFlag coal = new DoubleFlag("coal");
+	public static DoubleFlag iron = new DoubleFlag("iron");
+	public static DoubleFlag diamond = new DoubleFlag("diamond");
+	public static DoubleFlag redstone = new DoubleFlag("redstone");
+	public static DoubleFlag lapis = new DoubleFlag("lapis");
 	
 	
 }

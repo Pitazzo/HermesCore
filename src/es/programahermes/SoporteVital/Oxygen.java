@@ -11,13 +11,14 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import WGRegions.WGFlags;
+
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import es.programahermes.MySQL;
-import es.programahermes.Utilidades.WGFlags;
 
 public class Oxygen {
 
@@ -87,6 +88,7 @@ public class Oxygen {
 			@Override
 			public void run() {
 				for (Player player : Bukkit.getOnlinePlayers()) {
+					//Argo
 					if (player.getWorld().getName().equals("Nave")) {
 						if (player.getGameMode().equals(GameMode.SURVIVAL)) {
 							if (hasSuit(player)) {
@@ -128,6 +130,7 @@ public class Oxygen {
 					} else {
 						if (player.getWorld().getName()
 								.equalsIgnoreCase("Kepler")) {
+							//kepler
 							if (player.getGameMode().equals(GameMode.SURVIVAL)) {
 								if (hasMask(player)) {
 									return;

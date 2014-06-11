@@ -1,6 +1,7 @@
 package es.programahermes.Combat;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;

@@ -1,4 +1,4 @@
-package es.programahermes.Habilidades;
+package es.programahermes.Geologia;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
