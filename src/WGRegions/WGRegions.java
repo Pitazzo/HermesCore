@@ -47,4 +47,19 @@ public class WGRegions {
 		return "0.0%";
 
 	}
+	
+	public static double getConecentration(Location loc, Flag flag) {
+		if (hasFlag(loc, flag)) {
+			WorldGuardPlugin guard = getWorldGuard();
+			RegionManager manager = guard.getRegionManager(loc.getWorld());
+			ApplicableRegionSet set = manager.getApplicableRegions(loc);
+			for (ProtectedRegion each : set) {
+				return Double.parseDouble(each.getFlag(flag).toString());
+			}
+		} else {
+			return 0;
+		}
+		return 0;
+
+	}
 }

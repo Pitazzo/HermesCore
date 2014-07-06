@@ -3,16 +3,6 @@ package es.programahermes;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
-
-
-
-
-
-
-
-
-
 import WGRegions.WGFlags;
 import es.programahermes.Combat.Accuracy;
 import es.programahermes.Combat.Melee;
@@ -24,6 +14,7 @@ import es.programahermes.Commands.VSC;
 import es.programahermes.Commands.Visor;
 import es.programahermes.Geologia.Geologia;
 import es.programahermes.Geologia.Perforadora;
+import es.programahermes.Geologia.Prospectar;
 import es.programahermes.Geologia.Refuerzos;
 import es.programahermes.Habilidades.Biologia;
 import es.programahermes.Habilidades.Estructural;
@@ -36,8 +27,8 @@ import es.programahermes.SoporteVital.OxygenCommand;
 import es.programahermes.SoporteVital.Residual;
 import es.programahermes.Training.ETS;
 import es.programahermes.Training.Resistencia;
+import es.programahermes.Utilidades.Batteries;
 import es.programahermes.Utilidades.Bulletproof;
-import es.programahermes.Utilidades.EnergyCells;
 import es.programahermes.Utilidades.FireExtinguisher;
 import es.programahermes.Utilidades.GPS;
 import es.programahermes.Utilidades.Miscelaneo;
@@ -57,7 +48,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().getPluginManager().registerEvents(new Geologia(), this);
 		getServer().getPluginManager().registerEvents(new Refuerzos(), this);
 		getServer().getPluginManager().registerEvents(new Perforadora(), this);
-		getServer().getPluginManager().registerEvents(new EnergyCells(), this);
+		getServer().getPluginManager().registerEvents(new Batteries(), this);
 		getServer().getPluginManager().registerEvents(new Biologia(), this);
 		getServer().getPluginManager().registerEvents(new Estructural(), this);
 		getServer().getPluginManager().registerEvents(new Quimica(), this);
@@ -73,6 +64,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
 				this);
 		getServer().getPluginManager().registerEvents(new Melee(), this);
 		getServer().getPluginManager().registerEvents(new Bulletproof(), this);
+		getServer().getPluginManager().registerEvents(new Prospectar(), this);
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());
