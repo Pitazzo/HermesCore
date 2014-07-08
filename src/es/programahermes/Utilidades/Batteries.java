@@ -6,14 +6,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Furnace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.FurnaceSmeltEvent;
+import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -22,6 +20,7 @@ import es.programahermes.MySQL;
 public class Batteries implements Listener {
 
 	public static HashMap<Location, Long> panels = new HashMap<Location, Long>();
+	public static HashMap<Location, Long> bench = new HashMap<Location, Long>();
 
 	public boolean day(World world) {
 
@@ -50,7 +49,12 @@ public class Batteries implements Listener {
 											panels.put(event.getClickedBlock()
 													.getLocation(), System
 													.currentTimeMillis());
-											player.sendMessage("WIN!");
+											ItemMeta im = player
+													.getItemInHand()
+													.getItemMeta();
+											im.setDisplayName("Batería cargada");
+											player.getItemInHand().setItemMeta(
+													im);
 										} else {
 											int percent = (int) ((100 * (panels
 													.get(event
@@ -65,7 +69,11 @@ public class Batteries implements Listener {
 										panels.put(event.getClickedBlock()
 												.getLocation(), System
 												.currentTimeMillis());
-										player.sendMessage("WIN!");
+
+										ItemMeta im = player.getItemInHand()
+												.getItemMeta();
+										im.setDisplayName("Batería cargada");
+										player.getItemInHand().setItemMeta(im);
 									}
 								} else {
 									player.sendMessage(ChatColor.RED
@@ -94,27 +102,124 @@ public class Batteries implements Listener {
 
 	public boolean isEmpty(ItemStack item) {
 
-		if (item.getItemMeta().getDisplayName().equals("Batería descargada")) {
+		if (item != null) {
+			if (item.getItemMeta() != null) {
+				if (item.getItemMeta().getDisplayName() != null) {
+					if (item.getItemMeta().getDisplayName()
+							.equals("Batería descargada")) {
 
-			return true;
-		}else{
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+
+		} else {
 			return false;
 		}
 
-		
+	}
+
+	public boolean isCharged(ItemStack item) {
+
+		if (item != null) {
+			if (item.getItemMeta() != null) {
+				if (item.getItemMeta().getDisplayName() != null) {
+					if (item.getItemMeta().getDisplayName()
+							.equals("Batería cargada")) {
+
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+
+		} else {
+			return false;
+		}
 
 	}
 
 	@EventHandler
-	public void onSmelt(FurnaceSmeltEvent event) {
-		Furnace furnace = (Furnace) event.getBlock().getState();
-		FurnaceInventory inv = furnace.getInventory();
-		ItemStack eBatt = new ItemStack(Material.COAL, 1);
-		ItemMeta im = eBatt.getItemMeta();
-		im.setDisplayName("Batería descargada");
-		eBatt.setItemMeta(im);
-		if (inv.getFuel() == null) {
-			inv.setFuel(eBatt);
+	public void onBurn(FurnaceBurnEvent event) {
+
+		if (isCharged(event.getFuel())) {
+			event.setBurnTime(60 * 20);
+			ItemStack eBatt = new ItemStack(Material.COAL, 1);
+			ItemMeta im = eBatt.getItemMeta();
+			im.setDisplayName("Batería descargada");
+			eBatt.setItemMeta(im);
+			event.getBlock().getWorld()
+					.dropItem(event.getBlock().getLocation(), eBatt);
+		}
+
+	}
+
+	@EventHandler
+	public void onInteract1(PlayerInteractEvent event) {
+		if (!event.isCancelled()) {
+
+			Player player = event.getPlayer();
+			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+				if (event.getClickedBlock().getType()
+						.equals(Material.WORKBENCH)) {
+					if (!isCharged(player.getItemInHand())) {
+						if (bench.containsKey(event.getClickedBlock()
+								.getLocation())) {
+							if (System.currentTimeMillis()
+									- bench.get(event.getClickedBlock()
+											.getLocation()) < 900000) {
+								int left = (int) ((900000 - (System
+										.currentTimeMillis() - bench.get(event
+										.getClickedBlock().getLocation()))) / (60 * 1000));
+								player.sendMessage(ChatColor.GREEN
+										+ "A esta mesa de trabajo le queda una autonomía de "
+										+ left + " minutos");
+							} else {
+								player.sendMessage(ChatColor.RED
+										+ "Ésta mesa de trabajo no tiene suficiente energía para funcionar");
+								event.setCancelled(true);
+							}
+						} else {
+							player.sendMessage(ChatColor.RED
+									+ "Ésta mesa de trabajo no tiene suficiente energía para funcionar");
+							event.setCancelled(true);
+						}
+					} else {
+						if (bench.containsKey(event.getClickedBlock()
+								.getLocation())) {
+							bench.remove(event.getClickedBlock().getLocation());
+							bench.put(event.getClickedBlock().getLocation(),
+									System.currentTimeMillis());
+							player.sendMessage(ChatColor.GREEN
+									+ "Has recargado la batería interna de la mesa de trabajo. Cuenta con una autonomía de 15 minutos");
+							ItemMeta im = event.getPlayer().getItemInHand()
+									.getItemMeta();
+							im.setDisplayName("Batería descargada");
+							player.getItemInHand().setItemMeta(im);
+						} else {
+							bench.put(event.getClickedBlock().getLocation(),
+									System.currentTimeMillis());
+							player.sendMessage(ChatColor.GREEN
+									+ "Has recargado la batería interna de la mesa de trabajo. Cuenta con una autonomía de 15 minutos");
+							ItemMeta im = event.getPlayer().getItemInHand()
+									.getItemMeta();
+							im.setDisplayName("Batería descargada");
+							player.getItemInHand().setItemMeta(im);
+						}
+					}
+				}
+			}
 		}
 	}
 
