@@ -42,3 +42,6 @@ commands:
    emergency:
      description: Proporciona equipación de emergencia a los OPs
      usage: Error de sintaxis! Simplemente escribe /emergency
+   vendarse:
+     description: Se realiza un vendaje de emergencia que no siempre previene de infecciones
+     usage: Error de sintaxis! Simplemente escribe /vendarse

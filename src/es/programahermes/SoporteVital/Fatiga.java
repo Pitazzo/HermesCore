@@ -17,7 +17,9 @@ import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.plugin.Plugin;
 
 import es.programahermes.MySQL;
+import es.programahermes.Health.HealthSQL;
 import es.programahermes.Training.TrainingSQL;
+import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.ModiferConverter;
 import es.programahermes.Utilidades.Scoreboard;
 
@@ -108,9 +110,11 @@ public class Fatiga implements Listener {
 				MySQL.addFatiga(player, 0.01*ModiferConverter.SacalaReverse(TrainingSQL.getFTI(event.getPlayer())));
 				Scoreboard.showScore(player);
 				if (MySQL.getFatiga(player) > 85) {
-					player.setWalkSpeed((float) 0.1);
+					Miscelaneo.setWalkSpeed(player, 0.1);
+					
 				} else {
-					player.setWalkSpeed((float) 0.2);
+					Miscelaneo.setWalkSpeed(player, 0.2);
+					
 				}
 				if (walked.containsValue(player)) {
 					walked.remove(player);

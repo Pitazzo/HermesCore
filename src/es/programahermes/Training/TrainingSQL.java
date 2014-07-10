@@ -1,7 +1,5 @@
 package es.programahermes.Training;
 
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,9 +7,9 @@ import java.sql.SQLException;
 import org.bukkit.entity.Player;
 
 import es.programahermes.MySQL;
+import es.programahermes.Health.HealthSQL;
 
 public class TrainingSQL {
-
 
 	public static synchronized double getFTS(Player player) {
 
@@ -23,17 +21,21 @@ public class TrainingSQL {
 			ResultSet result = sql.executeQuery();
 			result.next();
 			double FTS = result.getDouble("FTS");
+			double finalFTS;
+			if (HealthSQL.FracturaTS(player)) {
+				finalFTS = FTS * 0.4;
+			} else {
+				finalFTS = FTS;
+			}
 			sql.close();
 			result.close();
 
-			return FTS;
+			return finalFTS;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
-
-
 
 	public static synchronized void addFTS(Player player, double newFTS) {
 
@@ -59,8 +61,7 @@ public class TrainingSQL {
 		}
 	}
 
-	public static synchronized void removeFTS(Player player,
-			double FTSToRemove) {
+	public static synchronized void removeFTS(Player player, double FTSToRemove) {
 
 		try {
 			PreparedStatement ps1 = MySQL.connection
@@ -99,7 +100,6 @@ public class TrainingSQL {
 		}
 	}
 
-	
 	public static synchronized double getFTI(Player player) {
 
 		try {
@@ -110,17 +110,21 @@ public class TrainingSQL {
 			ResultSet result = sql.executeQuery();
 			result.next();
 			double FTI = result.getDouble("FTI");
+			double finalFTS;
+			if (HealthSQL.FracturaTI(player)) {
+				finalFTS = FTI * 0.4;
+			} else {
+				finalFTS = FTI;
+			}
 			sql.close();
 			result.close();
 
-			return FTI;
+			return finalFTS;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
-
-
 
 	public static synchronized void addFTI(Player player, double newFTI) {
 
@@ -146,8 +150,7 @@ public class TrainingSQL {
 		}
 	}
 
-	public static synchronized void removeFTI(Player player,
-			double FTIToRemove) {
+	public static synchronized void removeFTI(Player player, double FTIToRemove) {
 
 		try {
 			PreparedStatement ps1 = MySQL.connection
@@ -185,5 +188,5 @@ public class TrainingSQL {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.plugin.Plugin;
 
 import es.programahermes.MySQL;
+import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.Scoreboard;
 
 public class Hydratation implements Listener {
@@ -28,9 +29,9 @@ public class Hydratation implements Listener {
 
 						Scoreboard.showScore(player);
 						if (MySQL.getSed(player) <= 20) {
-							player.setWalkSpeed((float) 0.1);
+							Miscelaneo.setWalkSpeed(player, 0.1);
 						} else {
-							player.setWalkSpeed((float) 0.2);
+							Miscelaneo.setWalkSpeed(player, 0.2);
 						}
 
 						if (MySQL.getSed(player) <= 20) {

@@ -55,6 +55,8 @@ public class Batteries implements Listener {
 											im.setDisplayName("Batería cargada");
 											player.getItemInHand().setItemMeta(
 													im);
+											player.sendMessage(ChatColor.GREEN
+													+ "¡Has recargado la batería!");
 										} else {
 											int percent = (int) ((100 * (panels
 													.get(event
@@ -74,6 +76,8 @@ public class Batteries implements Listener {
 												.getItemMeta();
 										im.setDisplayName("Batería cargada");
 										player.getItemInHand().setItemMeta(im);
+										player.sendMessage(ChatColor.GREEN
+												+ "¡Has recargado la batería!");
 									}
 								} else {
 									player.sendMessage(ChatColor.RED
@@ -92,7 +96,7 @@ public class Batteries implements Listener {
 								+ "La recarga de baterías solo puede ser realizada por personal cualificado");
 					}
 				} else {
-					player.sendMessage(ChatColor.RED + "No es una batería");
+					player.sendMessage(ChatColor.RED + "Ese objeto no es recargable");
 				}
 			}
 

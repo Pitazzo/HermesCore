@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 
+import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.ModiferConverter;
 
 public class Resistencia implements Listener {
@@ -20,9 +21,9 @@ public class Resistencia implements Listener {
 					TrainingSQL.addFTI(player, 0.001);
 					double fti = TrainingSQL.getFTI(player);
 					double modifier = ModiferConverter.Scala(fti);
-					player.setWalkSpeed((float) ((float) 0.2 +0.1*modifier));
+					Miscelaneo.setWalkSpeed(player, (float) ((float) 0.2 +0.1*modifier));
 				} else {
-					player.setWalkSpeed((float) 0.2);
+					Miscelaneo.setWalkSpeed(player, 0.2);
 				}
 			}
 		}
