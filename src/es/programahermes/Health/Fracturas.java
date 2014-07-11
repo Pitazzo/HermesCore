@@ -10,7 +10,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
+import es.programahermes.Main;
 import es.programahermes.MySQL;
 
 public class Fracturas implements Listener {
@@ -25,6 +27,7 @@ public class Fracturas implements Listener {
 			if (event.getCause().equals(DamageCause.FALL)) {
 				if (event.getDamage() > 1) {
 					setFracturaTI(player);
+
 				}
 			}
 		}
@@ -40,7 +43,9 @@ public class Fracturas implements Listener {
 					if (HealthSQL.FracturaTS(player)) {
 						double rdm = Math.random() * 100;
 						if (rdm < 85) {
-							reconstruccionCheck(null, player, target, "TS");
+							reconstruccionCheck(
+									JavaPlugin.getPlugin(Main.class), player,
+									target, "TS");
 						} else {
 							player.sendMessage(ChatColor.RED
 									+ "Desgraciadamente, el proceso ha fallado");
@@ -55,7 +60,8 @@ public class Fracturas implements Listener {
 						if (HealthSQL.FracturaTI(player)) {
 							double rdm = Math.random() * 100;
 							if (rdm < 85) {
-								reconstruccionCheck(null, player, target, "TI");
+								reconstruccionCheck(Main.getPlugin(Main.class),
+										player, target, "TI");
 							} else {
 								player.sendMessage(ChatColor.RED
 										+ "Desgraciadamente, el proceso ha fallado");
@@ -80,16 +86,28 @@ public class Fracturas implements Listener {
 	}
 
 	public void setFracturaTS(Player player) {
-		player.sendMessage(ChatColor.DARK_RED
-				+ "¡Acabas de fracturate un hueso en el tren superior! ¡Qué dolor!");
-		HealthSQL.setFracturaTS(player, true);
+		if (HealthSQL.FracturaTS(player)) {
+			player.sendMessage(ChatColor.DARK_RED
+					+ "¡Ten un poco de cuidado, no haces más que empeorar tu lesión! ¡Qué dolor!");
+		} else {
+			player.sendMessage(ChatColor.DARK_RED
+					+ "¡Acabas de fracturate un hueso en el tren superior! ¡Qué dolor!");
+			HealthSQL.setFracturaTS(player, true);
+		}
+
 	}
 
 	public void setFracturaTI(Player player) {
-		player.setWalkSpeed((float) 0.005);
-		player.sendMessage(ChatColor.DARK_RED
-				+ "¡Acabas de fracturate un hueso en el tren inferior! ¡Qué dolor!");
-		HealthSQL.setFracturaTI(player, true);
+
+		if (HealthSQL.FracturaTI(player)) {
+			player.sendMessage(ChatColor.DARK_RED
+					+ "¡Ten un poco de cuidado, no haces más que empeorar tu lesión! ¡Qué dolor!");
+		} else {
+			player.sendMessage(ChatColor.DARK_RED
+					+ "¡Acabas de fracturate un hueso en el tren inferior! ¡Qué dolor!");
+			HealthSQL.setFracturaTI(player, true);
+			player.setWalkSpeed((float) 0.005);
+		}
 
 	}
 
@@ -170,9 +188,9 @@ public class Fracturas implements Listener {
 
 								case "TI":
 									player.sendMessage(ChatColor.GREEN
-											+ "¡Reconstrucción ósea completada! ¡Ha sido un éxito! ¡Las fracturas del tren inferior han sanado!");
+											+ "¡Reconstrucción ósea completada! ¡Ha sido todo un éxito! ¡Las fracturas del tren inferior han sanado!");
 									target.sendMessage(ChatColor.GREEN
-											+ "¡Reconstrucción ósea completada! ¡Ha sido un éxito! ¡Tus fracturas del tren inferior han sanado!");
+											+ "¡Reconstrucción ósea completada! ¡Ha sido todo un éxito! ¡Tus fracturas del tren inferior han sanado!");
 									healFracturaTI(target);
 
 								}

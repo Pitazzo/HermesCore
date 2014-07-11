@@ -11,9 +11,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import WGRegions.WGFlags;
-import WGRegions.WGRegions;
 import es.programahermes.MySQL;
+import es.programahermes.WGRegions.WGFlags;
+import es.programahermes.WGRegions.WGRegions;
 
 public class Perforadora implements Listener {
 

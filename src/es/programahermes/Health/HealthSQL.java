@@ -73,7 +73,7 @@ public class HealthSQL {
 
 	}
 	
-	public void setSepticemia(Player player, boolean state) {
+	public static void setSepticemia(Player player, boolean state) {
 		try {
 			PreparedStatement ps = MySQL.connection
 					.prepareStatement("UPDATE `user_data` SET `sepsis`=? WHERE name=?");
@@ -87,7 +87,7 @@ public class HealthSQL {
 		}
 	}
 	
-	public boolean Septicemia(Player player) {
+	public static boolean Septicemia(Player player) {
 		try {
 			PreparedStatement sql = MySQL.connection
 					.prepareStatement("SELECT sepsis FROM `bukkit`.`user_data` WHERE name=? ");

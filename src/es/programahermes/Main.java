@@ -1,9 +1,9 @@
 package es.programahermes;
 
-import org.bukkit.command.CommandExecutor;
+
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import WGRegions.WGFlags;
+
 import es.programahermes.Combat.Accuracy;
 import es.programahermes.Combat.Melee;
 import es.programahermes.Commands.LevelUpCommand;
@@ -20,6 +20,8 @@ import es.programahermes.Habilidades.Biologia;
 import es.programahermes.Habilidades.Estructural;
 import es.programahermes.Habilidades.Quimica;
 import es.programahermes.Habilidades.Tecnica;
+import es.programahermes.Health.Fracturas;
+import es.programahermes.Health.Septicemia;
 import es.programahermes.SoporteVital.Fatiga;
 import es.programahermes.SoporteVital.Hydratation;
 import es.programahermes.SoporteVital.Oxygen;
@@ -34,11 +36,12 @@ import es.programahermes.Utilidades.GPS;
 import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.Pernos;
 import es.programahermes.Utilidades.Recipes;
+import es.programahermes.WGRegions.WGFlags;
 
-public class Main extends JavaPlugin implements CommandExecutor {
+public class Main extends JavaPlugin{
 
-	Plugin plugin = this;
-
+	public Plugin plugin = this;
+	
 	public void onEnable() {
 
 		Residual.residualUpdate(plugin);
@@ -65,6 +68,9 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		getServer().getPluginManager().registerEvents(new Melee(), this);
 		getServer().getPluginManager().registerEvents(new Bulletproof(), this);
 		getServer().getPluginManager().registerEvents(new Prospectar(), this);
+		getServer().getPluginManager().registerEvents(new Fracturas(), this);
+		getServer().getPluginManager().registerEvents(new Septicemia(), this);
+		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
 		getCommand("stats").setExecutor(new Stats());
@@ -100,7 +106,6 @@ public class Main extends JavaPlugin implements CommandExecutor {
 		this.plugin.getConfig().options().copyDefaults(true);
 		this.plugin.saveConfig();
 
-	}
+	}	
 
-	
 }
