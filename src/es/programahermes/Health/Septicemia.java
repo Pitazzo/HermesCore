@@ -170,6 +170,7 @@ public class Septicemia implements Listener, CommandExecutor {
 		if (!HealthSQL.Septicemia(player)) {
 			HealthSQL.setSepticemia(player, true);
 			sepsis(JavaPlugin.getPlugin(Main.class), player);
+			player.setMaxHealth(player.getMaxHealth()-8);
 			player.sendMessage(ChatColor.RED
 					+ "Parece ser que alguna de tus heridas se ha infectado. Busca un médico o podrías tener graves problemas.");
 		} else {
@@ -201,7 +202,6 @@ public class Septicemia implements Listener, CommandExecutor {
 							player.addPotionEffect(new PotionEffect(
 									PotionEffectType.HUNGER, 20 * 30, 1));
 							Miscelaneo.setWalkSpeed(player, 0.1);
-							player.setMaxHealth(12);
 							player.sendMessage("Otra vez no...");
 							player.playSound(player.getLocation(),
 									Sound.AMBIENCE_THUNDER, (float) 1.0,

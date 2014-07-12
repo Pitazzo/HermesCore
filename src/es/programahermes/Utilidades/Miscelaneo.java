@@ -73,5 +73,4 @@ public class Miscelaneo implements Listener, CommandExecutor {
 			return;
 		}
 	}
-
 }

@@ -20,6 +20,7 @@ import es.programahermes.Habilidades.Biologia;
 import es.programahermes.Habilidades.Estructural;
 import es.programahermes.Habilidades.Quimica;
 import es.programahermes.Habilidades.Tecnica;
+import es.programahermes.Health.Anemia;
 import es.programahermes.Health.Fracturas;
 import es.programahermes.Health.Septicemia;
 import es.programahermes.SoporteVital.Fatiga;
@@ -70,6 +71,7 @@ public class Main extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new Prospectar(), this);
 		getServer().getPluginManager().registerEvents(new Fracturas(), this);
 		getServer().getPluginManager().registerEvents(new Septicemia(), this);
+		getServer().getPluginManager().registerEvents(new Anemia(), this);
 		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());

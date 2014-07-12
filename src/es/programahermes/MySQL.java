@@ -5,18 +5,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
 
 public class MySQL {
 
 	public static Connection connection;
+
 	public static synchronized void openConnection() {
 		try {
 			connection = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/bukkit", "root",
-					"");
+					"jdbc:mysql://localhost:3306/bukkit", "root", "");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -213,7 +214,7 @@ public class MySQL {
 			result1.next();
 			int previousLevel = result1.getInt("nivel1");
 
-			if(!(previousLevel + 1 <= 5)){
+			if (!(previousLevel + 1 <= 5)) {
 				PreparedStatement ps2 = connection
 						.prepareStatement("UPDATE `user_data` SET `nivel1`=? WHERE name=?");
 				ps2.setString(2, player.getName());
@@ -222,7 +223,7 @@ public class MySQL {
 				ps1.close();
 				result1.close();
 				ps2.close();
-			}else{
+			} else {
 				return;
 			}
 
@@ -547,7 +548,7 @@ public class MySQL {
 			ResultSet result1 = ps1.executeQuery();
 			result1.next();
 			double sed2 = result1.getDouble("sed");
-			if(!(sed2+sed>100)){
+			if (!(sed2 + sed > 100)) {
 
 				PreparedStatement ps2 = connection
 						.prepareStatement("UPDATE `user_data` SET `sed`=? WHERE name=?");
@@ -557,7 +558,7 @@ public class MySQL {
 				ps1.close();
 				result1.close();
 				ps2.close();
-			}else{
+			} else {
 				return;
 			}
 
@@ -850,4 +851,28 @@ public class MySQL {
 		}
 	}
 
+	public static synchronized Player[] getNames() {
+
+		try {
+			PreparedStatement sql = connection
+					.prepareStatement("SELECT name FROM `bukkit`.`user_data`;");
+
+			ResultSet result = sql.executeQuery();
+			ArrayList<Player> list = new ArrayList<Player>();
+			while (result.next()) {
+				list.add(Bukkit.getPlayer(result.getString("name")));
+			}
+
+			Player[] names = new Player[list.size()];
+			names = list.toArray(names);
+			sql.close();
+			result.close();
+			return names;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
 }

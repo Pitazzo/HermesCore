@@ -2,6 +2,7 @@ package es.programahermes.Health;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.bukkit.entity.Player;
 
@@ -103,5 +104,97 @@ public class HealthSQL {
 		}
 		return false;
 
+	}
+	
+	public static synchronized double geVPoints(Player player) {
+
+		try {
+			PreparedStatement sql = MySQL.connection
+					.prepareStatement("SELECT VPoints FROM `bukkit`.`user_data` WHERE name=?;");
+
+			sql.setString(1, player.getName());
+			ResultSet result = sql.executeQuery();
+			result.next();
+			double VPoints = result.getDouble("VPoints");
+			sql.close();
+			result.close();
+
+			return VPoints;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public static synchronized void addVPoints(Player player, double VPoints) {
+
+		try {
+
+			PreparedStatement ps1 = MySQL.connection
+					.prepareStatement("SELECT VPoints FROM `bukkit`.`user_data` WHERE name=?");
+			ps1.setString(1, player.getName());
+			ResultSet result1 = ps1.executeQuery();
+			result1.next();
+			double VPoints2 = result1.getDouble("VPoints");
+			if(!(VPoints2+VPoints>100)){
+
+				PreparedStatement ps2 = MySQL.connection
+						.prepareStatement("UPDATE `user_data` SET `VPoints`=? WHERE name=?");
+				ps2.setString(2, player.getName());
+				ps2.setDouble(1, VPoints + VPoints2);
+				ps2.executeUpdate();
+				ps1.close();
+				result1.close();
+				ps2.close();
+			}else{
+				return;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static synchronized void removeVPoints(Player player, double VPoints) {
+
+		try {
+			PreparedStatement ps1 = MySQL.connection
+					.prepareStatement("SELECT VPoints FROM `bukkit`.`user_data` WHERE name=?");
+			ps1.setString(1, player.getName());
+			ResultSet result1 = ps1.executeQuery();
+			result1.next();
+			double VPoints2 = result1.getDouble("VPoints");
+
+			if (!(VPoints2 - VPoints < 0)) {
+				PreparedStatement ps2 = MySQL.connection
+						.prepareStatement("UPDATE `bukkit`.`user_data` SET `VPoints`=? WHERE name=?");
+				ps2.setString(2, player.getName());
+				ps2.setDouble(1, VPoints2 - VPoints);
+				ps2.executeUpdate();
+				ps1.close();
+				result1.close();
+				ps2.close();
+			} else {
+				return;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static synchronized void setVPoints(Player player, double newVPoints) {
+
+		try {
+			PreparedStatement ps = MySQL.connection
+					.prepareStatement("UPDATE `user_data` SET `VPoints`=? WHERE name=?");
+			ps.setString(2, player.getName());
+			ps.setDouble(1, newVPoints);
+			ps.executeUpdate();
+			ps.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
