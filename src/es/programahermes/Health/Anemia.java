@@ -1,7 +1,7 @@
 package es.programahermes.Health;
 
-
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,11 +13,11 @@ import es.programahermes.MySQL;
 public class Anemia implements Listener {
 
 	@EventHandler
-	public void onConsume(PlayerItemConsumeEvent event){
+	public void onConsume(PlayerItemConsumeEvent event) {
 		Player player = event.getPlayer();
 		anemiaCheck();
-		if(isDrug(event.getItem())){
-			if(isVitaminas(event.getItem())){
+		if (isDrug(event.getItem())) {
+			if (isVitaminas(event.getItem())) {
 				HealthSQL.addVPoints(player, 1);
 			}
 		}
@@ -74,18 +74,33 @@ public class Anemia implements Listener {
 		return false;
 
 	}
-	
-	public void anemiaCheck(){
-		for(Player player : MySQL.getNames()){
-			Bukkit.getPlayer("Pitazzo").sendMessage(player.toString());
+
+	public static void anemiaCheck() {
+		for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {
+			Player player = Bukkit.getPlayer(offlinePlayer.getName());
+			HealthSQL.removeVPoints(player, 65);
+			if (HealthSQL.getVPoints(player) < 10) {
+				if (!HealthSQL.Anemia(player)) {
+					setAnemia(player);
+				}
+			} else {
+				if (HealthSQL.getVPoints(player) > 45) {
+					if (HealthSQL.Anemia(player)) {
+						healAnemia(player);
+					}
+				}
+			}
+
 		}
 	}
-	
-	public void setAnemia(Player player){
-		player.setMaxHealth(player.getMaxHealth()-6);
+
+	public static void setAnemia(Player player) {
+		player.setMaxHealth(player.getMaxHealth() - 6);
+		HealthSQL.setAnemia(player, true);
 	}
-	
-	public void healAnemia(Player player){
+
+	public static void healAnemia(Player player) {
 		player.setMaxHealth(20);
+		HealthSQL.setAnemia(player, false);
 	}
 }

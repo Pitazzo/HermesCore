@@ -106,7 +106,7 @@ public class HealthSQL {
 
 	}
 	
-	public static synchronized double geVPoints(Player player) {
+	public static synchronized double getVPoints(Player player) {
 
 		try {
 			PreparedStatement sql = MySQL.connection
@@ -197,4 +197,37 @@ public class HealthSQL {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void setAnemia(Player player, boolean state) {
+		try {
+			PreparedStatement ps = MySQL.connection
+					.prepareStatement("UPDATE `user_data` SET `anemia`=? WHERE name=?");
+			ps.setString(2, player.getName());
+			ps.setBoolean(1, state);
+			ps.executeUpdate();
+			ps.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean Anemia(Player player) {
+		try {
+			PreparedStatement sql = MySQL.connection
+					.prepareStatement("SELECT anemia FROM `bukkit`.`user_data` WHERE name=? ");
+			sql.setString(1, player.getName());
+			ResultSet result = sql.executeQuery();
+			result.next();
+			boolean state = result.getBoolean("anemia");
+			sql.close();
+
+			return state;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+	
 }

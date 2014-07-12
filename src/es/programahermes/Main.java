@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import es.programahermes.Combat.Accuracy;
 import es.programahermes.Combat.Melee;
 import es.programahermes.Commands.LevelUpCommand;
+import es.programahermes.Commands.PointsAdjust;
 import es.programahermes.Commands.PointsCommand;
 import es.programahermes.Commands.SetHability;
 import es.programahermes.Commands.Stats;
@@ -85,6 +86,7 @@ public class Main extends JavaPlugin{
 		getCommand("entrenartiro").setExecutor(new Accuracy());
 		getCommand("cuerpoacuerpo").setExecutor(new Melee());
 		getCommand("emergency").setExecutor(new Miscelaneo());
+		getCommand("calcularpuntos").setExecutor(new PointsAdjust());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class MySQL {
 
@@ -17,7 +18,19 @@ public class MySQL {
 	public static synchronized void openConnection() {
 		try {
 			connection = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/bukkit", "root", "");
+					"jdbc:mysql://"
+							+ JavaPlugin.getPlugin(Main.class).getConfig()
+									.getString("MySQL.Host")
+							+ ":"
+							+ JavaPlugin.getPlugin(Main.class).getConfig()
+									.getString("MySQL.Port")
+							+ "/"
+							+ JavaPlugin.getPlugin(Main.class).getConfig()
+									.getString("MySQL.DB"),
+					JavaPlugin.getPlugin(Main.class).getConfig()
+							.getString("MySQL.User"),
+					JavaPlugin.getPlugin(Main.class).getConfig()
+							.getString("MySQL.Password"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

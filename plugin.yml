@@ -45,3 +45,6 @@ commands:
    vendarse:
      description: Se realiza un vendaje de emergencia que no siempre previene de infecciones
      usage: Error de sintaxis! Simplemente escribe /vendarse
+   calcularpuntos:
+     description: Se realizan los cálculos semanales
+     usage: Error de sintaxis! Simplemente escribe /calcularpuntos
