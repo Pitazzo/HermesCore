@@ -22,6 +22,7 @@ import es.programahermes.Habilidades.Estructural;
 import es.programahermes.Habilidades.Quimica;
 import es.programahermes.Habilidades.Tecnica;
 import es.programahermes.Health.Anemia;
+import es.programahermes.Health.Diarrea;
 import es.programahermes.Health.Fracturas;
 import es.programahermes.Health.Septicemia;
 import es.programahermes.SoporteVital.Fatiga;
@@ -50,6 +51,7 @@ public class Main extends JavaPlugin{
 		Hydratation.thirstUpdate(plugin);
 		Oxygen.oxyenUpdate(plugin);
 		Fatiga.waitFatigaCheck(plugin);
+		Diarrea.diarreaUpdate(plugin);
 		getServer().getPluginManager().registerEvents(new Geologia(), this);
 		getServer().getPluginManager().registerEvents(new Refuerzos(), this);
 		getServer().getPluginManager().registerEvents(new Perforadora(), this);
@@ -73,6 +75,7 @@ public class Main extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new Fracturas(), this);
 		getServer().getPluginManager().registerEvents(new Septicemia(), this);
 		getServer().getPluginManager().registerEvents(new Anemia(), this);
+		getServer().getPluginManager().registerEvents(new Diarrea(), this);
 		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
@@ -91,7 +94,8 @@ public class Main extends JavaPlugin{
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
 		MySQL.openConnection();
-		getServer().addRecipe(Recipes.Web);
+		getServer().addRecipe(Recipes.O2);
+		getServer().addRecipe(Recipes.reconstructor);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.presurizada);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.gold);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.iron);

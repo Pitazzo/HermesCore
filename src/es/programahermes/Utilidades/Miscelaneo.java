@@ -2,6 +2,7 @@ package es.programahermes.Utilidades;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,9 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
-import org.bukkit.event.player.PlayerLoginEvent.Result;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import es.programahermes.MySQL;
 import es.programahermes.Health.HealthSQL;
@@ -22,6 +23,21 @@ public class Miscelaneo implements Listener, CommandExecutor {
 	public void onDeath(PlayerDeathEvent event) {
 		Player player = event.getEntity();
 		MySQL.removePoints(player, 40);
+	}
+	
+	@EventHandler
+	public void onCraft(CraftItemEvent event) {
+		for(ItemStack item : event.getInventory().getMatrix()){
+			if(Batteries.isCharged(item)){
+				ItemStack eBatt = new ItemStack(Material.COAL, item.getAmount());
+				ItemMeta im = eBatt.getItemMeta();
+				im.setDisplayName("Batería descargada");
+				eBatt.setItemMeta(im);
+				Player player = (Player) event.getInventory().getHolder();
+	            Block craftingTable = player.getTargetBlock(null, 10);
+	            craftingTable.getWorld().dropItemNaturally(craftingTable.getLocation(), eBatt);
+			}
+		}
 	}
 
 	/*

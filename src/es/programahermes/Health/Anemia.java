@@ -23,7 +23,7 @@ public class Anemia implements Listener {
 		}
 	}
 
-	public boolean isDrug(ItemStack item) {
+	public static boolean isDrug(ItemStack item) {
 
 		if (item != null) {
 			if (item.getItemMeta() != null) {

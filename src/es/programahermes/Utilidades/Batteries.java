@@ -129,7 +129,7 @@ public class Batteries implements Listener {
 
 	}
 
-	public boolean isCharged(ItemStack item) {
+	public static boolean isCharged(ItemStack item) {
 
 		if (item != null) {
 			if (item.getItemMeta() != null) {

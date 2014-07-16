@@ -34,7 +34,7 @@ public class Residual implements CommandExecutor{
 							player.sendMessage(ChatColor.GREEN
 									+ "[Soporte Vital]"
 									+ ChatColor.RED
-									+ "¡Vacía pronto tu depósito de residuos, está al límite de su capacidad!");
+									+ "Deberías pensar en evacuar tus residuos...");
 							player.playSound(player.getLocation(), Sound.BAT_DEATH,
 									0.5F, 0.0F);
 							if (MySQL.getResidual(player) >= 100) {
@@ -58,7 +58,8 @@ public class Residual implements CommandExecutor{
 			if(player instanceof Player){
 				if(player.getInventory().getLeggings() == null){
 					MySQL.setResidual(player, 0);
-					ItemStack caca = new ItemStack(Material.COCOA, 1);
+					ItemStack caca = new ItemStack(Material.INK_SACK, 1);
+					caca.setDurability((short) 8);
 					player.getWorld().dropItemNaturally(player.getLocation(), caca);
 					player.playSound(player.getLocation(), Sound.DIG_SNOW, 0.5F, 0.0F);
 					player.sendMessage(ChatColor.GREEN

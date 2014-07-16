@@ -2,13 +2,14 @@ package es.programahermes.Health;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,6 +19,7 @@ import es.programahermes.MySQL;
 public class Fracturas implements Listener {
 
 	static int taskID1;
+	static int counter = 0;
 
 	@EventHandler
 	public void onFall(EntityDamageEvent event) {
@@ -27,6 +29,8 @@ public class Fracturas implements Listener {
 			if (event.getCause().equals(DamageCause.FALL)) {
 				if (event.getDamage() > 1) {
 					setFracturaTI(player);
+					reconstruccionCheck(JavaPlugin.getPlugin(Main.class),
+							player, player, "TI");
 
 				}
 			}
@@ -38,8 +42,12 @@ public class Fracturas implements Listener {
 		if (event.getRightClicked() instanceof Player) {
 			Player player = event.getPlayer();
 			Player target = (Player) event.getRightClicked();
-			if (player.getItemInHand().getType().equals(Material.ARROW)) {
+			if (isCharged(player.getItemInHand())) {
 				if (player.hasPermission("hermescore.oseo")) {
+					ItemMeta meta = player.getItemInHand().getItemMeta();
+					meta.setDisplayName("Reconstructor óseo desarmado");
+					player.getItemInHand().setItemMeta(meta);
+					
 					if (HealthSQL.FracturaTS(player)) {
 						double rdm = Math.random() * 100;
 						if (rdm < 85) {
@@ -74,7 +82,7 @@ public class Fracturas implements Listener {
 							}
 						} else {
 							player.sendMessage(ChatColor.GREEN
-									+ "¡Buenas noticias! El paciente no tiene ninguna fractura ");
+									+ "¡Buenas noticias! El paciente no tiene ninguna fractura "+HealthSQL.Diarrea(player));
 						}
 					}
 				} else {
@@ -128,10 +136,9 @@ public class Fracturas implements Listener {
 				new Runnable() {
 					@Override
 					public void run() {
-						int counter = 0;
-						counter++;
 
-						while (counter < 10) {
+						counter++;
+						if (counter < 10) {
 							if (counter == 0) {
 								player.sendMessage(ChatColor.GOLD
 										+ "Preparando el reconstructor óseo");
@@ -165,8 +172,7 @@ public class Fracturas implements Listener {
 						}
 
 						if (counter == 10) {
-							plugin.getServer().getScheduler()
-									.cancelTask(taskID1);
+
 							double rdm = Math.random() * 100;
 							if (rdm < 20) {
 								player.sendMessage(ChatColor.RED
@@ -177,6 +183,9 @@ public class Fracturas implements Listener {
 										+ "Desgraciadamente, el proceso ha fallado");
 								target.damage(5);
 								MySQL.removePoints(player, 10);
+								plugin.getServer().getScheduler()
+										.cancelTask(taskID1);
+
 							} else {
 								switch (type) {
 								case "TS":
@@ -192,13 +201,66 @@ public class Fracturas implements Listener {
 									target.sendMessage(ChatColor.GREEN
 											+ "¡Reconstrucción ósea completada! ¡Ha sido todo un éxito! ¡Tus fracturas del tren inferior han sanado!");
 									healFracturaTI(target);
+									plugin.getServer().getScheduler()
+											.cancelTask(taskID1);
 
 								}
 							}
+
 						}
 
 					}
 				}, 100L, 20 * 1 * 10);
+	}
+
+	public boolean isCharged(ItemStack item) {
+
+		if (item != null) {
+			if (item.getItemMeta() != null) {
+				if (item.getItemMeta().getDisplayName() != null) {
+					if (item.getItemMeta().getDisplayName()
+							.equals("Reconstructor óseo armado")) {
+
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+
+		} else {
+			return false;
+		}
+
+	}
+
+	public boolean isEmpty(ItemStack item) {
+
+		if (item != null) {
+			if (item.getItemMeta() != null) {
+				if (item.getItemMeta().getDisplayName() != null) {
+					if (item.getItemMeta().getDisplayName()
+							.equals("Reconstructor óseo desarmado")) {
+
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+
+		} else {
+			return false;
+		}
+
 	}
 
 }

@@ -56,6 +56,10 @@ public class HealthSQL {
 
 	}
 
+	
+	
+	
+	
 	public static boolean FracturaTI(Player player) {
 		try {
 			PreparedStatement sql = MySQL.connection
@@ -229,5 +233,38 @@ public class HealthSQL {
 		return false;
 
 	}
+	
+	public static void setDiarrea(Player player, boolean state) {
+		try {
+			PreparedStatement ps = MySQL.connection
+					.prepareStatement("UPDATE `user_data` SET `diarrea`=? WHERE name=?");
+			ps.setString(2, player.getName());
+			ps.setBoolean(1, state);
+			ps.executeUpdate();
+			ps.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean Diarrea(Player player) {
+		try {
+			PreparedStatement sql = MySQL.connection
+					.prepareStatement("SELECT diarrea FROM `bukkit`.`user_data` WHERE name=? ");
+			sql.setString(1, player.getName());
+			ResultSet result = sql.executeQuery();
+			result.next();
+			boolean state = result.getBoolean("diarrea");
+			sql.close();
+
+			return state;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+	
 	
 }
