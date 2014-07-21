@@ -106,24 +106,9 @@ public class Batteries implements Listener {
 
 	public boolean isEmpty(ItemStack item) {
 
-		if (item != null) {
-			if (item.getItemMeta() != null) {
-				if (item.getItemMeta().getDisplayName() != null) {
-					if (item.getItemMeta().getDisplayName()
-							.equals("Batería descargada")) {
-
-						return true;
-					} else {
-						return false;
-					}
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-
-		} else {
+		if(Miscelaneo.getName(item).equals("Batería descargada")){
+			return true;
+		}else{
 			return false;
 		}
 
@@ -131,28 +116,15 @@ public class Batteries implements Listener {
 
 	public static boolean isCharged(ItemStack item) {
 
-		if (item != null) {
-			if (item.getItemMeta() != null) {
-				if (item.getItemMeta().getDisplayName() != null) {
-					if (item.getItemMeta().getDisplayName()
-							.equals("Batería cargada")) {
-
-						return true;
-					} else {
-						return false;
-					}
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-
-		} else {
+		if(Miscelaneo.getName(item).equals("Batería cargada")){
+			return true;
+		}else{
 			return false;
 		}
+	
+		}
 
-	}
+	
 
 	@EventHandler
 	public void onBurn(FurnaceBurnEvent event) {

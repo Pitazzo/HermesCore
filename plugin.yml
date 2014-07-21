@@ -48,3 +48,6 @@ commands:
    calcularpuntos:
      description: Se realizan los cálculos semanales
      usage: Error de sintaxis! Simplemente escribe /calcularpuntos
+   data:
+     description: Se obtiene información del ítem seleccionado
+     usage: Error de sintaxis! Simplemente escribe /data

@@ -34,10 +34,13 @@ import es.programahermes.Training.ETS;
 import es.programahermes.Training.Resistencia;
 import es.programahermes.Utilidades.Batteries;
 import es.programahermes.Utilidades.Bulletproof;
+import es.programahermes.Utilidades.DataGetter;
+import es.programahermes.Utilidades.FakeTable;
 import es.programahermes.Utilidades.FireExtinguisher;
 import es.programahermes.Utilidades.GPS;
 import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.Pernos;
+import es.programahermes.Utilidades.Poison;
 import es.programahermes.Utilidades.Recipes;
 import es.programahermes.WGRegions.WGFlags;
 
@@ -76,6 +79,8 @@ public class Main extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new Septicemia(), this);
 		getServer().getPluginManager().registerEvents(new Anemia(), this);
 		getServer().getPluginManager().registerEvents(new Diarrea(), this);
+		getServer().getPluginManager().registerEvents(new Poison(), this);
+		getServer().getPluginManager().registerEvents(new FakeTable(), this);
 		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
@@ -90,6 +95,7 @@ public class Main extends JavaPlugin{
 		getCommand("cuerpoacuerpo").setExecutor(new Melee());
 		getCommand("emergency").setExecutor(new Miscelaneo());
 		getCommand("calcularpuntos").setExecutor(new PointsAdjust());
+		getCommand("data").setExecutor(new DataGetter());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();

@@ -6,9 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.inventory.ItemStack;
-
-import es.programahermes.MySQL;
+import es.programahermes.Utilidades.Miscelaneo;
 
 public class Anemia implements Listener {
 
@@ -16,64 +14,13 @@ public class Anemia implements Listener {
 	public void onConsume(PlayerItemConsumeEvent event) {
 		Player player = event.getPlayer();
 		anemiaCheck();
-		if (isDrug(event.getItem())) {
-			if (isVitaminas(event.getItem())) {
+		if (Miscelaneo.equalsName(event.getItem(), "Complemento vitamínico")) {
+			
 				HealthSQL.addVPoints(player, 1);
-			}
+			
 		}
 	}
 
-	public static boolean isDrug(ItemStack item) {
-
-		if (item != null) {
-			if (item.getItemMeta() != null) {
-				if (item.getItemMeta().getDisplayName() != null) {
-					if (item.getItemMeta().getDisplayName()
-							.equals("Frasco de medicinas")) {
-
-						return true;
-					} else {
-						return false;
-					}
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-
-		} else {
-			return false;
-		}
-
-	}
-
-	public boolean isVitaminas(ItemStack item) {
-
-		if (item != null) {
-			if (item.getItemMeta() != null) {
-				if (item.getItemMeta().getDisplayName() != null) {
-					if (item.getItemMeta().hasLore()) {
-						if (item.getItemMeta().getLore().get(0)
-								.equals("Complemento vitamínico")) {
-							return true;
-						}
-					} else {
-						return false;
-					}
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-
-		} else {
-			return false;
-		}
-		return false;
-
-	}
 
 	public static void anemiaCheck() {
 		for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {

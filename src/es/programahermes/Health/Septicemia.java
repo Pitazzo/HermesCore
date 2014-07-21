@@ -36,7 +36,6 @@ public class Septicemia implements Listener, CommandExecutor {
 		Player victim = (Player) event.getVictim();
 		if (event.getVictim() instanceof Player) {
 			desinfeccionCheck(JavaPlugin.getPlugin(Main.class), victim);
-			victim.sendMessage("1 MINUTO");
 		}
 
 	}
@@ -53,29 +52,29 @@ public class Septicemia implements Listener, CommandExecutor {
 							if (System.currentTimeMillis()
 									- injured.get(player) < 1000 * 30) {
 								injured.remove(player);
-								player.sendMessage("NO INFECTADO!");
+
 							} else {
 								if (rdm > 35) {
 									// random
 									// setSepticemia
 									injured.remove(player);
 									setSepsis(player);
-									player.sendMessage("INFECTADO!");
+
 								} else {
-									player.sendMessage("NO INFECTADO!");
+
 								}
 							}
 						} else {
 							if (rdm > 35) {
-								player.sendMessage("INFECTADO!");
+
 								setSepsis(player);
 							} else {
-								player.sendMessage("NO INFECTADO!");
+
 							}
 
 						}
 					}
-				}, 20 * 30L);
+				}, 20 * 60 * 8L);
 	}
 
 	// desinfectar
@@ -170,25 +169,25 @@ public class Septicemia implements Listener, CommandExecutor {
 		if (!HealthSQL.Septicemia(player)) {
 			HealthSQL.setSepticemia(player, true);
 			sepsis(JavaPlugin.getPlugin(Main.class), player);
-			player.setMaxHealth(player.getMaxHealth()-8);
+			player.setMaxHealth(player.getMaxHealth() - 8);
 			player.sendMessage(ChatColor.RED
 					+ "Parece ser que alguna de tus heridas se ha infectado. Busca un médico o podrías tener graves problemas.");
 		} else {
 			return;
 		}
 	}
-	
-	public void healSepsis(Player player){
-		if(HealthSQL.Septicemia(player)){
+
+	public void healSepsis(Player player) {
+		if (HealthSQL.Septicemia(player)) {
 			HealthSQL.setSepticemia(player, false);
-			player.sendMessage(ChatColor.GREEN+"Parece que tu septicemia comienza a remitir...");
+			player.sendMessage(ChatColor.GREEN
+					+ "Parece que tu septicemia comienza a remitir...");
 			Miscelaneo.setWalkSpeed(player, 0.2);
 			player.setMaxHealth(20);
-		}else{
+		} else {
 			return;
 		}
-		
-		
+
 	}
 
 	public static void sepsis(Plugin plugin, final Player player) {
@@ -214,7 +213,7 @@ public class Septicemia implements Listener, CommandExecutor {
 						}
 
 					}
-				}, 200L, 20 * 60*3L);
+				}, 200L, 20 * 60 * 3L);
 	}
 
 	@EventHandler

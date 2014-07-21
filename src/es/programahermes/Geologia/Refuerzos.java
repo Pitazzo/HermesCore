@@ -17,39 +17,43 @@ public class Refuerzos implements Listener {
 	@EventHandler
 	public void onRefor(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
-		if (MySQL.getHability(player).equals("Geologia")) {
-			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-				if (player.getItemInHand().getType().equals(Material.INK_SACK)) {
-					if (player.getItemInHand().getDurability() == 0) {
-						if (event.getClickedBlock().getType()
-								.equals(Material.STONE)
-								|| event.getClickedBlock().getType()
-										.equals(Material.ENDER_STONE)) {
-							event.getClickedBlock().setType(
-									Material.STAINED_CLAY);
-							event.getClickedBlock().setData((byte) 14);
-							event.getClickedBlock().setType(
-									Material.STAINED_CLAY);
-							player.getInventory()
-									.setItem(
-											player.getInventory().first(
-													Material.INK_SACK),
-											new ItemStack(
-													Material.INK_SACK,
-													player.getInventory()
-															.getItem(
-																	player.getInventory()
-																			.first(Material.INK_SACK))
-															.getAmount() - 1));
-							player.updateInventory();
-						} else {
-							player.sendMessage(ChatColor.GOLD
-									+ "Ese bloque no es reforzable");
+		if (!event.isCancelled()) {
+			if (MySQL.getHability(player).equals("Geologia")) {
+				if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+					if (player.getItemInHand().getType()
+							.equals(Material.INK_SACK)) {
+						if (player.getItemInHand().getDurability() == 0) {
+							if (event.getClickedBlock().getType()
+									.equals(Material.STONE)
+									|| event.getClickedBlock().getType()
+											.equals(Material.ENDER_STONE)) {
+								event.getClickedBlock().setType(
+										Material.STAINED_CLAY);
+								event.getClickedBlock().setData((byte) 14);
+								event.getClickedBlock().setType(
+										Material.STAINED_CLAY);
+								player.getInventory()
+										.setItem(
+												player.getInventory().first(
+														Material.INK_SACK),
+												new ItemStack(
+														Material.INK_SACK,
+														player.getInventory()
+																.getItem(
+																		player.getInventory()
+																				.first(Material.INK_SACK))
+																.getAmount() - 1));
+								player.updateInventory();
+							} else {
+								player.sendMessage(ChatColor.GOLD
+										+ "Ese bloque no es reforzable");
+							}
 						}
 					}
 				}
 			}
 		}
+
 	}
 
 	@EventHandler
@@ -71,5 +75,5 @@ public class Refuerzos implements Listener {
 			}
 		}
 	}
-	
+
 }

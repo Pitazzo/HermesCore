@@ -47,17 +47,26 @@ public class MySQL {
 	public static synchronized boolean dbContanisPlayer(Player player) {
 
 		try {
+			openConnection();
 			PreparedStatement ps = connection
 					.prepareStatement("SELECT * FROM `bukkit`.`user_data` WHERE name=?;");
 			ps.setString(1, player.getName());
 			ResultSet resultSet = ps.executeQuery();
-			boolean containsPlayer = resultSet.next();
+			if (resultSet.next()) {
+				ps.close();
+				resultSet.close();
+				closeConnection();
+				return true;
+			} else {
+				ps.close();
+				resultSet.close();
+				closeConnection();
+				return false;
+			}
 
-			ps.close();
-			resultSet.close();
-
-			return containsPlayer;
 		} catch (Exception e) {
+			System.out
+					.println("Error al conectar con la base de datos. Revisar credenciales.");
 			e.printStackTrace();
 		}
 		return false;

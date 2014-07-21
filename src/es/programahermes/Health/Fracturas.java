@@ -25,13 +25,21 @@ public class Fracturas implements Listener {
 	public void onFall(EntityDamageEvent event) {
 		if (event.getEntity() instanceof Player) {
 			Player player = (Player) event.getEntity();
+			DamageCause cause = event.getCause();
 			// caida
-			if (event.getCause().equals(DamageCause.FALL)) {
-				if (event.getDamage() > 1) {
+			if (cause.equals(DamageCause.FALL)) {
+				if (event.getDamage() > 5) {
 					setFracturaTI(player);
-					reconstruccionCheck(JavaPlugin.getPlugin(Main.class),
-							player, player, "TI");
 
+				}
+			} else {
+				if (cause.equals(DamageCause.BLOCK_EXPLOSION)
+						|| cause.equals(DamageCause.ENTITY_ATTACK)
+						|| cause.equals(DamageCause.SUFFOCATION)
+						|| cause.equals(DamageCause.FALLING_BLOCK)) {
+					if (Math.random() * 100 < 20 && event.getDamage() > 6) {
+						setFracturaTS(player);
+					}
 				}
 			}
 		}
@@ -47,7 +55,7 @@ public class Fracturas implements Listener {
 					ItemMeta meta = player.getItemInHand().getItemMeta();
 					meta.setDisplayName("Reconstructor óseo desarmado");
 					player.getItemInHand().setItemMeta(meta);
-					
+
 					if (HealthSQL.FracturaTS(player)) {
 						double rdm = Math.random() * 100;
 						if (rdm < 85) {
@@ -82,7 +90,8 @@ public class Fracturas implements Listener {
 							}
 						} else {
 							player.sendMessage(ChatColor.GREEN
-									+ "¡Buenas noticias! El paciente no tiene ninguna fractura "+HealthSQL.Diarrea(player));
+									+ "¡Buenas noticias! El paciente no tiene ninguna fractura "
+									+ HealthSQL.Diarrea(player));
 						}
 					}
 				} else {
