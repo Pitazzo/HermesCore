@@ -144,7 +144,6 @@ public class Batteries implements Listener {
 	@EventHandler
 	public void onInteract1(PlayerInteractEvent event) {
 		if (!event.isCancelled()) {
-
 			Player player = event.getPlayer();
 			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 				if (event.getClickedBlock().getType()

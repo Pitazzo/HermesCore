@@ -14,8 +14,8 @@ public class Bulletproof implements Listener{
 	@EventHandler
 	public void onDamage(WeaponDamageEntityEvent event){
 		if(!event.isHeadshot()){
-			Player victim = (Player) event.getVictim();
 			if(event.getVictim() instanceof Player){
+				Player victim = (Player) event.getVictim();
 				if(victim.getInventory().getChestplate().getType().equals(Material.LEATHER_CHESTPLATE)){
 					victim.setVelocity(victim.getLocation().getDirection().multiply(-0.15));
 					victim.sendMessage(ChatColor.RED+"Notas un fuerte impacto en el pecho");

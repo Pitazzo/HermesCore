@@ -145,6 +145,8 @@ public class Miscelaneo implements Listener, CommandExecutor {
 			if (item.getItemMeta() != null) {
 				if (item.getItemMeta().getDisplayName() != null) {
 					return item.getItemMeta().getDisplayName();
+				}else{
+					return "ERROR";
 				}
 			}
 		}
@@ -152,16 +154,19 @@ public class Miscelaneo implements Listener, CommandExecutor {
 	}
 
 	public static String getIRName(ItemStack item) {
-		for(Player player : Bukkit.getOnlinePlayers()){
+		for (Player player : Bukkit.getOnlinePlayers()) {
 			int counter = 0;
 			counter++;
-			if(counter < 2){
-				return RenamerAPI
-						.getAPI()
-						.getRule(
-								RenamerAPI.getAPI().getRenamePack(
-										player), item).getName();
-			}else{
+			if (counter < 2) {
+				String name = RenamerAPI.getAPI().getRule(RenamerAPI.getAPI().getRenamePack(player),item).getName().toString();
+				if (name != null) {
+					return name;
+
+				}else{
+					return "ERROR";
+				}
+				
+			} else {
 				break;
 			}
 		}
@@ -174,10 +179,16 @@ public class Miscelaneo implements Listener, CommandExecutor {
 			if (item.getItemMeta().getDisplayName() != null) {
 				return getDisplayName(item);
 			} else {
-				return getIRName(item);
+				if (getIRName(item) != null) {
+					return getIRName(item);
+				} else {
+					return "ERROR";
+				}
+
 			}
+		} else {
+			return "ERROR";
 		}
 
-		return null;
 	}
 }

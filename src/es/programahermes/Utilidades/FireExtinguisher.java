@@ -2,7 +2,6 @@ package es.programahermes.Utilidades;
 
 import java.util.ArrayList;
 
-import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -11,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class FireExtinguisher implements Listener{
@@ -36,7 +34,6 @@ public class FireExtinguisher implements Listener{
 					if(fire.getType().equals(Material.FIRE)){
 						fire.setType(Material.AIR);
 					}
-					player.playEffect(fire.getLocation(), Effect.SMOKE, 10);
 					player.playSound(fire.getLocation(), Sound.FIZZ, 1.0F, 1.0F);
 					}
 				player.getItemInHand().setDurability((short) (player.getItemInHand().getDurability() - 10));

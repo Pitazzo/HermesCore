@@ -44,7 +44,7 @@ public class Stats implements CommandExecutor {
 				int level1 = MySQL.getLevel(target);
 				String habilidad1 = MySQL.getHability(target);
 				if (player.hasPermission("hermescore.stats") || player.isOp()) {
-					if (MySQL.dbContanisPlayer(target)) {
+					if (MySQL.dbContanisPlayer(target.getName())) {
 						player.sendMessage(ChatColor.GOLD + "[Hermes Core] "
 								+ ChatColor.GREEN + " El jugador "
 								+ target.getName() + " está a nivel " + level1

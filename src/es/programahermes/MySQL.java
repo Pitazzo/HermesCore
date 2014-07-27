@@ -44,13 +44,13 @@ public class MySQL {
 		}
 	}
 
-	public static synchronized boolean dbContanisPlayer(Player player) {
+	public static synchronized boolean dbContanisPlayer(String player) {
 
 		try {
 			openConnection();
 			PreparedStatement ps = connection
 					.prepareStatement("SELECT * FROM `bukkit`.`user_data` WHERE name=?;");
-			ps.setString(1, player.getName());
+			ps.setString(1, player);
 			ResultSet resultSet = ps.executeQuery();
 			if (resultSet.next()) {
 				ps.close();

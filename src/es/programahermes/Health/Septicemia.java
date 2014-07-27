@@ -33,8 +33,8 @@ public class Septicemia implements Listener, CommandExecutor {
 
 	@EventHandler
 	public void onDamage(WeaponDamageEntityEvent event) {
-		Player victim = (Player) event.getVictim();
 		if (event.getVictim() instanceof Player) {
+			Player victim = (Player) event.getVictim();
 			desinfeccionCheck(JavaPlugin.getPlugin(Main.class), victim);
 		}
 

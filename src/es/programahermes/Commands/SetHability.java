@@ -25,7 +25,7 @@ public class SetHability implements CommandExecutor {
 							|| habilidad.equalsIgnoreCase("Tecnica")
 							|| habilidad.equalsIgnoreCase("Estructural")
 							|| habilidad.equalsIgnoreCase("Quimica")) {
-						if (MySQL.dbContanisPlayer(target)) {
+						if (MySQL.dbContanisPlayer(target.getName())) {
 							MySQL.setHability(target, habilidad);
 							target.sendMessage(ChatColor.GREEN
 									+ player.getName()

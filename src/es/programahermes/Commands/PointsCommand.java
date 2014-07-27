@@ -29,7 +29,7 @@ public class PointsCommand implements CommandExecutor {
 				if (player.hasPermission("hermescore.editpoints")
 						|| player.isOp()) {
 					if (args[0].equalsIgnoreCase("dar")) {
-						if (!MySQL.dbContanisPlayer(player)) {
+						if (!MySQL.dbContanisPlayer(player.getName())) {
 							player.sendMessage(ChatColor.RED
 									+ "El jugador no existe");
 							return true;
@@ -43,7 +43,7 @@ public class PointsCommand implements CommandExecutor {
 						return true;
 					}
 					if (args[0].equalsIgnoreCase("quitar")) {
-						if (!MySQL.dbContanisPlayer(player)) {
+						if (!MySQL.dbContanisPlayer(player.getName())) {
 							player.sendMessage(ChatColor.RED
 									+ "El jugador no existe");
 							return true;
@@ -59,7 +59,7 @@ public class PointsCommand implements CommandExecutor {
 					
 					if(args[0].equalsIgnoreCase("set")){
 						
-						if (!MySQL.dbContanisPlayer(player)) {
+						if (!MySQL.dbContanisPlayer(player.getName())) {
 							player.sendMessage(ChatColor.RED
 									+ "El jugador no existe");
 							return true;
