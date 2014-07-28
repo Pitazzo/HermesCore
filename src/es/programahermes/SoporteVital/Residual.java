@@ -25,19 +25,19 @@ public class Residual implements CommandExecutor{
 			public void run() {
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					if(player.getGameMode().equals(GameMode.SURVIVAL)){
-						if(!(MySQL.getResidual(player)>= 100)){
-							MySQL.addResidual(player, 1.85);
+						if(!(MySQL.getResidual(player.getName())>= 100)){
+							MySQL.addResidual(player.getName(), 1.85);
 						}
 						
 						Scoreboard.showScore(player);
-						if (MySQL.getResidual(player) >= 80) {
+						if (MySQL.getResidual(player.getName()) >= 80) {
 							player.sendMessage(ChatColor.GREEN
 									+ "[Soporte Vital]"
 									+ ChatColor.RED
 									+ "Deberías pensar en evacuar tus residuos...");
 							player.playSound(player.getLocation(), Sound.BAT_DEATH,
 									0.5F, 0.0F);
-							if (MySQL.getResidual(player) >= 100) {
+							if (MySQL.getResidual(player.getName()) >= 100) {
 								player.addPotionEffect(new PotionEffect(
 										PotionEffectType.CONFUSION, 2, 0), true);
 								player.damage(2);
@@ -57,7 +57,7 @@ public class Residual implements CommandExecutor{
 		if (cmd.getName().equalsIgnoreCase("evacuar")) {
 			if(player instanceof Player){
 				if(player.getInventory().getLeggings() == null){
-					MySQL.setResidual(player, 0);
+					MySQL.setResidual(player.getName(), 0);
 					ItemStack caca = new ItemStack(Material.INK_SACK, 1);
 					caca.setDurability((short) 8);
 					player.getWorld().dropItemNaturally(player.getLocation(), caca);

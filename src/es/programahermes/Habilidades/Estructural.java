@@ -15,9 +15,9 @@ public class Estructural implements Listener {
 		if(!event.isCancelled()){
 			Player player = event.getPlayer();
 			String material = event.getBlock().getType().toString();
-			if (MySQL.getHability(player).equals("Estructural")) {
+			if (MySQL.getHability(player.getName()).equals("Estructural")) {
 				player.sendMessage("est");
-				MySQL.addEarnedPoints(player, "break", material, 1);
+				MySQL.addEarnedPoints(player.getName(), "break", material, 1);
 			}
 		}
 	}
@@ -27,8 +27,8 @@ public class Estructural implements Listener {
 		if(!event.isCancelled()){
 			Player player = event.getPlayer();
 			String material = event.getBlock().getType().toString();
-			if (MySQL.getHability(player).equals("Estructural")) {
-				MySQL.addEarnedPoints(player, "place", material, 1);
+			if (MySQL.getHability(player.getName()).equals("Estructural")) {
+				MySQL.addEarnedPoints(player.getName(), "place", material, 1);
 
 			}
 		}

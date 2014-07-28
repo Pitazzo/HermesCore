@@ -18,10 +18,10 @@ public class Scoreboard {
 
 	public static void showScore(Player player) {
 
-		int sed = (int) MySQL.getSed(player);
-		int res = (int) MySQL.getResidual(player);
-		int oxy = (int) MySQL.getOxygen(player);
-		int fat = (int) MySQL.getFatiga(player);
+		int sed = (int) MySQL.getSed(player.getName());
+		int res = (int) MySQL.getResidual(player.getName());
+		int oxy = (int) MySQL.getOxygen(player.getName());
+		int fat = (int) MySQL.getFatiga(player.getName());
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		org.bukkit.scoreboard.Scoreboard board = manager.getNewScoreboard();
 		org.bukkit.scoreboard.Scoreboard blank = manager.getNewScoreboard();
@@ -36,11 +36,11 @@ public class Scoreboard {
 		int food = (100 * player.getFoodLevel() / 20);
 
 		// sed
-		if (MySQL.getSed(player) > 70) {
+		if (MySQL.getSed(player.getName()) > 70) {
 			hidratacion = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN
 					+ "Hidrata: " + sed + "%"));
 		} else {
-			if (MySQL.getSed(player) < 30) {
+			if (MySQL.getSed(player.getName()) < 30) {
 				hidratacion = obj.getScore(Bukkit
 						.getOfflinePlayer(ChatColor.RED + "Hidrata: " + sed
 								+ "%"));
@@ -53,11 +53,11 @@ public class Scoreboard {
 		}
 
 		// fatiga
-		if (MySQL.getFatiga(player) < 50) {
+		if (MySQL.getFatiga(player.getName()) < 50) {
 			fatiga = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN
 					+ "Fatiga: " + fat + "%"));
 		} else {
-			if (MySQL.getFatiga(player) > 70) {
+			if (MySQL.getFatiga(player.getName()) > 70) {
 				fatiga = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.RED
 						+ "Fatiga: " + fat + "%"));
 			} else {
@@ -84,11 +84,11 @@ public class Scoreboard {
 		}
 
 		// residuos
-		if (MySQL.getResidual(player) < 50) {
+		if (MySQL.getResidual(player.getName()) < 50) {
 			residual = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN
 					+ "Residuos: " + res + "%"));
 		} else {
-			if (MySQL.getResidual(player) > 70) {
+			if (MySQL.getResidual(player.getName()) > 70) {
 				residual = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.RED
 						+ "Residuos: " + res + "%"));
 			} else {
@@ -99,11 +99,11 @@ public class Scoreboard {
 		}
 
 		if (Oxygen.hasSuit(player)) {
-			if (MySQL.getOxygen(player) > 70) {
+			if (MySQL.getOxygen(player.getName()) > 70) {
 				oxygen = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN
 						+ "Oxígeno: " + oxy + " L"));
 			} else {
-				if (MySQL.getOxygen(player) < 30) {
+				if (MySQL.getOxygen(player.getName()) < 30) {
 					oxygen = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.RED
 							+ "Oxígeno: " + oxy + " L"));
 				} else {

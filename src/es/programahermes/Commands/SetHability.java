@@ -26,7 +26,7 @@ public class SetHability implements CommandExecutor {
 							|| habilidad.equalsIgnoreCase("Estructural")
 							|| habilidad.equalsIgnoreCase("Quimica")) {
 						if (MySQL.dbContanisPlayer(target.getName())) {
-							MySQL.setHability(target, habilidad);
+							MySQL.setHability(target.getName(), habilidad);
 							target.sendMessage(ChatColor.GREEN
 									+ player.getName()
 									+ " ha cambiado tu habilidad principal a "

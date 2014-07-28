@@ -8,13 +8,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import es.programahermes.Main;
 import es.programahermes.MySQL;
+import es.programahermes.Utilidades.Miscelaneo;
 
 public class Fracturas implements Listener {
 
@@ -50,13 +50,13 @@ public class Fracturas implements Listener {
 		if (event.getRightClicked() instanceof Player) {
 			Player player = event.getPlayer();
 			Player target = (Player) event.getRightClicked();
-			if (isCharged(player.getItemInHand())) {
+			if (Miscelaneo.getName(player.getItemInHand()).equals("Reconstructor óseo armado")) {
 				if (player.hasPermission("hermescore.oseo")) {
 					ItemMeta meta = player.getItemInHand().getItemMeta();
 					meta.setDisplayName("Reconstructor óseo desarmado");
 					player.getItemInHand().setItemMeta(meta);
 
-					if (HealthSQL.FracturaTS(player)) {
+					if (HealthSQL.FracturaTS(player.getName())) {
 						double rdm = Math.random() * 100;
 						if (rdm < 85) {
 							reconstruccionCheck(
@@ -70,10 +70,10 @@ public class Fracturas implements Listener {
 							target.sendMessage(ChatColor.RED
 									+ "Desgraciadamente, el proceso ha fallado");
 							target.damage(5);
-							MySQL.removePoints(player, 10);
+							MySQL.removePoints(player.getName(), 10);
 						}
 					} else {
-						if (HealthSQL.FracturaTI(player)) {
+						if (HealthSQL.FracturaTI(player.getName())) {
 							double rdm = Math.random() * 100;
 							if (rdm < 85) {
 								reconstruccionCheck(Main.getPlugin(Main.class),
@@ -86,12 +86,12 @@ public class Fracturas implements Listener {
 								target.sendMessage(ChatColor.RED
 										+ "Desgraciadamente, el proceso ha fallado");
 								target.damage(5);
-								MySQL.removePoints(player, 10);
+								MySQL.removePoints(player.getName(), 10);
 							}
 						} else {
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Buenas noticias! El paciente no tiene ninguna fractura "
-									+ HealthSQL.Diarrea(player));
+									+ HealthSQL.Diarrea(player.getName()));
 						}
 					}
 				} else {
@@ -103,26 +103,26 @@ public class Fracturas implements Listener {
 	}
 
 	public void setFracturaTS(Player player) {
-		if (HealthSQL.FracturaTS(player)) {
+		if (HealthSQL.FracturaTS(player.getName())) {
 			player.sendMessage(ChatColor.DARK_RED
 					+ "¡Ten un poco de cuidado, no haces más que empeorar tu lesión! ¡Qué dolor!");
 		} else {
 			player.sendMessage(ChatColor.DARK_RED
 					+ "¡Acabas de fracturate un hueso en el tren superior! ¡Qué dolor!");
-			HealthSQL.setFracturaTS(player, true);
+			HealthSQL.setFracturaTS(player.getName(), true);
 		}
 
 	}
 
 	public void setFracturaTI(Player player) {
 
-		if (HealthSQL.FracturaTI(player)) {
+		if (HealthSQL.FracturaTI(player.getName())) {
 			player.sendMessage(ChatColor.DARK_RED
 					+ "¡Ten un poco de cuidado, no haces más que empeorar tu lesión! ¡Qué dolor!");
 		} else {
 			player.sendMessage(ChatColor.DARK_RED
 					+ "¡Acabas de fracturate un hueso en el tren inferior! ¡Qué dolor!");
-			HealthSQL.setFracturaTI(player, true);
+			HealthSQL.setFracturaTI(player.getName(), true);
 			player.setWalkSpeed((float) 0.005);
 		}
 
@@ -130,13 +130,13 @@ public class Fracturas implements Listener {
 
 	public static void healFracturaTS(Player player) {
 		player.sendMessage(ChatColor.GREEN + "Te recuperas de tu lesión");
-		HealthSQL.setFracturaTI(player, false);
+		HealthSQL.setFracturaTI(player.getName(), false);
 	}
 
 	public static void healFracturaTI(Player player) {
 		player.sendMessage(ChatColor.GREEN + "Te recuperas de tu lesión");
 		player.setWalkSpeed((float) 0.2);
-		HealthSQL.setFracturaTI(player, false);
+		HealthSQL.setFracturaTI(player.getName(), false);
 	}
 
 	public static void reconstruccionCheck(final Plugin plugin,
@@ -191,7 +191,7 @@ public class Fracturas implements Listener {
 								target.sendMessage(ChatColor.RED
 										+ "Desgraciadamente, el proceso ha fallado");
 								target.damage(5);
-								MySQL.removePoints(player, 10);
+								MySQL.removePoints(player.getName(), 10);
 								plugin.getServer().getScheduler()
 										.cancelTask(taskID1);
 
@@ -220,56 +220,6 @@ public class Fracturas implements Listener {
 
 					}
 				}, 100L, 20 * 1 * 10);
-	}
-
-	public boolean isCharged(ItemStack item) {
-
-		if (item != null) {
-			if (item.getItemMeta() != null) {
-				if (item.getItemMeta().getDisplayName() != null) {
-					if (item.getItemMeta().getDisplayName()
-							.equals("Reconstructor óseo armado")) {
-
-						return true;
-					} else {
-						return false;
-					}
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-
-		} else {
-			return false;
-		}
-
-	}
-
-	public boolean isEmpty(ItemStack item) {
-
-		if (item != null) {
-			if (item.getItemMeta() != null) {
-				if (item.getItemMeta().getDisplayName() != null) {
-					if (item.getItemMeta().getDisplayName()
-							.equals("Reconstructor óseo desarmado")) {
-
-						return true;
-					} else {
-						return false;
-					}
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-
-		} else {
-			return false;
-		}
-
 	}
 
 }

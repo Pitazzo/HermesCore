@@ -13,6 +13,7 @@ public class CombatSQL {
 	public static synchronized double getWP(Player player) {
 
 		try {
+			MySQL.openConnection();
 			PreparedStatement sql = MySQL.connection
 					.prepareStatement("SELECT WP FROM `bukkit`.`user_data` WHERE name=?;");
 
@@ -22,7 +23,7 @@ public class CombatSQL {
 			double WP = result.getDouble("WP");
 			sql.close();
 			result.close();
-
+			MySQL.closeConnection();
 			return WP;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -35,6 +36,7 @@ public class CombatSQL {
 	public static synchronized void addWP(Player player, double newWP) {
 
 		try {
+			MySQL.openConnection();
 			PreparedStatement ps1 = MySQL.connection
 					.prepareStatement("SELECT WP FROM `bukkit`.`user_data` WHERE name=?");
 			ps1.setString(1, player.getName());
@@ -50,7 +52,7 @@ public class CombatSQL {
 			ps1.close();
 			result1.close();
 			ps2.close();
-
+			MySQL.closeConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -60,6 +62,7 @@ public class CombatSQL {
 			double WPToRemove) {
 
 		try {
+			MySQL.openConnection();
 			PreparedStatement ps1 = MySQL.connection
 					.prepareStatement("SELECT WP FROM `bukkit`.`user_data` WHERE name=?");
 			ps1.setString(1, player.getName());
@@ -75,7 +78,7 @@ public class CombatSQL {
 			ps1.close();
 			result1.close();
 			ps2.close();
-
+			MySQL.closeConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -84,13 +87,14 @@ public class CombatSQL {
 	public static synchronized void setWP(Player player, double newWP) {
 
 		try {
+			MySQL.openConnection();
 			PreparedStatement ps = MySQL.connection
 					.prepareStatement("UPDATE `user_data` SET `WP`=? WHERE name=?");
 			ps.setString(2, player.getName());
 			ps.setDouble(1, newWP);
 			ps.executeUpdate();
 			ps.close();
-
+			MySQL.closeConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

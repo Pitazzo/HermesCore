@@ -91,8 +91,8 @@ public class Oxygen {
 					if (player.getWorld().getName().equals("Nave")) {
 						if (player.getGameMode().equals(GameMode.SURVIVAL)) {
 							if (hasSuit(player)) {
-								if (MySQL.getOxygen(player) > 1) {
-									MySQL.removeOxygen(player, 1);
+								if (MySQL.getOxygen(player.getName()) > 1) {
+									MySQL.removeOxygen(player.getName(), 1);
 								} else {
 									player.sendMessage(ChatColor.GREEN
 											+ "[Soporte Vital]"
@@ -106,7 +106,7 @@ public class Oxygen {
 											true);
 								}
 							} else {
-								MySQL.setOxygen(player, 0);
+								MySQL.setOxygen(player.getName(), 0);
 								// no tiene traje
 								if (isPresurizada(player.getLocation())) {
 									// está en casa

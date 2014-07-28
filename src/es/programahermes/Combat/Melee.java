@@ -65,11 +65,11 @@ public class Melee implements Listener, CommandExecutor {
 						event.setDamage(0);
 						victim.setVelocity(victim.getLocation().getDirection()
 								.multiply(-0.5));
-						TrainingSQL.addFTS(attacker, 0.03);
-						MySQL.addFatiga(attacker, 0.2 * ModiferConverter
-								.SacalaReverse(TrainingSQL.getFTS(attacker)));
-						MySQL.addFatiga(victim, 0.3 * ModiferConverter
-								.SacalaReverse(TrainingSQL.getFTS(victim)));
+						TrainingSQL.addFTS(attacker.getName(), 0.03);
+						MySQL.addFatiga(attacker.getName(), 0.2 * ModiferConverter
+								.SacalaReverse(TrainingSQL.getFTS(attacker.getName())));
+						MySQL.addFatiga(victim.getName(), 0.3 * ModiferConverter
+								.SacalaReverse(TrainingSQL.getFTS(victim.getName())));
 						CombatSQL.addWP(attacker, 0.01);
 						if (Math.random() < 0.01) {
 							event.setDamage(0.5);
@@ -88,15 +88,15 @@ public class Melee implements Listener, CommandExecutor {
 				}
 
 				// modifiers normales
-				double fts = TrainingSQL.getFTS(attacker);
+				double fts = TrainingSQL.getFTS(attacker.getName());
 				double modifier = ModiferConverter.Scala(fts);
 				event.setDamage(event.getDamage() * modifier);
-				TrainingSQL.addFTS(attacker, 0.03);
+				TrainingSQL.addFTS(attacker.getName(), 0.03);
 				CombatSQL.addWP(attacker, 0.01);
-				MySQL.addFatiga(attacker, 0.2 * ModiferConverter
-						.SacalaReverse(TrainingSQL.getFTS(attacker)));
-				MySQL.addFatiga(victim, 0.3 * ModiferConverter
-						.SacalaReverse(TrainingSQL.getFTS(victim)));
+				MySQL.addFatiga(attacker.getName(), 0.2 * ModiferConverter
+						.SacalaReverse(TrainingSQL.getFTS(attacker.getName())));
+				MySQL.addFatiga(victim.getName(), 0.3 * ModiferConverter
+						.SacalaReverse(TrainingSQL.getFTS(victim.getName())));
 
 				// por la espalda
 				int x1 = attacker.getLocation().getDirection().getBlockX();

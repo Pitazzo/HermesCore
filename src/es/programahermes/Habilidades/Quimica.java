@@ -15,8 +15,8 @@ public class Quimica implements Listener {
 			Player player = (Player) event.getWhoClicked();
 			String result = event.getRecipe().getResult().getType().toString();
 			int amount = event.getRecipe().getResult().getAmount();
-			if (MySQL.getHability(player).equals("Quimico")) {
-				MySQL.addEarnedPoints(player, "craft", result, amount);
+			if (MySQL.getHability(player.getName()).equals("Quimico")) {
+				MySQL.addEarnedPoints(player.getName(), "craft", result, amount);
 			}
 		}
 		

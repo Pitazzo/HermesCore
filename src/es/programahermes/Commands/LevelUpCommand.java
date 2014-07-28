@@ -17,23 +17,23 @@ public class LevelUpCommand implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("subirnivel")) {
 			Player player = (Player) sender;
 
-			int points = (int) MySQL.getPoints(player);
+			int points = (int) MySQL.getPoints(player.getName());
 			int pointsLeft = 1000 - points;
-			String habilidad1 = MySQL.getHability(player);
+			String habilidad1 = MySQL.getHability(player.getName());
 			if (points >= 1000) {
 
-				String habilidad = MySQL.getHability(player);
+				String habilidad = MySQL.getHability(player.getName());
 				if (habilidad.equals("Geologia")) {
 					PermissionUser user = PermissionsEx.getUser(player);
 
-					switch (MySQL.getLevel(player)) {
+					switch (MySQL.getLevel(player.getName())) {
 					case 1:
 						user.addGroup("Geologia2");
 						player.sendMessage(ChatColor.GREEN
 								+ "¡Has subido de nivel tu habilidad principal "
 								+ habilidad1.toLowerCase() + "!");
-						MySQL.levelUp(player);
-						MySQL.removePoints(player, 1000);
+						MySQL.levelUp(player.getName());
+						MySQL.removePoints(player.getName(), 1000);
 
 						break;
 					case 2:
@@ -41,8 +41,8 @@ public class LevelUpCommand implements CommandExecutor {
 						player.sendMessage(ChatColor.GREEN
 								+ "¡Has subido de nivel tu habilidad principal "
 								+ habilidad1.toLowerCase() + "!");
-						MySQL.levelUp(player);
-						MySQL.removePoints(player, 1000);
+						MySQL.levelUp(player.getName());
+						MySQL.removePoints(player.getName(), 1000);
 
 						break;
 					case 3:
@@ -50,8 +50,8 @@ public class LevelUpCommand implements CommandExecutor {
 						player.sendMessage(ChatColor.GREEN
 								+ "¡Has subido de nivel tu habilidad principal "
 								+ habilidad1.toLowerCase() + "!");
-						MySQL.levelUp(player);
-						MySQL.removePoints(player, 1000);
+						MySQL.levelUp(player.getName());
+						MySQL.removePoints(player.getName(), 1000);
 
 						break;
 					case 4:
@@ -59,8 +59,8 @@ public class LevelUpCommand implements CommandExecutor {
 						player.sendMessage(ChatColor.GREEN
 								+ "¡Has subido de nivel tu habilidad principal "
 								+ habilidad1.toLowerCase() + "!");
-						MySQL.levelUp(player);
-						MySQL.removePoints(player, 1000);
+						MySQL.levelUp(player.getName());
+						MySQL.removePoints(player.getName(), 1000);
 
 						break;
 					case 5:
@@ -74,38 +74,38 @@ public class LevelUpCommand implements CommandExecutor {
 					}
 
 					if (habilidad.equals("Biologia")) {
-						switch (MySQL.getLevel(player)) {
+						switch (MySQL.getLevel(player.getName())) {
 						case 1:
 							user.addGroup("Biologia2");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 2:
 							user.addGroup("Biologia3");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 3:
 							user.addGroup("Biologia4");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 4:
 							user.addGroup("Biologia5");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 5:
 							player.sendMessage(ChatColor.BLUE
@@ -119,38 +119,38 @@ public class LevelUpCommand implements CommandExecutor {
 
 					}
 					if (habilidad.equals("Quimica")) {
-						switch (MySQL.getLevel(player)) {
+						switch (MySQL.getLevel(player.getName())) {
 						case 1:
 							user.addGroup("Quimica2");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 2:
 							user.addGroup("Quimica3");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 3:
 							user.addGroup("Quimica4");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 4:
 							user.addGroup("Quimica5");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 5:
 							player.sendMessage(ChatColor.BLUE
@@ -164,38 +164,38 @@ public class LevelUpCommand implements CommandExecutor {
 
 					}
 					if (habilidad.equals("Estructural")) {
-						switch (MySQL.getLevel(player)) {
+						switch (MySQL.getLevel(player.getName())) {
 						case 1:
 							user.addGroup("Estructural2");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 2:
 							user.addGroup("Estructural3");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 3:
 							user.addGroup("Estructural4");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 4:
 							user.addGroup("Estructural5");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 5:
 							player.sendMessage(ChatColor.BLUE
@@ -209,38 +209,38 @@ public class LevelUpCommand implements CommandExecutor {
 
 					}
 					if (habilidad.equals("Tecnico")) {
-						switch (MySQL.getLevel(player)) {
+						switch (MySQL.getLevel(player.getName())) {
 						case 1:
 							user.addGroup("Tecnico");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 2:
 							user.addGroup("Tecnico3");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 3:
 							user.addGroup("Tecnico4");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 4:
 							user.addGroup("Tecnico5");
 							player.sendMessage(ChatColor.GREEN
 									+ "¡Has subido de nivel tu habilidad principal "
 									+ habilidad1.toLowerCase() + "!");
-							MySQL.levelUp(player);
-							MySQL.removePoints(player, 1000);
+							MySQL.levelUp(player.getName());
+							MySQL.removePoints(player.getName(), 1000);
 							break;
 						case 5:
 							player.sendMessage(ChatColor.BLUE

@@ -25,23 +25,23 @@ public class OxygenCommand implements CommandExecutor {
 				if (args.length == 1 || args.length == 2) {
 					if (args[0].equalsIgnoreCase("traje")) {
 						if (hasOxygen(player.getItemInHand())) {
-							if (MySQL.getOxygen(player)
+							if (MySQL.getOxygen(player.getName())
 									+ getOxygen(player.getItemInHand()) > 700) {
 								int rellenable = (int) (700 - MySQL
-										.getOxygen(player));
+										.getOxygen(player.getName()));
 								if (rellenable <= 0) {
 									player.sendMessage(ChatColor.RED
 											+ "¡Tu traje está al límite de su capacidad!");
 									return true;
 								} else {
 									if(getOxygen(player.getItemInHand())<= rellenable){
-										MySQL.addOxygen(player, getOxygen(player.getItemInHand()));
+										MySQL.addOxygen(player.getName(), getOxygen(player.getItemInHand()));
 										removeOxygen(player.getItemInHand(), getOxygen(player.getItemInHand()));
 										player.sendMessage(ChatColor.GREEN
 												+ "¡Se ha presurizado tu traje con "+getOxygen(player.getItemInHand())+"L de oxígeno!");
 										return true;
 									}else{
-										MySQL.addOxygen(player, rellenable);
+										MySQL.addOxygen(player.getName(), rellenable);
 										removeOxygen(player.getItemInHand(), rellenable);
 										player.sendMessage(ChatColor.GREEN
 												+ "¡Se ha presurizado tu traje con "+rellenable+"L de oxígeno!");
@@ -50,7 +50,7 @@ public class OxygenCommand implements CommandExecutor {
 								}
 
 							} else {
-								MySQL.addOxygen(player,
+								MySQL.addOxygen(player.getName(),
 										getOxygen(player.getItemInHand()));
 								player.sendMessage(ChatColor.GREEN
 										+ "Se ha presruizado tu traje con "
@@ -68,9 +68,9 @@ public class OxygenCommand implements CommandExecutor {
 						}
 					} else {
 						if (args[0].equalsIgnoreCase("tanque")) {
-							int oxygen = (int) MySQL.getOxygen(player);
+							int oxygen = (int) MySQL.getOxygen(player.getName());
 							setOxygen(player.getItemInHand(), oxygen);
-							MySQL.removeOxygen(player, oxygen);
+							MySQL.removeOxygen(player.getName(), oxygen);
 							player.playSound(player.getLocation(),
 									Sound.BAT_LOOP, 1.0F, 1.0F);
 							player.sendMessage(ChatColor.RED

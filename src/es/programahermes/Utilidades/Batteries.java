@@ -36,7 +36,7 @@ public class Batteries implements Listener {
 			if (event.getClickedBlock().getType()
 					.equals(Material.DAYLIGHT_DETECTOR)) {
 				if (isEmpty(player.getItemInHand())) {
-					if (MySQL.getHability(player).equals("Tecnico")) {
+					if (MySQL.getHability(player.getName()).equals("Tecnico")) {
 						if (!(event.getClickedBlock().getWorld().hasStorm())) {
 							if (day(event.getClickedBlock().getWorld())) {
 								if (event.getClickedBlock().getLightLevel() > 4) {

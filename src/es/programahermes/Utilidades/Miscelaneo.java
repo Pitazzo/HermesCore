@@ -27,7 +27,7 @@ public class Miscelaneo implements Listener, CommandExecutor {
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
 		Player player = event.getEntity();
-		MySQL.removePoints(player, 40);
+		MySQL.removePoints(player.getName(), 40);
 	}
 
 	@EventHandler
@@ -59,10 +59,10 @@ public class Miscelaneo implements Listener, CommandExecutor {
 			if (sender instanceof Player) {
 				if (sender.isOp()) {
 					Player player = (Player) sender;
-					MySQL.setFatiga(player, 0);
-					MySQL.setOxygen(player, 700);
-					MySQL.setResidual(player, 0);
-					MySQL.setSed(player, 100);
+					MySQL.setFatiga(player.getName(), 0);
+					MySQL.setOxygen(player.getName(), 700);
+					MySQL.setResidual(player.getName(), 0);
+					MySQL.setSed(player.getName(), 100);
 					player.setHealth(20);
 					player.setFoodLevel(20);
 					player.getInventory().setHelmet(
@@ -89,7 +89,7 @@ public class Miscelaneo implements Listener, CommandExecutor {
 	}
 
 	public static void setWalkSpeed(Player player, double d) {
-		if (!HealthSQL.FracturaTI(player)) {
+		if (!HealthSQL.FracturaTI(player.getName())) {
 			player.setWalkSpeed((float) d);
 		} else {
 			return;

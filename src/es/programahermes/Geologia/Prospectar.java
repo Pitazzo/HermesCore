@@ -15,7 +15,7 @@ public class Prospectar implements Listener {
 
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
-		if (MySQL.getHability(event.getPlayer()).equals("Biologia")) {
+		if (MySQL.getHability(event.getPlayer().getName()).equals("Biologia")) {
 			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 				if (event.getClickedBlock().getType().equals(Material.STONE)) {
 					if (event.getPlayer().getItemInHand().getType()

@@ -55,6 +55,7 @@ public class Main extends JavaPlugin{
 		Oxygen.oxyenUpdate(plugin);
 		Fatiga.waitFatigaCheck(plugin);
 		Diarrea.diarreaUpdate(plugin);
+		PointsAdjust.pointsAdjust(plugin);
 		getServer().getPluginManager().registerEvents(new Geologia(), this);
 		getServer().getPluginManager().registerEvents(new Refuerzos(), this);
 		getServer().getPluginManager().registerEvents(new Perforadora(), this);
@@ -94,12 +95,10 @@ public class Main extends JavaPlugin{
 		getCommand("entrenartiro").setExecutor(new Accuracy());
 		getCommand("cuerpoacuerpo").setExecutor(new Melee());
 		getCommand("emergency").setExecutor(new Miscelaneo());
-		getCommand("calcularpuntos").setExecutor(new PointsAdjust());
 		getCommand("data").setExecutor(new DataGetter());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
-		MySQL.openConnection();
 		getServer().addRecipe(Recipes.O2);
 		getServer().addRecipe(Recipes.reconstructor);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.presurizada);
@@ -112,7 +111,6 @@ public class Main extends JavaPlugin{
 	}
 
 	public void onDisable() {
-		MySQL.closeConnection();
 		getServer().clearRecipes();
 	}
 

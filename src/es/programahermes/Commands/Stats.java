@@ -24,9 +24,9 @@ public class Stats implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("stats")) {
 
 			Player player = (Player) sender;
-			int points = (int) MySQL.getPoints(player);
-			int level = MySQL.getLevel(player);
-			String habilidad = MySQL.getHability(player);
+			int points = (int) MySQL.getPoints(player.getName());
+			int level = MySQL.getLevel(player.getName());
+			String habilidad = MySQL.getHability(player.getName());
 			if (args.length == 0) {
 
 				player.sendMessage(ChatColor.GOLD + "[Hermes Core] "
@@ -40,9 +40,9 @@ public class Stats implements CommandExecutor {
 			if (args.length == 1) {
 
 				Player target = Bukkit.getPlayer(args[1]);
-				double points1 = MySQL.getPoints(target);
-				int level1 = MySQL.getLevel(target);
-				String habilidad1 = MySQL.getHability(target);
+				double points1 = MySQL.getPoints(target.getName());
+				int level1 = MySQL.getLevel(target.getName());
+				String habilidad1 = MySQL.getHability(target.getName());
 				if (player.hasPermission("hermescore.stats") || player.isOp()) {
 					if (MySQL.dbContanisPlayer(target.getName())) {
 						player.sendMessage(ChatColor.GOLD + "[Hermes Core] "

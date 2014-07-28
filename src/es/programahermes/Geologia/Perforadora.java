@@ -23,7 +23,7 @@ public class Perforadora implements Listener {
 		if (!event.isCancelled()) {
 			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 				if (event.getClickedBlock().getType().equals(Material.LEVER)) {
-					if (MySQL.getHability(player).equals("Geologia")) {
+					if (MySQL.getHability(player.getName()).equals("Geologia")) {
 
 						if (event.getClickedBlock().getType()
 								.equals(Material.LEVER)) {
@@ -51,8 +51,8 @@ public class Perforadora implements Listener {
 										loc3.getBlock().setType(Material.AIR);
 									}
 
-									MySQL.addPoints(player,
-											8 / MySQL.getLevel(player));
+									MySQL.addPoints(player.getName(),
+											8 / MySQL.getLevel(player.getName()));
 									player.getWorld().playSound(drill,
 											Sound.ANVIL_BREAK, 15F, 15F);
 									//carbon

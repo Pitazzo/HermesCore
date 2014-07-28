@@ -18,7 +18,7 @@ public class Refuerzos implements Listener {
 	public void onRefor(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		if (!event.isCancelled()) {
-			if (MySQL.getHability(player).equals("Geologia")) {
+			if (MySQL.getHability(player.getName()).equals("Geologia")) {
 				if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 					if (player.getItemInHand().getType()
 							.equals(Material.INK_SACK)) {

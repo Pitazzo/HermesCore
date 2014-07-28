@@ -16,7 +16,7 @@ public class PointsCommand implements CommandExecutor {
 		Player player = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("puntos")) {
 			if (args.length == 0) {
-				double points = MySQL.getPoints(player);
+				double points = MySQL.getPoints(player.getName());
 				player.sendMessage(ChatColor.GREEN + "Ahora mismo tienes "
 						+ points + " puntos");
 				return true;
@@ -34,7 +34,7 @@ public class PointsCommand implements CommandExecutor {
 									+ "El jugador no existe");
 							return true;
 						}
-						MySQL.addPoints(target, points);
+						MySQL.addPoints(target.getName(), points);
 						target.sendMessage(ChatColor.GREEN + "¡"
 								+ player.getName() + " te ha dado " + points
 								+ " puntos!");
@@ -48,7 +48,7 @@ public class PointsCommand implements CommandExecutor {
 									+ "El jugador no existe");
 							return true;
 						}
-						MySQL.removePoints(target, points);
+						MySQL.removePoints(target.getName(), points);
 						target.sendMessage(ChatColor.GREEN + "¡"
 								+ player.getName() + " te ha quitado " + points
 								+ " puntos!");
@@ -64,7 +64,7 @@ public class PointsCommand implements CommandExecutor {
 									+ "El jugador no existe");
 							return true;
 						}
-						MySQL.setPoints(player, points);
+						MySQL.setPoints(player.getName(), points);
 						target.sendMessage(ChatColor.GREEN + "¡"
 								+ player.getName() + " te ha seteado " + points
 								+ " puntos!");

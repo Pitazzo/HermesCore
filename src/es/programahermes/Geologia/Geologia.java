@@ -19,18 +19,18 @@ public class Geologia implements Listener {
 		Player player = event.getPlayer();
 		String material = event.getBlock().getType().toString();
 		if(!event.isCancelled()){
-			if (MySQL.getHability(player).equals("Geologia")) {
+			if (MySQL.getHability(player.getName()).equals("Geologia")) {
 				if(player.getItemInHand().getType().equals(Material.WOOD_PICKAXE)){
-					MySQL.addEarnedPoints(player, "break", material, 0.8);
+					MySQL.addEarnedPoints(player.getName(), "break", material, 0.8);
 				}
 				if(player.getItemInHand().getType().equals(Material.STONE_PICKAXE)){
-					MySQL.addEarnedPoints(player, "break", material, 0.9);
+					MySQL.addEarnedPoints(player.getName(), "break", material, 0.9);
 				}
 				if(player.getItemInHand().getType().equals(Material.DIAMOND_PICKAXE)){
-					MySQL.addEarnedPoints(player, "break", material, 1.15);
+					MySQL.addEarnedPoints(player.getName(), "break", material, 1.15);
 				}
 				if(player.getItemInHand().getType().equals(Material.AIR)){
-					MySQL.addEarnedPoints(player, "break", material, 0.65);
+					MySQL.addEarnedPoints(player.getName(), "break", material, 0.65);
 	
 				}
 
@@ -39,7 +39,7 @@ public class Geologia implements Listener {
 					event.getBlock().getDrops(drop);
 					player.sendMessage(ChatColor.RED
 							+ "¡Has malgastado un mineral del que extraer energía!");
-					MySQL.removePoints(player, 3);
+					MySQL.removePoints(player.getName(), 3);
 				}
 
 			}
@@ -52,8 +52,8 @@ public class Geologia implements Listener {
 		if(!event.isCancelled()){
 			Player player = event.getPlayer();
 			String material = event.getBlock().getType().toString();
-			if (MySQL.getHability(player).equals("Geologia")) {
-				MySQL.addEarnedPoints(player, "place", material, 1);
+			if (MySQL.getHability(player.getName()).equals("Geologia")) {
+				MySQL.addEarnedPoints(player.getName(), "place", material, 1);
 			}
 		}
 	}

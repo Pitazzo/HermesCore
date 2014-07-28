@@ -26,12 +26,12 @@ public class ETS implements Listener {
 		if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 			if (player.getItemInHand().getType().equals(Material.AIR)) {
 				if (event.getClickedBlock().getType().equals(Material.WOOL)) {
-					MySQL.addFatiga(player, 0.2 * ModiferConverter
-							.SacalaReverse(TrainingSQL.getFTS(player)));
+					MySQL.addFatiga(player.getName(), 0.2 * ModiferConverter
+							.SacalaReverse(TrainingSQL.getFTS(player.getName())));
 					player.playSound(player.getLocation(), Sound.VILLAGER_HIT,
 							3.0F, 3.0F);
-					TrainingSQL.addFTS(player, 0.05);
-					MySQL.removeSed(player, 0.1);
+					TrainingSQL.addFTS(player.getName(), 0.05);
+					MySQL.removeSed(player.getName(), 0.1);
 					double random = Math.random();
 					if (random * 100 < 1.5) {
 						player.damage(3.0);
@@ -53,7 +53,7 @@ public class ETS implements Listener {
 			if (player.getItemInHand().getType().equals(Material.INK_SACK)) {
 				if (player.getItemInHand().getDurability() == 2) {
 					if (player.getHealth() > 10) {
-						if (MySQL.getFatiga(player) < 70) {
+						if (MySQL.getFatiga(player.getName()) < 70) {
 							if (cooldownP.containsKey(player.getName())) {
 								long diff = (System.currentTimeMillis() - cooldownP
 										.get(player.getName())) / 1000;
@@ -68,10 +68,10 @@ public class ETS implements Listener {
 										Scoreboard.showScore(player);
 
 									}
-									MySQL.addFatiga(player,
+									MySQL.addFatiga(player.getName(),
 											0.5 * ModiferConverter
 													.SacalaReverse(TrainingSQL
-															.getFTS(player)));
+															.getFTS(player.getName())));
 									int show = (int) (20 - diff);
 									player.sendMessage(ChatColor.GOLD
 											+ "Mejor espera unos "
@@ -80,11 +80,11 @@ public class ETS implements Listener {
 									Scoreboard.showScore(player);
 
 								} else {
-									MySQL.addFatiga(player,
+									MySQL.addFatiga(player.getName(),
 											0.6 * ModiferConverter
 													.SacalaReverse(TrainingSQL
-															.getFTS(player)));
-									TrainingSQL.addFTS(player, 0.2);
+															.getFTS(player.getName())));
+									TrainingSQL.addFTS(player.getName(), 0.2);
 									player.sendMessage(ChatColor.GREEN
 											+ "¡Así se hace! Sigue así :)");
 									cooldownP.put(player.getName(),
@@ -93,8 +93,8 @@ public class ETS implements Listener {
 
 								}
 							} else {
-								MySQL.addFatiga(player, 0.6);
-								TrainingSQL.addFTS(player, 0.2);
+								MySQL.addFatiga(player.getName(), 0.6);
+								TrainingSQL.addFTS(player.getName(), 0.2);
 								player.sendMessage(ChatColor.GREEN
 										+ "¡Así se hace! Sigue así :)");
 								cooldownP.put(player.getName(),
@@ -128,7 +128,7 @@ public class ETS implements Listener {
 					|| event.getBlock().getType().equals(Material.DIRT)
 					|| event.getBlock().getType().equals(Material.SAND)
 					|| event.getBlock().getType().equals(Material.GRAVEL)) {
-				if (TrainingSQL.getFTS(player) < 65) {
+				if (TrainingSQL.getFTS(player.getName()) < 65) {
 					event.setCancelled(true);
 					player.sendMessage(ChatColor.RED
 							+ "No tienes fuerza suficiente para romper ese bloque");

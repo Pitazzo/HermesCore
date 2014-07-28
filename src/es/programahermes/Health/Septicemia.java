@@ -166,8 +166,8 @@ public class Septicemia implements Listener, CommandExecutor {
 	}
 
 	public static void setSepsis(Player player) {
-		if (!HealthSQL.Septicemia(player)) {
-			HealthSQL.setSepticemia(player, true);
+		if (!HealthSQL.Septicemia(player.getName())) {
+			HealthSQL.setSepticemia(player.getName(), true);
 			sepsis(JavaPlugin.getPlugin(Main.class), player);
 			player.setMaxHealth(player.getMaxHealth() - 8);
 			player.sendMessage(ChatColor.RED
@@ -178,8 +178,8 @@ public class Septicemia implements Listener, CommandExecutor {
 	}
 
 	public void healSepsis(Player player) {
-		if (HealthSQL.Septicemia(player)) {
-			HealthSQL.setSepticemia(player, false);
+		if (HealthSQL.Septicemia(player.getName())) {
+			HealthSQL.setSepticemia(player.getName(), false);
 			player.sendMessage(ChatColor.GREEN
 					+ "Parece que tu septicemia comienza a remitir...");
 			Miscelaneo.setWalkSpeed(player, 0.2);
@@ -195,7 +195,7 @@ public class Septicemia implements Listener, CommandExecutor {
 				.scheduleSyncRepeatingTask(plugin, new Runnable() {
 					@Override
 					public void run() {
-						if (HealthSQL.Septicemia(player)) {
+						if (HealthSQL.Septicemia(player.getName())) {
 							player.addPotionEffect(new PotionEffect(
 									PotionEffectType.CONFUSION, 20 * 40, 2));
 							player.addPotionEffect(new PotionEffect(
@@ -218,7 +218,7 @@ public class Septicemia implements Listener, CommandExecutor {
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
-		if (HealthSQL.Septicemia(event.getPlayer())) {
+		if (HealthSQL.Septicemia(event.getPlayer().getName())) {
 			sepsis(JavaPlugin.getPlugin(Main.class), event.getPlayer());
 		} else {
 			return;

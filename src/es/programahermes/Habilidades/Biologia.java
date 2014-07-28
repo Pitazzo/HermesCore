@@ -24,7 +24,7 @@ public class Biologia implements Listener {
 			Action action = event.getAction();
 			Block block = event.getClickedBlock();
 			ItemStack item = player.getItemInHand();
-			String habilidad = MySQL.getHability(player);
+			String habilidad = MySQL.getHability(player.getName());
 			if (habilidad.equals("Biologia")) {
 
 				if (action.equals(Action.RIGHT_CLICK_BLOCK)) {
@@ -35,7 +35,7 @@ public class Biologia implements Listener {
 								|| item.getType().equals(Material.STONE_HOE)
 								|| item.getType().equals(Material.IRON_HOE)
 								|| item.getType().equals(Material.DIAMOND_HOE)) {
-							MySQL.addEarnedPoints(player, "special", "labrar",
+							MySQL.addEarnedPoints(player.getName(), "special", "labrar",
 									1);
 
 						}
@@ -43,7 +43,7 @@ public class Biologia implements Listener {
 					}
 
 					if (block.getType().equals(Material.SOIL)) {
-						MySQL.addEarnedPoints(player, "interact", block
+						MySQL.addEarnedPoints(player.getName(), "interact", block
 								.getType().toString(), 1);
 
 					}
@@ -58,9 +58,9 @@ public class Biologia implements Listener {
 		if (!event.isCancelled()) {
 			Player player = event.getPlayer();
 
-			if (MySQL.getHability(player).equals("Biologia")) {
+			if (MySQL.getHability(player.getName()).equals("Biologia")) {
 				String entity = event.getRightClicked().getType().toString();
-				MySQL.addEarnedPoints(player, "entity", entity, 1);
+				MySQL.addEarnedPoints(player.getName(), "entity", entity, 1);
 			}
 		}
 
@@ -72,8 +72,8 @@ public class Biologia implements Listener {
 		String entity = event.getEntity().getType().toString();
 		if (killer instanceof Player) {
 			Player player = (Player) killer;
-			if (MySQL.getHability(player).equals("Biologia")) {
-				MySQL.addEarnedPoints(player, "entity", entity, 1);
+			if (MySQL.getHability(player.getName()).equals("Biologia")) {
+				MySQL.addEarnedPoints(player.getName(), "entity", entity, 1);
 			}
 		}
 	}
@@ -84,8 +84,8 @@ public class Biologia implements Listener {
 			Player player = (Player) event.getWhoClicked();
 			String result = event.getRecipe().getResult().getType().toString();
 			int amount = event.getRecipe().getResult().getAmount();
-			if (MySQL.getHability(player).equals("Biologia")) {
-				MySQL.addEarnedPoints(player, "craft", result, amount);
+			if (MySQL.getHability(player.getName()).equals("Biologia")) {
+				MySQL.addEarnedPoints(player.getName(), "craft", result, amount);
 
 			}
 		}
