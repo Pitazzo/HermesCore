@@ -1,4 +1,4 @@
-package es.programahermes.Commands;
+package es.programahermes.Utilidades;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

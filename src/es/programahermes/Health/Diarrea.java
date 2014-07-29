@@ -24,6 +24,8 @@ public class Diarrea implements Listener {
 	@EventHandler
 	public void onConsume(PlayerItemConsumeEvent event) {
 		Player player = event.getPlayer();
+		player.sendMessage("Fractura TS: "+HealthSQL.FracturaTS(player.getName()));
+		player.sendMessage("Fractura TI: "+HealthSQL.FracturaTI(player.getName()));
 		if (HealthSQL.Diarrea(player.getName())) {
 			if (!event.getItem().getItemMeta().getDisplayName().contains("Frasco de ")) {
 				if (!event.getItem().getType().equals(Material.POTION)) {

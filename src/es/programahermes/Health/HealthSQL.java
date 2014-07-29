@@ -167,7 +167,6 @@ public class HealthSQL {
 	}
 
 	public static synchronized void removeVPoints(String player, double VPoints) {
-		Bukkit.broadcastMessage("Ejecutado cálculo 1 para "+player);
 		try {
 			MySQL.openConnection();
 			PreparedStatement ps1 = MySQL.connection
@@ -176,14 +175,12 @@ public class HealthSQL {
 			ResultSet result1 = ps1.executeQuery();
 			result1.next();
 			double VPoints2 = result1.getDouble("VPoints");
-			Bukkit.broadcastMessage("Ejecutado cálculo 2 para "+player);
 	
 				PreparedStatement ps2 = MySQL.connection
 						.prepareStatement("UPDATE `bukkit`.`user_data` SET `VPoints`=? WHERE name=?");
 				ps2.setString(2, player);
 				ps2.setDouble(1, VPoints2 - VPoints);
 				ps2.executeUpdate();
-				Bukkit.broadcastMessage("Ejecutado cálculo 3 para "+player);
 				ps1.close();
 				result1.close();
 				ps2.close();
