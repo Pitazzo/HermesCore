@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -195,6 +196,20 @@ public class Batteries implements Listener {
 					}
 				}
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onItemBreak(PlayerItemBreakEvent event){
+		ItemStack item = event.getBrokenItem();
+		if(item.getType().equals(Material.WOOD_SWORD)){
+			ItemStack tool = new ItemStack(item.getType(), 1);
+			tool.setDurability((short) 58);
+			ItemMeta meta = tool.getItemMeta();
+			meta.setDisplayName(Miscelaneo.getName(item)+" descargado");
+			tool.setItemMeta(meta);
+			event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), tool);
+			event.getPlayer().sendMessage(ChatColor.RED+"A tu "+Miscelaneo.getName(item)+" se le ha agotado la batería");
 		}
 	}
 

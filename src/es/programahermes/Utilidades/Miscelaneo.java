@@ -96,27 +96,7 @@ public class Miscelaneo implements Listener, CommandExecutor {
 		}
 	}
 
-	public static boolean equalsName(ItemStack item, String name) {
-		if (item != null) {
-			if (item.getItemMeta() != null) {
-				if (item.getItemMeta().getDisplayName() != null) {
-					if (item.getItemMeta().getDisplayName().equals(name)) {
 
-						return true;
-					} else {
-						return false;
-					}
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-
-		} else {
-			return false;
-		}
-	}
 
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
@@ -158,13 +138,20 @@ public class Miscelaneo implements Listener, CommandExecutor {
 			int counter = 0;
 			counter++;
 			if (counter < 2) {
-				String name = RenamerAPI.getAPI().getRule(RenamerAPI.getAPI().getRenamePack(player),item).getName().toString();
-				if (name != null) {
-					return name;
-
+				if(RenamerAPI.getAPI() != null){
+					if(RenamerAPI.getAPI().getRule(RenamerAPI.getAPI().getRenamePack(player),item) != null){
+						if(RenamerAPI.getAPI().getRule(RenamerAPI.getAPI().getRenamePack(player),item).getName() != null){
+							return RenamerAPI.getAPI().getRule(RenamerAPI.getAPI().getRenamePack(player),item).getName().toString();
+						}else{
+							return "Sin nombre IR";
+						}
+					}else{
+						return "Sin nombre IR";
+					}
 				}else{
-					return "ERROR";
+					return "Sin nombre IR";
 				}
+				
 				
 			} else {
 				break;

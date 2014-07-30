@@ -26,17 +26,19 @@ public class ETS implements Listener {
 		if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 			if (player.getItemInHand().getType().equals(Material.AIR)) {
 				if (event.getClickedBlock().getType().equals(Material.WOOL)) {
-					MySQL.addFatiga(player.getName(), 0.2 * ModiferConverter
-							.SacalaReverse(TrainingSQL.getFTS(player.getName())));
-					player.playSound(player.getLocation(), Sound.VILLAGER_HIT,
-							3.0F, 3.0F);
-					TrainingSQL.addFTS(player.getName(), 0.05);
-					MySQL.removeSed(player.getName(), 0.1);
-					double random = Math.random();
-					if (random * 100 < 1.5) {
-						player.damage(3.0);
-						player.sendMessage(ChatColor.RED
-								+ "¡Ouch! ¡No golpees con tanta fuerza o te lesionarás!");
+					if(event.getClickedBlock().getData() == 8){
+						MySQL.addFatiga(player.getName(), 0.2 * ModiferConverter
+								.SacalaReverse(TrainingSQL.getFTS(player.getName())));
+						player.playSound(player.getLocation(), Sound.VILLAGER_HIT,
+								3.0F, 3.0F);
+						TrainingSQL.addFTS(player.getName(), 0.05);
+						MySQL.removeSed(player.getName(), 0.1);
+						double random = Math.random();
+						if (random * 100 < 1.5) {
+							player.damage(3.0);
+							player.sendMessage(ChatColor.RED
+									+ "¡Ouch! ¡No golpees con tanta fuerza o te lesionarás!");
+						}
 					}
 				}
 
