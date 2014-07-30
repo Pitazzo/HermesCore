@@ -168,4 +168,19 @@ public class DeathSQL {
 		return null;
 	}
 
+	public static void setInLimbo(String player, boolean state) {
+		try {
+			MySQL.openConnection();
+			PreparedStatement ps = MySQL.connection
+					.prepareStatement("UPDATE `user_data` SET `isInLimbo`=? WHERE name=?");
+			ps.setString(2, player);
+			ps.setBoolean(1, state);
+			ps.executeUpdate();
+			ps.close();
+			MySQL.closeConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

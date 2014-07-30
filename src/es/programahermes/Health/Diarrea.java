@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import es.programahermes.MySQL;
+import es.programahermes.PHDS.DeathSQL;
 import es.programahermes.Utilidades.Miscelaneo;
 
 public class Diarrea implements Listener {
@@ -24,8 +25,6 @@ public class Diarrea implements Listener {
 	@EventHandler
 	public void onConsume(PlayerItemConsumeEvent event) {
 		Player player = event.getPlayer();
-		player.sendMessage("Fractura TS: "+HealthSQL.FracturaTS(player.getName()));
-		player.sendMessage("Fractura TI: "+HealthSQL.FracturaTI(player.getName()));
 		if (HealthSQL.Diarrea(player.getName())) {
 			if (!event.getItem().getItemMeta().getDisplayName().contains("Frasco de ")) {
 				if (!event.getItem().getType().equals(Material.POTION)) {
@@ -98,20 +97,22 @@ public class Diarrea implements Listener {
 			public void run() {
 				for (Player player : Bukkit.getOnlinePlayers())
 					if (HealthSQL.Diarrea(player.getName())) {
-						MySQL.removeSed(player.getName(), 8);
-						player.sendMessage("Oh no... otra vez no...");
-						for (Player others : Bukkit.getOnlinePlayers()) {
-							if (others.getWorld().equals(player.getWorld())) {
-								if (player.getLocation().distance(
-										others.getLocation()) < 10) {
-									others.sendMessage("*"
-											+ player.getDisplayName()
-											+ " ha vomitado");
-									ItemStack caca = new ItemStack(
-											Material.INK_SACK, 1);
-									caca.setDurability((short) 8);
-									player.getWorld().dropItemNaturally(
-											player.getLocation(), caca);
+						if(!DeathSQL.isInLimbo(player.getName())){
+							MySQL.removeSed(player.getName(), 8);
+							player.sendMessage("Oh no... otra vez no...");
+							for (Player others : Bukkit.getOnlinePlayers()) {
+								if (others.getWorld().equals(player.getWorld())) {
+									if (player.getLocation().distance(
+											others.getLocation()) < 10) {
+										others.sendMessage("*"
+												+ player.getDisplayName()
+												+ " ha vomitado");
+										ItemStack caca = new ItemStack(
+												Material.INK_SACK, 1);
+										caca.setDurability((short) 8);
+										player.getWorld().dropItemNaturally(
+												player.getLocation(), caca);
+									}
 								}
 							}
 						}

@@ -59,6 +59,7 @@ public class Main extends JavaPlugin{
 		Diarrea.diarreaUpdate(plugin);
 		PointsAdjust.pointsAdjust(plugin);
 		DeathTimer.limbo(plugin);
+		Septicemia.sepsis(plugin);
 		getServer().getPluginManager().registerEvents(new Geologia(), this);
 		getServer().getPluginManager().registerEvents(new Refuerzos(), this);
 		getServer().getPluginManager().registerEvents(new Perforadora(), this);

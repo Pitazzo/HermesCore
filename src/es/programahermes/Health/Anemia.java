@@ -14,6 +14,7 @@ public class Anemia implements Listener {
 	@EventHandler
 	public void onConsume(PlayerItemConsumeEvent event) {
 		Player player = event.getPlayer();
+		player.setMaxHealth(50);
 		if (Miscelaneo.getName(event.getItem()).equals("Complemento vitamínico")) {
 				HealthSQL.addVPoints(player.getName(), 1);
 			

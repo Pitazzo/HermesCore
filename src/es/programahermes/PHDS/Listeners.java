@@ -6,22 +6,33 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class Listeners implements Listener {
 
-	public static Location spawn = new Location(Bukkit.getWorld("Limbo"), 0, 70, 0);
-	
+	public static Location spawn = new Location(Bukkit.getWorld("Limbo"), 64,
+			10, -500);
+
 	@EventHandler
-	public void onDeath(PlayerDeathEvent event){
+	public void onDeath(PlayerDeathEvent event) {
 		Player player = event.getEntity();
-		
-		if(!player.getWorld().getName().equals("Limbo")){
-			player.sendMessage("Muerto");
+
+		if (!player.getWorld().getName().equals("Limbo")) {
+			DeathSQL.setInLimbo(player.getName(), true);
 			DeathSQL.setTimeLeft(player.getName(), 300);
 			DeathSQL.setDeathLoc(player.getName(), player.getLocation());
-		}else{
+
+		} else {
 			DeathSQL.addTimeLeft(player.getName(), 300);
+			player.teleport(spawn);
 		}
 	}
-	
+
+	@EventHandler
+	public void onRespawn(PlayerRespawnEvent event) {
+		if (DeathSQL.isInLimbo(event.getPlayer().getName())) {
+			event.setRespawnLocation(spawn);
+		}
+
+	}
 }

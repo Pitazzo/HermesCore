@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -22,6 +23,8 @@ import org.bukkit.potion.PotionEffectType;
 import com.shampaggon.crackshot.events.WeaponDamageEntityEvent;
 
 import es.programahermes.Main;
+import es.programahermes.MySQL;
+import es.programahermes.PHDS.DeathSQL;
 import es.programahermes.Utilidades.Miscelaneo;
 
 public class Septicemia implements Listener, CommandExecutor {
@@ -168,7 +171,6 @@ public class Septicemia implements Listener, CommandExecutor {
 	public static void setSepsis(Player player) {
 		if (!HealthSQL.Septicemia(player.getName())) {
 			HealthSQL.setSepticemia(player.getName(), true);
-			sepsis(JavaPlugin.getPlugin(Main.class), player);
 			player.setMaxHealth(player.getMaxHealth() - 8);
 			player.sendMessage(ChatColor.RED
 					+ "Parece ser que alguna de tus heridas se ha infectado. Busca un médico o podrías tener graves problemas.");
@@ -190,39 +192,37 @@ public class Septicemia implements Listener, CommandExecutor {
 
 	}
 
-	public static void sepsis(Plugin plugin, final Player player) {
+	public static void sepsis(Plugin plugin) {
 		taskID2 = Bukkit.getServer().getScheduler()
 				.scheduleSyncRepeatingTask(plugin, new Runnable() {
 					@Override
 					public void run() {
-						if (HealthSQL.Septicemia(player.getName())) {
-							player.addPotionEffect(new PotionEffect(
-									PotionEffectType.CONFUSION, 20 * 40, 2));
-							player.addPotionEffect(new PotionEffect(
-									PotionEffectType.HUNGER, 20 * 30, 1));
-							Miscelaneo.setWalkSpeed(player, 0.1);
-							player.sendMessage("Otra vez no...");
-							player.playSound(player.getLocation(),
-									Sound.AMBIENCE_THUNDER, (float) 1.0,
-									(float) 1.0);
-						} else {
-							Bukkit.getScheduler().cancelTask(taskID2);
-							Miscelaneo.setWalkSpeed(player, 0.2);
-							player.setMaxHealth(20);
-
+						for(Player player : Bukkit.getOnlinePlayers()){
+							if(!DeathSQL.isInLimbo(player.getName())){
+								if(HealthSQL.Septicemia(player.getName())){
+									MySQL.removeSed(player.getName(), 8);
+									player.sendMessage("Oh no... otra vez no...");
+									for (Player others : Bukkit.getOnlinePlayers()) {
+										if (others.getWorld().equals(player.getWorld())) {
+											if (player.getLocation().distance(
+													others.getLocation()) < 10) {
+												others.sendMessage("*"
+														+ player.getDisplayName()
+														+ " ha vomitado");
+												ItemStack caca = new ItemStack(
+														Material.INK_SACK, 1);
+												caca.setDurability((short) 8);
+												player.getWorld().dropItemNaturally(
+														player.getLocation(), caca);
+											}
+										}
+									}
+								}
+							}
 						}
 
 					}
-				}, 200L, 20 * 60 * 3L);
+				}, 200L, 20 * 60 * 5L);
 	}
 
-	@EventHandler
-	public void onJoin(PlayerJoinEvent event) {
-		if (HealthSQL.Septicemia(event.getPlayer().getName())) {
-			sepsis(JavaPlugin.getPlugin(Main.class), event.getPlayer());
-		} else {
-			return;
-		}
-
-	}
 }

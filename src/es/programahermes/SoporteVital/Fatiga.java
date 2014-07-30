@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.plugin.Plugin;
 
 import es.programahermes.MySQL;
+import es.programahermes.PHDS.DeathSQL;
 import es.programahermes.Training.TrainingSQL;
 import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.ModiferConverter;
@@ -58,9 +59,9 @@ public class Fatiga implements Listener {
 		if (player.getGameMode().equals(GameMode.SURVIVAL)) {
 			if (!player.isSprinting()) {
 				if (!(MySQL.getFatiga(player.getName()) >= 100)) {
-					MySQL.addFatiga(player.getName(),
-							0.3 * ModiferConverter.SacalaReverse(TrainingSQL
-									.getFTI(event.getPlayer().getName())));
+					MySQL.addFatiga(player.getName(), 0.3 * ModiferConverter
+							.SacalaReverse(TrainingSQL.getFTI(event.getPlayer()
+									.getName())));
 				}
 				if (!(MySQL.getSed(player.getName()) <= 0)) {
 					MySQL.removeSed(player.getName(), 0.5);
@@ -104,44 +105,48 @@ public class Fatiga implements Listener {
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-						
-						Location loc = player.getLocation();
-						if (walked.containsKey(player)) {
-							
-							int toX = (int) loc.getX();
-							int toY = (int) loc.getY();
-							int toZ = (int) loc.getZ();
+						if (!DeathSQL.isInLimbo(player.getName())) {
+							Location loc = player.getLocation();
+							if (walked.containsKey(player)) {
 
-							int fromX = (int) walked.get(player).getX();
-							int fromY = (int) walked.get(player).getY();
-							int fromZ = (int) walked.get(player).getZ();
+								int toX = (int) loc.getX();
+								int toY = (int) loc.getY();
+								int toZ = (int) loc.getZ();
 
-							// misma loc
-							if (fromX == toX && fromY == toY && fromZ == toZ) {
-								MySQL.removeFatiga(player.getName(), 0.75);
-						
-								// otra loc
+								int fromX = (int) walked.get(player).getX();
+								int fromY = (int) walked.get(player).getY();
+								int fromZ = (int) walked.get(player).getZ();
+
+								// misma loc
+								if (fromX == toX && fromY == toY
+										&& fromZ == toZ) {
+									MySQL.removeFatiga(player.getName(), 0.75);
+
+									// otra loc
+								} else {
+									MySQL.addFatiga(
+											player.getName(),
+											0.1 * ModiferConverter.SacalaReverse(TrainingSQL
+													.getFTI(player.getName())));
+
+								}
+								walked.remove(player);
+								walked.put(player, player.getLocation());
 							} else {
-								MySQL.addFatiga(player.getName(), 0.1 * ModiferConverter
-										.SacalaReverse(TrainingSQL
-												.getFTI(player.getName())));
-								
+								walked.put(player, player.getLocation());
 							}
-							walked.remove(player);
-							walked.put(player, player.getLocation());
-						} else {
-							walked.put(player, player.getLocation());
+
+							if (MySQL.getFatiga(player.getName()) > 85) {
+								Miscelaneo.setWalkSpeed(player, 0.1);
+							}
+							// fracturas, anemia, desmayos, etc
+							if ((player.getWalkSpeed() < 0.2)
+									&& (MySQL.getFatiga(player.getName()) < 85)) {
+								Miscelaneo.setWalkSpeed(player, 0.2);
+							}
+							Scoreboard.showScore(player);
 						}
 
-						if (MySQL.getFatiga(player.getName()) > 85) {
-							Miscelaneo.setWalkSpeed(player, 0.1);
-						}
-						// fracturas, anemia, desmayos, etc
-						if ((player.getWalkSpeed() < 0.2)
-								&& (MySQL.getFatiga(player.getName()) < 85)) {
-							Miscelaneo.setWalkSpeed(player, 0.2);
-						}
-						Scoreboard.showScore(player);
 					}
 				}
 

@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.plugin.Plugin;
 
 import es.programahermes.MySQL;
+import es.programahermes.PHDS.DeathSQL;
 import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.Scoreboard;
 
@@ -22,33 +23,34 @@ public class Hydratation implements Listener {
 			@Override
 			public void run() {
 				for (Player player : Bukkit.getOnlinePlayers()) {
-					if(player.getGameMode().equals(GameMode.SURVIVAL)){
-						if (MySQL.getSed(player.getName()) > 0) {
-							MySQL.removeSed(player.getName(), 1);
-						}
+					if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+						if (!DeathSQL.isInLimbo(player.getName())) {
+							if (MySQL.getSed(player.getName()) > 0) {
+								MySQL.removeSed(player.getName(), 1);
+							}
 
-						Scoreboard.showScore(player);
-						if (MySQL.getSed(player.getName()) <= 20) {
-							Miscelaneo.setWalkSpeed(player, 0.1);
-						} else {
-							Miscelaneo.setWalkSpeed(player, 0.2);
-						}
+							Scoreboard.showScore(player);
+							if (MySQL.getSed(player.getName()) <= 20) {
+								Miscelaneo.setWalkSpeed(player, 0.1);
+							} else {
+								Miscelaneo.setWalkSpeed(player, 0.2);
+							}
 
-						if (MySQL.getSed(player.getName()) <= 20) {
-							player.sendMessage(ChatColor.GREEN
-									+ "[Soporte Vital]"
-									+ ChatColor.RED
-									+ "¡Bebe algo pronto, tu nivel de hidratación es muy bajo!");
-							player.playSound(player.getLocation(), Sound.BAT_DEATH,
-									0.5F, 0.0F);
-							if (MySQL.getSed(player.getName()) <= 0) {
-								player.damage(100);
+							if (MySQL.getSed(player.getName()) <= 20) {
+								player.sendMessage(ChatColor.GREEN
+										+ "[Soporte Vital]"
+										+ ChatColor.RED
+										+ "¡Bebe algo pronto, tu nivel de hidratación es muy bajo!");
+								player.playSound(player.getLocation(),
+										Sound.BAT_DEATH, 0.5F, 0.0F);
+								if (MySQL.getSed(player.getName()) <= 0) {
+									player.damage(100);
 
+								}
 							}
 						}
-
 					}
-					}
+				}
 
 			}
 		}, 100L, 20 * 60);
