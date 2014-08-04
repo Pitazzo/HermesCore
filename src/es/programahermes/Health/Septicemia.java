@@ -34,11 +34,13 @@ public class Septicemia implements Listener, CommandExecutor {
 	static int taskID1;
 	static int taskID2;
 
+
+	
 	@EventHandler
 	public void onDamage(WeaponDamageEntityEvent event) {
 		if (event.getVictim() instanceof Player) {
 			Player victim = (Player) event.getVictim();
-			desinfeccionCheck(JavaPlugin.getPlugin(Main.class), victim);
+			desinfeccionCheck(Main.plugin, victim);
 		}
 
 	}
@@ -171,7 +173,6 @@ public class Septicemia implements Listener, CommandExecutor {
 	public static void setSepsis(Player player) {
 		if (!HealthSQL.Septicemia(player.getName())) {
 			HealthSQL.setSepticemia(player.getName(), true);
-			player.setMaxHealth(player.getMaxHealth() - 8);
 			player.sendMessage(ChatColor.RED
 					+ "Parece ser que alguna de tus heridas se ha infectado. Busca un médico o podrías tener graves problemas.");
 		} else {

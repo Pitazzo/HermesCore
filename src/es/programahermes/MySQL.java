@@ -5,29 +5,22 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class MySQL {
 
 	public static Connection connection;
 
+	private static String host = Main.plugin.getConfig().getString("MySQL.Host");
+	private static String port = Main.plugin.getConfig().getString("MySQL.Port");
+	private static String db = Main.plugin.getConfig().getString("MySQL.DB");
+	private static String user = Main.plugin.getConfig().getString("MySQL.User");
+	private static String password = Main.plugin.getConfig().getString(
+			"MySQL.Password");
+
 	public static synchronized void openConnection() {
 		try {
-
-			connection = DriverManager.getConnection(
-					"jdbc:mysql://"
-							+ JavaPlugin.getPlugin(Main.class).getConfig()
-									.getString("MySQL.Host")
-							+ ":"
-							+ JavaPlugin.getPlugin(Main.class).getConfig()
-									.getString("MySQL.Port")
-							+ "/"
-							+ JavaPlugin.getPlugin(Main.class).getConfig()
-									.getString("MySQL.DB"),
-					JavaPlugin.getPlugin(Main.class).getConfig()
-							.getString("MySQL.User"),
-					JavaPlugin.getPlugin(Main.class).getConfig()
-							.getString("MySQL.Password"));
+			connection = DriverManager.getConnection("jdbc:mysql://" + host
+					+ ":" + port + "/" + db, user, password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

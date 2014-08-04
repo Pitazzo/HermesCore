@@ -48,11 +48,14 @@ import es.programahermes.WGRegions.WGFlags;
 
 public class Main extends JavaPlugin{
 
-	public Plugin plugin = this;
+	public static Plugin plugin = null;
+	
+
 	
 	public void onEnable() {
 
-		Residual.residualUpdate(plugin);
+		this.plugin = this;
+		Residual.residualUpdate(this);
 		Hydratation.thirstUpdate(plugin);
 		Oxygen.oxyenUpdate(plugin);
 		Fatiga.waitFatigaCheck(plugin);
@@ -116,6 +119,7 @@ public class Main extends JavaPlugin{
 	}
 
 	public void onDisable() {
+		this.plugin = null;
 		getServer().clearRecipes();
 	}
 

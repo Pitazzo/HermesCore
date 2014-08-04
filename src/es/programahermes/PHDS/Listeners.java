@@ -17,7 +17,7 @@ public class Listeners implements Listener {
 	public void onDeath(PlayerDeathEvent event) {
 		Player player = event.getEntity();
 
-		if (!player.getWorld().getName().equals("Limbo")) {
+		if (!DeathSQL.isInLimbo(player.getName())) {
 			DeathSQL.setInLimbo(player.getName(), true);
 			DeathSQL.setTimeLeft(player.getName(), 300);
 			DeathSQL.setDeathLoc(player.getName(), player.getLocation());

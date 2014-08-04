@@ -7,10 +7,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import es.programahermes.Main;
 import es.programahermes.Utilidades.Miscelaneo;
 
 public class Anemia implements Listener {
 
+
+	
 	@EventHandler
 	public void onConsume(PlayerItemConsumeEvent event) {
 		Player player = event.getPlayer();
@@ -50,10 +53,10 @@ public class Anemia implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event){
 		Player player = event.getPlayer();
-		if(player.getMaxHealth() > 12){
+		
 			if(HealthSQL.Anemia(player.getName())){
 				player.setMaxHealth(12);
-			}
+			
 		}else{
 			if(!HealthSQL.Anemia(player.getName())){
 				player.setMaxHealth(20);

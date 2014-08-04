@@ -12,6 +12,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import es.programahermes.Main;
 import es.programahermes.MySQL;
 import es.programahermes.Utilidades.ModiferConverter;
 import es.programahermes.Utilidades.Scoreboard;
@@ -20,6 +21,12 @@ public class ETS implements Listener {
 
 	HashMap<String, Long> cooldownP = new HashMap<String, Long>();
 
+	public static Main plugin;
+	
+	public ETS(){
+		this.plugin = plugin;
+		}
+	
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
@@ -54,7 +61,7 @@ public class ETS implements Listener {
 				|| event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 			if (player.getItemInHand().getType().equals(Material.INK_SACK)) {
 				if (player.getItemInHand().getDurability() == 2) {
-					if (player.getHealth() > 10) {
+					//if (player.getHealth() > 10) {
 						if (MySQL.getFatiga(player.getName()) < 70) {
 							if (cooldownP.containsKey(player.getName())) {
 								long diff = (System.currentTimeMillis() - cooldownP
@@ -118,14 +125,13 @@ public class ETS implements Listener {
 				}
 			}
 		}
-	}
+	//}
 
 	@EventHandler
 	public void onBreak(BlockBreakEvent event) {
 		Player player = event.getPlayer();
 		if (!event.isCancelled()) {
 			if (event.getBlock().getType().equals(Material.LOG)
-					|| event.getBlock().getType().equals(Material.LOG_2)
 					|| event.getBlock().getType().equals(Material.GRASS)
 					|| event.getBlock().getType().equals(Material.DIRT)
 					|| event.getBlock().getType().equals(Material.SAND)

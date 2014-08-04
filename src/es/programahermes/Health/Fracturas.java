@@ -21,6 +21,12 @@ public class Fracturas implements Listener {
 	static int taskID1;
 	static int counter = 0;
 
+	public static Main plugin;
+	
+	public Fracturas(){
+		this.plugin = plugin;
+		}
+	
 	@EventHandler
 	public void onFall(EntityDamageEvent event) {
 		if (event.getEntity() instanceof Player) {
@@ -60,7 +66,7 @@ public class Fracturas implements Listener {
 						double rdm = Math.random() * 100;
 						if (rdm < 85) {
 							reconstruccionCheck(
-									JavaPlugin.getPlugin(Main.class), player,
+									plugin, player,
 									target, "TS");
 						} else {
 							player.sendMessage(ChatColor.RED
@@ -76,7 +82,7 @@ public class Fracturas implements Listener {
 						if (HealthSQL.FracturaTI(player.getName())) {
 							double rdm = Math.random() * 100;
 							if (rdm < 85) {
-								reconstruccionCheck(Main.getPlugin(Main.class),
+								reconstruccionCheck(plugin,
 										player, target, "TI");
 							} else {
 								player.sendMessage(ChatColor.RED
