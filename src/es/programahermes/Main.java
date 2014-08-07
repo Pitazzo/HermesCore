@@ -12,6 +12,7 @@ import es.programahermes.Commands.SetHability;
 import es.programahermes.Commands.Stats;
 import es.programahermes.Commands.VSC;
 import es.programahermes.Commands.Visor;
+import es.programahermes.CustomEntities.CustomEntityType;
 import es.programahermes.Geologia.Geologia;
 import es.programahermes.Geologia.Perforadora;
 import es.programahermes.Geologia.Prospectar;
@@ -54,6 +55,7 @@ public class Main extends JavaPlugin{
 	
 	public void onEnable() {
 
+		CustomEntityType.registerEntities();
 		this.plugin = this;
 		Residual.residualUpdate(this);
 		Hydratation.thirstUpdate(plugin);
