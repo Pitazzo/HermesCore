@@ -6,14 +6,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.bukkit.entity.Player;
+
 public class MySQL {
 
 	public static Connection connection;
 
-	private static String host = Main.plugin.getConfig().getString("MySQL.Host");
-	private static String port = Main.plugin.getConfig().getString("MySQL.Port");
+	private static String host = Main.plugin.getConfig()
+			.getString("MySQL.Host");
+	private static String port = Main.plugin.getConfig()
+			.getString("MySQL.Port");
 	private static String db = Main.plugin.getConfig().getString("MySQL.DB");
-	private static String user = Main.plugin.getConfig().getString("MySQL.User");
+	private static String user = Main.plugin.getConfig()
+			.getString("MySQL.User");
 	private static String password = Main.plugin.getConfig().getString(
 			"MySQL.Password");
 
@@ -891,6 +896,67 @@ public class MySQL {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static synchronized boolean getGenero(String player) {
+
+		try {
+			openConnection();
+			PreparedStatement sql = connection
+					.prepareStatement("SELECT genero FROM `bukkit`.`user_data` WHERE name=?;");
+
+			sql.setString(1, player);
+			ResultSet result = sql.executeQuery();
+			result.next();
+			boolean genero = result.getBoolean("genero");
+			sql.close();
+			result.close();
+			closeConnection();
+			return genero;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	public static synchronized String getName(Player player) {
+
+		try {
+			PreparedStatement sql = connection
+					.prepareStatement("SELECT ICName FROM `bukkit`.`user_data` WHERE name=?;");
+
+			sql.setString(1, player.getName());
+			ResultSet result = sql.executeQuery();
+			result.next();
+			String name = result.getString("ICName");
+			sql.close();
+			result.close();
+
+			return name;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "ERROR";
+	}
+
+	public static synchronized String getDescripcion(String player) {
+
+		try {
+			PreparedStatement sql = connection
+					.prepareStatement("SELECT descripcion FROM `bukkit`.`user_data` WHERE name=?;");
+
+			sql.setString(1, player);
+			ResultSet result = sql.executeQuery();
+			result.next();
+			String descripcion = result.getString("descripcion");
+			sql.close();
+			result.close();
+
+			return descripcion;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "ERROR";
 	}
 
 }
