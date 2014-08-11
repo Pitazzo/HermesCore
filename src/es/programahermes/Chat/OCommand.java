@@ -13,7 +13,8 @@ public class OCommand implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("o")) {
 			if (sender instanceof Player) {
 				if (args.length == 0) {
-					HermesChat.tono.put((Player) sender, 3);
+					HermesChat.channel.put((Player) sender, "OOC");
+					HermesChat.tono.put((Player) sender, 30);
 					sender.sendMessage(ChatColor.DARK_BLUE
 							+ "Has cambiado al canal OOC");
 					return true;

@@ -11,8 +11,8 @@ public class JoinListener implements Listener{
 	public void onJoin(PlayerLoginEvent event){
 		Player player = event.getPlayer();
 		player.sendMessage("Test");
-		HermesChat.channel.put(player, "IC");
-		HermesChat.channel.put(player, "inglés");
+		HermesChat.channel.put(player, "ic");
+		HermesChat.idioma.put(player, "inglés");
 		HermesChat.tono.put(player, 16);
 	}
 	

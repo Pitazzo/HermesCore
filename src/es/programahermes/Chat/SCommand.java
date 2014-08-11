@@ -13,7 +13,8 @@ public class SCommand implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("s")) {
 			if (sender instanceof Player) {
 				if (args.length == 0) {
-					HermesChat.tono.put((Player) sender, 3);
+					HermesChat.tono.put((Player) sender, 2);
+					HermesChat.channel.put((Player) sender, "ic");
 					sender.sendMessage(ChatColor.GRAY
 							+ "Has cambiado a modo susurrar");
 					return true;
@@ -25,7 +26,7 @@ public class SCommand implements CommandExecutor {
 					    msg = msg + arg; 
 					}
 					
-					HermesChat.chat((Player) sender, msg, 2, "IC",
+					HermesChat.chat((Player) sender, msg, 2, "ic",
 							HermesChat.idioma.get(sender));
 					return true;
 

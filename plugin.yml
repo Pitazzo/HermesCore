@@ -60,6 +60,9 @@ commands:
    g:
      description: Se obtiene información del ítem seleccionado
      usage: Error de sintaxis! Simplemente escribe /data
+   h:
+     description: Se obtiene información del ítem seleccionado
+     usage: Error de sintaxis! Simplemente escribe /data
    canal:
      description: Se obtiene información del ítem seleccionado
      usage: Error de sintaxis! Simplemente escribe /data

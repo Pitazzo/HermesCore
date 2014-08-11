@@ -41,15 +41,15 @@ public class HermesChat {
 				 * + IdentityChat.getName(sender, player); } }
 				 */
 				// canales
-				if (channel == "IC") {
+				if (channel.equalsIgnoreCase("ic")) {
 					ch = ChatColor.GOLD + "[IC] ";
-				} else if (channel == "OOC") {
+				} else if (channel.equalsIgnoreCase("ooc")) {
 					ch = ChatColor.BLUE + "[OOC] ";
 				}
 				// radio
 				if (radius < 3) {
 					msg = ChatColor.GRAY + msg;
-				} else if (radius > 19) {
+				} else if (radius > 19 && channel.equalsIgnoreCase("ic")) {
 					msg = ChatColor.DARK_RED + msg;
 				}
 

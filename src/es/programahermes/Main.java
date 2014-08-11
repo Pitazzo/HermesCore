@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import es.programahermes.Chat.ChannelSwitcher;
 import es.programahermes.Chat.ChatListener;
 import es.programahermes.Chat.GCommand;
+import es.programahermes.Chat.HCommand;
 import es.programahermes.Chat.JoinListener;
 import es.programahermes.Chat.LanguageSwitcher;
 import es.programahermes.Chat.OCommand;
@@ -118,6 +119,7 @@ public class Main extends JavaPlugin{
 		getCommand("s").setExecutor(new SCommand());
 		getCommand("o").setExecutor(new OCommand());
 		getCommand("g").setExecutor(new GCommand());
+		getCommand("h").setExecutor(new HCommand());
 		getCommand("idioma").setExecutor(new LanguageSwitcher());
 		getCommand("canal").setExecutor(new ChannelSwitcher());
 		loadConfiguration();
