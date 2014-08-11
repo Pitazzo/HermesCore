@@ -51,3 +51,18 @@ commands:
    data:
      description: Se obtiene información del ítem seleccionado
      usage: Error de sintaxis! Simplemente escribe /data
+   o:
+     description: Se obtiene información del ítem seleccionado
+     usage: Error de sintaxis! Simplemente escribe /data
+   s:
+     description: Se obtiene información del ítem seleccionado
+     usage: Error de sintaxis! Simplemente escribe /data
+   g:
+     description: Se obtiene información del ítem seleccionado
+     usage: Error de sintaxis! Simplemente escribe /data
+   canal:
+     description: Se obtiene información del ítem seleccionado
+     usage: Error de sintaxis! Simplemente escribe /data
+   idioma:
+     description: Se obtiene información del ítem seleccionado
+     usage: Error de sintaxis! Simplemente escribe /data

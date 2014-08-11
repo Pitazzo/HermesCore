@@ -4,6 +4,13 @@ package es.programahermes;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import es.programahermes.Chat.ChannelSwitcher;
+import es.programahermes.Chat.ChatListener;
+import es.programahermes.Chat.GCommand;
+import es.programahermes.Chat.JoinListener;
+import es.programahermes.Chat.LanguageSwitcher;
+import es.programahermes.Chat.OCommand;
+import es.programahermes.Chat.SCommand;
 import es.programahermes.Combat.Accuracy;
 import es.programahermes.Combat.Melee;
 import es.programahermes.Commands.LevelUpCommand;
@@ -92,6 +99,8 @@ public class Main extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new Poison(), this);
 		getServer().getPluginManager().registerEvents(new FakeTable(), this);
 		getServer().getPluginManager().registerEvents(new Listeners(), this);
+		getServer().getPluginManager().registerEvents(new ChatListener(), this);
+		getServer().getPluginManager().registerEvents(new JoinListener(), this);
 		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
@@ -106,6 +115,11 @@ public class Main extends JavaPlugin{
 		getCommand("cuerpoacuerpo").setExecutor(new Melee());
 		getCommand("emergency").setExecutor(new Miscelaneo());
 		getCommand("data").setExecutor(new DataGetter());
+		getCommand("s").setExecutor(new SCommand());
+		getCommand("o").setExecutor(new OCommand());
+		getCommand("g").setExecutor(new GCommand());
+		getCommand("idioma").setExecutor(new LanguageSwitcher());
+		getCommand("canal").setExecutor(new ChannelSwitcher());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();

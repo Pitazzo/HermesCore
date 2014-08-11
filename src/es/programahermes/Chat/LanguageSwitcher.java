@@ -85,9 +85,9 @@ public class LanguageSwitcher implements CommandExecutor {
 									+ "No dominas ese idioma");
 						}
 					}else{
-						sender.sendMessage(ChatColor.DARK_RED+args[0]+" no es un idioma válido");
+						sender.sendMessage(ChatColor.DARK_RED+"El "+args[0]+" no es un idioma válido");
 					}
-					
+					return true;
 				}
 			}
 		}
