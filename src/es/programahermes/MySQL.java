@@ -919,8 +919,8 @@ public class MySQL {
 		return true;
 	}
 
-	public static synchronized String getName(Player player) {
-
+	public static synchronized String getICName(Player player) {
+		openConnection();
 		try {
 			PreparedStatement sql = connection
 					.prepareStatement("SELECT ICName FROM `bukkit`.`user_data` WHERE name=?;");
@@ -940,7 +940,7 @@ public class MySQL {
 	}
 
 	public static synchronized String getDescripcion(String player) {
-
+		openConnection();
 		try {
 			PreparedStatement sql = connection
 					.prepareStatement("SELECT descripcion FROM `bukkit`.`user_data` WHERE name=?;");

@@ -14,7 +14,7 @@ public class ChatListener implements Listener {
 		HermesChat.chat(sender, event.getMessage(),
 				HermesChat.tono.get(sender), HermesChat.channel.get(sender),
 				HermesChat.idioma.get(sender));
-		System.out.println(sender.getName() + ": " + event.getMessage());
+		System.out.println("["+HermesChat.channel.get(sender).toUpperCase()+"]"+sender.getName() + ": " + event.getMessage());
 		event.setCancelled(true);
 	}
 

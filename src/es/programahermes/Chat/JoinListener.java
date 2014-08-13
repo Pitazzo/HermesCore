@@ -1,5 +1,7 @@
 package es.programahermes.Chat;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,24 +12,30 @@ import org.bukkit.event.player.PlayerLoginEvent;
 
 import es.programahermes.Main;
 
-public class JoinListener implements Listener{
+public class JoinListener implements Listener {
 
 	@EventHandler
-	public void onJoin(PlayerLoginEvent event){
+	public void onJoin(PlayerLoginEvent event) {
 		Player player = event.getPlayer();
 		player.sendMessage("Test");
 		HermesChat.channel.put(player, "ic");
 		HermesChat.idioma.put(player, "inglés");
 		HermesChat.tono.put(player, 16);
-		
-		//data
-	
-			
-			List<String> conocidos = (List<String>) Main.JugadoresConfig.getList(player.getName());
-			System.out.println(conocidos.toString());
-			conocidos.add("Bastiv|agent X");
+
+		// data
+		if (!Main.JugadoresConfig.isSet(player.getName())) {
+			List<String> conocidos = new ArrayList<String>();
+			conocidos.add("Notch|Markus Persson");
 			Main.JugadoresConfig.set(player.getName(), conocidos);
-		
+			File file = new File(Main.plugin.getDataFolder(), "jugadores.yml");
+			try {
+				Main.JugadoresConfig.save(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			};
+			
+		}
+
 	}
-	
+
 }

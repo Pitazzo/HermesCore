@@ -96,12 +96,13 @@ public class Meeter implements CommandExecutor, Listener {
 		if (event.getRightClicked() instanceof Player) {
 			Player target = (Player) event.getRightClicked();
 			if (players.containsKey(player)) {
-		//		if (IdentityChat.knowsPlayer(player, target)) {
+	if (IdentityChat.knowsPlayer(player, target)) {
 					player.sendMessage(ChatColor.BLUE
 							+ "¡Te has presentado como " + players.get(player)
 							+ "!");
 					target.sendMessage(ChatColor.BLUE + "¡"
 							+ players.get(player) + " se ha presentado!");
+					IdentityChat.meetPlayer(player, target, player.getName());
 					players.remove(player);
 					name = null;
 				} else {
@@ -112,6 +113,6 @@ public class Meeter implements CommandExecutor, Listener {
 			}
 
 		}
-	//}
+	}
 
 }

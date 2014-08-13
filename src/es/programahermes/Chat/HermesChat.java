@@ -18,8 +18,10 @@ public class HermesChat {
 		for (Player player : sender.getWorld().getPlayers()) {
 			if (sender.getLocation().distance(player.getLocation()) < radius) {
 
-				String name = sender.getName();// IdentityChat.getName(sender,
-												// player);
+				String name = IdentityChat.getName(sender, player);
+				if(sender == player){
+					name = MySQL.getICName(player);
+				}
 				String cargo = "";
 				String ch = "";
 				// cargos
@@ -34,17 +36,13 @@ public class HermesChat {
 				}
 
 				// name
-				/*
-				 * if (!IdentityChat.knowsPlayer(sender, player)) { if
-				 * (MySQL.getGenero(sender.getName())) { name = "ese " +
-				 * IdentityChat.getName(sender, player); } else { name = "esa "
-				 * + IdentityChat.getName(sender, player); } }
-				 */
+
 				// canales
 				if (channel.equalsIgnoreCase("ic")) {
 					ch = ChatColor.GOLD + "[IC] ";
 				} else if (channel.equalsIgnoreCase("ooc")) {
 					ch = ChatColor.BLUE + "[OOC] ";
+					name = player.getName();
 				}
 				// radio
 				if (radius < 3) {
@@ -53,15 +51,28 @@ public class HermesChat {
 					msg = ChatColor.DARK_RED + msg;
 				}
 
-				if(sender == player){
+				if (sender == player) {
 					player.sendMessage(ch + cargo + ChatColor.WHITE + name
 							+ ": " + msg);
-				}else{
+				} else {
 					if (sender.getLocation().distance(player.getLocation()) < radius) {
-						if (player.hasPermission("hermescore.idiomas." + language)) {
-							player.sendMessage(ch + cargo + ChatColor.WHITE + name
-									+ ": " + msg);
+						if (player.hasPermission("hermescore.idiomas."
+								+ language)) {
+							player.sendMessage(ch + cargo + ChatColor.WHITE
+									+ name + ": " + msg);
 						} else {
+							if (!IdentityChat.knowsPlayer(player, sender)) {
+								if (MySQL.getGenero(sender.getName())) {
+
+									name = "esa "
+											+ IdentityChat.getName(sender,
+													player);
+								} else {
+									name = "ese "
+											+ IdentityChat.getName(sender,
+													player);
+								}
+							}
 							player.sendMessage("Humm... Parece que " + name
 									+ " está hablando en " + ChatColor.DARK_RED
 									+ language + ChatColor.WHITE
@@ -69,8 +80,6 @@ public class HermesChat {
 						}
 					}
 				}
-				
-			
 
 			}
 		}

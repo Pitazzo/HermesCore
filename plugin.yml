@@ -52,20 +52,26 @@ commands:
      description: Se obtiene información del ítem seleccionado
      usage: Error de sintaxis! Simplemente escribe /data
    o:
-     description: Se obtiene información del ítem seleccionado
-     usage: Error de sintaxis! Simplemente escribe /data
+     description: Se pasa al canal OOC o se envia un mensaje en OOC
+     usage: Error de sintaxis! Simplemente escribe /o o /o <mensaje>
    s:
-     description: Se obtiene información del ítem seleccionado
-     usage: Error de sintaxis! Simplemente escribe /data
+     description: Se habla en un tono de susurro o se cambia permanentemente al tono "susurrar"
+     usage: Error de sintaxis! Simplemente escribe /s o /s <mensaje>
    g:
-     description: Se obtiene información del ítem seleccionado
-     usage: Error de sintaxis! Simplemente escribe /data
+     description: Se habla en un tono de grito o se cambia permanentemente al tono "gritar"
+     usage: Error de sintaxis! Simplemente escribe /g o /g <mensaje>
    h:
-     description: Se obtiene información del ítem seleccionado
-     usage: Error de sintaxis! Simplemente escribe /data
+     description: Se habla en un tono normal o se cambia permanentemente al tono "hablar"
+     usage: Error de sintaxis! Simplemente escribe /h o /h <mensaje>
    canal:
-     description: Se obtiene información del ítem seleccionado
-     usage: Error de sintaxis! Simplemente escribe /data
+     description: Se cambia al canal de chat seleccionado
+     usage: Error de sintaxis! Simplemente escribe /canal <IC|OOC>
    idioma:
-     description: Se obtiene información del ítem seleccionado
-     usage: Error de sintaxis! Simplemente escribe /data
+     description: El jugador pasa a hablar en el idioma deseado, siempre que su personaje lo domine
+     usage: Error de sintaxis! Simplemente escribe /idioma <idioma>
+   presentarse:
+     description: El jugador se presenta con el nombre deseado a otro
+     usage: Error de sintaxis! Simplemente escribe /presentarse <nombre>
+   tono:
+    description: Se selecciona el tono de voz
+    usage: Error de sintaxis! Simplemente escribe /tono <susurrar|hablar|gritar>
