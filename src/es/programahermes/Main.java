@@ -1,6 +1,10 @@
 package es.programahermes;
 
+import java.io.File;
+import java.io.IOException;
 
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -10,8 +14,10 @@ import es.programahermes.Chat.GCommand;
 import es.programahermes.Chat.HCommand;
 import es.programahermes.Chat.JoinListener;
 import es.programahermes.Chat.LanguageSwitcher;
+import es.programahermes.Chat.Meeter;
 import es.programahermes.Chat.OCommand;
 import es.programahermes.Chat.SCommand;
+import es.programahermes.Chat.TonoSwitcher;
 import es.programahermes.Combat.Accuracy;
 import es.programahermes.Combat.Melee;
 import es.programahermes.Commands.LevelUpCommand;
@@ -55,12 +61,12 @@ import es.programahermes.Utilidades.Poison;
 import es.programahermes.Utilidades.Recipes;
 import es.programahermes.WGRegions.WGFlags;
 
-public class Main extends JavaPlugin{
+public class Main extends JavaPlugin {
 
 	public static Plugin plugin = null;
-	
+	public File jugadores;
+	public static FileConfiguration JugadoresConfig;
 
-	
 	public void onEnable() {
 
 		CustomEntityType.registerEntities();
@@ -73,6 +79,7 @@ public class Main extends JavaPlugin{
 		PointsAdjust.pointsAdjust(plugin);
 		DeathTimer.limbo(plugin);
 		Septicemia.sepsis(plugin);
+		loadJugadoresFile();
 		getServer().getPluginManager().registerEvents(new Geologia(), this);
 		getServer().getPluginManager().registerEvents(new Refuerzos(), this);
 		getServer().getPluginManager().registerEvents(new Perforadora(), this);
@@ -102,6 +109,7 @@ public class Main extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new Listeners(), this);
 		getServer().getPluginManager().registerEvents(new ChatListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinListener(), this);
+		getServer().getPluginManager().registerEvents(new Meeter(), this);
 		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
@@ -122,6 +130,8 @@ public class Main extends JavaPlugin{
 		getCommand("h").setExecutor(new HCommand());
 		getCommand("idioma").setExecutor(new LanguageSwitcher());
 		getCommand("canal").setExecutor(new ChannelSwitcher());
+		getCommand("presentarse").setExecutor(new Meeter());
+		getCommand("tono").setExecutor(new TonoSwitcher());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
@@ -144,7 +154,18 @@ public class Main extends JavaPlugin{
 	public void loadConfiguration() {
 		this.plugin.getConfig().options().copyDefaults(true);
 		this.plugin.saveConfig();
+	}
 
-	}	
+	public void loadJugadoresFile() {
+		jugadores = new File(getDataFolder(), "jugadores.yml");
+		if (!jugadores.exists()) {
+			try {
+				jugadores.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		JugadoresConfig = YamlConfiguration.loadConfiguration(jugadores);
+	}
 
 }

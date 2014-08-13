@@ -17,12 +17,11 @@ public class GPS implements CommandExecutor{
 				if(player.getItemInHand().getType().equals(Material.COMPASS)){
 					int latitud = (int) player.getLocation().getZ();
 					int longitud = (int) player.getLocation().getX();
-					int lat = latitud*(-1);
 					player.sendMessage(ChatColor.RED+"+-----GPS-----+");
 					if(latitud > 0){
 						player.sendMessage(ChatColor.GREEN+"Latitud: "+ChatColor.GOLD+latitud+"E");
 					}else{
-						player.sendMessage(ChatColor.GREEN+"Latitud: "+ChatColor.GOLD+lat+"O");
+						player.sendMessage(ChatColor.GREEN+"Latitud: "+ChatColor.GOLD+latitud*(-1)+"O");
 					}
 					
 					player.sendMessage(ChatColor.RED+"+-----GPS-----+");

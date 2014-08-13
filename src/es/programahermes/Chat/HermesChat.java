@@ -53,17 +53,24 @@ public class HermesChat {
 					msg = ChatColor.DARK_RED + msg;
 				}
 
-				if (sender.getLocation().distance(player.getLocation()) < radius) {
-					if (player.hasPermission("hermescore.idiomas." + language)) {
-						player.sendMessage(ch + cargo + ChatColor.WHITE + name
-								+ ": " + msg);
-					} else {
-						player.sendMessage("Humm... Parece que " + name
-								+ " está hablando en " + ChatColor.DARK_RED
-								+ language + ChatColor.WHITE
-								+ "... no entiendo nada");
+				if(sender == player){
+					player.sendMessage(ch + cargo + ChatColor.WHITE + name
+							+ ": " + msg);
+				}else{
+					if (sender.getLocation().distance(player.getLocation()) < radius) {
+						if (player.hasPermission("hermescore.idiomas." + language)) {
+							player.sendMessage(ch + cargo + ChatColor.WHITE + name
+									+ ": " + msg);
+						} else {
+							player.sendMessage("Humm... Parece que " + name
+									+ " está hablando en " + ChatColor.DARK_RED
+									+ language + ChatColor.WHITE
+									+ "... no entiendo nada");
+						}
 					}
 				}
+				
+			
 
 			}
 		}
