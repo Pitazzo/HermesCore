@@ -25,7 +25,8 @@ public class Prospectar implements Listener {
 					if (event.getPlayer().getItemInHand().getType()
 							.equals(Material.WOOD_PICKAXE)) {
 						Location loc = event.getClickedBlock().getLocation();
-						double ran = (Math.random() * 100) - MySQL.getLevel(event.getPlayer().getName());
+						double ran = (Math.random() * 100)
+								- MySQL.getLevel(event.getPlayer().getName());
 						if (ran > WGRegions
 								.getConecentration(loc, WGFlags.iron)) {
 							ores.add(Material.IRON_ORE);
@@ -38,16 +39,21 @@ public class Prospectar implements Listener {
 								WGFlags.coal)) {
 							ores.add(Material.COAL_ORE);
 						}
-						
-						for(Material material : ores){
-							if(ran < 70){
-								event.getClickedBlock().setType(material);
-								break;
-							}else{
-								event.getClickedBlock().setType(Material.ENDER_STONE);
-							}
-						}
 
+						if (!ores.isEmpty()) {
+							for (Material material : ores) {
+								if (ran < 70) {
+									event.getClickedBlock().setType(material);
+									break;
+								} else {
+									event.getClickedBlock().setType(
+											Material.ENDER_STONE);
+								}
+							}
+						} else {
+							event.getClickedBlock().setType(
+									Material.ENDER_STONE);
+						}
 					}
 				}
 			}
