@@ -1,5 +1,7 @@
 package es.programahermes.Geologia;
 
+import java.util.ArrayList;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -13,6 +15,8 @@ import es.programahermes.WGRegions.WGRegions;
 
 public class Prospectar implements Listener {
 
+	public ArrayList<Material> ores = new ArrayList<Material>();
+
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		if (MySQL.getHability(event.getPlayer().getName()).equals("Geologia")) {
@@ -21,45 +25,32 @@ public class Prospectar implements Listener {
 					if (event.getPlayer().getItemInHand().getType()
 							.equals(Material.WOOD_PICKAXE)) {
 						Location loc = event.getClickedBlock().getLocation();
-						double ran = Math.random() * 100;
+						double ran = (Math.random() * 100) - MySQL.getLevel(event.getPlayer().getName());
 						if (ran > WGRegions
 								.getConecentration(loc, WGFlags.iron)) {
-							event.getClickedBlock().setType(Material.IRON_ORE);
-						} else {
-							event.getClickedBlock().setType(
-									Material.ENDER_STONE);
+							ores.add(Material.IRON_ORE);
 						}
 						if (ran <= WGRegions.getConecentration(loc,
 								WGFlags.gold)) {
-							event.getClickedBlock().setType(Material.GOLD_ORE);
-						} else {
-							event.getClickedBlock().setType(
-									Material.ENDER_STONE);
+							ores.add(Material.GOLD_ORE);
 						}
 						if (ran <= WGRegions.getConecentration(loc,
 								WGFlags.coal)) {
-							event.getClickedBlock().setType(Material.COAL_ORE);
-						} else {
-							event.getClickedBlock().setType(
-									Material.ENDER_STONE);
+							ores.add(Material.COAL_ORE);
+						}
+						
+						for(Material material : ores){
+							if(ran < 70){
+								event.getClickedBlock().setType(material);
+								break;
+							}else{
+								event.getClickedBlock().setType(Material.ENDER_STONE);
+							}
 						}
 
-					} else {
-						// tool
-						return;
 					}
-				} else {
-					// stone
-					return;
 				}
-			} else {
-				// action
-				return;
 			}
-		} else {
-			// geo
-			return;
 		}
 	}
-
 }
