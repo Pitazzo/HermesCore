@@ -11,44 +11,49 @@ import es.programahermes.MySQL;
 
 public class IdentityChat {
 
-	public static boolean knowsPlayer(Player asker, Player player) {
+	public static boolean knowsPlayer(Player asker, Player sender) {
 		List<String> conocidos = (List<String>) Main.JugadoresConfig
 				.getList(asker.getName());
-		if(conocidos != null){
+		if (conocidos != null) {
 			for (String row : conocidos) {
-				if (row.contains(player.getName())) {
+				if (row.contains(sender.getName())) {
 					return true;
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
-	public static String getName(Player asker, Player player) {
-		if (knowsPlayer(asker, player)) {
+	public static String getName(Player asker, Player sender) {
+		if (knowsPlayer(asker, sender)) {
 
 			List<String> conocidos = (List<String>) Main.JugadoresConfig
 					.getList(asker.getName());
 			for (String row : conocidos) {
-				if (row.contains(player.getName())) {
-					String[] parts = row.split("|");
+				if (row.contains(sender.getName())) {
+					System.out.println(row);
+					String[] parts = row.split("@");
+					for(String substring : parts){
+						System.out.println(substring);
+					}
+					
 					return parts[1];
 				}
 			}
 
-		}else{
-			return MySQL.getDescripcion(player.getName());
+		} else {
+			return MySQL.getDescripcion(sender.getName());
 		}
 
-		return "";
+		return "ERROR EN CHAT - REPORTAR";
 	}
 
-	public static void meetPlayer(Player meeter, Player player, String name){
+	public static void meetPlayer(Player meeter, Player player, String name) {
 		List<String> conocidos = (List<String>) Main.JugadoresConfig
 				.getList(meeter.getName());
-		
-		conocidos.add(player.getName()+"|"+name);
+
+		conocidos.add(player.getName() + "@" + name);
 		Main.JugadoresConfig.set(meeter.getName(), conocidos);
 		File file = new File(Main.plugin.getDataFolder(), "jugadores.yml");
 		try {
@@ -56,7 +61,7 @@ public class IdentityChat {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 }

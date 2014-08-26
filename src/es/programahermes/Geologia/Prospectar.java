@@ -22,31 +22,28 @@ public class Prospectar implements Listener {
 							.equals(Material.WOOD_PICKAXE)) {
 						Location loc = event.getClickedBlock().getLocation();
 						double ran = Math.random() * 100;
-						if (ran > WGRegions.getConecentration(loc,
-									WGFlags.iron)) {
-								event.getClickedBlock().setType(
-										Material.IRON_ORE);
-							} else {
-								event.getClickedBlock().setType(
-										Material.ENDER_STONE);
-							}
-							if (ran <= WGRegions.getConecentration(loc,
-									WGFlags.gold)) {
-								event.getClickedBlock().setType(
-										Material.GOLD_ORE);
-							} else {
-								event.getClickedBlock().setType(
-										Material.ENDER_STONE);
-							}
-							if (ran <= WGRegions.getConecentration(loc,
-									WGFlags.coal)) {
-								event.getClickedBlock().setType(
-										Material.COAL_ORE);
-							} else {
-								event.getClickedBlock().setType(
-										Material.ENDER_STONE);
-							}
-						
+						if (ran > WGRegions
+								.getConecentration(loc, WGFlags.iron)) {
+							event.getClickedBlock().setType(Material.IRON_ORE);
+						} else {
+							event.getClickedBlock().setType(
+									Material.ENDER_STONE);
+						}
+						if (ran <= WGRegions.getConecentration(loc,
+								WGFlags.gold)) {
+							event.getClickedBlock().setType(Material.GOLD_ORE);
+						} else {
+							event.getClickedBlock().setType(
+									Material.ENDER_STONE);
+						}
+						if (ran <= WGRegions.getConecentration(loc,
+								WGFlags.coal)) {
+							event.getClickedBlock().setType(Material.COAL_ORE);
+						} else {
+							event.getClickedBlock().setType(
+									Material.ENDER_STONE);
+						}
+
 					} else {
 						// tool
 						return;

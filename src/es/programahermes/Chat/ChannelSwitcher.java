@@ -15,9 +15,11 @@ public class ChannelSwitcher implements CommandExecutor {
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("IC")) {
 						HermesChat.channel.put((Player) sender, "ic");
+						HermesChat.tono.put((Player) sender, 10); 
 						sender.sendMessage(ChatColor.GOLD+"Has cambiado al canal IC");
 					} else if (args[0].equalsIgnoreCase("OOC")) {
 						HermesChat.channel.put((Player) sender, "ooc");
+						HermesChat.tono.put((Player) sender, 25);
 						sender.sendMessage(ChatColor.BLUE+"Has cambiado al canal OOC");
 					} else {
 						sender.sendMessage(ChatColor.DARK_RED + args[0]

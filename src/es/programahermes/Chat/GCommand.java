@@ -6,7 +6,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import es.programahermes.Main;
 
 public class GCommand implements CommandExecutor {
 
@@ -24,7 +23,6 @@ public class GCommand implements CommandExecutor {
 						HermesChat.channel.put((Player) sender, "ic");
 						sender.sendMessage(ChatColor.DARK_RED
 								+ "Has cambiado a modo gritar");
-						Main.JugadoresConfig.set(sender.getName(), "Test");
 					}
 
 					return true;

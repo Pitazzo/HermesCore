@@ -16,14 +16,11 @@ public class HermesChat {
 	public static void chat(Player sender, String msg, int radius,
 			String channel, String language) {
 		for (Player player : sender.getWorld().getPlayers()) {
-			if (sender.getLocation().distance(player.getLocation()) < radius) {
-
-				String name = IdentityChat.getName(sender, player);
-				if(sender == player){
-					name = MySQL.getICName(player);
-				}
+			if (sender.getLocation().distance(player.getLocation()) < radius) {				
+				String name = "";		
 				String cargo = "";
 				String ch = "";
+				String lang = "";
 				// cargos
 				if (sender.hasPermission("hermescore.vip")) {
 					cargo = ChatColor.GOLD + "[VIP] ";
@@ -36,10 +33,12 @@ public class HermesChat {
 				}
 
 				// name
-
+				
 				// canales
 				if (channel.equalsIgnoreCase("ic")) {
 					ch = ChatColor.GOLD + "[IC] ";
+					name = IdentityChat.getName(player, sender);
+					lang = ChatColor.DARK_GREEN+"["+ idioma.get(sender).substring(0, 1).toUpperCase() + idioma.get(sender).substring(1)+"] ";
 				} else if (channel.equalsIgnoreCase("ooc")) {
 					ch = ChatColor.BLUE + "[OOC] ";
 					name = player.getName();
@@ -52,14 +51,14 @@ public class HermesChat {
 				}
 
 				if (sender == player) {
-					player.sendMessage(ch + cargo + ChatColor.WHITE + name
-							+ ": " + msg);
+					player.sendMessage(ch + cargo + lang +ChatColor.DARK_PURPLE +MySQL.getICName(player) +
+							 ChatColor.WHITE+": " + msg);
 				} else {
 					if (sender.getLocation().distance(player.getLocation()) < radius) {
 						if (player.hasPermission("hermescore.idiomas."
 								+ language)) {
-							player.sendMessage(ch + cargo + ChatColor.WHITE
-									+ name + ": " + msg);
+							player.sendMessage(ch + cargo +lang+ ChatColor.DARK_PURPLE
+									+ name + ChatColor.WHITE+ ": " + msg);
 						} else {
 							if (!IdentityChat.knowsPlayer(player, sender)) {
 								if (MySQL.getGenero(sender.getName())) {

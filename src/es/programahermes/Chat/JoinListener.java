@@ -17,7 +17,6 @@ public class JoinListener implements Listener {
 	@EventHandler
 	public void onJoin(PlayerLoginEvent event) {
 		Player player = event.getPlayer();
-		player.sendMessage("Test");
 		HermesChat.channel.put(player, "ic");
 		HermesChat.idioma.put(player, "inglés");
 		HermesChat.tono.put(player, 16);
@@ -25,7 +24,7 @@ public class JoinListener implements Listener {
 		// data
 		if (!Main.JugadoresConfig.isSet(player.getName())) {
 			List<String> conocidos = new ArrayList<String>();
-			conocidos.add("Notch|Markus Persson");
+			conocidos.add("Notch@Markus Persson");
 			Main.JugadoresConfig.set(player.getName(), conocidos);
 			File file = new File(Main.plugin.getDataFolder(), "jugadores.yml");
 			try {
@@ -34,6 +33,13 @@ public class JoinListener implements Listener {
 				e.printStackTrace();
 			};
 			
+		}else{
+			List<String> conocidos = (List<String>) Main.JugadoresConfig.getList(player.getName());
+			for (String row : conocidos){
+				System.out.println("Row: "+row);
+				String[] parts = row.split("@");
+				System.out.println("Nombre: "+parts[2]);
+			}
 		}
 
 	}
