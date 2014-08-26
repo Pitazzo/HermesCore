@@ -27,7 +27,7 @@ public class Prospectar implements Listener {
 						Location loc = event.getClickedBlock().getLocation();
 						double ran = (Math.random() * 100)
 								- MySQL.getLevel(event.getPlayer().getName());
-						if (ran > WGRegions
+						if (ran <= WGRegions
 								.getConecentration(loc, WGFlags.iron)) {
 							ores.add(Material.IRON_ORE);
 						}
