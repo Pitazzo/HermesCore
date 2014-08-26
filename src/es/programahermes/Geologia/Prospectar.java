@@ -1,6 +1,8 @@
 package es.programahermes.Geologia;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,7 +17,7 @@ import es.programahermes.WGRegions.WGRegions;
 
 public class Prospectar implements Listener {
 
-	public ArrayList<Material> ores = new ArrayList<Material>();
+	public HashMap<Material, Double> ores = new HashMap<Material, Double>();
 
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
@@ -27,32 +29,34 @@ public class Prospectar implements Listener {
 						Location loc = event.getClickedBlock().getLocation();
 						double ran = (Math.random() * 100)
 								- MySQL.getLevel(event.getPlayer().getName());
-						if (ran <= WGRegions
-								.getConecentration(loc, WGFlags.iron)) {
-							ores.add(Material.IRON_ORE);
+						if (ran <= WGRegions.getConecentration(loc,
+								WGFlags.iron)) {
+							ores.put(Material.IRON_ORE, Math.random());
 						}
 						if (ran <= WGRegions.getConecentration(loc,
 								WGFlags.gold)) {
-							ores.add(Material.GOLD_ORE);
+							ores.put(Material.GOLD_ORE, Math.random());
 						}
 						if (ran <= WGRegions.getConecentration(loc,
 								WGFlags.coal)) {
-							ores.add(Material.COAL_ORE);
+							ores.put(Material.COAL_ORE, Math.random());
 						}
 
 						if (!ores.isEmpty()) {
-							for (Material material : ores) {
-								if (ran < 70) {
-									event.getClickedBlock().setType(material);
-									break;
-								} else {
+							double max = Collections.max(ores.values());
+							for (Entry<Material, Double> entry : ores
+									.entrySet()) {
+								if (max == entry.getValue()) {
 									event.getClickedBlock().setType(
-											Material.ENDER_STONE);
+											entry.getKey());
+									ores.clear();
+									break;
 								}
 							}
 						} else {
 							event.getClickedBlock().setType(
 									Material.ENDER_STONE);
+							ores.clear();
 						}
 					}
 				}
