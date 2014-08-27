@@ -35,7 +35,7 @@ public class HermesChat {
 				// canales
 				if (channel.equalsIgnoreCase("ic")) {
 					ch = ChatColor.GOLD + "[IC] ";
-					name = IdentityChat.getName(player, sender);
+					name = IdentityChat.getName(sender, player);
 					lang = ChatColor.DARK_GREEN+"["+ idioma.get(sender).substring(0, 1).toUpperCase() + idioma.get(sender).substring(1)+"] ";
 				} else if (channel.equalsIgnoreCase("ooc")) {
 					ch = ChatColor.BLUE + "[OOC] ";

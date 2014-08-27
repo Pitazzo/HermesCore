@@ -43,7 +43,7 @@ public class IdentityChat {
 			}
 
 		} else {
-			return MySQL.getDescripcion(sender.getName());
+			return MySQL.getDescripcion(asker.getName());
 		}
 
 		return "ERROR EN CHAT - REPORTAR";

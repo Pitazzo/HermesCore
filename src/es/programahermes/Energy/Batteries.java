@@ -1,4 +1,4 @@
-package es.programahermes.Utilidades;
+package es.programahermes.Energy;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import es.programahermes.MySQL;
+import es.programahermes.Utilidades.Miscelaneo;
 
 public class Batteries implements Listener {
 

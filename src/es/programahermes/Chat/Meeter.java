@@ -17,8 +17,8 @@ import es.programahermes.Main;
 
 public class Meeter implements CommandExecutor, Listener {
 
+	public static HashMap<Player, String> names = new HashMap<Player, String>();
 	public static HashMap<Player, String> players = new HashMap<Player, String>();
-	public static String name = "";
 	static int taskID1;
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
@@ -27,30 +27,33 @@ public class Meeter implements CommandExecutor, Listener {
 			if (sender instanceof Player) {
 				if (!args[0].equalsIgnoreCase("confirmar")
 						&& !args[0].equalsIgnoreCase("cancelar")) {
-
+					names.put((Player) sender, "");
 					for (int i = 0; i < args.length; i++) {
 
 						String arg = args[i] + " ";
 						if (arg != null) {
-							name = name + arg;
+							names.put((Player) sender, names.get(sender) + arg);
 						}
 
 					}
 
 					sender.sendMessage(ChatColor.DARK_GREEN
-							+ "Vas a presentarte como " + name);
+							+ "Vas a presentarte como " + ChatColor.DARK_RED
+							+ names.get(sender));
 					sender.sendMessage(ChatColor.DARK_GREEN
 							+ "Recuerda que nadie te obliga a presentarte con"
 							+ ChatColor.DARK_RED + " tu nombe real");
-					sender.sendMessage(ChatColor.DARK_GREEN
-							+ "Confirma con /presentarse confirmar o cancela con /presentarse cancelar");
+					sender.sendMessage(ChatColor.DARK_GREEN + "Confirma con "
+							+ ChatColor.DARK_BLUE + "/presentarse confirmar "
+							+ ChatColor.DARK_GREEN + "o cancela con "
+							+ ChatColor.DARK_BLUE + "/presentarse cancelar");
 					return true;
 
 				} else if (args[0].equalsIgnoreCase("confirmar")) {
-					if (name != null) {
-						players.put((Player) sender, name);
+					if (names.get(sender) != null) {
+						players.put((Player) sender, names.get(sender));
 						sender.sendMessage(ChatColor.BLUE
-								+ "Has confirmado tu nombre como " + name);
+								+ "Has confirmado tu nombre como " + names.get(sender));
 						sender.sendMessage(ChatColor.BLUE
 								+ "Haz click en los próximos 10 segundos en el personaje al que quieras presentarte");
 						timer(Main.plugin, (Player) sender);
@@ -65,7 +68,6 @@ public class Meeter implements CommandExecutor, Listener {
 						sender.sendMessage(ChatColor.DARK_RED
 								+ "Se cancela la presentación");
 						players.remove(sender);
-						name = null;
 						return true;
 					} else {
 						sender.sendMessage(ChatColor.DARK_RED
@@ -87,7 +89,6 @@ public class Meeter implements CommandExecutor, Listener {
 					public void run() {
 						if (players.containsKey(player)) {
 							players.remove(player);
-							name = null;
 							player.sendMessage(ChatColor.DARK_RED
 									+ "Tu presentación ha expirado");
 						}
@@ -101,19 +102,21 @@ public class Meeter implements CommandExecutor, Listener {
 		if (event.getRightClicked() instanceof Player) {
 			Player target = (Player) event.getRightClicked();
 			if (players.containsKey(player)) {
-				if (IdentityChat.knowsPlayer(target, player)) {
-				player.sendMessage(ChatColor.BLUE + "¡Te has presentado como "
-						+ players.get(player) + "!");
-				target.sendMessage(ChatColor.BLUE + "¡" + players.get(player)
-						+ " se ha presentado!");
-				IdentityChat.meetPlayer(player, target, name);
-				players.remove(player);
-				name = null;
-				
-				 } else { player.sendMessage(ChatColor.DARK_RED +
-				 "Ya te has presentado anteriormente a este jugador");
-				  players.remove(player); }
-				 
+				if (!IdentityChat.knowsPlayer(player, target)) {
+					player.sendMessage(ChatColor.BLUE
+							+ "¡Te has presentado como " + players.get(player)
+							+ "!");
+					target.sendMessage(ChatColor.BLUE + "¡"
+							+ players.get(player) + " se ha presentado!");
+					IdentityChat.meetPlayer(player, target, players.get(player));
+					players.remove(player);
+
+				} else {
+					player.sendMessage(ChatColor.DARK_RED
+							+ "Ya te has presentado anteriormente a este jugador");
+					players.remove(player);
+				}
+
 			}
 
 		}

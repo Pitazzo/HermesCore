@@ -20,6 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.shininet.bukkit.itemrenamer.api.RenamerAPI;
 
 import es.programahermes.MySQL;
+import es.programahermes.Energy.Batteries;
 import es.programahermes.Health.HealthSQL;
 
 public class Miscelaneo implements Listener, CommandExecutor {
@@ -163,7 +164,7 @@ public class Miscelaneo implements Listener, CommandExecutor {
 
 	public static String getName(ItemStack item) {
 		if (item != null) {
-			if (item.getItemMeta().getDisplayName() != null) {
+			if (item.getItemMeta() != null && item.getItemMeta().getDisplayName() !=null) {
 				return getDisplayName(item);
 			} else {
 				if (getIRName(item) != null) {
