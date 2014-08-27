@@ -11,12 +11,12 @@ import es.programahermes.MySQL;
 
 public class IdentityChat {
 
-	public static boolean knowsPlayer(Player asker, Player sender) {
+	public static boolean knowsPlayer(Player asker, Player player) {
 		List<String> conocidos = (List<String>) Main.JugadoresConfig
 				.getList(asker.getName());
 		if (conocidos != null) {
 			for (String row : conocidos) {
-				if (row.contains(sender.getName())) {
+				if (row.contains(player.getName())) {
 					return true;
 				}
 			}
@@ -34,10 +34,10 @@ public class IdentityChat {
 				if (row.contains(sender.getName())) {
 					System.out.println(row);
 					String[] parts = row.split("@");
-					for(String substring : parts){
+					for (String substring : parts) {
 						System.out.println(substring);
 					}
-					
+
 					return parts[1];
 				}
 			}

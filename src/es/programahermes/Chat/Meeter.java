@@ -25,53 +25,58 @@ public class Meeter implements CommandExecutor, Listener {
 			String[] args) {
 		if (cmd.getName().equalsIgnoreCase("presentarse")) {
 			if (sender instanceof Player) {
-					if (!args[0].equalsIgnoreCase("confirmar")
-							&& !args[0].equalsIgnoreCase("cancelar")) {
-						
-						for (int i = 0; i < args.length; i++) {
-							String arg = args[i] + " ";
+				if (!args[0].equalsIgnoreCase("confirmar")
+						&& !args[0].equalsIgnoreCase("cancelar")) {
+
+					for (int i = 0; i < args.length; i++) {
+
+						String arg = args[i] + " ";
+						if (arg != null) {
 							name = name + arg;
 						}
-						
-						sender.sendMessage(ChatColor.DARK_GREEN
-								+ "Vas a presentarte como " + name);
-						sender.sendMessage(ChatColor.DARK_GREEN
-								+ "Recuerda que nadie te obliga a presentarte con"
-								+ ChatColor.DARK_RED + " tu nombe real");
-						sender.sendMessage(ChatColor.DARK_GREEN
-								+ "Confirma con /presentarse confirmar o cancela con /presentarse cancelar");
-						return true;
-						
-					} else if (args[0].equalsIgnoreCase("confirmar")) {
-						if(name != null){
-							players.put((Player) sender, name);
-							sender.sendMessage(ChatColor.BLUE
-									+ "Has confirmado tu nombre como " + name);
-							sender.sendMessage(ChatColor.BLUE
-									+ "Haz click en los próximos 10 segundos en el personaje al que quieras presentarte");
-							timer(Main.plugin, (Player) sender);
-						}else{
-							sender.sendMessage(ChatColor.DARK_RED+"No hay nada que confirmar");
-						}
-						
-						return true;
-					} else if (args[0].equalsIgnoreCase("cancelar")) {
-						if (players.containsKey(sender)) {
-							sender.sendMessage(ChatColor.DARK_RED
-									+ "Se cancela la presentación");
-							players.remove(sender);
-							name = null;
-							return true;
-						} else {
-							sender.sendMessage(ChatColor.DARK_RED
-									+ "No hay nada que cancelar");
-							return true;
-						}
+
 					}
 
+					sender.sendMessage(ChatColor.DARK_GREEN
+							+ "Vas a presentarte como " + name);
+					sender.sendMessage(ChatColor.DARK_GREEN
+							+ "Recuerda que nadie te obliga a presentarte con"
+							+ ChatColor.DARK_RED + " tu nombe real");
+					sender.sendMessage(ChatColor.DARK_GREEN
+							+ "Confirma con /presentarse confirmar o cancela con /presentarse cancelar");
+					return true;
+
+				} else if (args[0].equalsIgnoreCase("confirmar")) {
+					if (name != null) {
+						players.put((Player) sender, name);
+						sender.sendMessage(ChatColor.BLUE
+								+ "Has confirmado tu nombre como " + name);
+						sender.sendMessage(ChatColor.BLUE
+								+ "Haz click en los próximos 10 segundos en el personaje al que quieras presentarte");
+						timer(Main.plugin, (Player) sender);
+					} else {
+						sender.sendMessage(ChatColor.DARK_RED
+								+ "No hay nada que confirmar");
+					}
+
+					return true;
+				} else if (args[0].equalsIgnoreCase("cancelar")) {
+					if (players.containsKey(sender)) {
+						sender.sendMessage(ChatColor.DARK_RED
+								+ "Se cancela la presentación");
+						players.remove(sender);
+						name = null;
+						return true;
+					} else {
+						sender.sendMessage(ChatColor.DARK_RED
+								+ "No hay nada que cancelar");
+						return true;
+					}
 				}
+
 			}
-		
+		}
+
 		return false;
 	}
 
@@ -96,20 +101,19 @@ public class Meeter implements CommandExecutor, Listener {
 		if (event.getRightClicked() instanceof Player) {
 			Player target = (Player) event.getRightClicked();
 			if (players.containsKey(player)) {
-	//if (IdentityChat.knowsPlayer(target, player)) {
-					player.sendMessage(ChatColor.BLUE
-							+ "¡Te has presentado como " + players.get(player)
-							+ "!");
-					target.sendMessage(ChatColor.BLUE + "¡"
-							+ players.get(player) + " se ha presentado!");
-					IdentityChat.meetPlayer(player, target, name);
-					players.remove(player);
-					name = null;
-				/*} else {
-					player.sendMessage(ChatColor.DARK_RED
-							+ "Ya te has presentado anteriormente a este jugador");
-					players.remove(player);
-				}*/
+				if (IdentityChat.knowsPlayer(target, player)) {
+				player.sendMessage(ChatColor.BLUE + "¡Te has presentado como "
+						+ players.get(player) + "!");
+				target.sendMessage(ChatColor.BLUE + "¡" + players.get(player)
+						+ " se ha presentado!");
+				IdentityChat.meetPlayer(player, target, name);
+				players.remove(player);
+				name = null;
+				
+				 } else { player.sendMessage(ChatColor.DARK_RED +
+				 "Ya te has presentado anteriormente a este jugador");
+				  players.remove(player); }
+				 
 			}
 
 		}

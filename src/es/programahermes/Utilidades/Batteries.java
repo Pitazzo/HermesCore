@@ -1,6 +1,7 @@
 package es.programahermes.Utilidades;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -196,6 +197,17 @@ public class Batteries implements Listener {
 					}
 				}
 			}
+		}
+	}
+	
+	public void unload(ItemStack item){
+		if(Miscelaneo.getName(item).equals("Batería cargada")){
+			List<String> lore = item.getItemMeta().getLore();
+			String usos = lore.get(0);
+			usos.replace("Rendimiento: ", "");
+			usos.replace("%", "");
+			int rendimiento = Integer.parseInt(usos);
+			
 		}
 	}
 	

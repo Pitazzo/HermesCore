@@ -31,8 +31,6 @@ public class HermesChat {
 				if (sender.hasPermission("hermescore.admin")) {
 					cargo = ChatColor.DARK_RED + "[ADM] ";
 				}
-
-				// name
 				
 				// canales
 				if (channel.equalsIgnoreCase("ic")) {

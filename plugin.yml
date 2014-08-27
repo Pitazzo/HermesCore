@@ -63,6 +63,9 @@ commands:
    h:
      description: Se habla en un tono normal o se cambia permanentemente al tono "hablar"
      usage: Error de sintaxis! Simplemente escribe /h o /h <mensaje>
+   me:
+     description: Se expresa una acción realizada por tu personaje
+     usage: Error de sintaxis! Simplemente escribe /me <mensaje>
    canal:
      description: Se cambia al canal de chat seleccionado
      usage: Error de sintaxis! Simplemente escribe /canal <IC|OOC>

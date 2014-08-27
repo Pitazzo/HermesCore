@@ -14,6 +14,7 @@ import es.programahermes.Chat.GCommand;
 import es.programahermes.Chat.HCommand;
 import es.programahermes.Chat.JoinListener;
 import es.programahermes.Chat.LanguageSwitcher;
+import es.programahermes.Chat.MCommand;
 import es.programahermes.Chat.Meeter;
 import es.programahermes.Chat.OCommand;
 import es.programahermes.Chat.SCommand;
@@ -128,6 +129,7 @@ public class Main extends JavaPlugin {
 		getCommand("o").setExecutor(new OCommand());
 		getCommand("g").setExecutor(new GCommand());
 		getCommand("h").setExecutor(new HCommand());
+		getCommand("m").setExecutor(new MCommand());
 		getCommand("idioma").setExecutor(new LanguageSwitcher());
 		getCommand("canal").setExecutor(new ChannelSwitcher());
 		getCommand("presentarse").setExecutor(new Meeter());
