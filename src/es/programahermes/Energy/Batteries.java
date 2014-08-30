@@ -55,11 +55,11 @@ public class Batteries implements Listener {
 											ItemMeta im = player
 													.getItemInHand()
 													.getItemMeta();
-											im.setDisplayName("Batería cargada");
+											im.setDisplayName("Baterï¿½a cargada");
 											player.getItemInHand().setItemMeta(
 													im);
 											player.sendMessage(ChatColor.GREEN
-													+ "¡Has recargado la batería!");
+													+ "ï¿½Has recargado la baterï¿½a!");
 										} else {
 											int percent = (int) ((100 * (panels
 													.get(event
@@ -67,7 +67,7 @@ public class Batteries implements Listener {
 															.getLocation()) - System
 													.currentTimeMillis())) / -480000);
 											player.sendMessage(ChatColor.RED
-													+ "El panel fotovoltaico aún no está cargado ("
+													+ "El panel fotovoltaico aï¿½n no estï¿½ cargado ("
 													+ percent + "%)");
 										}
 									} else {
@@ -77,10 +77,10 @@ public class Batteries implements Listener {
 
 										ItemMeta im = player.getItemInHand()
 												.getItemMeta();
-										im.setDisplayName("Batería cargada");
+										im.setDisplayName("Baterï¿½a cargada");
 										player.getItemInHand().setItemMeta(im);
 										player.sendMessage(ChatColor.GREEN
-												+ "¡Has recargado la batería!");
+												+ "ï¿½Has recargado la baterï¿½a!");
 									}
 								} else {
 									player.sendMessage(ChatColor.RED
@@ -88,15 +88,15 @@ public class Batteries implements Listener {
 								}
 							} else {
 								player.sendMessage(ChatColor.RED
-										+ "Es de noche, la batería del panel fotovotaico no está cargado");
+										+ "Es de noche, la baterï¿½a del panel fotovotaico no estï¿½ cargado");
 							}
 						} else {
 							player.sendMessage(ChatColor.RED
-									+ "La batería interna del panel fotovoltaico no está cargada por las condiciones meteorológicas");
+									+ "La baterï¿½a interna del panel fotovoltaico no estï¿½ cargada por las condiciones meteorolï¿½gicas");
 						}
 					} else {
 						player.sendMessage(ChatColor.RED
-								+ "La recarga de baterías solo puede ser realizada por personal cualificado");
+								+ "La recarga de baterï¿½as solo puede ser realizada por personal cualificado");
 					}
 				} else {
 					player.sendMessage(ChatColor.RED + "Ese objeto no es recargable");
@@ -107,9 +107,9 @@ public class Batteries implements Listener {
 
 	}
 
-	public boolean isEmpty(ItemStack item) {
+	public static boolean isEmpty(ItemStack item) {
 
-		if(Miscelaneo.getName(item).equals("Batería descargada")){
+		if(Miscelaneo.getName(item).equals("Baterï¿½a descargada")){
 			return true;
 		}else{
 			return false;
@@ -119,7 +119,7 @@ public class Batteries implements Listener {
 
 	public static boolean isCharged(ItemStack item) {
 
-		if(Miscelaneo.getName(item).equals("Batería cargada")){
+		if(Miscelaneo.getName(item).equals("Baterï¿½a cargada")){
 			return true;
 		}else{
 			return false;
@@ -136,7 +136,7 @@ public class Batteries implements Listener {
 			event.setBurnTime(60 * 20);
 			ItemStack eBatt = new ItemStack(Material.COAL, 1);
 			ItemMeta im = eBatt.getItemMeta();
-			im.setDisplayName("Batería descargada");
+			im.setDisplayName("Baterï¿½a descargada");
 			eBatt.setItemMeta(im);
 			event.getBlock().getWorld()
 					.dropItem(event.getBlock().getLocation(), eBatt);
@@ -161,16 +161,16 @@ public class Batteries implements Listener {
 										.currentTimeMillis() - bench.get(event
 										.getClickedBlock().getLocation()))) / (60 * 1000));
 								player.sendMessage(ChatColor.GREEN
-										+ "A esta mesa de trabajo le queda una autonomía de "
+										+ "A esta mesa de trabajo le queda una autonomï¿½a de "
 										+ left + " minutos");
 							} else {
 								player.sendMessage(ChatColor.RED
-										+ "Ésta mesa de trabajo no tiene suficiente energía para funcionar");
+										+ "ï¿½sta mesa de trabajo no tiene suficiente energï¿½a para funcionar");
 								event.setCancelled(true);
 							}
 						} else {
 							player.sendMessage(ChatColor.RED
-									+ "Ésta mesa de trabajo no tiene suficiente energía para funcionar");
+									+ "ï¿½sta mesa de trabajo no tiene suficiente energï¿½a para funcionar");
 							event.setCancelled(true);
 						}
 					} else {
@@ -180,49 +180,24 @@ public class Batteries implements Listener {
 							bench.put(event.getClickedBlock().getLocation(),
 									System.currentTimeMillis());
 							player.sendMessage(ChatColor.GREEN
-									+ "Has recargado la batería interna de la mesa de trabajo. Cuenta con una autonomía de 15 minutos");
+									+ "Has recargado la baterï¿½a interna de la mesa de trabajo. Cuenta con una autonomï¿½a de 15 minutos");
 							ItemMeta im = event.getPlayer().getItemInHand()
 									.getItemMeta();
-							im.setDisplayName("Batería descargada");
+							im.setDisplayName("Baterï¿½a descargada");
 							player.getItemInHand().setItemMeta(im);
 						} else {
 							bench.put(event.getClickedBlock().getLocation(),
 									System.currentTimeMillis());
 							player.sendMessage(ChatColor.GREEN
-									+ "Has recargado la batería interna de la mesa de trabajo. Cuenta con una autonomía de 15 minutos");
+									+ "Has recargado la baterï¿½a interna de la mesa de trabajo. Cuenta con una autonomï¿½a de 15 minutos");
 							ItemMeta im = event.getPlayer().getItemInHand()
 									.getItemMeta();
-							im.setDisplayName("Batería descargada");
+							im.setDisplayName("Baterï¿½a descargada");
 							player.getItemInHand().setItemMeta(im);
 						}
 					}
 				}
 			}
-		}
-	}
-	
-	public void unload(ItemStack item){
-		if(Miscelaneo.getName(item).equals("Batería cargada")){
-			List<String> lore = item.getItemMeta().getLore();
-			String usos = lore.get(0);
-			usos.replace("Rendimiento: ", "");
-			usos.replace("%", "");
-			int rendimiento = Integer.parseInt(usos);
-			
-		}
-	}
-	
-	@EventHandler
-	public void onItemBreak(PlayerItemBreakEvent event){
-		ItemStack item = event.getBrokenItem();
-		if(item.getType().equals(Material.WOOD_SWORD)){
-			ItemStack tool = new ItemStack(item.getType(), 1);
-			tool.setDurability((short) 58);
-			ItemMeta meta = tool.getItemMeta();
-			meta.setDisplayName(Miscelaneo.getName(item)+" descargado");
-			tool.setItemMeta(meta);
-			event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), tool);
-			event.getPlayer().sendMessage(ChatColor.RED+"A tu "+Miscelaneo.getName(item)+" se le ha agotado la batería");
 		}
 	}
 

@@ -35,7 +35,7 @@ public class Recipes {
 	public static ItemStack bateria() {
 		ItemStack item = new ItemStack(Material.COAL);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName("Batería cargada");
+		meta.setDisplayName("BaterÃ­a cargada");
 		item.setItemMeta(meta);
 
 		return item;
@@ -45,7 +45,7 @@ public class Recipes {
 	public static ItemStack reconstructorEmpty() {
 		ItemStack item = new ItemStack(Material.GLOWSTONE_DUST, 1);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName("Reconstructor óseo desarmado");
+		meta.setDisplayName("Reconstructor ï¿½seo desarmado");
 		item.setItemMeta(meta);
 
 		return item;
@@ -55,7 +55,7 @@ public class Recipes {
 	public static ItemStack reconstructor() {
 		ItemStack item = new ItemStack(Material.GLOWSTONE_DUST, 1);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName("Reconstructor óseo armado");
+		meta.setDisplayName("Reconstructor ï¿½seo armado");
 		item.setItemMeta(meta);
 
 		return item;

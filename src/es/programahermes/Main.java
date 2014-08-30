@@ -29,6 +29,9 @@ import es.programahermes.Commands.VSC;
 import es.programahermes.Commands.Visor;
 import es.programahermes.CustomEntities.CustomEntityType;
 import es.programahermes.Energy.Batteries;
+import es.programahermes.Energy.Crafts;
+import es.programahermes.Energy.CustomTool;
+import es.programahermes.Energy.EnergyListeners;
 import es.programahermes.Geologia.Geologia;
 import es.programahermes.Geologia.Perforadora;
 import es.programahermes.Geologia.Prospectar;
@@ -70,6 +73,7 @@ public class Main extends JavaPlugin {
 
 	public void onEnable() {
 
+		CustomTool.loadTools();
 		CustomEntityType.registerEntities();
 		this.plugin = this;
 		Residual.residualUpdate(this);
@@ -111,6 +115,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ChatListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinListener(), this);
 		getServer().getPluginManager().registerEvents(new Meeter(), this);
+		getServer().getPluginManager().registerEvents(new EnergyListeners(), this);
 		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
@@ -138,6 +143,7 @@ public class Main extends JavaPlugin {
 		saveDefaultConfig();
 		getServer().addRecipe(Recipes.O2);
 		getServer().addRecipe(Recipes.reconstructor);
+		Crafts.register();
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.presurizada);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.gold);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.iron);
