@@ -12,18 +12,24 @@ public class Loader implements Listener {
 		String lore = item.getItemMeta().getLore().get(0);
 		if(Batteries.isEmpty(item) && lore.contains("Rendimiento: ")){
 			
-			lore.replace("Rendimiento:", "");
-			lore.replace("%", "");
-			double percentage = Double.parseDouble(lore);
+			String lore2 = lore.replace("Rendimiento:", "");
+			String lore3 = lore2.replace("%", "");
+			double percentage = Double.parseDouble(lore3);
+			System.out.println("0");
+			System.out.println(percentage+"%");
 			if(percentage>0){
+				System.out.println("1");
 				double newP = percentage-5.5;
 				List<String> list = item.getItemMeta().getLore();
-				list.set(0, "Porcentaje: "+newP+"%");
+				list.set(0, "Rendimiento: "+newP+"%");
+				System.out.println("5");
 				ItemMeta meta = item.getItemMeta();
 				meta.setLore(list);
 				meta.setDisplayName("Batería cargada");
 				item.setItemMeta(meta);
+				System.out.println("4");
 			}else{
+				System.out.println("-1");
 				List<String> list = item.getItemMeta().getLore();
 				list.set(0, "INSERVIBLE");
 				ItemMeta meta = item.getItemMeta();

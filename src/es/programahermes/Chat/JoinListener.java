@@ -18,7 +18,7 @@ public class JoinListener implements Listener {
 	public void onJoin(PlayerLoginEvent event) {
 		Player player = event.getPlayer();
 		HermesChat.channel.put(player, "ic");
-		HermesChat.idioma.put(player, "inglés");
+		HermesChat.idioma.put(player, "inglï¿½s");
 		HermesChat.tono.put(player, 16);
 
 		// data
@@ -31,17 +31,10 @@ public class JoinListener implements Listener {
 				Main.JugadoresConfig.save(file);
 			} catch (IOException e) {
 				e.printStackTrace();
-			};
-			
-		}else{
-			List<String> conocidos = (List<String>) Main.JugadoresConfig.getList(player.getName());
-			for (String row : conocidos){
-				System.out.println("Row: "+row);
-				String[] parts = row.split("@");
-				System.out.println("Nombre: "+parts[2]);
 			}
-		}
+			;
 
+		}
 	}
 
 }

@@ -39,7 +39,7 @@ public class Batteries implements Listener {
 			if (event.getClickedBlock().getType()
 					.equals(Material.DAYLIGHT_DETECTOR)) {
 				if (isEmpty(player.getItemInHand())) {
-					if (MySQL.getHability(player.getName()).equals("Tecnico")) {
+					if (MySQL.getHability(player.getName()).equals("Tecnica")) {
 						if (!(event.getClickedBlock().getWorld().hasStorm())) {
 							if (day(event.getClickedBlock().getWorld())) {
 								if (event.getClickedBlock().getLightLevel() > 4) {
@@ -52,14 +52,9 @@ public class Batteries implements Listener {
 											panels.put(event.getClickedBlock()
 													.getLocation(), System
 													.currentTimeMillis());
-											ItemMeta im = player
-													.getItemInHand()
-													.getItemMeta();
-											im.setDisplayName("Bater�a cargada");
-											player.getItemInHand().setItemMeta(
-													im);
+											Loader.reload(player.getItemInHand());
 											player.sendMessage(ChatColor.GREEN
-													+ "�Has recargado la bater�a!");
+													+ "¡Has recargado la batería!");
 										} else {
 											int percent = (int) ((100 * (panels
 													.get(event
@@ -67,7 +62,7 @@ public class Batteries implements Listener {
 															.getLocation()) - System
 													.currentTimeMillis())) / -480000);
 											player.sendMessage(ChatColor.RED
-													+ "El panel fotovoltaico a�n no est� cargado ("
+													+ "El panel fotovoltaico aún no está cargado ("
 													+ percent + "%)");
 										}
 									} else {
@@ -75,12 +70,9 @@ public class Batteries implements Listener {
 												.getLocation(), System
 												.currentTimeMillis());
 
-										ItemMeta im = player.getItemInHand()
-												.getItemMeta();
-										im.setDisplayName("Bater�a cargada");
-										player.getItemInHand().setItemMeta(im);
+										Loader.reload(player.getItemInHand());
 										player.sendMessage(ChatColor.GREEN
-												+ "�Has recargado la bater�a!");
+												+ "¡Has recargado la batería!");
 									}
 								} else {
 									player.sendMessage(ChatColor.RED
@@ -88,15 +80,15 @@ public class Batteries implements Listener {
 								}
 							} else {
 								player.sendMessage(ChatColor.RED
-										+ "Es de noche, la bater�a del panel fotovotaico no est� cargado");
+										+ "Es de noche, la batería del panel fotovotaico no está cargado");
 							}
 						} else {
 							player.sendMessage(ChatColor.RED
-									+ "La bater�a interna del panel fotovoltaico no est� cargada por las condiciones meteorol�gicas");
+									+ "La batería interna del panel fotovoltaico no está cargada por las condiciones meteorológicas");
 						}
 					} else {
 						player.sendMessage(ChatColor.RED
-								+ "La recarga de bater�as solo puede ser realizada por personal cualificado");
+								+ "La recarga de baterías solo puede ser realizada por personal cualificado");
 					}
 				} else {
 					player.sendMessage(ChatColor.RED + "Ese objeto no es recargable");
@@ -109,7 +101,7 @@ public class Batteries implements Listener {
 
 	public static boolean isEmpty(ItemStack item) {
 
-		if(Miscelaneo.getName(item).equals("Bater�a descargada")){
+		if(Miscelaneo.getName(item).equals("Batería descargada")){
 			return true;
 		}else{
 			return false;
@@ -119,7 +111,7 @@ public class Batteries implements Listener {
 
 	public static boolean isCharged(ItemStack item) {
 
-		if(Miscelaneo.getName(item).equals("Bater�a cargada")){
+		if(Miscelaneo.getName(item).equals("Batería cargada")){
 			return true;
 		}else{
 			return false;
@@ -136,7 +128,7 @@ public class Batteries implements Listener {
 			event.setBurnTime(60 * 20);
 			ItemStack eBatt = new ItemStack(Material.COAL, 1);
 			ItemMeta im = eBatt.getItemMeta();
-			im.setDisplayName("Bater�a descargada");
+			im.setDisplayName("Batería descargada");
 			eBatt.setItemMeta(im);
 			event.getBlock().getWorld()
 					.dropItem(event.getBlock().getLocation(), eBatt);
@@ -161,16 +153,16 @@ public class Batteries implements Listener {
 										.currentTimeMillis() - bench.get(event
 										.getClickedBlock().getLocation()))) / (60 * 1000));
 								player.sendMessage(ChatColor.GREEN
-										+ "A esta mesa de trabajo le queda una autonom�a de "
+										+ "A esta mesa de trabajo le queda una autonomía de "
 										+ left + " minutos");
 							} else {
 								player.sendMessage(ChatColor.RED
-										+ "�sta mesa de trabajo no tiene suficiente energ�a para funcionar");
+										+ "Ésta mesa de trabajo no tiene suficiente energía para funcionar");
 								event.setCancelled(true);
 							}
 						} else {
 							player.sendMessage(ChatColor.RED
-									+ "�sta mesa de trabajo no tiene suficiente energ�a para funcionar");
+									+ "Ésta mesa de trabajo no tiene suficiente energía para funcionar");
 							event.setCancelled(true);
 						}
 					} else {
@@ -180,19 +172,19 @@ public class Batteries implements Listener {
 							bench.put(event.getClickedBlock().getLocation(),
 									System.currentTimeMillis());
 							player.sendMessage(ChatColor.GREEN
-									+ "Has recargado la bater�a interna de la mesa de trabajo. Cuenta con una autonom�a de 15 minutos");
+									+ "Has recargado la batería interna de la mesa de trabajo. Cuenta con una autonomía de 15 minutos");
 							ItemMeta im = event.getPlayer().getItemInHand()
 									.getItemMeta();
-							im.setDisplayName("Bater�a descargada");
+							im.setDisplayName("Batería descargada");
 							player.getItemInHand().setItemMeta(im);
 						} else {
 							bench.put(event.getClickedBlock().getLocation(),
 									System.currentTimeMillis());
 							player.sendMessage(ChatColor.GREEN
-									+ "Has recargado la bater�a interna de la mesa de trabajo. Cuenta con una autonom�a de 15 minutos");
+									+ "Has recargado la batería interna de la mesa de trabajo. Cuenta con una autonomía de 15 minutos");
 							ItemMeta im = event.getPlayer().getItemInHand()
 									.getItemMeta();
-							im.setDisplayName("Bater�a descargada");
+							im.setDisplayName("Batería descargada");
 							player.getItemInHand().setItemMeta(im);
 						}
 					}

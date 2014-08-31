@@ -24,21 +24,18 @@ public class EnergyListeners implements Listener{
 								event.getWhoClicked().getLocation(),
 								Items.SemiCustom(Material.COAL, 1,
 										"Batería descargada",
-										item.getItemMeta().getLore().get(0), ""));
+										item.getItemMeta().getLore().get(1), ""));
 			}
 		}
 	}
 
 	@EventHandler
 	public void onBreak(BlockBreakEvent event) {
-		if (CustomTool.isATool(event.getPlayer().getItemInHand())) {
-			CustomTool item = new CustomTool(event.getPlayer().getItemInHand(),
-					event.getPlayer().getItemInHand().getItemMeta()
-							.getDisplayName());
-			if(item.getUsos()>0){
-				item.setUsos(item, item.getUsos()-1);
+		if(CustomTools.isATool(event.getPlayer().getItemInHand())){
+			if(CustomTools.getCarga(event.getPlayer().getItemInHand())>0){
+				CustomTools.useTool(event.getPlayer().getItemInHand());
 			}else{
-				event.getPlayer().sendMessage(ChatColor.DARK_RED+"A tu herramienta no le queda energía suficiente");
+				event.getPlayer().sendMessage(ChatColor.DARK_RED+"La carga de esta herramienta no es suficiente");
 				event.setCancelled(true);
 			}
 		}

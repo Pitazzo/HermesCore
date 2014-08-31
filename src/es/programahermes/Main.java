@@ -30,7 +30,7 @@ import es.programahermes.Commands.Visor;
 import es.programahermes.CustomEntities.CustomEntityType;
 import es.programahermes.Energy.Batteries;
 import es.programahermes.Energy.Crafts;
-import es.programahermes.Energy.CustomTool;
+import es.programahermes.Energy.CustomTools;
 import es.programahermes.Energy.EnergyListeners;
 import es.programahermes.Geologia.Geologia;
 import es.programahermes.Geologia.Perforadora;
@@ -73,7 +73,7 @@ public class Main extends JavaPlugin {
 
 	public void onEnable() {
 
-		CustomTool.loadTools();
+		CustomTools.loadTools();
 		CustomEntityType.registerEntities();
 		this.plugin = this;
 		Residual.residualUpdate(this);

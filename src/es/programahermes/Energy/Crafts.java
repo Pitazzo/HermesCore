@@ -23,7 +23,7 @@ public class Crafts {
 			.setIngredient('%', Material.DIAMOND);
 	
 	public static ShapelessRecipe loadedPickaxe = new ShapelessRecipe(Items.SemiCustom(
-			Material.IRON_PICKAXE, 1, "Cortador de plasma Falcon", "Usos: 40", ""))
+			Material.IRON_PICKAXE, 1, "Cortador de plasma Falcon", "Carga: 100%", ""))
 	.addIngredient(Items.SimpleSemiCustom(
 			Material.COAL, 1, "Batería cargada").getData())
 	.addIngredient(Items.SimpleSemiCustom(Material.IRON_PICKAXE, 1, "Cortadora de plasma Falcon").getData());

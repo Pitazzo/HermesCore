@@ -14,8 +14,8 @@ public class Items {
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
 		meta.setDisplayName(name);
-		lore.set(0, lore1);
-		lore.set(1, lore2);
+		lore.add(lore1);
+		lore.add(lore2);
 		meta.setLore(lore);
 		item.setItemMeta(meta);
 		return item;
