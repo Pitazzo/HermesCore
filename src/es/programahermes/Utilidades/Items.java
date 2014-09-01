@@ -9,13 +9,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Items {
 
-	public static ItemStack SemiCustom(Material material, int amount, String name, String lore1, String lore2){
+	public static ItemStack SemiCustom(Material material, int amount, String name, String lore1){
 		ItemStack item = new ItemStack(material, amount);
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
 		meta.setDisplayName(name);
 		lore.add(lore1);
-		lore.add(lore2);
 		meta.setLore(lore);
 		item.setItemMeta(meta);
 		return item;

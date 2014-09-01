@@ -41,7 +41,7 @@ public class CustomTools {
 		if(isATool(item)){
 			ItemMeta meta = item.getItemMeta();
 			List<String> lore = meta.getLore();
-			lore.set(0, "Carga: "+carga);
+			lore.set(0, "Carga: "+carga+"%");
 			meta.setLore(lore);
 			item.setItemMeta(meta);
 		}
