@@ -1,5 +1,6 @@
 package es.programahermes.Managers;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 
@@ -9,14 +10,21 @@ import es.programahermes.PHDS.DeathSQL;
 
 public class HealthManager {
 
-	public double getPercentage(Player player) {
-		if (player != null) {
-			return ((Damageable) player).getMaxHealth();
-
-		}
+	public int getPercentage(Player p) {
+		if (p != null) {
+			Damageable player = p;
+			return (int) ((player.getHealth()*100)/MaxHealthManager.getMaxHealth(p.getName()));			
+			}
 		return 0;
 	}
 
+	public static double getHealth(Player player, int percentage) { 
+		if (player != null) {
+			return (percentage*MaxHealthManager.getMaxHealth(player.getName())/100);	
+			}
+		return 0;
+	}
+	
 	public static void setMaxHealth(String player, int health) {
 		int percentage = 100;
 		if (MySQL.getFatiga(player) > 90) {
@@ -28,7 +36,6 @@ public class HealthManager {
 		if (MySQL.getSed(player) < 15) {
 			percentage = 75;
 		}
-		// desmayo
 		if (DeathSQL.isPostDesmayado(player)) {
 			percentage = 65;
 		}
@@ -39,10 +46,8 @@ public class HealthManager {
 			percentage = 45;
 		}
 
-		if (health > percentage) {
-
-		}else{
-			//set mas cercana
+		if (percentage >= health) {
+			Bukkit.getPlayer(player).setMaxHealth(getHealth(Bukkit.getPlayer(player), percentage));
 		}
 
 	}

@@ -55,7 +55,7 @@ public class Meeter implements CommandExecutor, Listener {
 						sender.sendMessage(ChatColor.BLUE
 								+ "Has confirmado tu nombre como " + names.get(sender));
 						sender.sendMessage(ChatColor.BLUE
-								+ "Haz click en los próximos 10 segundos en el personaje al que quieras presentarte");
+								+ "Haz click en los prï¿½ximos 10 segundos en el personaje al que quieras presentarte");
 						timer(Main.plugin, (Player) sender);
 					} else {
 						sender.sendMessage(ChatColor.DARK_RED
@@ -66,7 +66,7 @@ public class Meeter implements CommandExecutor, Listener {
 				} else if (args[0].equalsIgnoreCase("cancelar")) {
 					if (players.containsKey(sender)) {
 						sender.sendMessage(ChatColor.DARK_RED
-								+ "Se cancela la presentación");
+								+ "Se cancela la presentaciï¿½n");
 						players.remove(sender);
 						return true;
 					} else {
@@ -90,7 +90,7 @@ public class Meeter implements CommandExecutor, Listener {
 						if (players.containsKey(player)) {
 							players.remove(player);
 							player.sendMessage(ChatColor.DARK_RED
-									+ "Tu presentación ha expirado");
+									+ "Tu presentaciÃ³n ha expirado");
 						}
 					}
 				}, 20 * 10L);
@@ -104,9 +104,9 @@ public class Meeter implements CommandExecutor, Listener {
 			if (players.containsKey(player)) {
 				if (!IdentityChat.knowsPlayer(player, target)) {
 					player.sendMessage(ChatColor.BLUE
-							+ "¡Te has presentado como " + players.get(player)
+							+ "Â¡Te has presentado como " + players.get(player)
 							+ "!");
-					target.sendMessage(ChatColor.BLUE + "¡"
+					target.sendMessage(ChatColor.BLUE + "Â¡"
 							+ players.get(player) + " se ha presentado!");
 					IdentityChat.meetPlayer(player, target, players.get(player));
 					players.remove(player);

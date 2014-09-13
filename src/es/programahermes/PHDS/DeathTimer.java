@@ -19,12 +19,12 @@ public class DeathTimer {
 											20);
 								} else {
 									player.sendMessage(ChatColor.DARK_GREEN
-											+ "Poco a poco, recuperas la noción de la realidad; "
-											+ "tienes un fuerte dolor de cabeza y estás débil");
+											+ "Poco a poco, recuperas la nociÃ³n de la realidad; "
+											+ "tienes un fuerte dolor de cabeza y estÃ¡s dÃ©bil");
 									player.teleport(DeathSQL.getDeathLoc(player
 											.getName()));
 									DeathSQL.setInLimbo(player.getName(), false);
-									//añadir efectos post mareo
+									Desmayo.setPostDesmayo(player.getName());
 								}
 
 							}

@@ -959,4 +959,24 @@ public class MySQL {
 		return "ERROR";
 	}
 
+	public static synchronized String getSkin(String player) {
+		openConnection();
+		try {
+			PreparedStatement sql = connection
+					.prepareStatement("SELECT skinu FROM `bukkit`.`user_data` WHERE name=?;");
+
+			sql.setString(1, player);
+			ResultSet result = sql.executeQuery();
+			result.next();
+			String skin = result.getString("skinu");
+			sql.close();
+			result.close();
+
+			return skin;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
 }

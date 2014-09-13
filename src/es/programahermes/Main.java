@@ -45,7 +45,9 @@ import es.programahermes.Health.Diarrea;
 import es.programahermes.Health.Fracturas;
 import es.programahermes.Health.Septicemia;
 import es.programahermes.PHDS.DeathTimer;
+import es.programahermes.PHDS.Desmayo;
 import es.programahermes.PHDS.Listeners;
+import es.programahermes.Skins.SkinManager;
 import es.programahermes.SoporteVital.Fatiga;
 import es.programahermes.SoporteVital.Hydratation;
 import es.programahermes.SoporteVital.Oxygen;
@@ -84,6 +86,7 @@ public class Main extends JavaPlugin {
 		PointsAdjust.pointsAdjust(plugin);
 		DeathTimer.limbo(plugin);
 		Septicemia.sepsis(plugin);
+		Desmayo.postDesmayo(plugin);
 		loadJugadoresFile();
 		getServer().getPluginManager().registerEvents(new Geologia(), this);
 		getServer().getPluginManager().registerEvents(new Refuerzos(), this);
@@ -116,6 +119,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new JoinListener(), this);
 		getServer().getPluginManager().registerEvents(new Meeter(), this);
 		getServer().getPluginManager().registerEvents(new EnergyListeners(), this);
+		getServer().getPluginManager().registerEvents(new SkinManager(), this);
 		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());

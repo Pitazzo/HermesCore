@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="/home/pitazzo/Documentos/APIs/WorldEdit.jar"/>
 	<classpathentry kind="lib" path="/home/pitazzo/Documentos/APIs/WorldGuard.jar"/>
 	<classpathentry kind="lib" path="/home/pitazzo/Documentos/APIs/CrackShot.jar"/>
+	<classpathentry kind="lib" path="/home/pitazzo/Documentos/APIs/spoutcraftplugin-1.6.4-b5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

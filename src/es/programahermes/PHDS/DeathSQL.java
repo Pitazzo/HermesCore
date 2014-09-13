@@ -197,15 +197,15 @@ public class DeathSQL {
 			e.printStackTrace();
 		}
 	}
-	public static boolean isPostDesmayado(String player) {
+	public static boolean isInPost(String player) {
 		try {
 			MySQL.openConnection();
 			PreparedStatement sql = MySQL.connection
-					.prepareStatement("SELECT isPostDesmayado FROM `bukkit`.`user_data` WHERE name=? ");
+					.prepareStatement("SELECT isInPost FROM `bukkit`.`user_data` WHERE name=? ");
 			sql.setString(1, player);
 			ResultSet result = sql.executeQuery();
 			result.next();
-			boolean state = result.getBoolean("isPostDesmayado");
+			boolean state = result.getBoolean("isInPost");
 			sql.close();
 			MySQL.closeConnection();
 			return state;
@@ -303,6 +303,25 @@ public class DeathSQL {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static synchronized boolean isPostDesmayado(String player) {
+		try {
+			MySQL.openConnection();
+			PreparedStatement sql = MySQL.connection
+					.prepareStatement("SELECT isInPost FROM `bukkit`.`user_data` WHERE name=? ");
+			sql.setString(1, player);
+			ResultSet result = sql.executeQuery();
+			result.next();
+			boolean state = result.getBoolean("isInPost");
+			sql.close();
+			MySQL.closeConnection();
+			return state;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
 	}
 	
 }
