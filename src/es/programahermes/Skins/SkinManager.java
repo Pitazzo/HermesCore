@@ -24,13 +24,13 @@ public class SkinManager implements Listener {
 			@Override
 			public void run() {
 				SpoutPlayer spoutPlayer = (SpoutPlayer) player;
-				if (MySQL.getSkin(player.getName()) != null) {
+				try{
 					spoutPlayer.setSkin("http://programahermes.es/"
 							+ MySQL.getSkin(player.getName()));
 					player.sendMessage(ChatColor.DARK_GREEN+"Skin cargada de los servidores de Programa Hermes con éxito");
-				} else {
+				} catch(Exception e) {
 					spoutPlayer
-							.setSkin("http://www.minecraftskins.com/newuploaded_skins/skin_20140819064510129303.png");
+							.setSkin("http://programahermes.es/assets/skinus/HUE.png");
 					player.sendMessage(ChatColor.DARK_RED+"Skin no encontrada. Asigna una inmediatamente.");
 				}
 			}
