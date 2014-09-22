@@ -19,10 +19,31 @@ public class Items {
 		item.setItemMeta(meta);
 		return item;
 	}
-
-	public static ItemStack SimpleSemiCustom(Material material, int amount, String name){
+	
+	public static ItemStack SemiCustom(Material material, short durability, int amount, String name, String lore1){
 		ItemStack item = new ItemStack(material, amount);
 		ItemMeta meta = item.getItemMeta();
+		List<String> lore = new ArrayList<String>();
+		meta.setDisplayName(name);
+		item.setDurability(durability);
+		lore.add(lore1);
+		meta.setLore(lore);
+		item.setItemMeta(meta);
+		return item;
+	}
+
+	public static ItemStack SemiCustom(Material material, int amount, String name){
+		ItemStack item = new ItemStack(material, amount);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(name);
+		item.setItemMeta(meta);
+		return item;
+	}
+	
+	public static ItemStack SemiCustom(Material material, short durability, int amount, String name){
+		ItemStack item = new ItemStack(material, amount);
+		ItemMeta meta = item.getItemMeta();
+		item.setDurability(durability);
 		meta.setDisplayName(name);
 		item.setItemMeta(meta);
 		return item;

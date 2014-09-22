@@ -1,4 +1,4 @@
-package es.programahermes.Habilidades;
+package es.programahermes.Tecnica;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
