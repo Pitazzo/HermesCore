@@ -21,7 +21,7 @@ public class DataGetter implements CommandExecutor {
 					
 					ItemStack inHand = ((Player) sender).getItemInHand();
 					sender.sendMessage(ChatColor.GOLD
-							+ "============ Información del ítem ============");
+							+ "============ InformaciÃ³n del Ã­tem ============");
 					sender.sendMessage(ChatColor.GREEN + "Nombre: "
 							+ ChatColor.BLUE + inHand.getType().toString());
 					sender.sendMessage(ChatColor.GREEN + "Nombre ingame: "

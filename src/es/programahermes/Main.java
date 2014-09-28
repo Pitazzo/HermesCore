@@ -52,6 +52,7 @@ import es.programahermes.SoporteVital.Hydratation;
 import es.programahermes.SoporteVital.Oxygen;
 import es.programahermes.SoporteVital.OxygenCommand;
 import es.programahermes.SoporteVital.Residual;
+import es.programahermes.Tecnica.CraftsTecnica;
 import es.programahermes.Tecnica.Tecnica;
 import es.programahermes.Training.ETS;
 import es.programahermes.Training.Resistencia;
@@ -60,6 +61,7 @@ import es.programahermes.Utilidades.DataGetter;
 import es.programahermes.Utilidades.FakeTable;
 import es.programahermes.Utilidades.FireExtinguisher;
 import es.programahermes.Utilidades.GPS;
+import es.programahermes.Utilidades.Ingredients;
 import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.Pernos;
 import es.programahermes.Utilidades.PointsAdjust;
@@ -118,8 +120,10 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ChatListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinListener(), this);
 		getServer().getPluginManager().registerEvents(new Meeter(), this);
-		getServer().getPluginManager().registerEvents(new EnergyListeners(), this);
+		getServer().getPluginManager().registerEvents(new EnergyListeners(),
+				this);
 		getServer().getPluginManager().registerEvents(new SkinManager(), this);
+		getServer().getPluginManager().registerEvents(new Ingredients(), this);
 		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
@@ -148,6 +152,7 @@ public class Main extends JavaPlugin {
 		getServer().addRecipe(Recipes.O2);
 		getServer().addRecipe(Recipes.reconstructor);
 		Crafts.register();
+		CraftsTecnica.registrarTecnina();
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.presurizada);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.gold);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.iron);

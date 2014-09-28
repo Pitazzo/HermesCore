@@ -14,6 +14,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -37,7 +39,7 @@ public class Miscelaneo implements Listener, CommandExecutor {
 			if (Batteries.isCharged(item)) {
 				ItemStack eBatt = new ItemStack(Material.COAL, item.getAmount());
 				ItemMeta im = eBatt.getItemMeta();
-				im.setDisplayName("Batería descargada");
+				im.setDisplayName("BaterÃ­a descargada");
 				eBatt.setItemMeta(im);
 				Player player = (Player) event.getInventory().getHolder();
 				Block craftingTable = player.getTargetBlock(null, 10);
@@ -51,7 +53,7 @@ public class Miscelaneo implements Listener, CommandExecutor {
 	 * @EventHandler public void onLogin(PlayerLoginEvent event) { Player player
 	 * = event.getPlayer(); if (!MySQL.dbContanisPlayer(player)) {
 	 * event.disallow( Result.KICK_OTHER, ChatColor.GREEN +
-	 * "¡Acceso denegado, no cuentas con un perfil de jugador! Si crees que es un error contacta con el staff!"
+	 * "ï¿½Acceso denegado, no cuentas con un perfil de jugador! Si crees que es un error contacta con el staff!"
 	 * ); } }
 	 */
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
@@ -97,8 +99,6 @@ public class Miscelaneo implements Listener, CommandExecutor {
 		}
 	}
 
-
-
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		if (event.getPlayer().getItemInHand().getType()
@@ -126,7 +126,7 @@ public class Miscelaneo implements Listener, CommandExecutor {
 			if (item.getItemMeta() != null) {
 				if (item.getItemMeta().getDisplayName() != null) {
 					return item.getItemMeta().getDisplayName();
-				}else{
+				} else {
 					return "ERROR";
 				}
 			}
@@ -139,21 +139,30 @@ public class Miscelaneo implements Listener, CommandExecutor {
 			int counter = 0;
 			counter++;
 			if (counter < 2) {
-				if(RenamerAPI.getAPI() != null){
-					if(RenamerAPI.getAPI().getRule(RenamerAPI.getAPI().getRenamePack(player),item) != null){
-						if(RenamerAPI.getAPI().getRule(RenamerAPI.getAPI().getRenamePack(player),item).getName() != null){
-							return RenamerAPI.getAPI().getRule(RenamerAPI.getAPI().getRenamePack(player),item).getName().toString();
-						}else{
+				if (RenamerAPI.getAPI() != null) {
+					if (RenamerAPI.getAPI().getRule(
+							RenamerAPI.getAPI().getRenamePack(player), item) != null) {
+						if (RenamerAPI
+								.getAPI()
+								.getRule(
+										RenamerAPI.getAPI().getRenamePack(
+												player), item).getName() != null) {
+							return RenamerAPI
+									.getAPI()
+									.getRule(
+											RenamerAPI.getAPI().getRenamePack(
+													player), item).getName()
+									.toString();
+						} else {
 							return "Sin nombre IR";
 						}
-					}else{
+					} else {
 						return "Sin nombre IR";
 					}
-				}else{
+				} else {
 					return "Sin nombre IR";
 				}
-				
-				
+
 			} else {
 				break;
 			}
@@ -164,7 +173,8 @@ public class Miscelaneo implements Listener, CommandExecutor {
 
 	public static String getName(ItemStack item) {
 		if (item != null) {
-			if (item.getItemMeta() != null && item.getItemMeta().getDisplayName() !=null) {
+			if (item.getItemMeta() != null
+					&& item.getItemMeta().getDisplayName() != null) {
 				return getDisplayName(item);
 			} else {
 				if (getIRName(item) != null) {

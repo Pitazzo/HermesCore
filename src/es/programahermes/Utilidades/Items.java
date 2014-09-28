@@ -49,4 +49,10 @@ public class Items {
 		return item;
 	}
 	
+	public static ItemStack Custom(short durability, int amount){
+		ItemStack item = new ItemStack(Material.FLINT, amount);
+		item.setDurability(durability);
+		return item;
+	}
+	
 }

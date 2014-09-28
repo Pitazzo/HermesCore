@@ -7,6 +7,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 
 
+import es.programahermes.Utilidades.Ingredients;
 import es.programahermes.Utilidades.Items;
 
 public class Crafts {
@@ -20,7 +21,7 @@ public class Crafts {
 			Material.IRON_PICKAXE, 1, "Cortador de plasma Falcon", "Carga: 0%"))
 			.shape("   ", "*%*", "   ")
 			.setIngredient('*', Material.STICK)
-			.setIngredient('%', Material.DIAMOND);
+			.setIngredient('%', Ingredients.cactus);
 	
 	public static ShapelessRecipe loadedPickaxe = new ShapelessRecipe(Items.SemiCustom(
 			Material.IRON_PICKAXE, 1, "Cortador de plasma Falcon", "Carga: 100%"))
