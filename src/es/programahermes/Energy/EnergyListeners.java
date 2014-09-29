@@ -23,8 +23,7 @@ public class EnergyListeners implements Listener{
 						.dropItem(
 								event.getWhoClicked().getLocation(),
 								Items.SemiCustom(Material.COAL, 1,
-										"Batería descargada",
-										item.getItemMeta().getLore().get(0)));
+										"Batería descargada"));
 			}
 		}
 	}

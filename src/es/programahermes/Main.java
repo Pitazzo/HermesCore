@@ -47,6 +47,7 @@ import es.programahermes.PHDS.DeathTimer;
 import es.programahermes.PHDS.Desmayo;
 import es.programahermes.PHDS.Listeners;
 import es.programahermes.Skins.SkinManager;
+import es.programahermes.Skins.SkinReloadCommand;
 import es.programahermes.SoporteVital.Fatiga;
 import es.programahermes.SoporteVital.Hydratation;
 import es.programahermes.SoporteVital.Oxygen;
@@ -146,6 +147,7 @@ public class Main extends JavaPlugin {
 		getCommand("canal").setExecutor(new ChannelSwitcher());
 		getCommand("presentarse").setExecutor(new Meeter());
 		getCommand("tono").setExecutor(new TonoSwitcher());
+		getCommand("recargarskin").setExecutor(new SkinReloadCommand());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
