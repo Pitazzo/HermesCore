@@ -21,6 +21,7 @@ public class SkinManager implements Listener {
 					+ MySQL.getSkin(player.getName()));
 			player.sendMessage(ChatColor.DARK_GREEN
 					+ "Skin cargada de los servidores de Programa Hermes con éxito");
+			
 		} catch (Exception e) {
 			spoutPlayer
 					.setSkin("http://programahermes.es/assets/skinus/HUE.png");

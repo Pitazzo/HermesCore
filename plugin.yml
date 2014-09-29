@@ -78,3 +78,6 @@ commands:
    tono:
     description: Se selecciona el tono de voz
     usage: Error de sintaxis! Simplemente escribe /tono <susurrar|hablar|gritar>
+   recargarskin:
+    description: Se refresca la skin seleccionada en el Administrador de skins de Programa Hermes TM
+    usage: Error de sintaxis! Simplemente escribe /recargarskin
