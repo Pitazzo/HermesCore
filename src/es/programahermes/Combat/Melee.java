@@ -1,7 +1,6 @@
 package es.programahermes.Combat;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -31,12 +30,12 @@ public class Melee implements Listener, CommandExecutor {
 					if (isTraining.contains(sender.getName())) {
 						isTraining.remove(sender.getName());
 						sender.sendMessage(ChatColor.RED
-								+ "Ya no est·s entrenando tus habilidades de cuerpo a cuerpo");
+								+ "Ya no est√°s entrenando tus habilidades de cuerpo a cuerpo");
 						return true;
 					} else {
 						isTraining.add(sender.getName());
 						sender.sendMessage(ChatColor.GREEN
-								+ "Est·s entrenando tus habilidades de cuerpo a cuerpo");
+								+ "Est√°s entrenando tus habilidades de cuerpo a cuerpo");
 						return true;
 					}
 				}
@@ -74,12 +73,12 @@ public class Melee implements Listener, CommandExecutor {
 						if (Math.random() < 0.01) {
 							event.setDamage(0.5);
 							attacker.sendMessage(ChatColor.RED
-									+ "°ContrÛlate un poco!°No pegues tan fuerte!");
+									+ "¬°Contr√≥late un poco!¬°No pegues tan fuerte!");
 						}
 
 					} else {
 						attacker.sendMessage(ChatColor.RED
-								+ "Solo puedes practicar la lucha cuerpo a cuerpo con las manos vacÌas");
+								+ "Solo puedes practicar la lucha cuerpo a cuerpo con las manos vacÔøΩas");
 						attacker.sendMessage(ChatColor.RED
 								+ "Desactiva el entrenamiento con /cuerpoacuerpo");
 						event.setCancelled(true);
@@ -108,9 +107,9 @@ public class Melee implements Listener, CommandExecutor {
 					if (attacker.isSneaking()) {
 						if (isTraining.contains(victim.getName())) {
 							victim.sendMessage(ChatColor.GOLD
-									+ "DespuÈs de ese golpe de tu contrincante, ya estarÌas muerto");
+									+ "Despu√©s de ese golpe de tu contrincante, ya estar√°as muerto");
 							attacker.sendMessage(ChatColor.GOLD
-									+ "°Buen golpe! Digno de las fuerzas especiales...");
+									+ "¬°Buen golpe! Digno de las fuerzas especiales...");
 							CombatSQL.addWP(attacker, 4);
 						} else {
 							victim.damage(18);

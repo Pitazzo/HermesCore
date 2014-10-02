@@ -22,7 +22,7 @@ public class WGRegions {
 		return (WorldGuardPlugin) plugin;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
 	public static boolean hasFlag(Location loc, Flag flag){
 		WorldGuardPlugin guard = getWorldGuard();
 		if( Util.getFlagValue(getWorldGuard(), loc, flag) == null){
@@ -33,6 +33,7 @@ public class WGRegions {
 		
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static String getOreConecentration(Location loc, Flag flag) {
 		if (hasFlag(loc, flag)) {
 			WorldGuardPlugin guard = getWorldGuard();
@@ -48,6 +49,7 @@ public class WGRegions {
 
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static double getConecentration(Location loc, Flag flag) {
 		if (hasFlag(loc, flag)) {
 			WorldGuardPlugin guard = getWorldGuard();

@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
+import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 import es.programahermes.Main;
@@ -16,6 +17,8 @@ public class SkinManager implements Listener {
 
 	public static void setSkin(Player player) {
 		SpoutPlayer spoutPlayer = (SpoutPlayer) player;
+		spoutPlayer.hideTitle();
+		SpoutManager.getSkyManager().setCloudHeight(spoutPlayer, 300);
 		try {
 			spoutPlayer.setSkin("http://programahermes.es/"
 					+ MySQL.getSkin(player.getName()));

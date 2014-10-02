@@ -7,7 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import es.programahermes.Main;
 import es.programahermes.Utilidades.Miscelaneo;
 
 public class Anemia implements Listener {
@@ -18,7 +17,7 @@ public class Anemia implements Listener {
 	public void onConsume(PlayerItemConsumeEvent event) {
 		Player player = event.getPlayer();
 		player.setMaxHealth(50);
-		if (Miscelaneo.getName(event.getItem()).equals("Complemento vitamínico")) {
+		if (Miscelaneo.getName(event.getItem()).equals("Complemento vitamÃ­nico")) {
 				HealthSQL.addVPoints(player.getName(), 1);
 			
 		}

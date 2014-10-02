@@ -2,7 +2,6 @@ package es.programahermes.Utilidades;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import es.programahermes.MySQL;

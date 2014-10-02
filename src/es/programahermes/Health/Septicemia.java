@@ -5,7 +5,6 @@ import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,12 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import com.shampaggon.crackshot.events.WeaponDamageEntityEvent;
 
@@ -110,7 +105,7 @@ public class Septicemia implements Listener, CommandExecutor {
 							+ "Tu herida ha sido desinfectada");
 				} else {
 					player.sendMessage(ChatColor.RED
-							+ "La desinfección de heridas solo puede ser realizada por personal especializado");
+							+ "La desinfecciÃ³n de heridas solo puede ser realizada por personal especializado");
 				}
 			} else {
 				if (player.getItemInHand().getType().equals(Material.APPLE)) {
@@ -174,7 +169,7 @@ public class Septicemia implements Listener, CommandExecutor {
 		if (!HealthSQL.Septicemia(player.getName())) {
 			HealthSQL.setSepticemia(player.getName(), true);
 			player.sendMessage(ChatColor.RED
-					+ "Parece ser que alguna de tus heridas se ha infectado. Busca un médico o podrías tener graves problemas.");
+					+ "Parece ser que alguna de tus heridas se ha infectado. Busca un mÃ©dico o podrÃ¡as tener graves problemas.");
 		} else {
 			return;
 		}

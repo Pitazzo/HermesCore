@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 public class Pernos implements Listener{
 
 		
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlace(BlockPlaceEvent event){
 		
@@ -24,13 +25,13 @@ public class Pernos implements Listener{
 				      {
 				        Player p = event.getPlayer();
 				        event.setCancelled(true);
-				        p.sendMessage(ChatColor.DARK_RED + "Necesitarás algunos pernos para colocar ese bloque");
+				        p.sendMessage(ChatColor.DARK_RED + "Necesitarï¿½s algunos pernos para colocar ese bloque");
 				      }
 				      else {
 				        if(!event.getPlayer().getInventory().contains(Material.GOLD_HOE)){
 				        	Player p = event.getPlayer();
 				        	event.setCancelled(true);
-					        p.sendMessage(ChatColor.DARK_RED + "Necesitarás un martillo para poder emplazar ese bloque");
+					        p.sendMessage(ChatColor.DARK_RED + "Necesitarï¿½s un martillo para poder emplazar ese bloque");
 				        }else{
 				        	Inventory inv = event.getPlayer().getInventory();
 					        inv.setItem(inv.first(Material.STICK), new ItemStack(Material.STICK, inv.getItem(inv.first(Material.STICK)).getAmount() - 4));

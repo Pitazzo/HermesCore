@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,10 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockSpreadEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.event.inventory.InventoryMoveItemEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -42,6 +42,7 @@ public class Miscelaneo implements Listener, CommandExecutor {
 				im.setDisplayName("Batería descargada");
 				eBatt.setItemMeta(im);
 				Player player = (Player) event.getInventory().getHolder();
+				@SuppressWarnings("deprecation")
 				Block craftingTable = player.getTargetBlock(null, 10);
 				craftingTable.getWorld().dropItemNaturally(
 						craftingTable.getLocation(), eBatt);
@@ -99,6 +100,7 @@ public class Miscelaneo implements Listener, CommandExecutor {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		if (event.getPlayer().getItemInHand().getType()
@@ -189,4 +191,18 @@ public class Miscelaneo implements Listener, CommandExecutor {
 		}
 
 	}
+
+	@EventHandler
+	public void grassSpread(BlockSpreadEvent event) {
+		if (event.getBlock().getType().equals(Material.DIRT)
+				|| event.getBlock().getType().equals(Material.GRASS)) {
+			if (event.getBlock().getRelative(BlockFace.UP).getType()
+					.equals(Material.STATIONARY_WATER)
+					|| event.getBlock().getRelative(BlockFace.UP).getType()
+							.equals(Material.WATER)) {
+				event.setCancelled(true);
+			}
+		}
+	}
+
 }

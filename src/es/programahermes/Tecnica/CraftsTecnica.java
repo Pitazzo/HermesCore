@@ -5,16 +5,11 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.material.MaterialData;
-import org.getspout.spoutapi.material.CustomItem;
-
-import es.programahermes.Utilidades.Ingredients;
-import es.programahermes.Utilidades.Items;
 
 public class CraftsTecnica {
 
-	@SuppressWarnings("deprecation")
-	public static ShapedRecipe Chest = new ShapedRecipe(Items.SemiCustom(
-			Material.CHEST, 1, "Cápsula de almacenamiento"))
+	
+	public static ShapedRecipe Chest = new ShapedRecipe(new ItemStack(Material.CHEST, 1))
 			.shape("   ", "*%*", "   ")
 			.setIngredient('*', new MaterialData(Material.BAKED_POTATO))
 			.setIngredient('%', new ItemStack(Material.FLINT, (byte) 1195).getData());

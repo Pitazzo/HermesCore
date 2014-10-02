@@ -7,16 +7,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.shininet.bukkit.itemrenamer.api.RenamerAPI;
 
 public class FakeTable implements Listener {
 
@@ -62,7 +59,7 @@ public class FakeTable implements Listener {
 					event.getInventory().setResult(null);
 					
 				}else{
-					player.sendMessage("Sí");
+					player.sendMessage("Sï¿½");
 				}
 			}
 

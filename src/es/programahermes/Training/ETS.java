@@ -12,7 +12,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import es.programahermes.Main;
 import es.programahermes.MySQL;
 import es.programahermes.Utilidades.ModiferConverter;
 import es.programahermes.Utilidades.Scoreboard;
@@ -21,30 +20,27 @@ public class ETS implements Listener {
 
 	HashMap<String, Long> cooldownP = new HashMap<String, Long>();
 
-	public static Main plugin;
-	
-	public ETS(){
-		this.plugin = plugin;
-		}
-	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 			if (player.getItemInHand().getType().equals(Material.AIR)) {
 				if (event.getClickedBlock().getType().equals(Material.WOOL)) {
-					if(event.getClickedBlock().getData() == 8){
-						MySQL.addFatiga(player.getName(), 0.2 * ModiferConverter
-								.SacalaReverse(TrainingSQL.getFTS(player.getName())));
-						player.playSound(player.getLocation(), Sound.VILLAGER_HIT,
-								3.0F, 3.0F);
+					if (event.getClickedBlock().getData() == 8) {
+						MySQL.addFatiga(player.getName(),
+								0.2 * ModiferConverter
+										.SacalaReverse(TrainingSQL
+												.getFTS(player.getName())));
+						player.playSound(player.getLocation(),
+								Sound.VILLAGER_HIT, 3.0F, 3.0F);
 						TrainingSQL.addFTS(player.getName(), 0.05);
 						MySQL.removeSed(player.getName(), 0.1);
 						double random = Math.random();
 						if (random * 100 < 1.5) {
 							player.damage(3.0);
 							player.sendMessage(ChatColor.RED
-									+ "¡Ouch! ¡No golpees con tanta fuerza o te lesionarás!");
+									+ "Â¡Ouch! Â¡No golpees con tanta fuerza o te lesionarÃ¡s!");
 						}
 					}
 				}
@@ -61,71 +57,74 @@ public class ETS implements Listener {
 				|| event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 			if (player.getItemInHand().getType().equals(Material.INK_SACK)) {
 				if (player.getItemInHand().getDurability() == 2) {
-					//if (player.getHealth() > 10) {
-						if (MySQL.getFatiga(player.getName()) < 70) {
-							if (cooldownP.containsKey(player.getName())) {
-								long diff = (System.currentTimeMillis() - cooldownP
-										.get(player.getName())) / 1000;
-								if (diff < 20) {
-									double random = Math.random() * 100;
-									if (random < 5) {
-										player.sendMessage(ChatColor.DARK_RED
-												+ "¡Ouch!");
-										player.sendMessage(ChatColor.RED
-												+ "¡Más despacio! Te acabas de hacer daño, podría haber sido grave...");
-										player.damage(1);
-										Scoreboard.showScore(player);
-
-									}
-									MySQL.addFatiga(player.getName(),
-											0.5 * ModiferConverter
-													.SacalaReverse(TrainingSQL
-															.getFTS(player.getName())));
-									int show = (int) (20 - diff);
-									player.sendMessage(ChatColor.GOLD
-											+ "Mejor espera unos "
-											+ show
-											+ " segundos más, si entrenas tan rápido solo te cansarás más y puedes lesionarte");
-									Scoreboard.showScore(player);
-
-								} else {
-									MySQL.addFatiga(player.getName(),
-											0.6 * ModiferConverter
-													.SacalaReverse(TrainingSQL
-															.getFTS(player.getName())));
-									TrainingSQL.addFTS(player.getName(), 0.2);
-									player.sendMessage(ChatColor.GREEN
-											+ "¡Así se hace! Sigue así :)");
-									cooldownP.put(player.getName(),
-											System.currentTimeMillis());
+					// if (player.getHealth() > 10) {
+					if (MySQL.getFatiga(player.getName()) < 70) {
+						if (cooldownP.containsKey(player.getName())) {
+							long diff = (System.currentTimeMillis() - cooldownP
+									.get(player.getName())) / 1000;
+							if (diff < 20) {
+								double random = Math.random() * 100;
+								if (random < 5) {
+									player.sendMessage(ChatColor.DARK_RED
+											+ "Â¡Ouch!");
+									player.sendMessage(ChatColor.RED
+											+ "Â¡MÃ¡s despacio! Te acabas de hacer daÃ±o, podrÃ­a haber sido grave...");
+									player.damage(1);
 									Scoreboard.showScore(player);
 
 								}
+								MySQL.addFatiga(player.getName(),
+										0.5 * ModiferConverter
+												.SacalaReverse(TrainingSQL
+														.getFTS(player
+																.getName())));
+								int show = (int) (20 - diff);
+								player.sendMessage(ChatColor.GOLD
+										+ "Mejor espera unos "
+										+ show
+										+ " segundos mÃ¡s, si entrenas tan rÃ¡pido solo te cansarÃ¡s mÃ¡s y puedes lesionarte");
+								Scoreboard.showScore(player);
+
 							} else {
-								MySQL.addFatiga(player.getName(), 0.6);
+								MySQL.addFatiga(player.getName(),
+										0.6 * ModiferConverter
+												.SacalaReverse(TrainingSQL
+														.getFTS(player
+																.getName())));
 								TrainingSQL.addFTS(player.getName(), 0.2);
 								player.sendMessage(ChatColor.GREEN
-										+ "¡Así se hace! Sigue así :)");
+										+ "Â¡AsÃ­ se hace! Sigue asÃ­ :)");
 								cooldownP.put(player.getName(),
 										System.currentTimeMillis());
 								Scoreboard.showScore(player);
 
 							}
-
 						} else {
-							player.sendMessage(ChatColor.RED
-									+ "Mejor descansa un poco, estás demasiado cansado para entrenar");
+							MySQL.addFatiga(player.getName(), 0.6);
+							TrainingSQL.addFTS(player.getName(), 0.2);
+							player.sendMessage(ChatColor.GREEN
+									+ "Â¡AsÃ­ se hace! Sigue asÃ­ :)");
+							cooldownP.put(player.getName(),
+									System.currentTimeMillis());
+							Scoreboard.showScore(player);
 
 						}
+
 					} else {
 						player.sendMessage(ChatColor.RED
-								+ "Estás demasiado débil para entrenar ahora");
+								+ "Mejor descansa un poco, estÃ¡s demasiado cansado para entrenar");
 
 					}
+				} else {
+					player.sendMessage(ChatColor.RED
+							+ "EstÃ¡s demasiado dÃ©bil para entrenar ahora");
+
 				}
 			}
 		}
-	//}
+	}
+
+	// }
 
 	@EventHandler
 	public void onBreak(BlockBreakEvent event) {

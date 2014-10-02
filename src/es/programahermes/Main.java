@@ -14,7 +14,6 @@ import es.programahermes.Chat.GCommand;
 import es.programahermes.Chat.HCommand;
 import es.programahermes.Chat.JoinListener;
 import es.programahermes.Chat.LanguageSwitcher;
-import es.programahermes.Chat.MCommand;
 import es.programahermes.Chat.Meeter;
 import es.programahermes.Chat.OCommand;
 import es.programahermes.Chat.SCommand;
@@ -68,6 +67,7 @@ import es.programahermes.Utilidades.Pernos;
 import es.programahermes.Utilidades.PointsAdjust;
 import es.programahermes.Utilidades.Poison;
 import es.programahermes.Utilidades.Recipes;
+import es.programahermes.Utilidades.TestCommand;
 import es.programahermes.WGRegions.WGFlags;
 
 public class Main extends JavaPlugin {
@@ -76,6 +76,7 @@ public class Main extends JavaPlugin {
 	public File jugadores;
 	public static FileConfiguration JugadoresConfig;
 
+	@SuppressWarnings("static-access")
 	public void onEnable() {
 
 		CustomTools.loadTools();
@@ -148,6 +149,7 @@ public class Main extends JavaPlugin {
 		getCommand("presentarse").setExecutor(new Meeter());
 		getCommand("tono").setExecutor(new TonoSwitcher());
 		getCommand("recargarskin").setExecutor(new SkinReloadCommand());
+		getCommand("test").setExecutor(new TestCommand());
 		loadConfiguration();
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
@@ -164,11 +166,12 @@ public class Main extends JavaPlugin {
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.lapis);
 	}
 
+	@SuppressWarnings("static-access")
 	public void onDisable() {
 		this.plugin = null;
 		getServer().clearRecipes();
 	}
-
+	@SuppressWarnings("static-access")
 	public void loadConfiguration() {
 		this.plugin.getConfig().options().copyDefaults(true);
 		this.plugin.saveConfig();

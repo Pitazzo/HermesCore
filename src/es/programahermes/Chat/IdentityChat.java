@@ -12,6 +12,7 @@ import es.programahermes.MySQL;
 public class IdentityChat {
 
 	public static boolean knowsPlayer(Player asker, Player player) {
+		@SuppressWarnings("unchecked")
 		List<String> conocidos = (List<String>) Main.JugadoresConfig
 				.getList(asker.getName());
 		if (conocidos != null) {
@@ -28,6 +29,7 @@ public class IdentityChat {
 	public static String getName(Player asker, Player sender) {
 		if (knowsPlayer(asker, sender)) {
 
+			@SuppressWarnings("unchecked")
 			List<String> conocidos = (List<String>) Main.JugadoresConfig
 					.getList(asker.getName());
 			for (String row : conocidos) {
@@ -50,6 +52,7 @@ public class IdentityChat {
 	}
 
 	public static void meetPlayer(Player meeter, Player player, String name) {
+		@SuppressWarnings("unchecked")
 		List<String> conocidos = (List<String>) Main.JugadoresConfig
 				.getList(meeter.getName());
 

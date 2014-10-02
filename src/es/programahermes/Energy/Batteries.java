@@ -1,7 +1,6 @@
 package es.programahermes.Energy;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -13,7 +12,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 

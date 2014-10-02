@@ -2,6 +2,8 @@ package es.programahermes.PHDS;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,7 +18,9 @@ public class Listeners implements Listener {
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
 		Player player = event.getEntity();
-
+		player.getLocation().getBlock().setType(Material.BEDROCK);
+		player.getLocation().getBlock().getRelative(BlockFace.NORTH).setType(Material.BEDROCK);
+		
 		if (!DeathSQL.isInLimbo(player.getName())) {
 			DeathSQL.setInLimbo(player.getName(), true);
 			DeathSQL.setTimeLeft(player.getName(), 300);

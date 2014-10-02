@@ -41,7 +41,7 @@ public class Diarrea implements Listener {
 							+ ChatColor.RED + "Has evacuado");
 				}
 			}else{
-				if(Miscelaneo.getName(event.getItem()).equals("Antibiótico")){
+				if(Miscelaneo.getName(event.getItem()).equals("Antibiï¿½tico")){
 					if(Math.random()*100<25){
 						HealthSQL.setDiarrea(player.getName(), false);
 					}
@@ -54,6 +54,7 @@ public class Diarrea implements Listener {
 	public void onInteract(PlayerInteractEvent event) {
 		if (event.getAction() == Action.RIGHT_CLICK_BLOCK
 				|| event.getAction() == Action.RIGHT_CLICK_AIR) {
+			@SuppressWarnings("deprecation")
 			List<Block> los = event.getPlayer().getLineOfSight(null, 5);
 			if (event.getPlayer().isSneaking()) {
 				for (Block b : los) {

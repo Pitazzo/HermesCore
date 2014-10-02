@@ -14,6 +14,7 @@ import es.programahermes.MySQL;
 
 public class Refuerzos implements Listener {
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onRefor(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
@@ -56,6 +57,7 @@ public class Refuerzos implements Listener {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBreak(BlockBreakEvent event) {
 		if (event.getBlock().getType().equals(Material.STAINED_CLAY)) {

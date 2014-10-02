@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class DataGetter implements CommandExecutor {
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 		if (cmd.getName().equalsIgnoreCase("data")) {

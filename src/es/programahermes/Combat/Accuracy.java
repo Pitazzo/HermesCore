@@ -25,12 +25,12 @@ public class Accuracy implements Listener, CommandExecutor {
 				if (args.length == 0) {
 					if(isTraining.contains(sender.getName())){
 						isTraining.remove(sender.getName());
-						sender.sendMessage(ChatColor.RED+"Ya no estás entrenando tus habilidades de tiro");
+						sender.sendMessage(ChatColor.RED+"Ya no estï¿½s entrenando tus habilidades de tiro");
 						return true;
 					}else{
 						isTraining.add(sender.getName());
-						sender.sendMessage(ChatColor.GREEN+"Estás entrenando tus habilidades de tiro");
-						sender.sendMessage(ChatColor.GREEN+"Recuerda que ahora fallar la diana te restará puntos");
+						sender.sendMessage(ChatColor.GREEN+"Estï¿½s entrenando tus habilidades de tiro");
+						sender.sendMessage(ChatColor.GREEN+"Recuerda que ahora fallar la diana te restarï¿½ puntos");
 						return true;
 					}
 				}
@@ -42,6 +42,7 @@ public class Accuracy implements Listener, CommandExecutor {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onHit(WeaponHitBlockEvent event) {
 		Player player = event.getPlayer();
@@ -49,7 +50,7 @@ public class Accuracy implements Listener, CommandExecutor {
 			if(event.getBlock().getType().equals(Material.STAINED_CLAY)&&event.getBlock().getData()==13){
 				int distance = (int) player.getLocation().distance(event.getBlock().getLocation());
 				double points = distance*0.25;
-				player.sendMessage(ChatColor.GREEN+"¡Buen tiro! Has ganado "+points+" puntos. El objetivo estaba a "+distance+" metros.");
+				player.sendMessage(ChatColor.GREEN+"Â¡Buen tiro! Has ganado "+points+" puntos. El objetivo estaba a "+distance+" metros.");
 				CombatSQL.addWP(player, points);
 			}else{
 				player.sendMessage(ChatColor.RED+"Has fallado, pierdes cuatro puntos");

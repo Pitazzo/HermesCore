@@ -10,7 +10,6 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import es.programahermes.Main;
 import es.programahermes.MySQL;
@@ -21,12 +20,6 @@ public class Fracturas implements Listener {
 	static int taskID1;
 	static int counter = 0;
 
-	public static Main plugin;
-	
-	public Fracturas(){
-		this.plugin = plugin;
-		}
-	
 	@EventHandler
 	public void onFall(EntityDamageEvent event) {
 		if (event.getEntity() instanceof Player) {
@@ -56,18 +49,17 @@ public class Fracturas implements Listener {
 		if (event.getRightClicked() instanceof Player) {
 			Player player = event.getPlayer();
 			Player target = (Player) event.getRightClicked();
-			if (Miscelaneo.getName(player.getItemInHand()).equals("Reconstructor óseo armado")) {
+			if (Miscelaneo.getName(player.getItemInHand()).equals(
+					"Reconstructor Ã³seo armado")) {
 				if (player.hasPermission("hermescore.oseo")) {
 					ItemMeta meta = player.getItemInHand().getItemMeta();
-					meta.setDisplayName("Reconstructor óseo desarmado");
+					meta.setDisplayName("Reconstructor Ã³seo desarmado");
 					player.getItemInHand().setItemMeta(meta);
 
 					if (HealthSQL.FracturaTS(player.getName())) {
 						double rdm = Math.random() * 100;
 						if (rdm < 85) {
-							reconstruccionCheck(
-									plugin, player,
-									target, "TS");
+							reconstruccionCheck(Main.plugin, player, target, "TS");
 						} else {
 							player.sendMessage(ChatColor.RED
 									+ "Desgraciadamente, el proceso ha fallado");
@@ -82,8 +74,8 @@ public class Fracturas implements Listener {
 						if (HealthSQL.FracturaTI(player.getName())) {
 							double rdm = Math.random() * 100;
 							if (rdm < 85) {
-								reconstruccionCheck(plugin,
-										player, target, "TI");
+								reconstruccionCheck(Main.plugin, player, target,
+										"TI");
 							} else {
 								player.sendMessage(ChatColor.RED
 										+ "Desgraciadamente, el proceso ha fallado");
@@ -96,13 +88,13 @@ public class Fracturas implements Listener {
 							}
 						} else {
 							player.sendMessage(ChatColor.GREEN
-									+ "¡Buenas noticias! El paciente no tiene ninguna fractura "
+									+ "Â¡Buenas noticias! El paciente no tiene ninguna fractura "
 									+ HealthSQL.Diarrea(player.getName()));
 						}
 					}
 				} else {
 					player.sendMessage(ChatColor.DARK_RED
-							+ "¡La reconstrucción osea es un proceso muy complicado que solo puede ser realizado por personal cualificado!");
+							+ "Â¡La reconstrucciÃ³n osea es un proceso muy complicado que solo puede ser realizado por personal cualificado!");
 				}
 			}
 		}
@@ -111,10 +103,10 @@ public class Fracturas implements Listener {
 	public void setFracturaTS(Player player) {
 		if (HealthSQL.FracturaTS(player.getName())) {
 			player.sendMessage(ChatColor.DARK_RED
-					+ "¡Ten un poco de cuidado, no haces más que empeorar tu lesión! ¡Qué dolor!");
+					+ "Â¡Ten un poco de cuidado, no haces mÃ¡s que empeorar tu lesiÃ³n! Â¡QuÃ© dolor!");
 		} else {
 			player.sendMessage(ChatColor.DARK_RED
-					+ "¡Acabas de fracturate un hueso en el tren superior! ¡Qué dolor!");
+					+ "Â¡Acabas de fracturate un hueso en el tren superior! Â¡QuÃ© dolor!");
 			HealthSQL.setFracturaTS(player.getName(), true);
 		}
 
@@ -124,10 +116,10 @@ public class Fracturas implements Listener {
 
 		if (HealthSQL.FracturaTI(player.getName())) {
 			player.sendMessage(ChatColor.DARK_RED
-					+ "¡Ten un poco de cuidado, no haces más que empeorar tu lesión! ¡Qué dolor!");
+					+ "Â¡Ten un poco de cuidado, no haces mÃ¡s que empeorar tu lesiÃ³n! Â¡QuÃ© dolor!");
 		} else {
 			player.sendMessage(ChatColor.DARK_RED
-					+ "¡Acabas de fracturate un hueso en el tren inferior! ¡Qué dolor!");
+					+ "Â¡Acabas de fracturate un hueso en el tren inferior! Â¡QuÃ© dolor!");
 			HealthSQL.setFracturaTI(player.getName(), true);
 			player.setWalkSpeed((float) 0.005);
 		}
@@ -135,12 +127,12 @@ public class Fracturas implements Listener {
 	}
 
 	public static void healFracturaTS(Player player) {
-		player.sendMessage(ChatColor.GREEN + "Te recuperas de tu lesión");
+		player.sendMessage(ChatColor.GREEN + "Te recuperas de tu lesiÃ³n");
 		HealthSQL.setFracturaTI(player.getName(), false);
 	}
 
 	public static void healFracturaTI(Player player) {
-		player.sendMessage(ChatColor.GREEN + "Te recuperas de tu lesión");
+		player.sendMessage(ChatColor.GREEN + "Te recuperas de tu lesiÃ³n");
 		player.setWalkSpeed((float) 0.2);
 		HealthSQL.setFracturaTI(player.getName(), false);
 	}
@@ -156,32 +148,32 @@ public class Fracturas implements Listener {
 						if (counter < 10) {
 							if (counter == 0) {
 								player.sendMessage(ChatColor.GOLD
-										+ "Preparando el reconstructor óseo");
+										+ "Preparando el reconstructor Ã³seo");
 								target.sendMessage(ChatColor.GOLD
-										+ "Preparando el reconstructor óseo");
+										+ "Preparando el reconstructor Ã³seo");
 							}
 							if (counter == 1) {
 								player.sendMessage(ChatColor.GOLD
-										+ "Iniciando reconstrucción ósea");
+										+ "Iniciando reconstrucciÃ³n Ã³sea");
 								target.sendMessage(ChatColor.GOLD
-										+ "Iniciando reconstrucción ósea");
+										+ "Iniciando reconstrucciÃ³n Ã³sea");
 							}
 							switch (type) {
 							case "TS":
 								player.sendMessage(ChatColor.RED
-										+ "Reconstrcción ósea del tren superior al "
+										+ "ReconstrcciÃ³n Ã³sea del tren superior al "
 										+ counter * 10 + "%");
 								target.sendMessage(ChatColor.RED
-										+ "Reconstrcción ósea del tren superior al "
+										+ "ReconstrcciÃ³n Ã³sea del tren superior al "
 										+ counter * 10 + "%");
 
 							case "TI":
 
 								player.sendMessage(ChatColor.RED
-										+ "Reconstrcción ósea del tren inferior al "
+										+ "ReconstrcciÃ³n Ã³sea del tren inferior al "
 										+ counter * 10 + "%");
 								target.sendMessage(ChatColor.RED
-										+ "Reconstrcción ósea del tren inferior al "
+										+ "ReconstrcciÃ³n Ã³sea del tren inferior al "
 										+ counter * 10 + "%");
 							}
 						}
@@ -205,16 +197,16 @@ public class Fracturas implements Listener {
 								switch (type) {
 								case "TS":
 									player.sendMessage(ChatColor.GREEN
-											+ "¡Reconstrucción ósea completada! ¡Ha sido un éxito! ¡Las fracturas del tren superior han sanado!");
+											+ "Â¡ReconstrucciÃ³n Ã³sea completada! Â¡Ha sido un Ã©xito! Â¡Las fracturas del tren superior han sanado!");
 									target.sendMessage(ChatColor.GREEN
-											+ "¡Reconstrucción ósea completada! ¡Ha sido un éxito! ¡Tus fracturas del tren superior han sanado!");
+											+ "Â¡ReconstrucciÃ³n Ã³sea completada! Â¡Ha sido un Ã©xito! Â¡Tus fracturas del tren superior han sanado!");
 									healFracturaTS(target);
 
 								case "TI":
 									player.sendMessage(ChatColor.GREEN
-											+ "¡Reconstrucción ósea completada! ¡Ha sido todo un éxito! ¡Las fracturas del tren inferior han sanado!");
+											+ "Â¡ReconstrucciÃ³n Ã³sea completada! Â¡Ha sido todo un Ã©xito! Â¡Las fracturas del tren inferior han sanado!");
 									target.sendMessage(ChatColor.GREEN
-											+ "¡Reconstrucción ósea completada! ¡Ha sido todo un éxito! ¡Tus fracturas del tren inferior han sanado!");
+											+ "Â¡ReconstrucciÃ³n Ã³sea completada! Â¡Ha sido todo un Ã©xito! Â¡Tus fracturas del tren inferior han sanado!");
 									healFracturaTI(target);
 									plugin.getServer().getScheduler()
 											.cancelTask(taskID1);
