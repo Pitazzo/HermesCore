@@ -25,12 +25,12 @@ public class Accuracy implements Listener, CommandExecutor {
 				if (args.length == 0) {
 					if(isTraining.contains(sender.getName())){
 						isTraining.remove(sender.getName());
-						sender.sendMessage(ChatColor.RED+"Ya no est�s entrenando tus habilidades de tiro");
+						sender.sendMessage(ChatColor.RED+"Ya no estás entrenando tus habilidades de tiro");
 						return true;
 					}else{
 						isTraining.add(sender.getName());
-						sender.sendMessage(ChatColor.GREEN+"Est�s entrenando tus habilidades de tiro");
-						sender.sendMessage(ChatColor.GREEN+"Recuerda que ahora fallar la diana te restar� puntos");
+						sender.sendMessage(ChatColor.GREEN+"Estás entrenando tus habilidades de tiro");
+						sender.sendMessage(ChatColor.GREEN+"Recuerda que ahora fallar la diana te restará puntos");
 						return true;
 					}
 				}

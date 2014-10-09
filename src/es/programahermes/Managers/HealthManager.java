@@ -20,12 +20,14 @@ public class HealthManager {
 
 	public static double getHealth(Player player, int percentage) { 
 		if (player != null) {
+			player.sendMessage("salud: "+percentage*MaxHealthManager.getMaxHealth(player.getName())/100);
 			return (percentage*MaxHealthManager.getMaxHealth(player.getName())/100);	
 			}
 		return 0;
 	}
 	
 	public static void setMaxHealth(String player, int health) {
+		Bukkit.getPlayer(player).sendMessage("Iniciado seteo de salud");
 		int percentage = 100;
 		if (MySQL.getFatiga(player) > 90) {
 			percentage = 90;
@@ -48,6 +50,9 @@ public class HealthManager {
 
 		if (percentage >= health) {
 			Bukkit.getPlayer(player).setMaxHealth(getHealth(Bukkit.getPlayer(player), percentage));
+			Bukkit.getPlayer(player).sendMessage("Salud seteada a "+percentage);
+		}else{
+			Bukkit.getPlayer(player).sendMessage("Fail!");
 		}
 
 	}

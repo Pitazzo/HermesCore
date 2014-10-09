@@ -11,7 +11,7 @@ import es.programahermes.Managers.SpeedManager;
 public class Desmayo{
 
 	public static void setPostDesmayo(String player){
-		System.out.println("Post desmayo activado");
+		Bukkit.getPlayer(player).sendMessage("Iniciado postdesmayo");
 		HealthManager.setMaxHealth(player, 65);
 		SpeedManager.setSpeed(player, 70);
 		DeathSQL.setInPost(player, true);

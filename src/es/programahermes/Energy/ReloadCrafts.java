@@ -10,7 +10,7 @@ import org.bukkit.inventory.ShapelessRecipe;
 import es.programahermes.Utilidades.Ingredients;
 import es.programahermes.Utilidades.Items;
 
-public class Crafts {
+public class ReloadCrafts {
 
 	public static ShapedRecipe Battery = new ShapedRecipe(Items.SemiCustom(
 			Material.COAL, 1, "Batería cargada", "Rendimiento: 100%"))
@@ -30,9 +30,9 @@ public class Crafts {
 	.addIngredient(Items.SemiCustom(Material.IRON_PICKAXE, 1, "Cortadora de plasma Falcon").getData());
 	
 	public static void register(){
-		Bukkit.getServer().addRecipe(Crafts.Battery);
-		Bukkit.getServer().addRecipe(Crafts.Pickaxe);
-		Bukkit.getServer().addRecipe(Crafts.loadedPickaxe);
+		Bukkit.getServer().addRecipe(ReloadCrafts.Battery);
+		Bukkit.getServer().addRecipe(ReloadCrafts.Pickaxe);
+		Bukkit.getServer().addRecipe(ReloadCrafts.loadedPickaxe);
 	}
 
 	

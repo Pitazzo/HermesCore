@@ -13,107 +13,107 @@ public class LanguageSwitcher implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("idioma")) {
 			if (sender instanceof Player) {
 				if (args.length == 1) {
-					if (args[0].equalsIgnoreCase("arabe") || args[0].equalsIgnoreCase("árabe")) {
+					if (args[0].equalsIgnoreCase("arabe") || args[0].equalsIgnoreCase("Ã¡rabe")) {
 						if (sender.hasPermission("hermescore.idiomas.arabe")) {
-							HermesChat.idioma.put((Player) sender, "árabe");
-							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarás en "+ChatColor.BLUE+"árabe");
+							HermesChat.idioma.put((Player) sender, "Ã¡rabe");
+							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarÃ¡s en "+ChatColor.BLUE+"Ã¡rabe");
 						} else {
 							sender.sendMessage(ChatColor.DARK_RED
-									+ "No dominas el "+args[0]+", quizás deberías aprender...");
+									+ "No dominas el "+args[0]+", quizÃ¡s deberÃ­as aprender...");
 						}
 					
-					}else if (args[0].equalsIgnoreCase("alemán") || args[0].equalsIgnoreCase("aleman")) {
+					}else if (args[0].equalsIgnoreCase("alemÃ¡n") || args[0].equalsIgnoreCase("aleman")) {
 						if (sender.hasPermission("hermescore.idiomas.aleman")) {
-							HermesChat.idioma.put((Player) sender, "alemán");
-							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarás en "+ChatColor.BLUE+"alemán");
+							HermesChat.idioma.put((Player) sender, "alemÃ¡n");
+							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarÃ¡s en "+ChatColor.BLUE+"alemÃ¡n");
 						} else {
 							sender.sendMessage(ChatColor.DARK_RED
-									+ "No dominas el "+args[0]+", quizás deberías aprender...");
+									+ "No dominas el "+args[0]+", quizÃ¡s deberÃ­as aprender...");
 						}
 					
-					}else if (args[0].equalsIgnoreCase("inglés") || args[0].equalsIgnoreCase("ingles")) {
+					}else if (args[0].equalsIgnoreCase("inglÃ©s") || args[0].equalsIgnoreCase("ingles")) {
 						if (sender.hasPermission("hermescore.idiomas.ingles")) {
-							HermesChat.idioma.put((Player) sender, "inglés");
-							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarás en "+ChatColor.BLUE+"inglés");
+							HermesChat.idioma.put((Player) sender, "inglÃ©s");
+							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarÃ¡s en "+ChatColor.BLUE+"inglÃ©s");
 						} else {
 							sender.sendMessage(ChatColor.DARK_RED
-									+ "No dominas el "+args[0]+", quizás deberías aprender...");
+									+ "No dominas el "+args[0]+", quizÃ¡s deberÃ­as aprender...");
 						}
 					
-					}else if (args[0].equalsIgnoreCase("japonés") || args[0].equalsIgnoreCase("japones")) {
+					}else if (args[0].equalsIgnoreCase("japonï¿½s") || args[0].equalsIgnoreCase("japones")) {
 						if (sender.hasPermission("hermescore.idiomas.japones")) {
-							HermesChat.idioma.put((Player) sender, "japonés");
-							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarás en "+ChatColor.BLUE+"japonés");
+							HermesChat.idioma.put((Player) sender, "japonï¿½s");
+							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarï¿½s en "+ChatColor.BLUE+"japonï¿½s");
 						} else {
 							sender.sendMessage(ChatColor.DARK_RED
-									+ "No dominas el "+args[0]+", quizás deberías aprender...");
+									+ "No dominas el "+args[0]+", quizï¿½s deberï¿½as aprender...");
 						}
 					
-					}else if (args[0].equalsIgnoreCase("frances") || args[0].equalsIgnoreCase("francés")) {
+					}else if (args[0].equalsIgnoreCase("frances") || args[0].equalsIgnoreCase("francï¿½s")) {
 						if (sender.hasPermission("hermescore.idiomas.frances")) {
-							HermesChat.idioma.put((Player) sender, "francés");
-							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarás en "+ChatColor.BLUE+"francés");
+							HermesChat.idioma.put((Player) sender, "francï¿½s");
+							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarï¿½s en "+ChatColor.BLUE+"francï¿½s");
 						} else {
 							sender.sendMessage(ChatColor.DARK_RED
-									+ "No dominas el "+args[0]+", quizás deberías aprender...");
+									+ "No dominas el "+args[0]+", quizï¿½s deberï¿½as aprender...");
 						}
 					
 					}else if (args[0].equalsIgnoreCase("italiano")) {
 						if (sender.hasPermission("hermescore.idiomas."+args[0])) {
 							HermesChat.idioma.put((Player) sender, "args[0]");
-							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarás en "+ChatColor.BLUE+"italiano");
+							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarï¿½s en "+ChatColor.BLUE+"italiano");
 						} else {
 							sender.sendMessage(ChatColor.DARK_RED
-									+ "No dominas el "+args[0]+", quizás deberías aprender...");
+									+ "No dominas el "+args[0]+", quizï¿½s deberï¿½as aprender...");
 						}
 					
 					}else if (args[0].equalsIgnoreCase("chino")) {
 						if (sender.hasPermission("hermescore.idiomas."+args[0])) {
 							HermesChat.idioma.put((Player) sender, args[0]);
-							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarás en "+ChatColor.BLUE+"chino");
+							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarï¿½s en "+ChatColor.BLUE+"chino");
 						} else {
 							sender.sendMessage(ChatColor.DARK_RED
-									+ "No dominas el "+args[0]+", quizás deberías aprender...");
+									+ "No dominas el "+args[0]+", quizï¿½s deberï¿½as aprender...");
 						}
 					
 					}else if (args[0].equalsIgnoreCase("ruso")) {
 						if (sender.hasPermission("hermescore.idiomas."+args[0])) {
 							HermesChat.idioma.put((Player) sender, args[0]);
-							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarás en "+ChatColor.BLUE+"ruso");
+							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarï¿½s en "+ChatColor.BLUE+"ruso");
 						} else {
 							sender.sendMessage(ChatColor.DARK_RED
-									+ "No dominas el "+args[0]+", quizás deberías aprender...");
+									+ "No dominas el "+args[0]+", quizï¿½s deberï¿½as aprender...");
 						}
 					
-					}else if (args[0].equalsIgnoreCase("español")) {
+					}else if (args[0].equalsIgnoreCase("espaï¿½ol")) {
 						if (sender.hasPermission("hermescore.idiomas.espanol")) {
 							HermesChat.idioma.put((Player) sender, args[0]);
-							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarás en "+ChatColor.BLUE+"español");
+							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarï¿½s en "+ChatColor.BLUE+"espaï¿½ol");
 						} else {
 							sender.sendMessage(ChatColor.DARK_RED
-									+ "No dominas el "+args[0]+", quizás deberías aprender...");
+									+ "No dominas el "+args[0]+", quizï¿½s deberï¿½as aprender...");
 						}
 					
 					}else if (args[0].equalsIgnoreCase("sueco")) {
 						if (sender.hasPermission("hermescore.idiomas."+args[0])) {
 							HermesChat.idioma.put((Player) sender, args[0]);
-							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarás en "+ChatColor.BLUE+"sueco");
+							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarï¿½s en "+ChatColor.BLUE+"sueco");
 						} else {
 							sender.sendMessage(ChatColor.DARK_RED
-									+ "No dominas el "+args[0]+", quizás deberías aprender...");
+									+ "No dominas el "+args[0]+", quizï¿½s deberï¿½as aprender...");
 						}
 					
 					}else if (args[0].equalsIgnoreCase("hindi")) {
 						if (sender.hasPermission("hermescore.idiomas."+args[0])) {
 							HermesChat.idioma.put((Player) sender, args[0]);
-							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarás en "+ChatColor.BLUE+"hindi");
+							sender.sendMessage(ChatColor.GREEN+"De ahora en adelante hablarï¿½s en "+ChatColor.BLUE+"hindi");
 						} else {
 							sender.sendMessage(ChatColor.DARK_RED
-									+ "No dominas el "+args[0]+", quizás deberías aprender...");
+									+ "No dominas el "+args[0]+", quizï¿½s deberï¿½as aprender...");
 						}
 					
 					}else{
-						sender.sendMessage(ChatColor.DARK_RED+"El "+args[0]+" no es un idioma válido");
+						sender.sendMessage(ChatColor.DARK_RED+"El "+args[0]+" no es un idioma vï¿½lido");
 					}
 					
 					
