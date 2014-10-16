@@ -1,5 +1,7 @@
 package es.programahermes.Geologia;
 
+import net.morematerials.materials.MMCustomBlock;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -34,13 +36,6 @@ public class Geologia implements Listener {
 	
 				}
 
-				if (event.getBlock().getType().equals(Material.COAL_ORE)) {
-					ItemStack drop = new ItemStack(Material.STONE, 1);
-					event.getBlock().getDrops(drop);
-					player.sendMessage(ChatColor.RED
-							+ "¡Has malgastado un mineral del que extraer energía!");
-					MySQL.removePoints(player.getName(), 3);
-				}
 
 			}
 		}
@@ -51,7 +46,7 @@ public class Geologia implements Listener {
 	public void onBuild(BlockPlaceEvent event) {
 		if(!event.isCancelled()){
 			Player player = event.getPlayer();
-			String material = event.getBlock().getType().toString();
+			String material = event.getBlock().getType().toString();			
 			if (MySQL.getHability(player.getName()).equals("Geologia")) {
 				MySQL.addEarnedPoints(player.getName(), "place", material, 1);
 			}

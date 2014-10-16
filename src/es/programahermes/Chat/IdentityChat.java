@@ -34,12 +34,7 @@ public class IdentityChat {
 					.getList(asker.getName());
 			for (String row : conocidos) {
 				if (row.contains(sender.getName())) {
-					System.out.println(row);
 					String[] parts = row.split("@");
-					for (String substring : parts) {
-						System.out.println(substring);
-					}
-
 					return parts[1];
 				}
 			}

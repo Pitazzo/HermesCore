@@ -3,13 +3,21 @@ package es.programahermes.Utilidades;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.morematerials.MoreMaterials;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.getspout.spoutapi.inventory.SpoutItemStack;
 
 public class Items {
 
-	public static ItemStack SemiCustom(Material material, int amount, String name, String lore1){
+    public static MoreMaterials mm = (MoreMaterials)
+    Bukkit.getServer().getPluginManager().getPlugin("MoreMaterials");
+	
+	public static ItemStack SemiCustom(Material material, int amount,
+			String name, String lore1) {
 		ItemStack item = new ItemStack(material, amount);
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
@@ -19,8 +27,9 @@ public class Items {
 		item.setItemMeta(meta);
 		return item;
 	}
-	
-	public static ItemStack SemiCustom(Material material, short durability, int amount, String name, String lore1){
+
+	public static ItemStack SemiCustom(Material material, short durability,
+			int amount, String name, String lore1) {
 		ItemStack item = new ItemStack(material, amount);
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
@@ -32,15 +41,17 @@ public class Items {
 		return item;
 	}
 
-	public static ItemStack SemiCustom(Material material, int amount, String name){
+	public static ItemStack SemiCustom(Material material, int amount,
+			String name) {
 		ItemStack item = new ItemStack(material, amount);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(name);
 		item.setItemMeta(meta);
 		return item;
 	}
-	
-	public static ItemStack SemiCustom(Material material, short durability, int amount, String name){
+
+	public static ItemStack SemiCustom(Material material, short durability,
+			int amount, String name) {
 		ItemStack item = new ItemStack(material, amount);
 		ItemMeta meta = item.getItemMeta();
 		item.setDurability(durability);
@@ -49,10 +60,15 @@ public class Items {
 		return item;
 	}
 	
-	public static ItemStack Custom(short durability, int amount){
+	public static ItemStack VanillaCustom(short durability, int amount) {
 		ItemStack item = new ItemStack(Material.FLINT, amount);
 		item.setDurability(durability);
 		return item;
 	}
-	
+
+	public static org.getspout.spoutapi.material.Material Custom(int id) {	
+		org.getspout.spoutapi.material.Material material = mm.getSmpManager().getMaterial(id) ;
+		return material;
+	}
+
 }

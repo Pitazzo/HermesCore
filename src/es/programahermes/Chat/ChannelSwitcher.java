@@ -23,7 +23,7 @@ public class ChannelSwitcher implements CommandExecutor {
 						sender.sendMessage(ChatColor.BLUE+"Has cambiado al canal OOC");
 					} else {
 						sender.sendMessage(ChatColor.DARK_RED + args[0]
-								+ " no es un canal v·lido");
+								+ " no es un canal v√°lido");
 					}
 					return true;
 				}

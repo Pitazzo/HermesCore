@@ -3,6 +3,7 @@ package es.programahermes.Energy;
 import java.util.HashMap;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -50,7 +51,8 @@ public class Batteries implements Listener {
 											panels.put(event.getClickedBlock()
 													.getLocation(), System
 													.currentTimeMillis());
-											Loader.reload(player.getItemInHand());
+											Loader.reload(player
+													.getItemInHand());
 											player.sendMessage(ChatColor.GREEN
 													+ "¡Has recargado la batería!");
 										} else {
@@ -89,7 +91,8 @@ public class Batteries implements Listener {
 								+ "La recarga de baterías solo puede ser realizada por personal cualificado");
 					}
 				} else {
-					player.sendMessage(ChatColor.RED + "Ese objeto no es recargable");
+					player.sendMessage(ChatColor.RED
+							+ "Ese objeto no es recargable");
 				}
 			}
 
@@ -99,9 +102,9 @@ public class Batteries implements Listener {
 
 	public static boolean isEmpty(ItemStack item) {
 
-		if(Miscelaneo.getName(item).equals("Batería descargada")){
+		if (Miscelaneo.getName(item).equals("Batería descargada")) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 
@@ -109,15 +112,13 @@ public class Batteries implements Listener {
 
 	public static boolean isCharged(ItemStack item) {
 
-		if(Miscelaneo.getName(item).equals("Batería cargada")){
+		if (Miscelaneo.getName(item).equals("Batería cargada")) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
-	
-		}
 
-	
+	}
 
 	@EventHandler
 	public void onBurn(FurnaceBurnEvent event) {
@@ -136,7 +137,8 @@ public class Batteries implements Listener {
 
 	@EventHandler
 	public void onInteract1(PlayerInteractEvent event) {
-		if (!event.isCancelled()) {
+		if (!event.isCancelled()
+				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			Player player = event.getPlayer();
 			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 				if (event.getClickedBlock().getType()

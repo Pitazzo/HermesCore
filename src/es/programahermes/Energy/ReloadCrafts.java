@@ -21,7 +21,7 @@ public class ReloadCrafts {
 			Material.IRON_PICKAXE, 1, "Cortador de plasma Falcon", "Carga: 0%"))
 			.shape("   ", "*%*", "   ")
 			.setIngredient('*', Material.STICK)
-			.setIngredient('%', Ingredients.cactus);
+			.setIngredient('%', Ingredients.circuito_cobre);
 	
 	public static ShapelessRecipe loadedPickaxe = new ShapelessRecipe(Items.SemiCustom(
 			Material.IRON_PICKAXE, 1, "Cortador de plasma Falcon", "Carga: 100%"))

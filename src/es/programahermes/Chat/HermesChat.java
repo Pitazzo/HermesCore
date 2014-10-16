@@ -39,7 +39,7 @@ public class HermesChat {
 					lang = ChatColor.DARK_GREEN+"["+ idioma.get(sender).substring(0, 1).toUpperCase() + idioma.get(sender).substring(1)+"] ";
 				} else if (channel.equalsIgnoreCase("ooc")) {
 					ch = ChatColor.BLUE + "[OOC] ";
-					name = player.getName();
+					name = sender.getName();
 				}
 				// radio
 				if (radius < 3) {
@@ -71,7 +71,7 @@ public class HermesChat {
 								}
 							}
 							player.sendMessage("Humm... Parece que " + name
-									+ " está hablando en " + ChatColor.DARK_RED
+									+ " estÃ¡ hablando en " + ChatColor.DARK_RED
 									+ language + ChatColor.WHITE
 									+ "... no entiendo nada");
 						}

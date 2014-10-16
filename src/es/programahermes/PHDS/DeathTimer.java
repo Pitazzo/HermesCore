@@ -21,8 +21,14 @@ public class DeathTimer {
 									player.sendMessage(ChatColor.DARK_GREEN
 											+ "Poco a poco, recuperas la noción de la realidad; "
 											+ "tienes un fuerte dolor de cabeza y estás débil");
-									player.teleport(DeathSQL.getDeathLoc(player
-											.getName()));
+									if(DeathSQL.getDeathLoc(player
+											.getName()) != null){
+										player.teleport(DeathSQL.getDeathLoc(player
+												.getName()));
+									}else{
+										System.out.println("[GRAVE]");
+									}
+									
 									DeathSQL.setInLimbo(player.getName(), false);
 									Desmayo.setPostDesmayo(player.getName());
 								}

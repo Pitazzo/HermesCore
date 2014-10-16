@@ -50,9 +50,6 @@ public class HealthManager {
 
 		if (percentage >= health) {
 			Bukkit.getPlayer(player).setMaxHealth(getHealth(Bukkit.getPlayer(player), percentage));
-			Bukkit.getPlayer(player).sendMessage("Salud seteada a "+percentage);
-		}else{
-			Bukkit.getPlayer(player).sendMessage("Fail!");
 		}
 
 	}

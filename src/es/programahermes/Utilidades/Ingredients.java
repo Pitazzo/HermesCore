@@ -1,6 +1,5 @@
 package es.programahermes.Utilidades;
 
-
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,15 +28,16 @@ public class Ingredients implements Listener {
 			Material.INK_SACK, (short) 9, 1, "Plancha de aluminio").getData();
 	public static MaterialData circuito_impreso = Items.SemiCustom(
 			Material.INK_SACK, (short) 10, 1, "Circuito impreso").getData();
-	public static MaterialData cactus = Items.Custom(
-			(short) 1195, 1).getData();
 
-	
+
 	@EventHandler
-	public void onItemClick(InventoryClickEvent event) {			
+	public void onItemClick(InventoryClickEvent event) {
 		if (event.getSlotType().equals(SlotType.CRAFTING)
 				&& event.getCursor() != null) {
 			ItemStack item = event.getCursor();
+			
+			System.out.println("Data: "+item.getData());
+			
 			if (Miscelaneo.getDisplayName(item) == null
 					|| Miscelaneo.getDisplayName(item) == "ERROR") {
 				if (Miscelaneo.getIRName(item) != null
@@ -50,6 +50,24 @@ public class Ingredients implements Listener {
 			}
 		}
 
-	}	
+	}
 	
+	/*
+	@EventHandler
+	public void onInteract(PlayerInteractEvent event) {
+		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+			Player player = event.getPlayer();
+			
+			  Block block = event.getClickedBlock();
+			 
+			  player.sendMessage("Material: "+block.getType().toString());
+			  player.sendMessage("Data: "+block.getData());
+			  player.sendMessage("Estado: "+block.getState().toString());
+			 
+			SpoutBlock sBlock = (SpoutBlock) event.getClickedBlock();
+			player.sendMessage("ID: "
+					+ sBlock.getCustomBlockId());
+		}
+	}
+*/
 }

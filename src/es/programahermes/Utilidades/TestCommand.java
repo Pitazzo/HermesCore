@@ -1,13 +1,20 @@
 package es.programahermes.Utilidades;
 
+import net.morematerials.MoreMaterials;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.getspout.spoutapi.inventory.SpoutItemStack;
+import org.getspout.spoutapi.material.Material;
 
 public class TestCommand implements CommandExecutor {
 
+
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 		if (sender instanceof Player) {
@@ -15,7 +22,19 @@ public class TestCommand implements CommandExecutor {
 			if (cmd.getName().equalsIgnoreCase("test")) {
 				player.sendMessage(ChatColor.BLUE+"Comando de prueba ejecutado");
 				// Desmayo.setPostDesmayo(player.getName());
-
+				/*player.setMaxHealth(30.0D);
+				player.setHealthScale(60.0D);
+				System.out.println("Max health: "+player.getMaxHealth());
+				System.out.println("Health: "+player.getHealth());
+				System.out.println("Scaled health: "+player.getHealthScale());
+				return true;*/
+				SpoutItemStack stack = new SpoutItemStack(player.getItemInHand());
+				Material material = stack.getMaterial();
+				System.out.println("Material: "+material);
+				System.out.println("Material string: "+material.toString());
+				System.out.println("Material name: "+material.getName());
+				System.out.println("Material notchian name: "+material.getNotchianName());			
+				
 				return true;
 			}
 		}
