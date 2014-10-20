@@ -20,14 +20,14 @@ public class SkinManager implements Listener {
 		spoutPlayer.hideTitle();
 		SpoutManager.getSkyManager().setCloudHeight(spoutPlayer, 300);
 		try {
-			spoutPlayer.setSkin("http://programahermes.es/"
+			spoutPlayer.setSkin("http://178.32.219.57/"
 					+ MySQL.getSkin(player.getName()));
 			player.sendMessage(ChatColor.DARK_GREEN
 					+ "Skin cargada de los servidores de Programa Hermes con éxito");
 			
 		} catch (Exception e) {
 			spoutPlayer
-					.setSkin("http://programahermes.es/assets/skinus/HUE.png");
+					.setSkin("http://178.32.219.57/assets/skinus/HUE.png");
 			player.sendMessage(ChatColor.DARK_RED
 					+ "Skin no encontrada. Asigna una inmediatamente.");
 		}

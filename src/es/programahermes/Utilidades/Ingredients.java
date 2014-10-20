@@ -28,6 +28,11 @@ public class Ingredients implements Listener {
 			Material.INK_SACK, (short) 9, 1, "Plancha de aluminio").getData();
 	public static MaterialData circuito_impreso = Items.SemiCustom(
 			Material.INK_SACK, (short) 10, 1, "Circuito impreso").getData();
+	
+	//customs
+	public static org.getspout.spoutapi.material.Material led_rojo = Items.Custom(1577);
+	public static org.getspout.spoutapi.material.Material resistencia = Items.Custom(1579);
+
 
 
 	@EventHandler

@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.getspout.spout.inventory.SimpleSpoutShapedRecipe;
 import org.getspout.spoutapi.inventory.SpoutShapedRecipe;
 
+import es.programahermes.Utilidades.Ingredients;
 import es.programahermes.Utilidades.Items;
 
 public class CraftsTecnica {
@@ -23,20 +24,15 @@ public class CraftsTecnica {
 			.setIngredient('%', new MaterialData(Material.STAINED_CLAY, (byte) 10));
 */
 	
-	public static SpoutShapedRecipe test = new SpoutShapedRecipe(Items.VanillaCustom((short) 1550, 1))
-	.shape("   ", "* *", "   ")
-	.setIngredient('*', mm.getSmpManager().getMaterial(1553));
-	
-	public static SpoutShapedRecipe test2 = new SpoutShapedRecipe(new org.bukkit.inventory.ItemStack(Material.CHEST, 1))
-	.shape("   ", "* *", "   ")
-	.setIngredient('*', Items.Custom(1547));
+	public static SpoutShapedRecipe moduloLASER = new SpoutShapedRecipe(Items.VanillaCustom((short) 1575, 1))
+	.shape("   ", "*%*", "   ")
+	.setIngredient('*', Ingredients.led_rojo)
+	.setIngredient('%', Ingredients.resistencia);
+
 	
 	public static void registrarTecnina() {
-		
-		SimpleSpoutShapedRecipe sshaped = SimpleSpoutShapedRecipe.fromSpoutRecipe(test);
-		SimpleSpoutShapedRecipe sshaped2 = SimpleSpoutShapedRecipe.fromSpoutRecipe(test2);
-		sshaped.addToCraftingManager();
-		sshaped2.addToCraftingManager();
+		SimpleSpoutShapedRecipe smoduloLASER = SimpleSpoutShapedRecipe.fromSpoutRecipe(moduloLASER);
+		smoduloLASER.addToCraftingManager();
 
 	}
 	
