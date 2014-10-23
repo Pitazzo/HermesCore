@@ -19,6 +19,11 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
+import org.getspout.spout.packet.listener.PacketListeners;
+import org.getspout.spoutapi.packet.listener.PacketListener;
+import org.getspout.spoutapi.packet.standard.MCPacket;
+import org.getspout.spoutapi.player.SpoutPlayer;
 import org.shininet.bukkit.itemrenamer.api.RenamerAPI;
 
 import es.programahermes.MySQL;
@@ -203,6 +208,25 @@ public class Miscelaneo implements Listener, CommandExecutor {
 				event.setCancelled(true);
 			}
 		}
+	}
+
+	public static void packetFailAvoider(Plugin mPlugin) {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(mPlugin, new Runnable() {
+			@Override
+			public void run() {
+				PacketListeners.addListener(195, new PacketListener() {
+					@Override
+					public boolean checkPacket(Player pPlayer, MCPacket pPacket) {
+						if (pPlayer instanceof SpoutPlayer) {
+							SpoutPlayer p = (SpoutPlayer) pPlayer;
+							if (p.isSpoutCraftEnabled())
+								return true;
+						}
+						return false;
+					}
+				});
+			}
+		}, 1L);
 	}
 
 }

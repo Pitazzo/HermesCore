@@ -13,7 +13,8 @@ import org.getspout.spoutapi.material.Material;
 
 public class TestCommand implements CommandExecutor {
 
-
+    public static MoreMaterials mm = (MoreMaterials)
+    Bukkit.getServer().getPluginManager().getPlugin("MoreMaterials");
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
@@ -27,14 +28,19 @@ public class TestCommand implements CommandExecutor {
 				System.out.println("Max health: "+player.getMaxHealth());
 				System.out.println("Health: "+player.getHealth());
 				System.out.println("Scaled health: "+player.getHealthScale());
-				return true;*/
+				return true;
 				SpoutItemStack stack = new SpoutItemStack(player.getItemInHand());
 				Material material = stack.getMaterial();
 				System.out.println("Material: "+material);
 				System.out.println("Material string: "+material.toString());
 				System.out.println("Material name: "+material.getName());
 				System.out.println("Material notchian name: "+material.getNotchianName());			
+				*/
 				
+				player.sendMessage("Material: "+Ingredients.aguja_silicio.getName());
+				player.sendMessage("Material: "+Ingredients.aguja_silicio.getRawId());
+				SpoutItemStack stack = new SpoutItemStack(Ingredients.aguja_silicio, 1);
+				player.sendMessage("ID: "+stack.getTypeId());
 				return true;
 			}
 		}

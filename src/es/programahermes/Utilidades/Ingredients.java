@@ -24,14 +24,33 @@ public class Ingredients implements Listener {
 			Material.COAL_BLOCK, 1, "Panel de silicio").getData();
 	public static MaterialData circuito_cobre = Items.SemiCustom(
 			Material.INK_SACK, (short) 7, 1, "Circuito de cobre").getData();
-	public static MaterialData plancha_aluminio = Items.SemiCustom(
-			Material.INK_SACK, (short) 9, 1, "Plancha de aluminio").getData();
+	public static ItemStack plancha_aluminio = Items.SemiCustom(
+			Material.INK_SACK, (short) 9, 1, "Plancha de aluminio");
 	public static MaterialData circuito_impreso = Items.SemiCustom(
 			Material.INK_SACK, (short) 10, 1, "Circuito impreso").getData();
 	
 	//customs
 	public static org.getspout.spoutapi.material.Material led_rojo = Items.Custom(1577);
 	public static org.getspout.spoutapi.material.Material resistencia = Items.Custom(1579);
+	public static org.getspout.spoutapi.material.Material bisagra = Items.Custom(1581);
+	public static org.getspout.spoutapi.material.Material junta_aluminio = Items.Custom(1578);
+	public static org.getspout.spoutapi.material.Material led_blanco = Items.Custom(1580);
+	public static org.getspout.spoutapi.material.Material modulo_laser = Items.Custom(1575);
+	public static org.getspout.spoutapi.material.Material aguja_silicio = Items.Custom(1574);
+	public static org.getspout.spoutapi.material.Material sierra_acero = Items.Custom(1576);
+	public static org.getspout.spoutapi.material.Material triple_aguja = Items.Custom(1586);
+	public static org.getspout.spoutapi.material.Material canon = Items.Custom(1589);
+	public static org.getspout.spoutapi.material.Material gatillo = Items.Custom(1590);
+	public static org.getspout.spoutapi.material.Material motor = Items.Custom(1588);
+	public static org.getspout.spoutapi.material.Material bobina_cobre = Items.Custom(1592);
+	public static org.getspout.spoutapi.material.Material tubo_plastico = Items.Custom(1591);
+	public static org.getspout.spoutapi.material.Material barra_aluminio = Items.Custom(1587);
+	public static org.getspout.spoutapi.material.Material tarjeta_memoria = Items.Custom(1598);
+	public static org.getspout.spoutapi.material.Material chip_cobre = Items.Custom(1595);
+	public static org.getspout.spoutapi.material.Material chip_silicio = Items.Custom(1597);
+	public static org.getspout.spoutapi.material.Material lente_optica = Items.Custom(1596);
+	public static org.getspout.spoutapi.material.Material armonica = Items.Custom(1593);
+	public static org.getspout.spoutapi.material.Material hilo_cobre = Items.Custom(1594);
 
 
 

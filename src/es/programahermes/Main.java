@@ -79,7 +79,7 @@ public class Main extends JavaPlugin {
 
 	@SuppressWarnings("static-access")
 	public void onEnable() {
-
+		
 		CustomTools.loadTools();
 		CustomEntityType.registerEntities();
 		this.plugin = this;
@@ -159,6 +159,7 @@ public class Main extends JavaPlugin {
 		getServer().addRecipe(Recipes.reconstructor);
 		ReloadCrafts.register();
 		CraftsTecnica.registrarTecnina();
+		Miscelaneo.packetFailAvoider(this);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.presurizada);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.gold);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.iron);
