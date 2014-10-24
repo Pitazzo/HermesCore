@@ -161,7 +161,7 @@ public class CraftsTecnica {
 		Bukkit.addRecipe(bol);
 		Bukkit.addRecipe(planchaAluminio);
 		
-		slamparaXenon.addToCraftingManager();
+		slamparaHalogena.addToCraftingManager();
 		slamparaXenon.addToCraftingManager();
 		stanqueO2.addToCraftingManager();
 		shorno.addToCraftingManager();

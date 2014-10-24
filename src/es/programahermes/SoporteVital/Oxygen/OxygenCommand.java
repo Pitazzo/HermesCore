@@ -1,4 +1,4 @@
-package es.programahermes.SoporteVital;
+package es.programahermes.SoporteVital.Oxygen;
 
 import java.util.ArrayList;
 
@@ -31,20 +31,20 @@ public class OxygenCommand implements CommandExecutor {
 										.getOxygen(player.getName()));
 								if (rellenable <= 0) {
 									player.sendMessage(ChatColor.RED
-											+ "¡Tu traje está al límite de su capacidad!");
+											+ "Â¡Tu traje estÃ¡ al lÃ­mite de su capacidad!");
 									return true;
 								} else {
 									if(getOxygen(player.getItemInHand())<= rellenable){
 										MySQL.addOxygen(player.getName(), getOxygen(player.getItemInHand()));
 										removeOxygen(player.getItemInHand(), getOxygen(player.getItemInHand()));
 										player.sendMessage(ChatColor.GREEN
-												+ "¡Se ha presurizado tu traje con "+getOxygen(player.getItemInHand())+"L de oxígeno!");
+												+ "Â¡Se ha presurizado tu traje con "+getOxygen(player.getItemInHand())+"L de oxï¿½geno!");
 										return true;
 									}else{
 										MySQL.addOxygen(player.getName(), rellenable);
 										removeOxygen(player.getItemInHand(), rellenable);
 										player.sendMessage(ChatColor.GREEN
-												+ "¡Se ha presurizado tu traje con "+rellenable+"L de oxígeno!");
+												+ "ï¿½Se ha presurizado tu traje con "+rellenable+"L de oxï¿½geno!");
 										return true;
 									}
 								}
@@ -63,7 +63,7 @@ public class OxygenCommand implements CommandExecutor {
 							}
 						} else {
 							player.sendMessage(ChatColor.RED
-									+ "Este objeto no es un tanque de oxígeno");
+									+ "Este objeto no es un tanque de oxï¿½geno");
 							return true;
 						}
 					} else {
@@ -74,7 +74,7 @@ public class OxygenCommand implements CommandExecutor {
 							player.playSound(player.getLocation(),
 									Sound.BAT_LOOP, 1.0F, 1.0F);
 							player.sendMessage(ChatColor.RED
-									+ "Se han añadido "
+									+ "Se han aï¿½adido "
 									+ Integer.parseInt(args[1])
 									+ " L al tanque ");
 							return true;
@@ -93,7 +93,7 @@ public class OxygenCommand implements CommandExecutor {
 
 	}
 
-	public boolean hasOxygen(ItemStack item) {
+	public static boolean hasOxygen(ItemStack item) {
 		if (item.getItemMeta() != null) {
 			if (item.getItemMeta().getLore() != null) {
 				if (item.getItemMeta().getLore().get(0).contains("O2: ")) {

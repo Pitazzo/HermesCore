@@ -11,7 +11,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 import es.programahermes.MySQL;
 import es.programahermes.PHDS.DeathSQL;
-import es.programahermes.SoporteVital.Oxygen;
+import es.programahermes.SoporteVital.Oxygen.Oxygen;
 
 public class Scoreboard {
 
@@ -124,16 +124,16 @@ public class Scoreboard {
 			if (Oxygen.hasSuit(player)) {
 				if (MySQL.getOxygen(player.getName()) > 70) {
 					oxygen = obj.getScore(Bukkit
-							.getOfflinePlayer(ChatColor.GREEN + "Oxígeno: "
+							.getOfflinePlayer(ChatColor.GREEN + "Oxï¿½geno: "
 									+ oxy + " L"));
 				} else {
 					if (MySQL.getOxygen(player.getName()) < 30) {
 						oxygen = obj.getScore(Bukkit
-								.getOfflinePlayer(ChatColor.RED + "Oxígeno: "
+								.getOfflinePlayer(ChatColor.RED + "Oxï¿½geno: "
 										+ oxy + " L"));
 					} else {
 						oxygen = obj.getScore(Bukkit
-								.getOfflinePlayer(ChatColor.GOLD + "Oxígeno: "
+								.getOfflinePlayer(ChatColor.GOLD + "Oxï¿½geno: "
 										+ oxy + " L"));
 
 					}
@@ -141,7 +141,7 @@ public class Scoreboard {
 				}
 			} else {
 				oxygen = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD
-						+ "Oxígeno: -"));
+						+ "Oxï¿½geno: -"));
 			}
 
 			hambre.setScore(0);

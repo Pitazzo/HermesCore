@@ -1,4 +1,4 @@
-package es.programahermes.SoporteVital;
+package es.programahermes.SoporteVital.Oxygen;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -131,8 +131,8 @@ public class Oxygen {
 								.equalsIgnoreCase("Kepler")) {
 							//kepler
 							if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-								if (hasMask(player)) {
-									return;
+								if (hasMask(player) && MarsOxygen.tanques.get(player) != null) {
+									player.sendMessage("Todo bien de momento");
 								} else {
 									player.damage(2);
 									player.playSound(player.getLocation(),
