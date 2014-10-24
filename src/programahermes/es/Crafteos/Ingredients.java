@@ -1,4 +1,4 @@
-package es.programahermes.Utilidades;
+package programahermes.es.Crafteos;
 
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -8,6 +8,8 @@ import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
+
+import es.programahermes.Utilidades.Miscelaneo;
 
 public class Ingredients implements Listener {
 
@@ -27,7 +29,12 @@ public class Ingredients implements Listener {
 	public static ItemStack plancha_aluminio = Items.SemiCustom(
 			Material.INK_SACK, (short) 9, 1, "Plancha de aluminio");
 	public static MaterialData circuito_impreso = Items.SemiCustom(
-			Material.INK_SACK, (short) 10, 1, "Circuito impreso").getData();
+			Material.INK_SACK, (short) 10, 1, "Circuito impreso").getData();	
+	public static ItemStack cables = Items.SemiCustom(
+			Material.INK_SACK, (short) 12, 1, "Cableado");
+	
+	public static ItemStack tanqueO2vacio = Items.SemiCustom(
+			Material.GHAST_TEAR, 1, "Tanque de O2", "O2: 500L");
 	
 	//customs
 	public static org.getspout.spoutapi.material.Material led_rojo = Items.Custom(1577);
@@ -75,23 +82,4 @@ public class Ingredients implements Listener {
 		}
 
 	}
-	
-	/*
-	@EventHandler
-	public void onInteract(PlayerInteractEvent event) {
-		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-			Player player = event.getPlayer();
-			
-			  Block block = event.getClickedBlock();
-			 
-			  player.sendMessage("Material: "+block.getType().toString());
-			  player.sendMessage("Data: "+block.getData());
-			  player.sendMessage("Estado: "+block.getState().toString());
-			 
-			SpoutBlock sBlock = (SpoutBlock) event.getClickedBlock();
-			player.sendMessage("ID: "
-					+ sBlock.getCustomBlockId());
-		}
-	}
-*/
 }

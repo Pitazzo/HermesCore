@@ -8,7 +8,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 
-import es.programahermes.Utilidades.Items;
+import programahermes.es.Crafteos.Items;
+
 import es.programahermes.Utilidades.Miscelaneo;
 
 public class EnergyListeners implements Listener{

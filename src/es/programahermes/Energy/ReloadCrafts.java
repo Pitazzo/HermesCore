@@ -6,9 +6,10 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 
+import programahermes.es.Crafteos.Ingredients;
+import programahermes.es.Crafteos.Items;
 
-import es.programahermes.Utilidades.Ingredients;
-import es.programahermes.Utilidades.Items;
+
 
 public class ReloadCrafts {
 

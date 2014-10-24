@@ -8,6 +8,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import programahermes.es.Crafteos.Ingredients;
+
 import es.programahermes.Chat.ChannelSwitcher;
 import es.programahermes.Chat.ChatListener;
 import es.programahermes.Chat.GCommand;
@@ -62,7 +64,6 @@ import es.programahermes.Utilidades.DataGetter;
 import es.programahermes.Utilidades.FakeTable;
 import es.programahermes.Utilidades.FireExtinguisher;
 import es.programahermes.Utilidades.GPS;
-import es.programahermes.Utilidades.Ingredients;
 import es.programahermes.Utilidades.Miscelaneo;
 import es.programahermes.Utilidades.Pernos;
 import es.programahermes.Utilidades.PointsAdjust;

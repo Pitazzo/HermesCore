@@ -1,4 +1,4 @@
-package es.programahermes.Utilidades;
+package programahermes.es.Crafteos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.getspout.spoutapi.inventory.SpoutItemStack;
 
 public class Items {
 

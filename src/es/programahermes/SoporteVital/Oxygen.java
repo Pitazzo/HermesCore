@@ -97,7 +97,7 @@ public class Oxygen {
 									player.sendMessage(ChatColor.GREEN
 											+ "[Soporte Vital]"
 											+ ChatColor.RED
-											+ "¡Tu traje no está presurizado!¡Presurizalo!");
+											+ "Â¡Tu traje no estÃ¡ presurizado!Â¡Presurizalo!");
 									player.damage(3);
 									player.playSound(player.getLocation(),
 											Sound.BAT_DEATH, 1F, 1F);
@@ -109,14 +109,14 @@ public class Oxygen {
 								MySQL.setOxygen(player.getName(), 0);
 								// no tiene traje
 								if (isPresurizada(player.getLocation())) {
-									// está en casa
+									// estÃ¡ en casa
 									return;
 								} else {
-									// no está en casa
+									// no estÃ¡ en casa
 									player.sendMessage(ChatColor.GREEN
 											+ "[Soporte Vital]"
 											+ ChatColor.RED
-											+ "¡No salgas al exterior sin un traje!¡Regresa inmediatamente!");
+											+ "Â¡No salgas al exterior sin un traje!Â¡Regresa inmediatamente!");
 									player.damage(3);
 									player.playSound(player.getLocation(),
 											Sound.BAT_DEATH, 1F, 1F);
@@ -142,7 +142,7 @@ public class Oxygen {
 									player.sendMessage(ChatColor.GREEN
 											+ "[Soporte Vital]"
 											+ ChatColor.RED
-											+ "¡La atmósfera no es respirable!¡Colocate una mascarilla inmediatamente o regresa a la base!");
+											+ "Â¡La atmÃ³sfera no es respirable!Â¡Colocate una mascarilla inmediatamente o regresa a la base!");
 								}
 							}
 						}
