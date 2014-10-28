@@ -66,15 +66,15 @@ public class Fatiga implements Listener {
 				if (!(MySQL.getSed(player.getName()) <= 0)) {
 					MySQL.removeSed(player.getName(), 0.5);
 				}
-				if (!(MySQL.getOxygen(player.getName()) <= 0)) {
+				/*if (!(MySQL.getOxygen(player.getName()) <= 0)) {
 					MySQL.removeOxygen(player.getName(), 0.5);
-				}
+				}*/
 
 				Scoreboard.showScore(player);
 				if (MySQL.getFatiga(player.getName()) > 70) {
 					event.setCancelled(true);
 					player.sendMessage(ChatColor.RED
-							+ "Estás demasiado cansado para hacer un sprint");
+							+ "Estï¿½s demasiado cansado para hacer un sprint");
 				}
 			}
 		}

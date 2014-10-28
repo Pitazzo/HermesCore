@@ -10,8 +10,9 @@ import org.getspout.spout.inventory.SimpleSpoutShapedRecipe;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
 import org.getspout.spoutapi.inventory.SpoutShapedRecipe;
 
-import programahermes.es.Crafteos.Ingredients;
-import programahermes.es.Crafteos.Items;
+import es.programahermes.Crafteos.Ingredients;
+import es.programahermes.Crafteos.Items;
+
 
 
 public class CraftsTecnica {
@@ -58,7 +59,7 @@ public class CraftsTecnica {
 			.getMaterial());
 
 	public static SpoutShapedRecipe tanqueO2 = new SpoutShapedRecipe(
-			new ItemStack(Material.GHAST_TEAR, 1))
+			new ItemStack(Ingredients.tanqueO2vacio))
 			.shape(" e ", "q q", "qrq")
 			.setIngredient(
 					'q',
@@ -117,7 +118,7 @@ public class CraftsTecnica {
 
 	public static SpoutShapedRecipe moduloLASER = new SpoutShapedRecipe(
 			Items.VanillaCustom((short) 1575, 1))
-			.shape(" q  ", "*%*", "ror")
+			.shape(" q ", "*%*", "ror")
 			.setIngredient('*', Ingredients.led_rojo)
 			.setIngredient('q', Ingredients.lente_optica)
 			.setIngredient('%', Ingredients.resistencia)

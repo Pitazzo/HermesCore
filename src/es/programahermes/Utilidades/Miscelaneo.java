@@ -69,7 +69,7 @@ public class Miscelaneo implements Listener, CommandExecutor {
 				if (sender.isOp()) {
 					Player player = (Player) sender;
 					MySQL.setFatiga(player.getName(), 0);
-					MySQL.setOxygen(player.getName(), 700);
+					//MySQL.setOxygen(player.getName(), 700);
 					MySQL.setResidual(player.getName(), 0);
 					MySQL.setSed(player.getName(), 100);
 					player.setHealth(20);

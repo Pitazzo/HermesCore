@@ -11,7 +11,6 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 import es.programahermes.MySQL;
 import es.programahermes.PHDS.DeathSQL;
-import es.programahermes.SoporteVital.Oxygen.Oxygen;
 
 public class Scoreboard {
 
@@ -21,7 +20,7 @@ public class Scoreboard {
 
 		int sed = (int) MySQL.getSed(player.getName());
 		int res = (int) MySQL.getResidual(player.getName());
-		int oxy = (int) MySQL.getOxygen(player.getName());
+		//int oxy = (int) MySQL.getOxygen(player.getName());
 		int fat = (int) MySQL.getFatiga(player.getName());
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		org.bukkit.scoreboard.Scoreboard board = manager.getNewScoreboard();
@@ -32,7 +31,7 @@ public class Scoreboard {
 		Score residual = null;
 		Score hidratacion = null;
 		Score hambre = null;
-		Score oxygen = null;
+		//Score oxygen = null;
 		Score fatiga = null;
 		Score timeleft = null;
 		int min = DeathSQL.getTimeLeft(player.getName()) / 60;
@@ -121,7 +120,7 @@ public class Scoreboard {
 				}
 			}
 
-			if (Oxygen.hasSuit(player)) {
+			/*if (Oxygen.hasSuit(player)) {
 				if (MySQL.getOxygen(player.getName()) > 70) {
 					oxygen = obj.getScore(Bukkit
 							.getOfflinePlayer(ChatColor.GREEN + "Ox�geno: "
@@ -141,13 +140,13 @@ public class Scoreboard {
 				}
 			} else {
 				oxygen = obj.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD
-						+ "Ox�geno: -"));
-			}
+						+ "Oxígeno: -"));
+			}*/
 
 			hambre.setScore(0);
 			residual.setScore(0);
 			hidratacion.setScore(0);
-			oxygen.setScore(0);
+			//oxygen.setScore(0);
 			fatiga.setScore(0);
 
 		}

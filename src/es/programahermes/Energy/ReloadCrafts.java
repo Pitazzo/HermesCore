@@ -6,8 +6,9 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 
-import programahermes.es.Crafteos.Ingredients;
-import programahermes.es.Crafteos.Items;
+import es.programahermes.Crafteos.Ingredients;
+import es.programahermes.Crafteos.Items;
+
 
 
 

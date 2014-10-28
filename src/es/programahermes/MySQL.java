@@ -807,97 +807,6 @@ public class MySQL {
 		}
 	}
 
-	public static synchronized double getOxygen(String player) {
-
-		try {
-			openConnection();
-			PreparedStatement sql = connection
-					.prepareStatement("SELECT oxygen FROM `bukkit`.`user_data` WHERE name=?;");
-
-			sql.setString(1, player);
-			ResultSet result = sql.executeQuery();
-			result.next();
-			double oxygen = result.getDouble("oxygen");
-			sql.close();
-			result.close();
-			closeConnection();
-			return oxygen;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	public static synchronized void addOxygen(String player, double oxygen) {
-
-		try {
-			openConnection();
-			PreparedStatement ps1 = connection
-					.prepareStatement("SELECT oxygen FROM `bukkit`.`user_data` WHERE name=?");
-			ps1.setString(1, player);
-			ResultSet result1 = ps1.executeQuery();
-			result1.next();
-			double oxygen2 = result1.getDouble("oxygen");
-
-			PreparedStatement ps2 = connection
-					.prepareStatement("UPDATE `user_data` SET `oxygen`=? WHERE name=?");
-			ps2.setString(2, player);
-			ps2.setDouble(1, oxygen + oxygen2);
-			ps2.executeUpdate();
-			ps1.close();
-			result1.close();
-			ps2.close();
-			closeConnection();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static synchronized void removeOxygen(String player, double oxygen) {
-
-		try {
-			openConnection();
-			PreparedStatement ps1 = connection
-					.prepareStatement("SELECT oxygen FROM `bukkit`.`user_data` WHERE name=?");
-			ps1.setString(1, player);
-			ResultSet result1 = ps1.executeQuery();
-			result1.next();
-			double oxygen2 = result1.getDouble("oxygen");
-			if (!(oxygen2 - oxygen < 0)) {
-				PreparedStatement ps2 = connection
-						.prepareStatement("UPDATE `bukkit`.`user_data` SET `oxygen`=? WHERE name=?");
-				ps2.setString(2, player);
-				ps2.setDouble(1, oxygen2 - oxygen);
-				ps2.executeUpdate();
-				ps1.close();
-				result1.close();
-				ps2.close();
-				closeConnection();
-			} else {
-				return;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static synchronized void setOxygen(String player, double newOxygen) {
-
-		try {
-			openConnection();
-			PreparedStatement ps = connection
-					.prepareStatement("UPDATE `user_data` SET `oxygen`=? WHERE name=?");
-			ps.setString(2, player);
-			ps.setDouble(1, newOxygen);
-			ps.executeUpdate();
-			ps.close();
-			closeConnection();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static synchronized boolean getGenero(String player) {
 
 		try {
@@ -978,5 +887,5 @@ public class MySQL {
 		}
 		return "";
 	}
-	
+
 }

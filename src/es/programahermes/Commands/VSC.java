@@ -22,8 +22,8 @@ public class VSC implements CommandExecutor{
 					int residual = (int) MySQL.getResidual(player.getName());
 					int food = (100 * player.getFoodLevel() / 20);
 					player.sendMessage(ChatColor.RED+"+-------+Consola de soporte vital+-------+");
-					player.sendMessage(ChatColor.GOLD+"Oxígeno: "+ChatColor.GREEN+MySQL.getOxygen(player.getName())+"L");
-					player.sendMessage(ChatColor.GOLD+"Nivel de hidratación: "+ChatColor.GREEN+sed+"%");
+					//player.sendMessage(ChatColor.GOLD+"Oxï¿½geno: "+ChatColor.GREEN+MySQL.getOxygen(player.getName())+"L");
+					player.sendMessage(ChatColor.GOLD+"Nivel de hidrataciï¿½n: "+ChatColor.GREEN+sed+"%");
 					player.sendMessage(ChatColor.GOLD+"Fatiga: "+ChatColor.GREEN+fatiga+"%");
 					player.sendMessage(ChatColor.GOLD+"Hambre: "+ChatColor.GREEN+food+"%");
 					player.sendMessage(ChatColor.GOLD+"Almacenaje de residuos: "+ChatColor.GREEN+residual+"%");

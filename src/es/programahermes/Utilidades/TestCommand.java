@@ -10,7 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
 
-import programahermes.es.Crafteos.Ingredients;
+import es.programahermes.Crafteos.Ingredients;
+
 
 public class TestCommand implements CommandExecutor {
 

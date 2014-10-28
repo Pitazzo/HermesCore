@@ -1,4 +1,4 @@
-package programahermes.es.Crafteos;
+package es.programahermes.Crafteos;
 
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -32,7 +32,6 @@ public class Ingredients implements Listener {
 			Material.INK_SACK, (short) 10, 1, "Circuito impreso").getData();	
 	public static ItemStack cables = Items.SemiCustom(
 			Material.INK_SACK, (short) 12, 1, "Cableado");
-	
 	public static ItemStack tanqueO2vacio = Items.SemiCustom(
 			Material.GHAST_TEAR, 1, "Tanque de O2", "O2: 500L");
 	

@@ -8,7 +8,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import programahermes.es.Crafteos.Ingredients;
 
 import es.programahermes.Chat.ChannelSwitcher;
 import es.programahermes.Chat.ChatListener;
@@ -28,6 +27,7 @@ import es.programahermes.Commands.SetHability;
 import es.programahermes.Commands.Stats;
 import es.programahermes.Commands.VSC;
 import es.programahermes.Commands.Visor;
+import es.programahermes.Crafteos.Ingredients;
 import es.programahermes.CustomEntities.CustomEntityType;
 import es.programahermes.Energy.Batteries;
 import es.programahermes.Energy.ReloadCrafts;
@@ -52,8 +52,8 @@ import es.programahermes.Skins.SkinReloadCommand;
 import es.programahermes.SoporteVital.Fatiga;
 import es.programahermes.SoporteVital.Hydratation;
 import es.programahermes.SoporteVital.Residual;
+import es.programahermes.SoporteVital.Oxygen.MarsOxygen;
 import es.programahermes.SoporteVital.Oxygen.Oxygen;
-import es.programahermes.SoporteVital.Oxygen.OxygenCommand;
 import es.programahermes.Tecnica.CraftsTecnica;
 import es.programahermes.Tecnica.Tecnica;
 import es.programahermes.Training.ETS;
@@ -86,10 +86,11 @@ public class Main extends JavaPlugin {
 		this.plugin = this;
 		Residual.residualUpdate(this);
 		Hydratation.thirstUpdate(plugin);
-		Oxygen.oxyenUpdate(plugin);
+		//Oxygen.oxyenUpdate(plugin);
 		Fatiga.waitFatigaCheck(plugin);
 		Diarrea.diarreaUpdate(plugin);
 		PointsAdjust.pointsAdjust(plugin);
+		MarsOxygen.oxygenUpdate(plugin);
 		DeathTimer.limbo(plugin);
 		Septicemia.sepsis(plugin);
 		Desmayo.postDesmayo(plugin);
@@ -129,6 +130,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new SkinManager(), this);
 		getServer().getPluginManager().registerEvents(new Ingredients(), this);
 		getServer().getPluginManager().registerEvents(new Armonica(), this);
+		getServer().getPluginManager().registerEvents(new MarsOxygen(), this);
 		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
@@ -136,7 +138,6 @@ public class Main extends JavaPlugin {
 		getCommand("sethabilidad").setExecutor(new SetHability());
 		getCommand("evacuar").setExecutor(new Residual());
 		getCommand("csv").setExecutor(new VSC());
-		getCommand("presurizar").setExecutor(new OxygenCommand());
 		getCommand("visor").setExecutor(new Visor());
 		getCommand("gps").setExecutor(new GPS());
 		getCommand("entrenartiro").setExecutor(new Accuracy());

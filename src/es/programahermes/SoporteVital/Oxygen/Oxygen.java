@@ -1,12 +1,14 @@
 package es.programahermes.SoporteVital.Oxygen;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -16,7 +18,6 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import es.programahermes.MySQL;
 import es.programahermes.WGRegions.WGFlags;
 
 public class Oxygen {
@@ -82,76 +83,71 @@ public class Oxygen {
 		return false;
 	}
 
-	public static void oxyenUpdate(Plugin plugin) {
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
-			@Override
-			public void run() {
-				for (Player player : Bukkit.getOnlinePlayers()) {
-					//Argo
-					if (player.getWorld().getName().equals("Nave")) {
-						if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-							if (hasSuit(player)) {
-								if (MySQL.getOxygen(player.getName()) > 1) {
-									MySQL.removeOxygen(player.getName(), 1);
-								} else {
-									player.sendMessage(ChatColor.GREEN
-											+ "[Soporte Vital]"
-											+ ChatColor.RED
-											+ "¡Tu traje no está presurizado!¡Presurizalo!");
-									player.damage(3);
-									player.playSound(player.getLocation(),
-											Sound.BAT_DEATH, 1F, 1F);
-									player.addPotionEffect(new PotionEffect(
-											PotionEffectType.CONFUSION, 10, 2),
-											true);
-								}
-							} else {
-								MySQL.setOxygen(player.getName(), 0);
-								// no tiene traje
-								if (isPresurizada(player.getLocation())) {
-									// está en casa
-									return;
-								} else {
-									// no está en casa
-									player.sendMessage(ChatColor.GREEN
-											+ "[Soporte Vital]"
-											+ ChatColor.RED
-											+ "¡No salgas al exterior sin un traje!¡Regresa inmediatamente!");
-									player.damage(3);
-									player.playSound(player.getLocation(),
-											Sound.BAT_DEATH, 1F, 1F);
-									player.addPotionEffect(new PotionEffect(
-											PotionEffectType.CONFUSION, 10, 2),
-											true);
-								}
-							}
-						}
-					} else {
-						if (player.getWorld().getName()
-								.equalsIgnoreCase("Kepler")) {
-							//kepler
-							if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-								if (hasMask(player) && MarsOxygen.tanques.get(player) != null) {
-									player.sendMessage("Todo bien de momento");
-								} else {
-									player.damage(2);
-									player.playSound(player.getLocation(),
-											Sound.BAT_DEATH, 1F, 1F);
-									player.addPotionEffect(new PotionEffect(
-											PotionEffectType.CONFUSION, 5, 2));
-									player.sendMessage(ChatColor.GREEN
-											+ "[Soporte Vital]"
-											+ ChatColor.RED
-											+ "¡La atmósfera no es respirable!¡Colocate una mascarilla inmediatamente o regresa a la base!");
-								}
-							}
-						}
-					}
-
+	public static boolean hasOxygen(ItemStack item) {
+		if (item != null && item.getItemMeta() != null) {
+			if (item.getItemMeta().getLore() != null) {
+				if (item.getItemMeta().getLore().get(0).contains("O2: ")) {
+					return true;
 				}
 			}
+		}
 
-		}, 100L, 20 * 5);
+		return false;
 
 	}
+
+	public static int getOxygen(ItemStack item) {
+		if (item.getItemMeta() != null) {
+			if (item.getItemMeta().getLore() != null) {
+				String o2 = item.getItemMeta().getLore().get(0);
+				if (o2.contains("O2: ")) {
+					String o3 = o2.replace("O2: ", "");
+					String o4 = o3.replace("L", "");
+					int oxygen = Integer.parseInt(o4);
+					return oxygen;
+
+				}
+
+			}
+		}
+
+		return 0;
+
+	}
+
+	public static void setOxygen(ItemStack item, int oxygen) {
+		ItemMeta meta = item.getItemMeta();
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add("O2: " + oxygen + "L");
+		meta.setLore(lore);
+		item.setItemMeta(meta);
+	}
+
+	public static void addOxygen(ItemStack item, int oxygen) {
+		int previous = getOxygen(item);
+		setOxygen(item, previous + oxygen);
+	}
+
+	public static void removeOxygen(ItemStack item, int oxygen) {
+		int previous = getOxygen(item);
+		if (previous - oxygen > 0) {
+			setOxygen(item, previous - oxygen);
+		} else {
+			setOxygen(item, 0);
+		}
+
+	}
+
+	public static void kill(Player player){
+		if(player.getWorld().getName().equals("Nave")){
+			player.damage(8);
+			player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 4));
+			player.sendMessage(ChatColor.GRAY+"En el vacío no hay aire que transporte el sonido...");
+		}else if(player.getWorld().getName().equals("Kepler")){
+			player.damage(1);
+			player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1));
+			player.sendMessage(ChatColor.GOLD+"Mis... mis pulmones... ¡AIRE!");
+		}
+	}
+	
 }

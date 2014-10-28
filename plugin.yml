@@ -84,3 +84,6 @@ commands:
    test:
     description: Comando de desarrollo
     usage: Error de sintaxis! Simplemente escribe /test
+   equipartanque:
+    description: Se equipa el tanque de oxígeno seleccionado en la mascarilla de respiración
+    usage: Error de sintaxis! Simplemente escribe /equipartanque
