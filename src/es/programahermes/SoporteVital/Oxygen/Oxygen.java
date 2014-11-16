@@ -50,15 +50,9 @@ public class Oxygen {
 			if (player.getInventory().getHelmet().getType()
 					.equals(Material.LEATHER_HELMET)) {
 				return true;
-			} else {
-				return false;
 			}
-
-		} else {
-
-			return false;
 		}
-
+		return false;
 	}
 
 	// World Guard
@@ -76,9 +70,12 @@ public class Oxygen {
 		RegionManager manager = guard.getRegionManager(loc.getWorld());
 		ApplicableRegionSet set = manager.getApplicableRegions(loc);
 		for (ProtectedRegion each : set) {
-			if (each.getFlag(WGFlags.presurizada).booleanValue()) {
-				return true;
+			if(each.getFlag(WGFlags.presurizada) !=null){
+				if (each.getFlag(WGFlags.presurizada).booleanValue()) {
+					return true;
+				}
 			}
+			
 		}
 		return false;
 	}

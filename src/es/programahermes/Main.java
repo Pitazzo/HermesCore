@@ -131,6 +131,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Ingredients(), this);
 		getServer().getPluginManager().registerEvents(new Armonica(), this);
 		getServer().getPluginManager().registerEvents(new MarsOxygen(), this);
+		getServer().getPluginManager().registerEvents(new TestCommand(), this);
 		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());

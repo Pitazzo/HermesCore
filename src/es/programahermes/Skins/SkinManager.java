@@ -12,7 +12,7 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 
 import es.programahermes.Main;
 import es.programahermes.MySQL;
-import es.programahermes.SoporteVital.Oxygen.MarsOxygen;
+import es.programahermes.SoporteVital.Oxygen.Oxygen;
 
 public class SkinManager implements Listener {
 
@@ -21,15 +21,17 @@ public class SkinManager implements Listener {
 		spoutPlayer.hideTitle();
 		SpoutManager.getSkyManager().setCloudHeight(spoutPlayer, 300);
 		try {
-			
-			spoutPlayer.setSkin("http://178.32.219.57/"
-					+ MySQL.getSkin(player.getName()));
-			
-			if (MarsOxygen.checkTanque(player)) {
+			if(Oxygen.hasOxygen(player.getInventory().getItem(35))){
+				String url = MySQL.getSkin(player.getName());
+				String suburl = url.replace(".png", "");
+				String sub2 = suburl + "-b.png";
+				spoutPlayer.setSkin("http://178.32.219.57/" + sub2);
+			}else{
 				spoutPlayer.setSkin("http://178.32.219.57/"
-						+ MySQL.getSkin(player.getName()) + "-b");
+					+ MySQL.getSkin(player.getName()));
 			}
-
+			
+			
 			player.sendMessage(ChatColor.DARK_GREEN
 					+ "Skin cargada de los servidores de Programa Hermes con éxito");
 

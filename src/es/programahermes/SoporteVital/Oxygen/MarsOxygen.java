@@ -24,13 +24,13 @@ public class MarsOxygen implements Listener {
 
 					if (!Oxygen.isPresurizada(player.getLocation())
 							&& !player.getGameMode().equals(GameMode.CREATIVE)) {
-
 						if (player.getWorld().getName().equals("Nave")) {
 							// ARGO
 							if (Oxygen.hasSuit(player) && checkTanque(player)) {
 								checkOutside(player);
 							} else {
 								Oxygen.kill(player);
+						
 							}
 
 						} else if (player.getWorld().getName().equals("Kepler")) {
@@ -49,13 +49,15 @@ public class MarsOxygen implements Listener {
 		}, 20*10, 20*7L);
 	}
 
+	
+	
 	@EventHandler
 	public void onClick(InventoryClickEvent event) {
+		Player player = (Player) event.getWhoClicked();
+	
 		if (event.getInventory().getType().equals(InventoryType.PLAYER)) {
 			if (event.getSlot() == 35) {
-				Player player = (Player) event.getWhoClicked();
 				SpoutPlayer splayer = (SpoutPlayer) player;
-
 				if (Oxygen.hasOxygen(event.getCursor())) {
 					// poner
 					if (!MySQL.getSkin(player.getName()).contains("-b")) {
@@ -88,13 +90,14 @@ public class MarsOxygen implements Listener {
 
 		if (checkTanque(player)
 				&& Oxygen.getOxygen(player.getInventory().getItem(35)) > 1) {
-
+	
 			if(Oxygen.hasSuit(player)){
 				Oxygen.removeOxygen(player.getInventory().getItem(35), 3);
-			}else if(Oxygen.hasSuit(player)){
+		
+			}else if(Oxygen.hasMask(player)){
 				Oxygen.removeOxygen(player.getInventory().getItem(35), 1);
+		
 			}
-			
 
 		} else {
 			Oxygen.kill(player);
