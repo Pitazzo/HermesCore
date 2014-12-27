@@ -13,13 +13,14 @@ import org.getspout.spoutapi.inventory.SpoutShapedRecipe;
 import es.programahermes.Crafteos.Ingredients;
 import es.programahermes.Crafteos.Items;
 
-
-
 public class CraftsTecnica {
 
 	public static MoreMaterials mm = (MoreMaterials) Bukkit.getServer()
 			.getPluginManager().getPlugin("MoreMaterials");
 
+	// nivel 1
+
+	// ?
 	public static SpoutShapedRecipe puertaAluminio = new SpoutShapedRecipe(
 			new ItemStack(Material.WOODEN_DOOR, 1))
 			.shape("qe ", "ter", "qe ")
@@ -41,22 +42,22 @@ public class CraftsTecnica {
 							.getMaterial())
 			.setIngredient('a', Ingredients.junta_aluminio)
 			.setIngredient('t', Ingredients.chip_cobre);
-	
+
 	public static SpoutShapedRecipe lamparaHalogena = new SpoutShapedRecipe(
 			new ItemStack(Material.TORCH, 1))
 			.shape(" e ", " q ", " r ")
 			.setIngredient('q', Ingredients.chip_cobre)
 			.setIngredient('e', (Ingredients.led_blanco))
-			.setIngredient('r', new SpoutItemStack(Ingredients.cables)
-			.getMaterial());
-	
+			.setIngredient('r',
+					new SpoutItemStack(Ingredients.cables).getMaterial());
+
 	public static SpoutShapedRecipe lamparaXenon = new SpoutShapedRecipe(
 			new ItemStack(Material.REDSTONE_TORCH_OFF, 1))
 			.shape(" e ", " q ", " r ")
 			.setIngredient('q', Ingredients.chip_cobre)
 			.setIngredient('e', (Ingredients.led_rojo))
-			.setIngredient('r', new SpoutItemStack(Ingredients.cables)
-			.getMaterial());
+			.setIngredient('r',
+					new SpoutItemStack(Ingredients.cables).getMaterial());
 
 	public static SpoutShapedRecipe tanqueO2 = new SpoutShapedRecipe(
 			new ItemStack(Ingredients.tanqueO2vacio))
@@ -97,7 +98,7 @@ public class CraftsTecnica {
 			new ItemStack(Material.WORKBENCH, 1))
 			.shape("qeq", "wtw", "qwq")
 			.setIngredient('q', Ingredients.junta_aluminio)
-			.setIngredient('e', Ingredients.chip_silicio)
+			.setIngredient('e', Ingredients.chip_cobre)
 			.setIngredient(
 					'w',
 					new SpoutItemStack(Ingredients.plancha_aluminio)
@@ -130,15 +131,19 @@ public class CraftsTecnica {
 
 	public static SpoutShapedRecipe horno = new SpoutShapedRecipe(
 			new ItemStack(Material.FURNACE, 1))
-			.shape("qeq", "w w", "qwq")
+			.shape("qeq", "w w", "qaq")
 			.setIngredient('q', Ingredients.junta_aluminio)
 			.setIngredient('e', Ingredients.resistencia)
 			.setIngredient(
 					'w',
 					new SpoutItemStack(Ingredients.plancha_aluminio)
-							.getMaterial());
+							.getMaterial())
+			.setIngredient('a', Ingredients.chip_cobre);
 
 	public static void registrarTecnina() {
+		
+		SimpleSpoutShapedRecipe spuertaAluminio = SimpleSpoutShapedRecipe
+		.fromSpoutRecipe(puertaAluminio);
 		SimpleSpoutShapedRecipe smoduloLASER = SimpleSpoutShapedRecipe
 				.fromSpoutRecipe(moduloLASER);
 		SimpleSpoutShapedRecipe slamparaHalogena = SimpleSpoutShapedRecipe
@@ -161,13 +166,14 @@ public class CraftsTecnica {
 		Bukkit.addRecipe(barraAluminio);
 		Bukkit.addRecipe(bol);
 		Bukkit.addRecipe(planchaAluminio);
-		
+
+		spuertaAluminio.addToCraftingManager();
 		slamparaHalogena.addToCraftingManager();
 		slamparaXenon.addToCraftingManager();
 		stanqueO2.addToCraftingManager();
 		shorno.addToCraftingManager();
 		sbobina.addToCraftingManager();
-		smoduloLASER.addToCraftingManager();
+		// smoduloLASER.addToCraftingManager();
 		scapsulaAlmacenamiento.addToCraftingManager();
 		sassembler.addToCraftingManager();
 		smotor.addToCraftingManager();

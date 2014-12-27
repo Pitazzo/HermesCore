@@ -7,6 +7,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.plugin.Plugin;
@@ -30,7 +31,7 @@ public class MarsOxygen implements Listener {
 								checkOutside(player);
 							} else {
 								Oxygen.kill(player);
-						
+
 							}
 
 						} else if (player.getWorld().getName().equals("Kepler")) {
@@ -46,19 +47,29 @@ public class MarsOxygen implements Listener {
 				}
 
 			}
-		}, 20*10, 20*7L);
+		}, 20 * 10, 20 * 7L);
 	}
 
-	
-	
 	@EventHandler
 	public void onClick(InventoryClickEvent event) {
 		Player player = (Player) event.getWhoClicked();
-	
+
 		if (event.getInventory().getType().equals(InventoryType.PLAYER)) {
 			if (event.getSlot() == 35) {
 				SpoutPlayer splayer = (SpoutPlayer) player;
-				if (Oxygen.hasOxygen(event.getCursor())) {
+
+				if (event.getAction().equals(InventoryAction.PLACE_ONE)
+						|| event.getAction().equals(InventoryAction.PLACE_ALL)
+						|| event.getAction().equals(InventoryAction.PLACE_SOME)) {
+					if(!Oxygen.hasOxygen(event.getCursor()) && event.getCursor() != null){
+						event.setCancelled(true);
+					}
+
+				}
+
+				if (event.getAction().equals(InventoryAction.PLACE_ONE)
+						|| event.getAction().equals(InventoryAction.PLACE_ALL)
+						|| event.getAction().equals(InventoryAction.PLACE_SOME)) {
 					// poner
 					if (!MySQL.getSkin(player.getName()).contains("-b")) {
 						String url = MySQL.getSkin(player.getName());
@@ -71,7 +82,10 @@ public class MarsOxygen implements Listener {
 								1.0F, 1.0F);
 					}
 
-				} else if (!Oxygen.hasOxygen(event.getCursor())) {
+				} else if (event.getAction().equals(InventoryAction.PICKUP_ALL)
+						|| event.getAction().equals(InventoryAction.PICKUP_ONE)
+						|| event.getAction().equals(InventoryAction.PICKUP_HALF)
+						|| event.getAction().equals(InventoryAction.PICKUP_SOME)) {
 					// quitar
 					splayer.setSkin("http://178.32.219.57/"
 							+ MySQL.getSkin(player.getName()));
@@ -90,13 +104,13 @@ public class MarsOxygen implements Listener {
 
 		if (checkTanque(player)
 				&& Oxygen.getOxygen(player.getInventory().getItem(35)) > 1) {
-	
-			if(Oxygen.hasSuit(player)){
+
+			if (Oxygen.hasSuit(player)) {
 				Oxygen.removeOxygen(player.getInventory().getItem(35), 3);
-		
-			}else if(Oxygen.hasMask(player)){
+
+			} else if (Oxygen.hasMask(player)) {
 				Oxygen.removeOxygen(player.getInventory().getItem(35), 1);
-		
+
 			}
 
 		} else {

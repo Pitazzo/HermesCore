@@ -57,8 +57,15 @@ public class Ingredients implements Listener {
 	public static org.getspout.spoutapi.material.Material lente_optica = Items.Custom(1596);
 	public static org.getspout.spoutapi.material.Material armonica = Items.Custom(1593);
 	public static org.getspout.spoutapi.material.Material hilo_cobre = Items.Custom(1594);
-
-
+	public static org.getspout.spoutapi.material.Material linote_alsi = Items.Custom(1632);
+	public static org.getspout.spoutapi.material.Material plancha_asli = Items.Custom(1631);
+	public static org.getspout.spoutapi.material.Material linote_wolframio = Items.Custom(1630);
+	public static org.getspout.spoutapi.material.Material circuito_mixto = Items.Custom(1627);
+	public static org.getspout.spoutapi.material.Material chip_torio = Items.Custom(1625);
+	public static org.getspout.spoutapi.material.Material plancha_wolframio = Items.Custom(1629);
+	public static org.getspout.spoutapi.material.Material barra_wolframio = Items.Custom(1628);
+	public static org.getspout.spoutapi.material.Material junta_wolframio = Items.Custom(1626);
+	public static org.getspout.spoutapi.material.Material motor_avanzado = Items.Custom(1633);
 
 	@EventHandler
 	public void onItemClick(InventoryClickEvent event) {
