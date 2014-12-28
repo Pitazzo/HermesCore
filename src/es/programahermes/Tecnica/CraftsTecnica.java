@@ -96,17 +96,15 @@ public class CraftsTecnica {
 
 	public static SpoutShapedRecipe assembler = new SpoutShapedRecipe(
 			new ItemStack(Material.WORKBENCH, 1))
-			.shape("qeq", "wtw", "qwq")
-			.setIngredient('q', Ingredients.junta_aluminio)
-			.setIngredient('e', Ingredients.chip_cobre)
-			.setIngredient(
-					'w',
-					new SpoutItemStack(Ingredients.plancha_aluminio)
-							.getMaterial())
+			.shape("ksk", "ata", "kak")
 			.setIngredient(
 					't',
 					new SpoutItemStack(new ItemStack(Material.SIGN))
-							.getMaterial());
+							.getMaterial())
+			.setIngredient('k', Ingredients.junta_aluminio)
+			.setIngredient('s', Ingredients.chip_cobre)
+			.setIngredient('a', new SpoutItemStack(Ingredients.plancha_aluminio)
+			.getMaterial());
 
 	public static SpoutShapedRecipe bobina = new SpoutShapedRecipe(
 			new ItemStack(new SpoutItemStack(Ingredients.bobina_cobre, 1)))
@@ -141,9 +139,13 @@ public class CraftsTecnica {
 			.setIngredient('a', Ingredients.chip_cobre);
 
 	public static void registrarTecnina() {
+
+		EMCATools.registerEMCA();
+		
+		
 		
 		SimpleSpoutShapedRecipe spuertaAluminio = SimpleSpoutShapedRecipe
-		.fromSpoutRecipe(puertaAluminio);
+				.fromSpoutRecipe(puertaAluminio);
 		SimpleSpoutShapedRecipe smoduloLASER = SimpleSpoutShapedRecipe
 				.fromSpoutRecipe(moduloLASER);
 		SimpleSpoutShapedRecipe slamparaHalogena = SimpleSpoutShapedRecipe
@@ -173,10 +175,12 @@ public class CraftsTecnica {
 		stanqueO2.addToCraftingManager();
 		shorno.addToCraftingManager();
 		sbobina.addToCraftingManager();
-		// smoduloLASER.addToCraftingManager();
+		//smoduloLASER.addToCraftingManager();
 		scapsulaAlmacenamiento.addToCraftingManager();
 		sassembler.addToCraftingManager();
 		smotor.addToCraftingManager();
+		
+		
 
 	}
 

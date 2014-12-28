@@ -54,7 +54,7 @@ public class HermesChat {
 				} else {
 					if (sender.getLocation().distance(player.getLocation()) < radius) {
 						if (player.hasPermission("hermescore.idiomas."
-								+ language)) {
+								+ language)||player.isOp()) {
 							player.sendMessage(ch + cargo +lang+ ChatColor.DARK_PURPLE
 									+ name + ChatColor.WHITE+ ": " + msg);
 						} else {

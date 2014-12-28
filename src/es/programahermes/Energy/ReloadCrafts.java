@@ -14,6 +14,7 @@ import es.programahermes.Crafteos.Items;
 
 public class ReloadCrafts {
 
+	//mover
 	public static ShapedRecipe Battery = new ShapedRecipe(Items.SemiCustom(
 			Material.COAL, 1, "Batería cargada", "Rendimiento: 100%"))
 			.shape("   ", "*%*", "   ").setIngredient('*', Material.IRON_INGOT)
