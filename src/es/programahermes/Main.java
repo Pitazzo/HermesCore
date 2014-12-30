@@ -53,9 +53,9 @@ import es.programahermes.SoporteVital.Fatiga;
 import es.programahermes.SoporteVital.Hydratation;
 import es.programahermes.SoporteVital.Residual;
 import es.programahermes.SoporteVital.Oxygen.MarsOxygen;
-import es.programahermes.SoporteVital.Oxygen.Oxygen;
 import es.programahermes.Tecnica.CraftsTecnica;
 import es.programahermes.Tecnica.Tecnica;
+import es.programahermes.Tecnica.TecnicaPerms;
 import es.programahermes.Training.ETS;
 import es.programahermes.Training.Resistencia;
 import es.programahermes.Utilidades.Armonica;
@@ -132,6 +132,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Armonica(), this);
 		getServer().getPluginManager().registerEvents(new MarsOxygen(), this);
 		getServer().getPluginManager().registerEvents(new TestCommand(), this);
+		getServer().getPluginManager().registerEvents(new TecnicaPerms(), this);
 		getCommand("vendarse").setExecutor(new Septicemia());
 		getCommand("subirnivel").setExecutor(new LevelUpCommand());
 		getCommand("puntos").setExecutor(new PointsCommand());
