@@ -141,7 +141,7 @@ public class CraftsTecnica {
 	public static void registrarTecnina() {
 
 		EMCATools.registerEMCA();
-		
+		TecnicaPerms.loader();
 		
 		
 		SimpleSpoutShapedRecipe spuertaAluminio = SimpleSpoutShapedRecipe
