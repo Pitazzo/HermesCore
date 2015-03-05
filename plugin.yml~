@@ -1,0 +1,86 @@
+name: HermesCore
+version: 0.2
+main: es.programahermes.Main
+depend: [WorldGuard, WorldEdit, WGCustomFlags]
+commands:
+   subirnivel:
+     description: Subes el nivel de la habilidad principal
+     usage: Error de sintaxis! Simplemente escribe /subirnivel
+   puntos:
+     description: Indica tu cantidad de puntos de habilidad.
+     usage: Error de sintaxis! Simplemente escribe /puntos
+   stats:
+     description: Muestra las estadísticas de tu personaje
+     usage: Error de sintaxis! Simplemente escribe /stats
+   sethabilidad:
+     description: Se asigna una habildiad concreta al jugador
+     usage: Error de sintaxis! Simplemente escribe /sethabilidad <jugador> <habilidad>
+   evacuar:
+     description: El jugador evacua sus residuos
+     usage: Error de sintaxis! Simplemente escribe /evacuar
+   csv:
+     description: El jugador consulta su CSP
+     usage: Error de sintaxis! Simplemente escribe /csp
+   presurizar:
+     description: El jugador presuriza su traje o tanque de oxígeno
+     usage: Error de sintaxis! Simplemente escribe /presurizar <tanque|traje>
+   visor:
+     description: Se activa/desactiva el protector solar del casco
+     usage: Error de sintaxis! Simplemente escribe /visor
+   GPS:
+     description: Se muestra información sobre la ubicación
+     usage: Error de sintaxis! Simplemente escribe /GPS
+   entrenartiro:
+     description: Activado, suma y resta puntos en función de si se hace diana o no
+     usage: Error de sintaxis! Simplemente escribe /entrenartiro
+   cuerpoacuerpo:
+     description: Activado, se pueden entrenar hablidades de combate cuerpo a cuerpo
+     usage: Error de sintaxis! Simplemente escribe /cuerpoacuerpo
+   location:
+     description: TEST
+     usage: Error de sintaxis! Simplemente escribe /location <nombre>
+   emergency:
+     description: Proporciona equipación de emergencia a los OPs
+     usage: Error de sintaxis! Simplemente escribe /emergency
+   vendarse:
+     description: Se realiza un vendaje de emergencia que no siempre previene de infecciones
+     usage: Error de sintaxis! Simplemente escribe /vendarse
+   calcularpuntos:
+     description: Se realizan los cálculos semanales
+     usage: Error de sintaxis! Simplemente escribe /calcularpuntos
+   data:
+     description: Se obtiene información del ítem seleccionado
+     usage: Error de sintaxis! Simplemente escribe /data
+   o:
+     description: Se pasa al canal OOC o se envia un mensaje en OOC
+     usage: Error de sintaxis! Simplemente escribe /o o /o <mensaje>
+   s:
+     description: Se habla en un tono de susurro o se cambia permanentemente al tono "susurrar"
+     usage: Error de sintaxis! Simplemente escribe /s o /s <mensaje>
+   g:
+     description: Se habla en un tono de grito o se cambia permanentemente al tono "gritar"
+     usage: Error de sintaxis! Simplemente escribe /g o /g <mensaje>
+   h:
+     description: Se habla en un tono normal o se cambia permanentemente al tono "hablar"
+     usage: Error de sintaxis! Simplemente escribe /h o /h <mensaje>
+   me:
+     description: Se expresa una acción realizada por tu personaje
+     usage: Error de sintaxis! Simplemente escribe /me <mensaje>
+   canal:
+     description: Se cambia al canal de chat seleccionado
+     usage: Error de sintaxis! Simplemente escribe /canal <IC|OOC>
+   idioma:
+     description: El jugador pasa a hablar en el idioma deseado, siempre que su personaje lo domine
+     usage: Error de sintaxis! Simplemente escribe /idioma <idioma>
+   presentarse:
+     description: El jugador se presenta con el nombre deseado a otro
+     usage: Error de sintaxis! Simplemente escribe /presentarse <nombre>
+   tono:
+    description: Se selecciona el tono de voz
+    usage: Error de sintaxis! Simplemente escribe /tono <susurrar|hablar|gritar>
+   recargarskin:
+    description: Se refresca la skin seleccionada en el Administrador de skins de Programa Hermes TM
+    usage: Error de sintaxis! Simplemente escribe /recargarskin
+   test:
+    description: Comando de desarrollo
+    usage: Error de sintaxis! Simplemente escribe /test

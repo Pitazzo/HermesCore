@@ -2,9 +2,14 @@ package es.programahermes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -80,9 +85,8 @@ public class Main extends JavaPlugin {
 
 	@SuppressWarnings("static-access")
 	public void onEnable() {
+		recipeCleaner();
 		
-		CustomTools.loadTools();
-		CustomEntityType.registerEntities();
 		this.plugin = this;
 		Residual.residualUpdate(this);
 		Hydratation.thirstUpdate(plugin);
@@ -171,6 +175,7 @@ public class Main extends JavaPlugin {
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.lapis);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.diamond);
 		WGFlags.getWGCustomFlags().addCustomFlag(WGFlags.lapis);
+	
 	}
 
 	@SuppressWarnings("static-access")
@@ -196,4 +201,22 @@ public class Main extends JavaPlugin {
 		JugadoresConfig = YamlConfiguration.loadConfiguration(jugadores);
 	}
 
+	public void recipeCleaner(){
+		Iterator<Recipe> iterator = Bukkit.recipeIterator();
+		ItemStack result;
+		Recipe recipe;
+		Material resultType;
+		 
+		while(iterator.hasNext())
+		{
+		    recipe = iterator.next();				 
+		    result = recipe.getResult();
+		    resultType = result.getType();
+		 
+	
+		        iterator.remove();
+		    
+		}
+	}
+	
 }

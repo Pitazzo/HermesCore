@@ -26,24 +26,7 @@ public class TestCommand implements CommandExecutor, Listener {
 			Player player = (Player) sender;
 			if (cmd.getName().equalsIgnoreCase("test")) {
 				
-				Iterator<Recipe> iterator = Bukkit.recipeIterator();
-				ItemStack result;
-				Recipe recipe;
-				Material resultType;
-				 
-				while(iterator.hasNext())
-				{
-				    recipe = iterator.next();
-				 
-				    if(recipe == null) // some server mods adds a null recipe, better safe than sorry :P
-				         continue;
-				 
-				    result = recipe.getResult();
-				    resultType = result.getType();
-				 
-				    if(resultType == Material.SHEARS || (resultType == Material.STICK && result.getDurability() == 15) )
-				        iterator.remove();
-				}
+				
 				
 			}
 		}

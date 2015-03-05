@@ -21,29 +21,35 @@ public class TecnicaPerms implements Listener {
 	@EventHandler
 	public void onCraftEvent(CraftItemEvent event) {
 		Player player = (Player) event.getWhoClicked();
-		org.getspout.spoutapi.material.Material material = new SpoutItemStack(
-				event.getRecipe().getResult()).getMaterial();
-		int req;
+		if (MySQL.getHability(player.getName()).equals("Tecnica")) {
+			org.getspout.spoutapi.material.Material material = new SpoutItemStack(
+					event.getRecipe().getResult()).getMaterial();
+			int req;
 
-		if (lvl1m.contains(material)) {
-			req = 1;
-		} else if (lvl2m.contains(material)) {
-			req = 2;
-		} else if (lvl3m.contains(material)) {
-			req = 3;
-		} else {
-			req = 10;
-		}
+			if (lvl1m.contains(material)) {
+				req = 1;
+			} else if (lvl2m.contains(material)) {
+				req = 2;
+			} else if (lvl3m.contains(material)) {
+				req = 3;
+			} else {
+				req = 10;
+			}
 
-			//player.sendMessage("Nivel requerido: " + req);
-		
-		
+			// player.sendMessage("Nivel requerido: " + req);
 
-		if (MySQL.getLevel(player.getName()) < req) {
-			player.sendMessage(ChatColor.DARK_RED + "Tu nivel ("
-					+ MySQL.getLevel(player.getName())
-					+ ") no es suficiente para hacer esto");
-			event.setCancelled(true);
+			if (MySQL.getLevel(player.getName()) < req) {
+				player.sendMessage(ChatColor.DARK_RED + "Tu nivel ("
+						+ MySQL.getLevel(player.getName())
+						+ ") no es suficiente para hacer esto");
+				event.setCancelled(true);
+			} else {
+				String result = event.getRecipe().getResult().getType()
+						.toString();
+				int amount = event.getRecipe().getResult().getAmount();
+
+				MySQL.addEarnedPoints(player.getName(), "craft", result, amount);
+			}
 		}
 
 	}
